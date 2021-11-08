@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="utf-8"%>
-<%@ include file="../../css/indexHeader.jsp" %>
+<%@ include file="/WEB-INF/home/mainHeader.jsp" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <style>
         .container{
@@ -17,7 +17,7 @@
           background-image:url("<c:url value='../../images/loginLogo.png'/>");
           */
           
-          background-image:url("<c:url value='../../images/loginLogo.png'/>");/*form으로 포워딩해야사진뜸*/
+          background-image:url("<c:url value='/images/loginLogo.png'/>");/*form으로 포워딩해야사진뜸*/
           
          
         }
@@ -70,4 +70,4 @@
 	</form> 
 	
 </div>
-<%@ include file="../../css/indexFooter.jsp" %>
+<%@ include file="/WEB-INF/home/mainFooter.jsp" %>
