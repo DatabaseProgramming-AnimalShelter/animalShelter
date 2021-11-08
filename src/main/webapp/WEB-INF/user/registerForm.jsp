@@ -1,21 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../../css/indexHeader.jsp" %>
+<%@ include file="/WEB-INF/home/mainHeader.jsp" %>
  <style>
         .container{
-          height: 700px;
-          background-image: url('../../images/loginLogo.png');
+          background-color:#FFBB00;
+          padding-bottom:20px;
         }
         .registerForm{
           margin: auto;
-          width: 500px;
+          width: 700px;
+          background-color: rgba( 255, 255, 255, 0.7 );
+          padding: 30px;
+          margin-bottom:50px;
+          border:5px dashed white;
+        }
+        .signupLogo{
+        	margin: auto;
+        	width: 200px;
+        	margin-bottom:20px;
         }
     </style>
 	<script>
 	function userCreate() {
 		if (form.userId.value == "") {
-			alert("사용자 ID를 입력하십시오.");
+			alert(" ID를 입력하십시오.");
 			form.userId.focus();
 			return false;
 		} 
@@ -40,7 +49,7 @@
 			form.email.focus();
 			return false;
 		}
-		var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+		var phoneExp = /^\d{2,3}\d{3,4}\d{4}$/;
 		if(phoneExp.test(form.phone.value)==false) {
 			alert("전화번호 형식이 올바르지 않습니다.");
 			form.phone.focus();
@@ -61,63 +70,52 @@
 		</div>	  
 		<!-- registration form  -->
 		<form class="registerForm"name="form" method="POST" action="<c:url value='/user/register'/>">
-		<h4 style="text-align:center">회원 가입</h4>
+		
+		<img  class ="signupLogo" src="<c:url value='/images/signup.png'/>"  >
 			<div class="form-group row">   
-		        <label for="userId" class="col-lg-2 col-form-label">사용자 ID</label>
-		        <div class="col-lg-10">
+		        <label for="userId" class="col-lg-3 col-form-label">사용자 ID</label>
+		        <div class="col-lg-8">
 		            <input type="text" name="userId" class="form-control" placeholder="사용자 ID"> 
 		        </div>
 		    </div>       
 		    <div class="form-group row">   
-		        <label for="password" class="col-lg-2 col-form-label">비밀번호</label>
-		        <div class="col-lg-10">
+		        <label for="password" class="col-lg-3 col-form-label">비밀번호</label>
+		        <div class="col-lg-8">
 		            <input type="password" name="password" class="form-control" placeholder="password"> 
 		        </div>
 		    </div>       
 		    <div class="form-group row">  
-		        <label for="password2" class="col-lg-2 col-form-label">비밀번호 확인</label>
-		        <div class="col-lg-10">
+		        <label for="password2" class="col-lg-3 col-form-label">비밀번호 확인</label>
+		        <div class="col-lg-8">
 		        	<input type="password" name="password2" class="form-control" placeholder="비밀번호 확인">
 		        </div> 
 		    </div> 
 			<div class="form-group row">   
-		        <label for="name" class="col-lg-2 col-form-label">이름</label>
-		        <div class="col-lg-10">
+		        <label for="name" class="col-lg-3 col-form-label">이름</label>
+		        <div class="col-lg-8">
 		        	<input type="text" name="name" class="form-control" placeholder="이름"
 		        		<c:if test="${registerFailed}">value="${user.name}"</c:if> > 
 		        </div>
 		    </div>       
 		    <div class="form-group row">  
-		        <label for="email" class="col-lg-2 col-form-label">이메일 주소</label>
-		        <div class="col-lg-10">
+		        <label for="email" class="col-lg-3 col-form-label">이메일</label>
+		        <div class="col-lg-8">
 		        	<input type="text" name="email" class="form-control" placeholder="you@example.com"
 		        		<c:if test="${registerFailed}">value="${user.email}"</c:if> >  
 		        </div>
 		    </div> 
 			<div class="form-group row">  
-		        <label for="phone" class="col-lg-2 col-form-label">전화번호</label>
-		        <div class="col-lg-10">
+		        <label for="phone" class="col-lg-3 col-form-label">전화번호</label>
+		        <div class="col-lg-8">
 		        	<input type="text" name="phone" class="form-control" placeholder="010-XXXX-YYYY"
 		        		<c:if test="${registerFailed}">value="${user.phone}"</c:if> >  
 		        </div>
 		    </div> 
-			<div class="form-group row">  
-	        <label for="commId" class="col-lg-2 col-form-label">커뮤니티</label>
-	        <div class="col-lg-10">
-	        	<select id="commSelect" name="commId" class="form-control"> 
-					<option value="0">없음</option>
-					<c:forEach var="comm" items="${commList}">
-						<option value="${comm.id}"
-							<c:if test="${comm.id eq user.commId}">selected="selected"</c:if>
-							>${comm.name}</option>
-					</c:forEach>				
-				</select>
-	        </div>
-	    </div> 
+			
 	   		<br>
 			<div class="form-group">        
 				<input type="button" style=background-color:brown class=" w-100 btn" value="가입" onClick="userCreate()">  		     
 			</div>   
-		</form> 
+		</form> 	
 	</div>
-<%@ include file="../../css/indexFooter.jsp" %>
+<%@ include file="/WEB-INF/home/mainFooter.jsp" %>

@@ -40,34 +40,33 @@
         .searchForm{
           margin-left: 70%
         }
-        .container{
-          height: 700px;
-        }
     </style>
 <body>
   <div class="main">
     <br>
-    
+    <!--  
     <form class="d-flex searchForm">
       <input class="form-control me-2 searchInput" type="search" placeholder="Search" width="200px"aria-label="Search">
       <button class="btn btn-outline-success" type="submit">검색</button>
-    </form>
+    </form>-->
     <a  class="navbar-brand " href="<c:url value='/index.jsp' />"><img  class ="logo" src="<c:url value='/images/mainLogo.png'/>"  height="140px"></a>
     <br><br>
     <nav class="py-2 bg-light border-bottom">
       <div class=" d-flex flex-wrap">
         <ul class="nav me-auto">
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Features</a></li>
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2">Pricing</a></li>
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2">FAQs</a></li>
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2">About</a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">유기동물</a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark px-2">후기</a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark px-2">유기동물등록</a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark px-2">입양신청목록</a></li>
+          <li class="nav-item"><a href="#" class="nav-link link-dark px-2">입양결과</a></li>
         </ul>
         <ul class="nav">
-          <li class="nav-item"><!-- 여기 /form 조절 --><a href="<c:url value="/user/login/form"></c:url>" 
+          <li class="nav-item"><a href="<c:url value="/user/login"></c:url>" 
           class="nav-link link-dark px-2">Login</a></li>
           <li class="nav-item"><a href="<c:url value="/user/register"></c:url>" class="nav-link link-dark px-2">Sign up</a></li>
-          
+          <li class="nav-item"><a href="<c:url value="/user/login"></c:url>" 
+          class="nav-link link-dark px-2">Logout</a></li>
+          <li class="nav-item"><a href="<c:url value="/user/mypage"></c:url>" class="nav-link link-dark px-2">MyPage</a></li>
         </ul>
       </div>
     </nav>
