@@ -3,9 +3,9 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import model.Community;
+import model.AdoptApply;
 import model.User;
-import model.dao.CommunityDAO;
+import model.dao.AdoptDAO;
 import model.dao.UserDAO;
 
 /**
@@ -129,4 +129,9 @@ public class UserManager {
 	public UserDAO getUserDAO() {
 		return this.userDAO;
 	}
+	//adoptApply
+	public AdoptApply createAdoptApply(AdoptApply adopt) throws SQLException {
+		return AdoptDAO.create(comm);		
+	}
+	
 }
