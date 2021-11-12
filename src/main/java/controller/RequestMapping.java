@@ -23,6 +23,9 @@ public class RequestMapping {
         mappings.put("/user/mypage", new ViewUserController());
 
         mappings.put("/user/register", new RegisterUserController());
+        
+        //adopt form
+        mappings.put("/user/register", new RegisterUserController());
         logger.info("Initialized Request Mapping!");
     }
 
