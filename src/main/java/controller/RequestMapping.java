@@ -5,6 +5,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.adopt.CreateApplyFormController;
+import controller.animal.ListAnimalController;
+import controller.animal.SearchAnimalController;
+import controller.animal.ViewAnimalController;
 import controller.user.*;
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -23,6 +27,13 @@ public class RequestMapping {
         mappings.put("/user/mypage", new ViewUserController());
 
         mappings.put("/user/register", new RegisterUserController());
+       
+        mappings.put("/animal/search", new SearchAnimalController());
+        mappings.put("/animal/view", new ViewAnimalController());
+        mappings.put("/animal/list", new ListAnimalController());
+        mappings.put("/adopt/createForm", new CreateApplyFormController());
+        
+        
         logger.info("Initialized Request Mapping!");
     }
 
