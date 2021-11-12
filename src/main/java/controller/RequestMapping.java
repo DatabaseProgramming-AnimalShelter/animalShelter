@@ -13,25 +13,25 @@ import controller.user.*;
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
-    // 각 요청 uri에 대한 controller 객체를 저장할 HashMap 생성
+    // 媛� �슂泥� uri�뿉 ���븳 controller 媛앹껜瑜� ���옣�븷 HashMap �깮�꽦
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	// 각 uri에 대응되는 controller 객체를 생성 및 저장
+    	// 媛� uri�뿉 ���쓳�릺�뒗 controller 媛앹껜瑜� �깮�꽦 諛� ���옣
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/home", new ForwardController("/home/main.jsp"));
         mappings.put("/register",new ForwardController("/user/registerForm.jsp"));
-        //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));//header 로그인 버튼에서 /form조절
+        //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));//header 濡쒓렇�씤 踰꾪듉�뿉�꽌 /form議곗젅
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
         mappings.put("/user/mypage", new ViewUserController());
 
         mappings.put("/user/register", new RegisterUserController());
        
-        mappings.put("/animal/search", new SearchAnimalController());
-        mappings.put("/animal/view", new ViewAnimalController());
-        mappings.put("/animal/list", new ListAnimalController());
-        mappings.put("/adopt/createForm", new CreateApplyFormController());
+//        mappings.put("/animal/search", new SearchAnimalController());
+//        mappings.put("/animal/view", new ViewAnimalController());
+//      //  mappings.put("/animal/list", new ListAnimalController());
+//        mappings.put("/adopt/createForm", new CreateApplyFormController());
         
         //adopt form
         mappings.put("/user/register", new RegisterUserController());
@@ -39,7 +39,7 @@ public class RequestMapping {
     }
 
     public Controller findController(String uri) {	
-    	// 주어진 uri에 대응되는 controller 객체를 찾아 반환
+    	// 二쇱뼱吏� uri�뿉 ���쓳�릺�뒗 controller 媛앹껜瑜� 李얠븘 諛섑솚
         return mappings.get(uri);
     }
 }
