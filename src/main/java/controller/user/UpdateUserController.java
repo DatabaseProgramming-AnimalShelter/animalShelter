@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.service.UserManager;
+import model.service.AdopterManager;
 import model.Community;
-import model.User;
+import model.Adopter;
 
 public class UpdateUserController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
@@ -27,18 +27,15 @@ public class UpdateUserController implements Controller {
 
     		log.debug("UpdateForm Request : {}", updateId);
     		
-    		UserManager manager = UserManager.getInstance();
-			User user = manager.findUser(updateId);	// 수정하려는 사용자 정보 검색
+    		AdopterManager manager = AdopterManager.getInstance();
+    		Adopter user = manager.findUser(updateId);	// 수정하려는 사용자 정보 검색
 			request.setAttribute("user", user);			
 
 			HttpSession session = request.getSession();
 			if (UserSessionUtils.isLoginUser(updateId, session) ||
 				UserSessionUtils.isLoginUser("admin", session)) {
 				// 현재 로그인한 사용자가 수정 대상 사용자이거나 관리자인 경우 -> 수정 가능
-								
-				List<Community> commList = manager.findCommunityList();	// 커뮤니티 리스트 검색
-				request.setAttribute("commList", commList);	
-				
+	
 				return "/user/updateForm.jsp";   // 검색한 사용자 정보를 update form으로 전송     
 			}    
 			
@@ -50,17 +47,16 @@ public class UpdateUserController implements Controller {
 	    }	
     	
     	// POST request (회원정보가 parameter로 전송됨)
-    	User updateUser = new User(
-    		request.getParameter("userId"),
+    	Adopter updateUser = new Adopter(
+    		request.getParameter("user_id"),
     		request.getParameter("password"),
-    		request.getParameter("name"),
+    		request.getParameter("user_name"),
     		request.getParameter("email"),
-    		request.getParameter("phone"),
-			Integer.parseInt(request.getParameter("commId")));
+    		request.getParameter("phone"));
 
     	log.debug("Update User : {}", updateUser);
 
-		UserManager manager = UserManager.getInstance();
+    	AdopterManager manager = AdopterManager.getInstance();
 		manager.update(updateUser);			
         return "redirect:/user/list";			
     }
