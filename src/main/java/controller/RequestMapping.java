@@ -5,24 +5,33 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.adopt.CreateApplyFormController;
+import controller.animal.ListAnimalController;
+import controller.animal.SearchAnimalController;
+import controller.animal.ViewAnimalController;
 import controller.user.*;
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
-    // °¢ ¿äÃ» uri¿¡ ´ëÇÑ controller °´Ã¼¸¦ ÀúÀåÇÒ HashMap »ý¼º
+    // åª›ï¿½ ï¿½ìŠ‚ï§£ï¿½ uriï¿½ë¿‰ ï¿½ï¿½ï¿½ë¸³ controller åª›ì•¹ê»œç‘œï¿½ ï¿½ï¿½ï¿½ì˜£ï¿½ë¸· HashMap ï¿½ê¹®ï¿½ê½¦
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	// °¢ uri¿¡ ´ëÀÀµÇ´Â controller °´Ã¼¸¦ »ý¼º ¹× ÀúÀå
+    	// åª›ï¿½ uriï¿½ë¿‰ ï¿½ï¿½ï¿½ì“³ï¿½ë¦ºï¿½ë’— controller åª›ì•¹ê»œç‘œï¿½ ï¿½ê¹®ï¿½ê½¦ è«›ï¿½ ï¿½ï¿½ï¿½ì˜£
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/home", new ForwardController("/home/main.jsp"));
         mappings.put("/register",new ForwardController("/user/registerForm.jsp"));
-        //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));//header ·Î±×ÀÎ ¹öÆ°¿¡¼­ /formÁ¶Àý
+        //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));//header æ¿¡ì’“ë ‡ï¿½ì”¤ è¸°ê¾ªë“‰ï¿½ë¿‰ï¿½ê½Œ /formè­°ê³—ì …
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
         mappings.put("/user/mypage", new ViewUserController());
 
         mappings.put("/user/register", new RegisterUserController());
+       
+//        mappings.put("/animal/search", new SearchAnimalController());
+//        mappings.put("/animal/view", new ViewAnimalController());
+//      //  mappings.put("/animal/list", new ListAnimalController());
+//        mappings.put("/adopt/createForm", new CreateApplyFormController());
         
         //adopt form
         mappings.put("/user/register", new RegisterUserController());
@@ -30,7 +39,7 @@ public class RequestMapping {
     }
 
     public Controller findController(String uri) {	
-    	// ÁÖ¾îÁø uri¿¡ ´ëÀÀµÇ´Â controller °´Ã¼¸¦ Ã£¾Æ ¹ÝÈ¯
+    	// äºŒì‡±ë¼±ï§žï¿½ uriï¿½ë¿‰ ï¿½ï¿½ï¿½ì“³ï¿½ë¦ºï¿½ë’— controller åª›ì•¹ê»œç‘œï¿½ ï§¡ì– ë¸˜ è«›ì„‘ì†š
         return mappings.get(uri);
     }
 }
