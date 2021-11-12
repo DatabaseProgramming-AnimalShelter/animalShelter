@@ -3,6 +3,12 @@ DROP SEQUENCE apply_id_seq;
 DROP SEQUENCE animal_id_seq;
 
 DROP SEQUENCE apply_id_seq;
+=======
+DROP SEQUENCE category_id_seq;
+
+DROP SEQUENCE user_no_seq;
+
+DROP SEQUENCE post_id_seq;
 
 DROP TABLE Review CASCADE CONSTRAINTS PURGE;
 
@@ -26,6 +32,13 @@ CREATE TABLE Adopter
 
 CREATE UNIQUE INDEX XPKUser ON Adopter
 (user_no   ASC);
+
+CREATE UNIQUE INDEX user_no_seq ON Adopter
+(user_no   ASC);
+
+CREATE SEQUENCE user_no_seq
+START WITH 1
+INCREMENT BY 1; 
 
 ALTER TABLE Adopter
 	ADD CONSTRAINT  XPKUser PRIMARY KEY (user_no);
@@ -60,6 +73,10 @@ CREATE TABLE Review
 	animal_id            VARCHAR() NOT NULL 
 );
 
+CREATE SEQUENCE post_id_seq
+START WITH 1
+INCREMENT BY 1;
+
 CREATE UNIQUE INDEX XPKReview ON Review
 (post_id   ASC);
 
@@ -79,6 +96,10 @@ CREATE TABLE AdoptApply
 	approval_date        DATE NULL 
 );
 
+CREATE SEQUENCE apply_id_seq
+START WITH 1
+INCREMENT BY 1;
+
 CREATE UNIQUE INDEX XPKAdoptApply ON AdoptApply
 (apply_id   ASC);
 
@@ -92,6 +113,10 @@ CREATE TABLE category
 	animal_type          VARCHAR() NULL 
 );
 
+CREATE SEQUENCE category_id_seq
+START WITH 1
+INCREMENT BY 1;
+
 CREATE UNIQUE INDEX XPKcategory ON category
 (category_id   ASC);
 
@@ -102,7 +127,7 @@ ALTER TABLE Animal
 	ADD (CONSTRAINT R_27 FOREIGN KEY (category_id) REFERENCES category (category_id));
 
 ALTER TABLE Review
-	ADD (CONSTRAINT �ı��ۼ� FOREIGN KEY (writer) REFERENCES Adopter (user_no) ON DELETE SET NULL);
+	ADD (CONSTRAINT ÈÄ±âÀÛ¼º FOREIGN KEY (writer) REFERENCES Adopter (user_no) ON DELETE SET NULL);
 
 ALTER TABLE Review
 	ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
@@ -112,7 +137,7 @@ ALTER TABLE AdoptApply
 
 ALTER TABLE AdoptApply
 	ADD (CONSTRAINT R_22 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
-	
+
 CREATE SEQUENCE apply_id_seq
 START WITH 1
 INCREMENT BY 1; 
