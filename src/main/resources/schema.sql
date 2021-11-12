@@ -1,3 +1,11 @@
+DROP SEQUENCE apply_id_seq;
+
+DROP SEQUENCE category_id_seq;
+
+DROP SEQUENCE user_no_seq;
+
+DROP SEQUENCE post_id_seq;
+
 DROP TABLE Review CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE AdoptApply CASCADE CONSTRAINTS PURGE;
@@ -10,79 +18,116 @@ DROP TABLE Adopter CASCADE CONSTRAINTS PURGE;
 
 CREATE TABLE Adopter
 (
-	user_id              CHAR(20) NOT NULL ,
-	password             CHAR(20) NOT NULL ,
-	userName             CHAR(10) NOT NULL ,
-	email                CHAR(18) NULL ,
-	address              CHAR(30) NULL 
+	user_no              INTEGER NOT NULL ,
+	password             VARCHAR() NOT NULL ,
+	userName             VARCHAR() NOT NULL ,
+	email                VARCHAR() NOT NULL ,
+	phone                VARCHAR() NOT NULL ,
+	user_id              VARCHAR() NOT NULL 
 );
 
+CREATE UNIQUE INDEX user_no_seq ON Adopter
+(user_no   ASC);
+
+CREATE SEQUENCE user_no_seq
+START WITH 1
+INCREMENT BY 1; 
+
 ALTER TABLE Adopter
-	ADD  PRIMARY KEY (user_id);
+	ADD CONSTRAINT  XPKUser PRIMARY KEY (user_no);
 
 CREATE TABLE Animal
 (
-	animal_name          CHAR(10) DEFAULT  0  NULL  CHECK (animal_name BETWEEN 0 AND 30),
-	animal_age           INT NULL ,
-	animal_location      CHAR(30) NULL ,
-	animal_id            INTEGER NOT NULL ,
+	age                  INT NULL ,
+	location             VARCHAR() NULL ,
+	animal_id            VARCHAR() NOT NULL ,
 	animal_matched       INT NULL ,
-	category_id          CHAR(18) NOT NULL 
+	category_id          INTEGER NOT NULL ,
+	image                VARCHAR() NULL ,
+	gender               VARCHAR() NULL ,
+	weight               VARCHAR() NULL ,
+	etc                  VARCHAR() NULL 
 );
 
+CREATE UNIQUE INDEX XPKAnimal ON Animal
+(animal_id   ASC);
+
 ALTER TABLE Animal
-	ADD  PRIMARY KEY (animal_id);
+	ADD CONSTRAINT  XPKAnimal PRIMARY KEY (animal_id);
 
 CREATE TABLE Review
 (
 	post_id              INTEGER NOT NULL ,
-	title                CHAR(18) NOT NULL ,
-	content              CHAR(18) NULL ,
+	title                VARCHAR() NOT NULL ,
+	content              VARCHAR() NULL ,
 	creationDate         DATE NULL ,
-	image                BINARY_DOUBLE NULL ,
-	writer               CHAR(20) NOT NULL ,
-	animal_id            INTEGER NOT NULL 
+	image                VARCHAR() NULL ,
+	writer               VARCHAR() NOT NULL ,
+	animal_id            VARCHAR() NOT NULL 
 );
 
+CREATE SEQUENCE post_id_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE UNIQUE INDEX XPKReview ON Review
+(post_id   ASC);
+
 ALTER TABLE Review
-	ADD  PRIMARY KEY (post_id);
+	ADD CONSTRAINT  XPKReview PRIMARY KEY (post_id);
 
 CREATE TABLE AdoptApply
 (
 	apply_id             INTEGER NOT NULL ,
-	content              CHAR(50) NULL ,
-	matched              INT NULL ,
-	user_id              CHAR(20) NULL ,
-	animal_id            INTEGER NULL ,
+	content              VARCHAR() NULL ,
+	apply_matched        INT NULL ,
+	user_no              INTEGER NULL ,
+	animal_id            VARCHAR() NULL ,
 	apply_date           DATE NULL ,
-	living_environment   CHAR(40) NULL ,
-	have_pets            CHAR(30) NULL 
+	living_environment   VARCHAR() NULL ,
+	have_pets            VARCHAR() NULL ,
+	approval_date        DATE NULL 
 );
 
+CREATE SEQUENCE apply_id_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE UNIQUE INDEX XPKAdoptApply ON AdoptApply
+(apply_id   ASC);
+
 ALTER TABLE AdoptApply
-	ADD  PRIMARY KEY (apply_id);
+	ADD CONSTRAINT  XPKAdoptApply PRIMARY KEY (apply_id);
 
 CREATE TABLE category
 (
-	species              CHAR(18) NULL ,
-	character            CHAR(18) NULL ,
-	category_id          CHAR(18) NOT NULL 
+	species              VARCHAR() NULL ,
+	category_id          INTEGER NOT NULL ,
+	animal_type          VARCHAR() NULL 
 );
 
+CREATE SEQUENCE category_id_seq
+START WITH 1
+INCREMENT BY 1;
+
+CREATE UNIQUE INDEX XPKcategory ON category
+(category_id   ASC);
+
 ALTER TABLE category
-	ADD  PRIMARY KEY (category_id);
+	ADD CONSTRAINT  XPKcategory PRIMARY KEY (category_id);
 
 ALTER TABLE Animal
-	ADD (FOREIGN KEY (category_id) REFERENCES category (category_id));
+	ADD (CONSTRAINT R_27 FOREIGN KEY (category_id) REFERENCES category (category_id));
 
 ALTER TABLE Review
-	ADD (FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE SET NULL);
+	ADD (CONSTRAINT 후기작성 FOREIGN KEY (writer) REFERENCES Adopter (user_no) ON DELETE SET NULL);
 
 ALTER TABLE Review
-	ADD (FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
+	ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
 
 ALTER TABLE AdoptApply
-	ADD (FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL);
+	ADD (CONSTRAINT R_20 FOREIGN KEY (user_no) REFERENCES Adopter (user_no) ON DELETE SET NULL);
 
 ALTER TABLE AdoptApply
-	ADD (FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
+	ADD (CONSTRAINT R_22 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
+	
