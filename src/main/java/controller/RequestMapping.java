@@ -5,24 +5,33 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.adopt.CreateApplyFormController;
+import controller.animal.ListAnimalController;
+import controller.animal.SearchAnimalController;
+import controller.animal.ViewAnimalController;
 import controller.user.*;
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
-    // °¢ ¿äÃ» uri¿¡ ´ëÇÑ controller °´Ã¼¸¦ ÀúÀåÇÒ HashMap »ı¼º
+    // ê° ìš”ì²­ uriì— ëŒ€í•œ controller ê°ì²´ë¥¼ ì €ì¥í•  HashMap ìƒì„±
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	// °¢ uri¿¡ ´ëÀÀµÇ´Â controller °´Ã¼¸¦ »ı¼º ¹× ÀúÀå
+    	// ê° uriì— ëŒ€ì‘ë˜ëŠ” controller ê°ì²´ë¥¼ ìƒì„± ë° ì €ì¥
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/home", new ForwardController("/home/main.jsp"));
         mappings.put("/register",new ForwardController("/user/registerForm.jsp"));
-        //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));//header ·Î±×ÀÎ ¹öÆ°¿¡¼­ /formÁ¶Àı
+        //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));//header ë¡œê·¸ì¸ ë²„íŠ¼ì—ì„œ /formì¡°ì ˆ
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
         mappings.put("/user/mypage", new ViewUserController());
 
         mappings.put("/user/register", new RegisterUserController());
+       
+        mappings.put("/animal/search", new SearchAnimalController());
+        mappings.put("/animal/view", new ViewAnimalController());
+        mappings.put("/animal/list", new ListAnimalController());
+        mappings.put("/adopt/createForm", new CreateApplyFormController());
         
         //adopt form
         mappings.put("/user/register", new RegisterUserController());
@@ -30,7 +39,7 @@ public class RequestMapping {
     }
 
     public Controller findController(String uri) {	
-    	// ÁÖ¾îÁø uri¿¡ ´ëÀÀµÇ´Â controller °´Ã¼¸¦ Ã£¾Æ ¹İÈ¯
+    	// ì£¼ì–´ì§„ uriì— ëŒ€ì‘ë˜ëŠ” controller ê°ì²´ë¥¼ ì°¾ì•„ ë°˜í™˜
         return mappings.get(uri);
     }
 }
