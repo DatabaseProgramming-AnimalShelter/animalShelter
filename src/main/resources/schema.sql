@@ -1,5 +1,9 @@
 DROP SEQUENCE apply_id_seq;
 
+DROP SEQUENCE animal_id_seq;
+
+DROP SEQUENCE apply_id_seq;
+=======
 DROP SEQUENCE category_id_seq;
 
 DROP SEQUENCE user_no_seq;
@@ -25,6 +29,9 @@ CREATE TABLE Adopter
 	phone                VARCHAR() NOT NULL ,
 	user_id              VARCHAR() NOT NULL 
 );
+
+CREATE UNIQUE INDEX XPKUser ON Adopter
+(user_no   ASC);
 
 CREATE UNIQUE INDEX user_no_seq ON Adopter
 (user_no   ASC);
@@ -120,7 +127,7 @@ ALTER TABLE Animal
 	ADD (CONSTRAINT R_27 FOREIGN KEY (category_id) REFERENCES category (category_id));
 
 ALTER TABLE Review
-	ADD (CONSTRAINT �ı��ۼ� FOREIGN KEY (writer) REFERENCES Adopter (user_no) ON DELETE SET NULL);
+	ADD (CONSTRAINT ÈÄ±âÀÛ¼º FOREIGN KEY (writer) REFERENCES Adopter (user_no) ON DELETE SET NULL);
 
 ALTER TABLE Review
 	ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
@@ -130,4 +137,7 @@ ALTER TABLE AdoptApply
 
 ALTER TABLE AdoptApply
 	ADD (CONSTRAINT R_22 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
-	
+
+CREATE SEQUENCE apply_id_seq
+START WITH 1
+INCREMENT BY 1; 
