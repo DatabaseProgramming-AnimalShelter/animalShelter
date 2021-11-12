@@ -23,9 +23,9 @@
     </style>
 	<script>
 	function userCreate() {
-		if (form.userId.value == "") {
+		if (form.user_id.value == "") {
 			alert(" ID를 입력하십시오.");
-			form.userId.focus();
+			form.user_id.focus();
 			return false;
 		} 
 		if (form.password.value == "") {
@@ -73,9 +73,9 @@
 		
 		<img  class ="signupLogo" src="<c:url value='/images/signup.png'/>"  >
 			<div class="form-group row">   
-		        <label for="userId" class="col-lg-3 col-form-label">사용자 ID</label>
+		        <label for="user_id" class="col-lg-3 col-form-label">사용자 ID</label>
 		        <div class="col-lg-8">
-		            <input type="text" name="userId" class="form-control" placeholder="사용자 ID"> 
+		            <input type="text" name="user_id" class="form-control" placeholder="사용자 ID"> 
 		        </div>
 		    </div>       
 		    <div class="form-group row">   
@@ -91,10 +91,10 @@
 		        </div> 
 		    </div> 
 			<div class="form-group row">   
-		        <label for="name" class="col-lg-3 col-form-label">이름</label>
+		        <label for="user_name" class="col-lg-3 col-form-label">이름</label>
 		        <div class="col-lg-8">
-		        	<input type="text" name="name" class="form-control" placeholder="이름"
-		        		<c:if test="${registerFailed}">value="${user.name}"</c:if> > 
+		        	<input type="text" name="user_name" class="form-control" placeholder="이름"
+		        		<c:if test="${registerFailed}">value="${user.user_name}"</c:if> > 
 		        </div>
 		    </div>       
 		    <div class="form-group row">  

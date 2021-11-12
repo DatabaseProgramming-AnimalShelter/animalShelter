@@ -1,4 +1,4 @@
-package model.service;
+/*package model.service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,4 +46,4 @@ public class UserAnalysis {
 		return friends;
 	}
 
-}
+}*/

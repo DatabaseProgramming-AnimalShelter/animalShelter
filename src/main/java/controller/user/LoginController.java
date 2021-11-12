@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import controller.ForwardController;
-import model.service.UserManager;
+import model.service.AdopterManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ public class LoginController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(LoginController.class);
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	String userId = request.getParameter("userId");
+    	String userId = request.getParameter("user_id");
 		String password = request.getParameter("password");
 		
        	if (request.getMethod().equals("GET")) {	
@@ -27,7 +27,7 @@ public class LoginController implements Controller {
 
 		try {
 			// 모델에 로그인 처리를 위임
-			UserManager manager = UserManager.getInstance();
+			AdopterManager manager = AdopterManager.getInstance();
 			manager.login(userId, password);
 	
 			// 세션에 사용자 이이디 저장
