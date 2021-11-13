@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
+import model.dao.AnimalDAO;
 
 public class SearchAnimalController implements Controller{
 	private AnimalDAO animalDAO = new AnimalDAO();
@@ -21,12 +22,12 @@ public class SearchAnimalController implements Controller{
 			animalList = animalDAO.findAnimalList();
 		}
 		else if(search.equals("dog")) {
-			animalList = animalDAO.findDogList();
+			animalList = animalDAO.searchAnimalList();
+//			category_id / animal_type / matched 
 		}
 		else if(search.equals("cat")) {
-			animalList = animalDAO.findCatList();
+			animalList = animalDAO.searchAnimalList();
 		}
-    	 
 		// animalList °´Ã¼¸¦  request °´Ã¼¿¡ ÀúÀåÇÏ¿© ºä¿¡ Àü´Þ
 		request.setAttribute("animalList", animalList);						
 

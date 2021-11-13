@@ -2,8 +2,11 @@ package controller.animal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import model.service.AnimalManager;
+import model.service.AnimalNotFoundException;
 import controller.Controller;
+
+import model.Animal;
 
 public class ViewAnimalController implements Controller{
 
