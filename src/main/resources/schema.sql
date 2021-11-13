@@ -96,7 +96,7 @@ INSERT INTO category VALUES (category_id_seq.NEXTVAL, '푸들', '개');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '말티즈', '개');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '골든리트리버', '개');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '러시안블루', '고양이');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '먼치킨'
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '먼치킨' '고양이');
 , '고양이');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '샴', '고양이');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '뱅갈', '고양이');

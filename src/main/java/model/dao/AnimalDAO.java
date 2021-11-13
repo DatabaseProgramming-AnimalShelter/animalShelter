@@ -56,7 +56,7 @@ public class AnimalDAO {
 	}
 
 	/**
-	 * 기존의 커뮤니티 정보를 수정
+	 * 기존의 동물 정보를 수정
 	 */
 	public int update(Animal animal) throws SQLException {
 		String sql = "UPDATE Animal "
@@ -169,10 +169,20 @@ public class AnimalDAO {
 	}
 	
 	public List<Animal> searchAnimalList(int category_id, String animal_type, int matched) throws SQLException {
-        String sql = "SELECT animal_id, category_id, age, location, image, animal_type, species, matched"
-        		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id"
-        		   + "WHERE category_id=? or animal_type=? or matched=?"
-        		   + "ORDER BY a.animal_id";        
+		String sql = null;
+		// list.jsp에서 species가 0이면  type을 전체로 선택한것이니 category_id=?를 주면 안됨
+		if (category_id == 0) {
+			sql = "SELECT animal_id, category_id, age, location, image, animal_type, species, matched"
+		     		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id"
+		     		   + "WHERE animal_type=? or matched=?"
+		     		   + "ORDER BY a.animal_id"; 
+		}else {
+			sql = "SELECT animal_id, category_id, age, location, image, animal_type, species, matched"
+	        		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id"
+	        		   + "WHERE category_id=? or animal_type=? or matched=?"
+	        		   + "ORDER BY a.animal_id";    
+		}
+		
         Object[] param = new Object[] { category_id, animal_type, matched};	// JDBCUtil에 update문과 매개 변수 설정
         jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
         

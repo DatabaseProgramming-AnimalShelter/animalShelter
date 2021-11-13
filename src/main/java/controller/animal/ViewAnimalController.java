@@ -14,8 +14,11 @@ public class ViewAnimalController implements Controller{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		Animal animal = null;
-    	try {
-			animal = manager.findAnimal(animalId);	// 유기동물 정보 검색  
+		AnimalManager manager = AnimalManager.getInstance();
+		int animal_id = (int) request.getAttribute("matched");
+		
+		try {
+			animal = manager.findAnimal(animal_id);	// 유기동물 정보 검색  
 		} catch (AnimalNotFoundException e) {				
 	        return "redirect:/animal/list";
 		}	

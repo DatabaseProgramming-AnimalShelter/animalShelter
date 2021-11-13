@@ -2,29 +2,27 @@ package controller.adopt;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.Controller;
+import controller.user.UserSessionUtils;
+import model.Adopter;
 import model.Animal;
 import model.User;
 import model.service.ExistingUserException;
 import model.service.UserManager;
 
 // 유기동물 입양 신청
-public class CreateApplyFormController implements Controller{
+public class ApplyAnimalController implements Controller{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub	
 
-    	// POST request (회원정보가 parameter로 전송됨)
-       	AdoptApply adoptApply = new AdoptApply( // 입양 신청 테이블 바꿔야 할듯???
-			request.getParameter(""),
-			request.getParameter(""),
-			request.getParameter(""),
-			request.getParameter(""),
-			request.getParameter(""),
-			Integer.parseInt(request.getParameter("")));
-	
+		Animal animal = (Animal) request.getAttribute("animal");
+		HttpSession session = request.getSession();
+		Adopter user = (Adopter) session.getAttribute(UserSessionUtils.USER_SESSION_KEY);
+		
 		try {
 			AdoptApplyManager manager = AdoptApplyManager.getInstance();
 			manager.create(adoptApply);

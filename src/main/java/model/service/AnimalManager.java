@@ -36,23 +36,19 @@ public class AnimalManager {
 	}
 	
 	public int create(Animal animal) throws SQLException, ExistingUserException {
-		if (animalDAO.findAnimal(animal.getAnimal_id()) == true) {
-			throw new ExistingUserException(animal.getAnimal_id() + "는 존재하는 아이디입니다.");
-		}
 		return animalDAO.create(animal);
 	}
 
-	public int update(Adopter user) throws SQLException, UserNotFoundException {
-
-		return adopterDAO.update(user);
+	public int update(Animal animal) throws SQLException, UserNotFoundException {
+		return animalDAO.update(animal);
 	}	
 
-	public int remove(String user_id) throws SQLException, UserNotFoundException {
+	public int remove(int animal_id) throws SQLException, UserNotFoundException {
 
-		return adopterDAO.remove(user_id);
+		return animalDAO.remove(animal_id);
 	}
 
-	public Adopter findUser(String user_id)
+	/*public Adopter findUser(String user_id)
 		throws SQLException, UserNotFoundException {
 		Adopter user = adopterDAO.findUser(user_id);
 		
@@ -60,18 +56,35 @@ public class AnimalManager {
 			throw new UserNotFoundException(user_id + "는 존재하지 않는 아이디입니다.");
 		}		
 		return user;
+	}*/
+
+	public List<Animal> findAnimalList() throws SQLException {
+			return animalDAO.findAnimalList();
+	}
+	
+	public List<Animal> searchAnimalList(int category_id, String animal_type, int matched)
+		throws SQLException {
+		return animalDAO.searchAnimalList(category_id, animal_type, matched);
 	}
 
-//	public List<User> findUserList() throws SQLException {
-//			return userDAO.findUserList();
-//	}
-//	
+	public Animal findAnimal(int animal_id) throws SQLException, AnimalNotFoundException {
+		// TODO Auto-generated method stub
+		Animal animal = animalDAO.findAnimal(animal_id);
+		
+		if(animal == null) {
+			throw new AnimalNotFoundException(animal_id + "는 존재하지 않는 동물입니다.");
+		}
+		
+		return animal;
+	}
+	
+	// currentPage ??
 //	public List<User> findUserList(int currentPage, int countPerPage)
-//		throws SQLException {
-//		return userDAO.findUserList(currentPage, countPerPage);
-//	}
+//	throws SQLException {
+//	return userDAO.findUserList(currentPage, countPerPage);
+//}
 
-	public boolean login(String user_id, String password)
+	/*public boolean login(String user_id, String password)
 		throws SQLException, UserNotFoundException, PasswordMismatchException {
 		Adopter user = findUser(user_id);
 
@@ -79,7 +92,7 @@ public class AnimalManager {
 			throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
 		}
 		return true;
-	}
+	}*/
 
 	/*
 	 * public List<User> makeFriends(String userId) throws Exception { return
