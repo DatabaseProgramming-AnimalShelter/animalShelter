@@ -43,7 +43,7 @@
     </style>
 <body>
   <div class="main">
-    <br>
+    <br>${curUserId}${user}
     <!--  
     <form class="d-flex searchForm">
       <input class="form-control me-2 searchInput" type="search" placeholder="Search" width="200px"aria-label="Search">
@@ -61,12 +61,19 @@
           <li class="nav-item"><a href="#" class="nav-link link-dark px-2">입양결과</a></li>
         </ul>
         <ul class="nav">
-          <li class="nav-item"><a href="<c:url value="/user/login"></c:url>" 
+        <c:choose>
+	        <c:when test="${curUserId==NULL}">
+	        <li class="nav-item"><a href="<c:url value="/user/login"></c:url>" 
           class="nav-link link-dark px-2">Login</a></li>
-          <li class="nav-item"><a href="<c:url value="/user/register"></c:url>" class="nav-link link-dark px-2">Sign up</a></li>
-          <li class="nav-item"><a href="<c:url value="/user/login"></c:url>" 
-          class="nav-link link-dark px-2">Logout</a></li>
-          <li class="nav-item"><a href="<c:url value="/user/mypage"></c:url>" class="nav-link link-dark px-2">MyPage</a></li>
+           <li class="nav-item"><a href="<c:url value="/user/register"></c:url>" class="nav-link link-dark px-2">Sign up</a></li>
+	   		</c:when>
+	   		<c:when test="${curUserId!=NULL}">
+	         <li class="nav-item"><a href="<c:url value="/user/logout"></c:url>" class="nav-link link-dark px-2">Logout</a></li>
+          <li class="nav-item"><a href="<c:url value="/user/mypage"> <c:param name='user_id' value='${user.user_id}'/></c:url>" class="nav-link link-dark px-2">MyPage</a></li>
+	   		</c:when>
+	     </c:choose> 
+         
+         
         </ul>
       </div>
     </nav>

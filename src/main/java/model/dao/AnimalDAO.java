@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Community;
+import model.Adopter;
+import model.Animal;
 
 /**
  * 사용자 관리를 위해 데이터베이스 작업을 전담하는 DAO 클래스
@@ -21,21 +22,29 @@ public class AnimalDAO {
 	/**
 	 * 커뮤니티 테이블에 새로운 행 생성 (PK 값은 Sequence를 이용하여 자동 생성)
 	 */
-	public Community create(Community comm) throws SQLException {
-		String sql = "INSERT INTO Community VALUES (commId_seq.nextval, ?, ?, SYSDATE, ?)";		
-		Object[] param = new Object[] {comm.getName(), comm.getDescription(),
-			comm.getChairId()};				
+	public int create(Animal animal) throws SQLException {
+		String sql = "INSERT INTO Animal VALUES (? , ?, ?, ?, ?, ?, ?, ?)";		
+		Object[] param = new Object[] {animal.getAnimal_id(), 
+				animal.getCategory_id(),
+				animal.getAge(),
+				animal.getLocation(),
+				animal.getImage(),
+				animal.getGender(),
+				animal.getWeight(),
+				animal.getEtc(),
+				animal.getAnimal_matched()
+				};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 						
-		String key[] = {"cId"};	// PK 컬럼의 이름     
+		String key[] = {"animal_id"};	// PK 컬럼의 이름     
 		try {    
-			jdbcUtil.executeUpdate(key);  // insert 문 실행
+			int result = jdbcUtil.executeUpdate(key);  // insert 문 실행
 		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
 		   	if(rs.next()) {
 		   		int generatedKey = rs.getInt(1);   // 생성된 PK 값
-		   		comm.setId(generatedKey); 	// id필드에 저장  
+		   		animal.setAnimal_id(generatedKey); 	// id필드에 저장  
 		   	}
-		   	return comm;
+		   	return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
@@ -43,20 +52,19 @@ public class AnimalDAO {
 			jdbcUtil.commit();
 			jdbcUtil.close();	// resource 반환
 		}		
-		return null;			
+		return 0;			
 	}
 
 	/**
 	 * 기존의 커뮤니티 정보를 수정
 	 */
-	public int update(Community comm) throws SQLException {
-		String sql = "UPDATE Community "
-					+ "SET cName=?, descr=?, chairId=? "
-					+ "WHERE cId=?";
-		String chairId = comm.getChairId();
-		if (chairId.equals("")) chairId = null;
-		Object[] param = new Object[] {comm.getName(), comm.getDescription(),
-				chairId, comm.getId()};				
+	public int update(Animal animal) throws SQLException {
+		String sql = "UPDATE Animal "
+					+ "SET age=?, location=?, image=?, gender=?, weight=?, etc=?, animal_matched=?  "
+					+ "WHERE animal_id=?";
+		Object[] param = new Object[] {animal.getAge(), animal.getLocation(),
+				animal.getImage(), animal.getGender(), animal.getWeight(),
+				animal.getEtc(), animal.getAnimal_matched()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
 			
 		try {				
@@ -73,36 +81,13 @@ public class AnimalDAO {
 		return 0;
 	}
 
-	/**
-	 * 커뮤니티의 회장을 변경  
-	 */
-	public int updateChair(Community comm) {
-		String sql = "UPDATE Community "
-					+ "SET chairId= ? "
-					+ "WHERE cId=?";
-		Object[] param = new Object[] {comm.getChairId(), comm.getId()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
-			
-		try {				
-			int result = jdbcUtil.executeUpdate();	// update 문 실행
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		}
-		finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 반환
-		}		
-		return 0;
-	}
 	
 	/**
 	 * 주어진 ID에 해당하는 커뮤니티 정보를 삭제.
 	 */
-	public int remove(String commId) throws SQLException {
-		String sql = "DELETE FROM Community WHERE cId=?";		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {commId});	// JDBCUtil에 delete문과 매개 변수 설정
+	public int remove(int animal_id) throws SQLException {
+		String sql = "DELETE FROM Animal WHERE animal_id=?";		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
 			int result = jdbcUtil.executeUpdate();	// delete 문 실행
@@ -118,57 +103,62 @@ public class AnimalDAO {
 		return 0;
 	}
 
-	/**
-	 * 주어진  ID에 해당하는 커뮤니티 정보를 데이터베이스에서 찾아 Community 도메인 클래스에 
-	 * 저장하여 반환.
-	 */
-	public Community findCommunity(int commId) throws SQLException {
-        String sql = "SELECT cName, descr, startDate, chairId, u.name As chairName "
-        			+ "FROM Community c LEFT OUTER JOIN UserInfo u ON c.chairId = u.userId "
-        			+ "WHERE cId=? ";              
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {commId});	// JDBCUtil에 query문과 매개 변수 설정
-		Community comm = null;
+	//animal detail
+	public Animal findAnimal(int animal_id) throws SQLException {
+        String sql = "SELECT animal_id, category_id, age, location, matched, image,gender,weight,etc, species, animal_type"
+     		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id" 
+     		  + "WHERE animal_id=?";  
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil에 query문과 매개 변수 설정
+
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
 			if (rs.next()) {						// 학생 정보 발견
-				comm = new Community(		// Community 객체를 생성하여 커뮤니티 정보를 저장
-					commId,
-					rs.getString("cName"),
-					rs.getString("descr"),
-					rs.getDate("startDate"),
-					rs.getString("chairId"),
-					rs.getString("chairName"));
+				Animal animal = new Animal(		// User 객체를 생성하여 학생 정보를 저장
+					rs.getInt("animal_id"),
+					rs.getInt("category_id"),
+					rs.getInt("age"),
+					rs.getString("location"),
+					rs.getInt("matched"),
+					rs.getString("image"),
+					rs.getString("gender"),
+					rs.getString("weight"),
+					rs.getString("etc"),
+					rs.getString("species"),
+					rs.getString("animal_type"));
+				return animal;
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.close();		// resource 반환
 		}
-		return comm;
+		return null;
 	}
-
 	/**
 	 * 전체 커뮤니티 정보를 검색하여 List에 저장 및 반환
 	 */
-	public List<Community> findCommunityList() throws SQLException {
-        String sql = "SELECT cId, cName, descr, COUNT(u.userId) AS numOfMem "
-        		   + "FROM Community c LEFT OUTER JOIN UserInfo u ON c.cId = u.commId "
-        		   + "GROUP BY cId, cName, descr "
-        		   + "ORDER BY cName";        
+	public List<Animal> findAnimalList() throws SQLException {
+        String sql = "SELECT animal_id, category_id, age, location, image, animal_type, species"
+        		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id" 
+        		   + "ORDER BY a.animal_id";        
+        			
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 					
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
-			List<Community> commList = new ArrayList<Community>();	// Community들의 리스트 생성
+			List<Animal> animalList = new ArrayList<Animal>();	// Community들의 리스트 생성
 			while (rs.next()) {
-				Community comm = new Community(			// Community 객체를 생성하여 현재 행의 정보를 저장
-						rs.getInt("cId"),
-						rs.getString("cName"),
-						rs.getString("descr"),
-						rs.getInt("numOfMem"));
-				commList.add(comm);				// List에 Community 객체 저장
+				Animal animal = new Animal(
+						rs.getInt("animal_id"), 
+						rs.getInt("category_id"),
+						rs.getInt("age"),
+						rs.getString("location"),
+						rs.getInt("matched"),
+						rs.getString("image"));
+
+				animalList.add(animal);				// List에 Community 객체 저장
 			}		
-			return commList;					
+			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -178,24 +168,39 @@ public class AnimalDAO {
 		return null;
 	}
 	
-	/**
-	 * 주어진  ID에 해당하는 커뮤니티가 존재하는지 검사 
-	 */
-	public boolean existingCommunity(String commId) throws SQLException {
-		String sql = "SELECT count(*) FROM Community WHRE cId=?";      
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {commId});	// JDBCUtil에 query문과 매개 변수 설정
-
+	public List<Animal> searchAnimalList(int category_id, String animal_type, int matched) throws SQLException {
+        String sql = "SELECT animal_id, category_id, age, location, image, animal_type, species, matched"
+        		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id"
+        		   + "WHERE category_id=? or animal_type=? or matched=?"
+        		   + "ORDER BY a.animal_id";        
+        Object[] param = new Object[] { category_id, animal_type, matched};	// JDBCUtil에 update문과 매개 변수 설정
+        jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
+        
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
-			if (rs.next()) {
-				int count = rs.getInt(1);
-				return (count == 1 ? true : false);
-			}
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			List<Animal> animalList = new ArrayList<Animal>();	// Community들의 리스트 생성
+			while (rs.next()) {
+				Animal animal = new Animal(
+						rs.getInt("animal_id"), 
+						rs.getInt("category_id"),
+						rs.getInt("age"),
+						rs.getString("location"),
+						rs.getInt("matched"),
+						rs.getString("image"),
+						rs.getString("species"),
+						rs.getString("animal_type"));
+
+				animalList.add(animal);				// List에 Community 객체 저장
+			}		
+			return animalList;					
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.close();		// resource 반환
 		}
-		return false;
+		return null;
 	}
+	
+
 }

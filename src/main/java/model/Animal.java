@@ -1,23 +1,42 @@
 package model;
 
 public class Animal {
-	private int id;
+	private int animal_id;
+	private int category_id;
 	private int age;
 	private String location;
 	private int matched;
 	private String image;
+	public String getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(String species) {
+		this.species = species;
+	}
+
+	public String getAnimal_type() {
+		return animal_type;
+	}
+
+	public void setAnimal_type(String animal_type) {
+		this.animal_type = animal_type;
+	}
 	private String gender;
 	private String weight;
 	private String etc;
-	
+	private String species;
+	private String animal_type;
+
 	public Animal() {
 		super();
 	}
 	
-	public Animal(int id, int age, String location, int matched, String image, String gender, String weight,
-			String etc) {
+	public Animal(int animal_id, int category_id, int age, String location, int matched, String image, String gender,
+			String weight, String etc, String species, String animal_type) {
 		super();
-		this.id = id;
+		this.animal_id = animal_id;
+		this.category_id = category_id;
 		this.age = age;
 		this.location = location;
 		this.matched = matched;
@@ -25,13 +44,44 @@ public class Animal {
 		this.gender = gender;
 		this.weight = weight;
 		this.etc = etc;
+		this.species = species;
+		this.animal_type = animal_type;
 	}
-	
-	public int getId() {
-		return id;
+
+	public Animal(int animal_id, int category_id, int age, String location, int matched, String image) {
+		super();
+		this.animal_id = animal_id;
+		this.category_id = category_id;
+		this.age = age;
+		this.location = location;
+		this.matched = matched;
+		this.image = image;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public Animal(int animal_id, int category_id, int age, String location, int matched, String image, String species,
+			String animal_type) {
+		super();
+		this.animal_id = animal_id;
+		this.category_id = category_id;
+		this.age = age;
+		this.location = location;
+		this.matched = matched;
+		this.image = image;
+		this.species = species;
+		this.animal_type = animal_type;
+	}
+
+	public int getAnimal_id() {
+		return animal_id;
+	}
+	public void setAnimal_id(int animal_id) {
+		this.animal_id = animal_id;
+	}
+	public int getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
 	}
 	public int getAge() {
 		return age;
@@ -74,5 +124,11 @@ public class Animal {
 	}
 	public void setEtc(String etc) {
 		this.etc = etc;
+	}
+	public int getAnimal_matched() {
+		return matched;
+	}
+	public void setAnimal_matched(int matched) {
+		this.matched = matched;
 	}
 }

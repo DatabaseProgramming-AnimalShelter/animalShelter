@@ -130,7 +130,7 @@ menu박스 가운데정렬, 글자가운데 정렬 */
 					<img class="img" src="'${animal.image}'" />
 				</div>
 				<div class="info">
-					<h3 class="fw-bolder">1. 품종 : ${animal.animal_type} > ${animal.species}</h5><br>
+					<h3 class="fw-bolder">${animal.animal_type} > ${animal.species}</h5><br>
 					2. 성별 : ${animal.gender}<br><br>
 					3. 발견장소 : ${animal.location}<br><br> 
 				</div>

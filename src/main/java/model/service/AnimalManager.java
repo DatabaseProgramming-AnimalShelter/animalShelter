@@ -4,8 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 //import model.AdoptApply;
-import model.Adopter;
-import model.dao.AdopterDAO;
+import model.Animal;
+import model.dao.AnimalDAO;
 
 /**
  * 사용자 관리 API를 사용하는 개발자들이 직접 접근하게 되는 클래스.
@@ -14,34 +14,32 @@ import model.dao.AdopterDAO;
  * 비지니스 로직이 복잡한 경우에는 비지니스 로직만을 전담하는 클래스를 
  * 별도로 둘 수 있다.
  */
-public class AdopterManager {
-	private static AdopterManager userMan = new AdopterManager();
-	private AdopterDAO adopterDAO;
-	//private AnimalDAO commDAO;
+public class AnimalManager {
+	private static AnimalManager animalMan = new AnimalManager();
+//	private AdopterDAO adopterDAO;
+	private AnimalDAO animalDAO;
 
-	public AdopterDAO getAdopterDAO() {
-		return this.adopterDAO;
+	public AnimalDAO getAnimalDAO() {
+		return this.animalDAO;
 	}
 	
-	private AdopterManager() {
+	private AnimalManager() {
 		try {
-			adopterDAO = new AdopterDAO();
-			//commDAO = new AnimalDAO();
+			animalDAO = new AnimalDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}			
 	}
 	
-	public static AdopterManager getInstance() {
-		System.out.println("----------------------userMan:--------------------"+userMan);
-		return userMan;
+	public static AnimalManager getInstance() {
+		return animalMan;
 	}
 	
-	public int create(Adopter user) throws SQLException, ExistingUserException {
-		if (adopterDAO.existingUser(user.getUser_id()) == true) {
-			throw new ExistingUserException(user.getUser_id() + "는 존재하는 아이디입니다.");
+	public int create(Animal animal) throws SQLException, ExistingUserException {
+		if (animalDAO.findAnimal(animal.getAnimal_id()) == true) {
+			throw new ExistingUserException(animal.getAnimal_id() + "는 존재하는 아이디입니다.");
 		}
-		return adopterDAO.create(user);
+		return animalDAO.create(animal);
 	}
 
 	public int update(Adopter user) throws SQLException, UserNotFoundException {
@@ -109,5 +107,6 @@ public class AdopterManager {
 	 * return userDAO.findUsersInCommunity(commId); }
 	 */
 
+	
 	
 }

@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.adopt.CreateApplyFormController;
-import controller.animal.ListAnimalController;
+//import controller.animal.ListAnimalController;
 import controller.animal.SearchAnimalController;
 import controller.animal.ViewAnimalController;
 import controller.user.*;
@@ -17,9 +17,8 @@ public class RequestMapping {
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	// 媛� uri�뿉 ���쓳�릺�뒗 controller 媛앹껜瑜� �깮�꽦 諛� ���옣
         mappings.put("/", new ForwardController("index.jsp"));
-        mappings.put("/home", new ForwardController("/home/main.jsp"));
+        mappings.put("/home", new MainController());
         mappings.put("/register",new ForwardController("/user/registerForm.jsp"));
         //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));//header 濡쒓렇�씤 踰꾪듉�뿉�꽌 /form議곗젅
         mappings.put("/user/login", new LoginController());
@@ -39,7 +38,6 @@ public class RequestMapping {
     }
 
     public Controller findController(String uri) {	
-    	// 二쇱뼱吏� uri�뿉 ���쓳�릺�뒗 controller 媛앹껜瑜� 李얠븘 諛섑솚
         return mappings.get(uri);
     }
 }
