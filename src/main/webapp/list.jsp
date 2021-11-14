@@ -119,10 +119,10 @@ menu박스 가운데정렬, 글자가운데 정렬 */
   margin:auto;
 }
 
-#dogSpecies, #catSpecies{
+/*#dogSpecies, #catSpecies{
 	display:none;
 }
-
+*/
 </style>
 </head>
 <body>
@@ -134,7 +134,6 @@ menu박스 가운데정렬, 글자가운데 정렬 */
 			<option value="dog">개</option>
 			<option value="cat">고양이</option>		
 		</select>
-		
 		<div id="dogSpecies">
 			<span>품종</span>
 			<select name="dogSpecies">

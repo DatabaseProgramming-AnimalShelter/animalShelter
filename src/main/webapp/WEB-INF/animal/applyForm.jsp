@@ -18,7 +18,7 @@
 <body>
     <h2>유기동물 등록 - 관리자</h2>
     <br>
-    <form method="post" action=".jsp">
+    <form class="applyForm"name="form" method="POST" action="<c:url value='/animal/apply'/>">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script>
             $( document ).ready(function(){
@@ -27,7 +27,7 @@
                 var sel1 = {
                     " ":"종 선택",
                     "개":"개",
-                    "C":"고양이"
+                    "고양이":"고양이"
                 };
                 
                 //sel1이 강아지일경우
@@ -54,7 +54,6 @@
                     14: "코리안숏헤어",
                     15: "스핑크스"
                 };
-                
                //sel1에 서버에서 받아온 값을 넣기위해..
                // map배열과 select 태그 id를 넘겨주면 option 태그를 붙여줌.
                // map[키이름] = 그 키에 해당하는 value를 반환한다.
@@ -72,9 +71,9 @@
                $("select[id='sel1']").on("change", function(){
                     var option = $("#sel1 option:selected").val();
                     var subSelName = '';
-                    if(option == "D") {
+                    if(option == "개") {
                         subSelName = "sel2_1";
-                    } else if(option == "C"){
+                    } else if(option == "고양이"){
                         subSelName = "sel2_2";
                     } else{
                         $("#sel2").hide();
@@ -88,14 +87,14 @@
             
             </script>
 
-        <!-- 종: type (개, 고양이, 기타) -->
-        종:
+        <!-- 과: type (개, 고양이, 기타) -->
+        과:
         <select name="sel1" id="sel1">
         </select>
         <br><br>
         
-        <!-- 품종: species (포메라니안, 요크셔테리어, 치와와) -->
-      품종:
+        <!-- 종: species (포메라니안, 요크셔테리어, 치와와) -->
+      종:
         <select name="sel2" id="sel2" style="">
         </select>
         <br><br>
@@ -110,19 +109,55 @@
         
         <!-- 나이: age -->
         나이:
-        <input type="text" name="age" placeholder="나이 입력" />
-        <br><br>
-        
+         <select name="age" >
+		    <option value="0" > 1살미만 </option>
+		    <option value="1"> 1살 </option>
+		    <option value="2" > 2살 </option>
+		    <option value="3"> 3살 </option>  
+		    <option value="4" > 4살</option>
+		    <option value="5"> 5살 </option>
+		    <option value="6" > 6살 </option>
+		    <option value="7"> 7살 </option>  
+		    <option value="8" > 8살 </option>
+		    <option value="9"> 9살 </option>
+		    <option value="10" > 10살 </option>
+		    <option value="11"> 11살 </option>  
+		    <option value="12" > 12살 </option>
+		    <option value="13"> 13살 </option>
+		    <option value="14" > 14살 </option>
+		    <option value="15"> 15살 </option>  
+		    <option value="16" > 16살 </option>
+		    <option value="17"> 17살 </option>
+		    <option value="18" > 18살 </option>
+		    <option value="19"> 19살 </option>  
+	  	</select> <br><br>
         <!-- 몸무게: weight -->
         몸무게:
-        <input type="text" name="weight" placeholder="몸무게 입력" />
+        <select name="weight" >
+		    <option value="0" > ~2kg </option>
+		    <option value="1"> 2kg~3kg </option>
+		    <option value="2" > 3kg~4kg  </option>
+		    <option value="3" > 4kg~5kg</option>
+		    <option value="4"> 5kg~6kg </option>
+		    <option value="5" > 7kg~10kg </option>
+		    <option value="6"> 11kg~15kg </option>  
+		    <option value="7" > 15kg~20kg  </option>
+		    <option value="8"> 20kg~ </option>
+	  	</select> 
         <br><br>
         
         <!-- 공고번호: notice_number -->
         
         <!-- 발견장소: location -->
         발견장소:
-        <input type="text" name="location" placeholder="발견장소 입력" />
+         <select name="location" >
+		    <option value="서울" > 서울 </option>
+		    <option value="경기"> 경기 </option>
+		    <option value="인천" > 인천 </option>
+		    <option value="etc"> 기타 </option>  
+	  	</select>
+
+
         <br><br>
         
         <!-- 특이사항: etc -->
