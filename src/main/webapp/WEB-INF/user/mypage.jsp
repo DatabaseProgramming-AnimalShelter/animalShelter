@@ -37,20 +37,19 @@
 	  	  <tr>
 			<td class="">사용자 ID</td>
 			<td class="">
-				${user.id}
+				${curUserId}
 			</td>
 		  </tr>
 		  <tr>
 			<td class="userHead">이름</td>
 			<td class="userCell">
-				${user.name}
+				${user.user_name} 
 			</td>
 		  </tr>
 		 
 		  <tr>
 			<td class="userHead">이메일</td>
-			<td class="userCell">
-				${user.email}
+			<td class="userCell">${user.email} 
 			</td>
 		  </tr>
 		  <tr>
@@ -63,10 +62,9 @@
 	 	</table>
 	    <br>
 	    <a href="<c:url value='/user/update'>
-	     		   <c:param name='userId' value='${user.id}'/>
+	     		 
 			 	 </c:url>">회원정보 수정</a> &nbsp;
  	    <a href="<c:url value='/user/delete'>
-				   <c:param name='userId' value='${user.id}'/>
 			 	 </c:url>" onclick="return userRemove();">회원탈퇴</a> &nbsp;
  	   
  	    <br><br>	   
