@@ -3,7 +3,74 @@
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
 <title>유기동물 목록 조회</title>
 <script type="text/javascript">
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+    $( document ).ready(function(){
+       
+        //테스트용 데이터
+        var type = {
+            " ":"종 선택",
+            "개":"개",
+            "고양이":"고양이"
+        };
+        
+        //type이 강아지일경우
+        var species_1 = {
+            " ":"개",
+            1: "믹스견",
+            2: "진돗개",
+            3: "풍산개",
+            4: "치와와",
+            5: "요크셔테리어",
+            6: "비숑",
+            7: "푸들",
+            8: "말티즈",
+            9: "골든리트리버"
+        };
+        
+        //type이 고양이일경우
+        var species_2 = {
+            " ":"고양이",
+            10: "러시안블루",
+            11: "먼치킨",
+            12: "샴",
+            13: "벵갈",
+            14: "코리안숏헤어",
+            15: "스핑크스"
+        };
+       //type에 서버에서 받아온 값을 넣기위해..
+       // map배열과 select 태그 id를 넘겨주면 option 태그를 붙여줌.
+       // map[키이름] = 그 키에 해당하는 value를 반환한다.
+       //retOption(데이터맵, select함수 id)
+       function retOption(mapArr, select){
+            var html = '';
+            var keys = Object.keys(mapArr);
+            for (var i in keys) {
+                html += "<option value=" + "'" + keys[i] + "'>" + mapArr[keys[i]] + "</option>";
+            }
+            
+            $("select[id='" + select +"']").html(html);
+       }
+       
+       $("select[id='type']").on("change", function(){
+            var option = $("#type option:selected").val();
+            var subSelName = '';
+            if(option == "개") {
+                subSelName = "species_1";
+            } else if(option == "고양이"){
+                subSelName = "species_2";
+            } else{
+                $("#species").hide();
+                return;
+            }
+            $("#species").show();
+            retOption(eval(subSelName), "species");
+        })
+       retOption(type, "type");
+    });
+    
+    </script>
+    <script>
 <!-- 검색 버튼 누르면 파라미터 settings -->
 function search(){
    String type = $("select[name='type']").val();
@@ -22,13 +89,7 @@ function search(){
    request.setAttribute("matched", matched);
 }   
 
-function type(){
-   String species = document.getElementById("type").options[langSelect.selectedIndex].value;
-   if (species == "dog") {
-      $('#dogSpecies').show();
-   } else {   
-      $('#catSpecies').show();
-   }
+f
        
 }
    
@@ -36,52 +97,18 @@ function type(){
 
 <form name="form" action="<c:url value='/animal/search' />">
    <div id="menu">
-      <span>과</span>
-      <select id="type" name="type" onchange="type()">
-         <option value="typeAll" selected>전체</option>
-         <option value="dog">개</option>
-         <option value="cat">고양이</option>      
-      </select>
-      <div id="dogSpecies">
-         <span>품종</span>
-         <select name="dogSpecies">
-            <option value="dogSpeciesAll" selected>전체</option>
-            
-            <!-- db에 넣으면 반복문으로 쓰기 -->
-            <%-- <c:forEach var="animal" items="${searchAnimalList}">
-               <option value="${animal.category_id}">${animal.category_id}</option>
-            </c:forEach> --%>
-         
-            <option value="02">진돗개</option>
-            <option value="03">풍산개</option>
-            <option value="04">치와와</option>
-            <option value="05">요크셔테리어</option>
-            <option value="06">비숑</option>
-            <option value="07">푸들</option>
-            <option value="08">말티즈</option>
-            <option value="09">골든리트리버</option>
-         </select>
-      </div>
+     과:
+        <select name="type" id="type">
+        </select>
+        <br><br>
+        
+        <!-- 종: species (포메라니안, 요크셔테리어, 치와와) -->
+      종:
+        <select name="species" id="species" style="">
+        </select>
+        <br><br>
       
-      <div id="catSpecies">
-         <span>품종</span>
-         <select name="catSpecies">
-            <option value="catSpeciesAll" selected>전체</option>
-            
-            <!-- db에 넣으면 반복문으로 쓰기 -->
-            <!--
-            <c:forEach var="animal" items="${searchAnimalList}">
-               <option value="${animal.category_id}">${animal.category_id}</option>
-            </c:forEach> 
-             -->
-            
-            <option value="10">샴</option>
-            <option value="11">뱅갈</option>
-            <option value="12">코리안숏헤어</option>
-            <option value="13">스핑크스</option>
-         </select>
-      </div>
-      
+    
       <span>입양유무</span>
       <select name="matched">
          <option value="matchedAll" selected>전체</option>
@@ -102,7 +129,7 @@ function type(){
                <img class="img" src="'${animal.image}'" />
             </div>
             <div class="info">
-               <h3 class="fw-bolder">${animal.animal_type} > ${animal.species}</h5><br>
+               <h3 class="fw-bolder">${animal.type} > ${animal.species}</h5><br>
                1. 성별 : ${animal.gender}<br><br>
                2. 발견장소 : ${animal.location}<br><br> 
             </div>
@@ -125,6 +152,7 @@ function type(){
               ${animal.age}     
            </td>
            <td>
+           
             <a href="<c:url value='/animal/view'>
                      <c:param name='animal_id' value='${animal.animal_id}'/>
                     </c:url>">
