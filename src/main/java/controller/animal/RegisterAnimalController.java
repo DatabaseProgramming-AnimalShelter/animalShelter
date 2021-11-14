@@ -13,8 +13,8 @@ import model.Animal;
 import model.service.ExistingUserException;
 import model.service.AnimalManager;
 
-public class ApplyAnimalController implements Controller {
-    private static final Logger log = LoggerFactory.getLogger(ApplyAnimalController.class);
+public class RegisterAnimalController implements Controller {
+    private static final Logger log = LoggerFactory.getLogger(RegisterAnimalController.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -22,22 +22,18 @@ public class ApplyAnimalController implements Controller {
     	if (request.getMethod().equals("GET")) {	
     		// GET request: 회원정보 등록 form 요청	
     		log.debug("ApplyForm Request");
-			return "/animal/applyForm.jsp";   
+			return "/animal/registerForm.jsp";   
 	    }	
-    	System.out.println("@@@@@@@@@@@@Create Animal :---------------------"+request.getParameter("gender"));
+    	System.out.println("@@@@@@@@@@@@Create Animal :---------------------"+request.getParameter("species"));
        	Animal animal = new Animal(
-			Integer.parseInt(request.getParameter("animal_id")),
-			
-			Integer.parseInt(request.getParameter("category_id")),
+			Integer.parseInt(request.getParameter("species")),
 			Integer.parseInt(request.getParameter("age")),
 			request.getParameter("location"),
-			Integer.parseInt(request.getParameter("matched")),
 			request.getParameter("image"),
 			request.getParameter("gender"),
 			request.getParameter("weight"),
 			request.getParameter("etc"),
-			request.getParameter("species"),
-			request.getParameter("animal_type")
+			0
 			);
 		System.out.println("Create Animal :---------------------"+animal);
         log.debug("Create Animal : {}", animal);
@@ -52,7 +48,7 @@ public class ApplyAnimalController implements Controller {
             request.setAttribute("registerFailed", true);
 			request.setAttribute("exception", e);
 			request.setAttribute("animal", animal);
-			return "/animal/applyForm.jsp";
+			return "/animal/registerForm.jsp";
 		}
     }
 }

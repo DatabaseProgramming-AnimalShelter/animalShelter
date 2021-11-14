@@ -18,20 +18,20 @@
 <body>
     <h2>유기동물 등록 - 관리자</h2>
     <br>
-    <form class="applyForm"name="form" method="POST" action="<c:url value='/animal/apply'/>">
+    <form class="applyForm"name="form" method="POST" action="<c:url value='/animal/register'/>">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script>
             $( document ).ready(function(){
                
                 //테스트용 데이터
-                var sel1 = {
+                var animal_type = {
                     " ":"종 선택",
                     "개":"개",
                     "고양이":"고양이"
                 };
                 
-                //sel1이 강아지일경우
-                var sel2_1 = {
+                //animal_type이 강아지일경우
+                var species_1 = {
                     " ":"개",
                     1: "믹스견",
                     2: "진돗개",
@@ -44,8 +44,8 @@
                     9: "골든리트리버"
                 };
                 
-                //sel1이 고양이일경우
-                var sel2_2 = {
+                //animal_type이 고양이일경우
+                var species_2 = {
                     " ":"고양이",
                     10: "러시안블루",
                     11: "먼치킨",
@@ -54,7 +54,7 @@
                     14: "코리안숏헤어",
                     15: "스핑크스"
                 };
-               //sel1에 서버에서 받아온 값을 넣기위해..
+               //animal_type에 서버에서 받아온 값을 넣기위해..
                // map배열과 select 태그 id를 넘겨주면 option 태그를 붙여줌.
                // map[키이름] = 그 키에 해당하는 value를 반환한다.
                //retOption(데이터맵, select함수 id)
@@ -68,34 +68,34 @@
                     $("select[id='" + select +"']").html(html);
                }
                
-               $("select[id='sel1']").on("change", function(){
-                    var option = $("#sel1 option:selected").val();
+               $("select[id='animal_type']").on("change", function(){
+                    var option = $("#animal_type option:selected").val();
                     var subSelName = '';
                     if(option == "개") {
-                        subSelName = "sel2_1";
+                        subSelName = "species_1";
                     } else if(option == "고양이"){
-                        subSelName = "sel2_2";
+                        subSelName = "species_2";
                     } else{
-                        $("#sel2").hide();
+                        $("#species").hide();
                         return;
                     }
-                    $("#sel2").show();
-                    retOption(eval(subSelName), "sel2");
+                    $("#species").show();
+                    retOption(eval(subSelName), "species");
                 })
-               retOption(sel1, "sel1");
+               retOption(animal_type, "animal_type");
             });
             
             </script>
 
         <!-- 과: type (개, 고양이, 기타) -->
         과:
-        <select name="sel1" id="sel1">
+        <select name="animal_type" id="animal_type">
         </select>
         <br><br>
         
         <!-- 종: species (포메라니안, 요크셔테리어, 치와와) -->
       종:
-        <select name="sel2" id="sel2" style="">
+        <select name="species" id="species" style="">
         </select>
         <br><br>
             
@@ -151,8 +151,8 @@
         <!-- 발견장소: location -->
         발견장소:
          <select name="location" >
-		    <option value="서울" > 서울 </option>
-		    <option value="경기"> 경기 </option>
+		    <option value="seoul" > 서울 </option>
+		    <option value="ky"> 경기 </option>
 		    <option value="인천" > 인천 </option>
 		    <option value="etc"> 기타 </option>  
 	  	</select>

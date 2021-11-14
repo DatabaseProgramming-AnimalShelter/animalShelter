@@ -23,8 +23,9 @@ public class AnimalDAO {
 	 * 커뮤니티 테이블에 새로운 행 생성 (PK 값은 Sequence를 이용하여 자동 생성)
 	 */
 	public int create(Animal animal) throws SQLException {
-		String sql = "INSERT INTO Animal VALUES (? , ?, ?, ?, ?, ?, ?, ?)";		
-		Object[] param = new Object[] {animal.getAnimal_id(), 
+		String sql = "INSERT INTO Animal VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";		
+		Object[] param = new Object[] {
+				
 				animal.getCategory_id(),
 				animal.getAge(),
 				animal.getLocation(),

@@ -5,7 +5,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controller.animal.ApplyAnimalController;
+import controller.animal.RegisterAnimalController;
 import controller.animal.ListAnimalController;
 //import controller.animal.ListAnimalController;
 import controller.animal.SearchAnimalController;
@@ -21,6 +21,7 @@ public class RequestMapping {
         mappings.put("/", new ForwardController("index.jsp"));
         mappings.put("/home", new MainController());
         mappings.put("/register",new ForwardController("/user/registerForm.jsp"));
+        mappings.put("/user/register", new RegisterUserController());
         //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
@@ -31,10 +32,8 @@ public class RequestMapping {
         mappings.put("/animal/search", new SearchAnimalController());
         mappings.put("/animal/view", new ViewAnimalController());
         mappings.put("/animal/list", new ListAnimalController());
-        mappings.put("/animal/apply", new ApplyAnimalController());
+        mappings.put("/animal/register", new RegisterAnimalController());
         
-        //adopt form
-        mappings.put("/user/register", new RegisterUserController());
         logger.info("Initialized Request Mapping!");
     }
 
