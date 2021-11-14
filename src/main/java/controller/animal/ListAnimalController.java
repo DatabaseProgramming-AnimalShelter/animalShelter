@@ -21,7 +21,7 @@ public class ListAnimalController implements Controller{
     	// Controller와 Manager를 분리한 방법
 		AnimalManager manager = AnimalManager.getInstance();
 		List<Animal> animalList = manager.findAnimalList();
-
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-"+animalList);
 		// animalList 객체를  request 객체에 저장하여 뷰에 전달
 		request.setAttribute("animalList", animalList);						
 

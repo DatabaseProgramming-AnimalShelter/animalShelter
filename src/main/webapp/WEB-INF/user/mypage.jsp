@@ -5,17 +5,6 @@
 <%--
 	User user = (User)request.getAttribute("user");
 --%>
- <style>
-        .container{
-          height: 700px;
-          background-image:url("<c:url value='images/loginLogo.png'/>");
-        }
-        .loginForm{
-          margin: auto;
-          width: 300px;
-          margin-top:25%;
-        }
-    </style>
 <div class="container" >  
 	<br>
 	<br>

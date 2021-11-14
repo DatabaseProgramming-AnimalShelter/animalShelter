@@ -106,8 +106,8 @@ public class AnimalDAO {
 
 	//animal detail
 	public Animal findAnimal(int animal_id) throws SQLException {
-        String sql = "SELECT animal_id, category_id, age, location, matched, image,gender,weight,etc, species, animal_type"
-     		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id" 
+        String sql = "SELECT a.animal_id, a.category_id, a.age, a.location, a.animal_matched, a.image,a.gender,a.weight,a.etc, c.species, c.animal_type "
+     		   + " FROM Animal a JOIN Category c ON a.category_id = c.category_id " 
      		  + "WHERE animal_id=?";  
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil에 query문과 매개 변수 설정
 
@@ -119,7 +119,7 @@ public class AnimalDAO {
 					rs.getInt("category_id"),
 					rs.getInt("age"),
 					rs.getString("location"),
-					rs.getInt("matched"),
+					rs.getInt("animal_matched"),
 					rs.getString("image"),
 					rs.getString("gender"),
 					rs.getString("weight"),
@@ -139,9 +139,9 @@ public class AnimalDAO {
 	 * 전체 커뮤니티 정보를 검색하여 List에 저장 및 반환
 	 */
 	public List<Animal> findAnimalList() throws SQLException {
-        String sql = "SELECT animal_id, category_id, age, location, image, animal_type, species"
-        		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id" 
-        		   + "ORDER BY a.animal_id";        
+        String sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image "
+        		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
+        		   + "ORDER BY animal_id";        
         			
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 					
@@ -154,7 +154,6 @@ public class AnimalDAO {
 						rs.getInt("category_id"),
 						rs.getInt("age"),
 						rs.getString("location"),
-						rs.getInt("matched"),
 						rs.getString("image"));
 
 				animalList.add(animal);				// List에 Community 객체 저장
