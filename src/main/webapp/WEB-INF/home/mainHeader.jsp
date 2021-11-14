@@ -56,7 +56,7 @@
         <ul class="nav me-auto">
           <li class="nav-item"><a href="<c:url value="/animal/list"></c:url>" class="nav-link link-dark px-2 active" aria-current="page">유기동물</a></li>
           <li class="nav-item"><a href="<c:url value="/review/list"></c:url>" class="nav-link link-dark px-2">후기</a></li>
-          <li class="nav-item"><a href="<c:url value="/animal/apply"></c:url>" class="nav-link link-dark px-2">유기동물등록</a></li>
+          <li class="nav-item"><a href="<c:url value="/animal/register"></c:url>" class="nav-link link-dark px-2">유기동물등록</a></li>
           <li class="nav-item"><a href="#" class="nav-link link-dark px-2">입양신청목록</a></li>
           <li class="nav-item"><a href="#" class="nav-link link-dark px-2">입양결과</a></li>
         </ul>
