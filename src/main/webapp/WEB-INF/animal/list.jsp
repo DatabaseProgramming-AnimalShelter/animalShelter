@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
+<%@ include file="/WEB-INF/home/mainHeader.jsp" %>
 <title>유기동물 목록 조회</title>
 <script type="text/javascript">
 
@@ -124,8 +121,7 @@ menu박스 가운데정렬, 글자가운데 정렬 */
 }
 */
 </style>
-</head>
-<body>
+
 <form name="form" action="<c:url value='/animal/search' />">
 	<div id="menu">
 		<span>과</span>
@@ -199,5 +195,5 @@ menu박스 가운데정렬, 글자가운데 정렬 */
 			</div>
 		</c:forEach>
 	</section> 
-</body>
-</html>
+
+ <%@ include file="/WEB-INF/home/mainFooter.jsp" %>
