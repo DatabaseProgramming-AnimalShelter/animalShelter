@@ -18,10 +18,10 @@ ALTER TABLE Adopter
 	ADD  PRIMARY KEY (user_id);
 CREATE TABLE Animal
 (
-	age                  INT NULL ,
-	location             VARCHAR2(40) NULL ,
 	animal_id            VARCHAR2(40) NOT NULL ,
 	category_id          INTEGER NOT NULL ,
+	age                  INT NULL ,
+	location             VARCHAR2(40) NULL ,
 	image                VARCHAR2(40) NULL ,
 	gender               VARCHAR2(40) NULL ,
 	weight               VARCHAR2(40) NULL ,
@@ -96,7 +96,8 @@ INSERT INTO category VALUES (category_id_seq.NEXTVAL, '푸들', '개');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '말티즈', '개');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '골든리트리버', '개');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '러시안블루', '고양이');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '먼치킨', '고양이');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '먼치킨' '고양이');
+, '고양이');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '샴', '고양이');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '뱅갈', '고양이');
 INSERT INTO category VALUES (category_id_seq.NEXTVAL, '코리안숏헤어', '고양이');
