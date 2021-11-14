@@ -79,7 +79,14 @@ public class Animal {
 		this.species = species;
 		this.animal_type = animal_type;
 	}
-	
+	public Animal(int animal_id, int category_id, int age, String location,  String image) {
+		super();
+		this.animal_id = animal_id;
+		this.category_id = category_id;
+		this.age = age;
+		this.location = location;
+		this.image = image;
+	}
 	public int getAnimal_id() {
 		return animal_id;
 	}

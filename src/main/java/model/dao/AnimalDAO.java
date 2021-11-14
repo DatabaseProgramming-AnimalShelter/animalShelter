@@ -139,9 +139,9 @@ public class AnimalDAO {
 	 * 전체 커뮤니티 정보를 검색하여 List에 저장 및 반환
 	 */
 	public List<Animal> findAnimalList() throws SQLException {
-        String sql = "SELECT animal_id, category_id, age, location, image, animal_type, species"
-        		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id" 
-        		   + "ORDER BY a.animal_id";        
+        String sql = "SELECT animal_id, category_id, age, location, image "
+        		   + "FROM animal  " 
+        		   + "ORDER BY animal_id";        
         			
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 					
@@ -154,7 +154,6 @@ public class AnimalDAO {
 						rs.getInt("category_id"),
 						rs.getInt("age"),
 						rs.getString("location"),
-						rs.getInt("matched"),
 						rs.getString("image"));
 
 				animalList.add(animal);				// List에 Community 객체 저장

@@ -152,8 +152,8 @@
         발견장소:
          <select name="location" >
 		    <option value="seoul" > 서울 </option>
-		    <option value="ky"> 경기 </option>
-		    <option value="인천" > 인천 </option>
+		    <option value="gyeonggi"> 경기 </option>
+		    <option value="incheon" > 인천 </option>
 		    <option value="etc"> 기타 </option>  
 	  	</select>
 
@@ -165,8 +165,9 @@
         <textarea id="etc" name="etc" rows=10" cols="30" placeholder="특이사항을 입력하시오."></textarea>
         <br><br>
         
-        <!-- 사진 -->
-        <input type="file" id="image" name="image" accept="image/png, image/jpeg">
+        <!-- 사진 
+        <input type="file" id="image" name="image" accept="image/png, image/jpeg">-->
+         <input type="file" id="image" name="image">
          <br><br>
         
         <input type="submit" value="등록" />
