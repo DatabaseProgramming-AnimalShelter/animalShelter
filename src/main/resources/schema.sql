@@ -1,143 +1,104 @@
 DROP SEQUENCE apply_id_seq;
-
-DROP SEQUENCE animal_id_seq;
-
-DROP SEQUENCE apply_id_seq;
-=======
 DROP SEQUENCE category_id_seq;
-
-DROP SEQUENCE user_no_seq;
-
 DROP SEQUENCE post_id_seq;
-
 DROP TABLE Review CASCADE CONSTRAINTS PURGE;
-
 DROP TABLE AdoptApply CASCADE CONSTRAINTS PURGE;
-
 DROP TABLE Animal CASCADE CONSTRAINTS PURGE;
-
 DROP TABLE category CASCADE CONSTRAINTS PURGE;
-
 DROP TABLE Adopter CASCADE CONSTRAINTS PURGE;
-
 CREATE TABLE Adopter
 (
-	user_no              INTEGER NOT NULL ,
-	password             VARCHAR() NOT NULL ,
-	userName             VARCHAR() NOT NULL ,
-	email                VARCHAR() NOT NULL ,
-	phone                VARCHAR() NOT NULL ,
-	user_id              VARCHAR() NOT NULL 
+	user_id              VARCHAR2(20) NOT NULL ,
+	password             VARCHAR2(40) NOT NULL ,
+	user_name            VARCHAR2(40) NOT NULL ,
+	email                VARCHAR2(40) NOT NULL ,
+	phone                VARCHAR2(40) NOT NULL
 );
-
-CREATE UNIQUE INDEX XPKUser ON Adopter
-(user_no   ASC);
-
-CREATE UNIQUE INDEX user_no_seq ON Adopter
-(user_no   ASC);
-
-CREATE SEQUENCE user_no_seq
-START WITH 1
-INCREMENT BY 1; 
-
 ALTER TABLE Adopter
-	ADD CONSTRAINT  XPKUser PRIMARY KEY (user_no);
-
+	ADD  PRIMARY KEY (user_id);
 CREATE TABLE Animal
 (
-	age                  INT NULL ,
-	location             VARCHAR() NULL ,
-	animal_id            VARCHAR() NOT NULL ,
-	animal_matched       INT NULL ,
+	animal_id            VARCHAR2(40) NOT NULL ,
 	category_id          INTEGER NOT NULL ,
-	image                VARCHAR() NULL ,
-	gender               VARCHAR() NULL ,
-	weight               VARCHAR() NULL ,
-	etc                  VARCHAR() NULL 
+	age                  INT NULL ,
+	location             VARCHAR2(40) NULL ,
+	image                VARCHAR2(40) NULL ,
+	gender               VARCHAR2(40) NULL ,
+	weight               VARCHAR2(40) NULL ,
+	etc                  VARCHAR2(40) NULL ,
+	animal_matched       INT NULL
 );
-
-CREATE UNIQUE INDEX XPKAnimal ON Animal
-(animal_id   ASC);
-
 ALTER TABLE Animal
-	ADD CONSTRAINT  XPKAnimal PRIMARY KEY (animal_id);
-
+	ADD  PRIMARY KEY (animal_id);
 CREATE TABLE Review
 (
 	post_id              INTEGER NOT NULL ,
-	title                VARCHAR() NOT NULL ,
-	content              VARCHAR() NULL ,
+	animal_id            VARCHAR2(40) NOT NULL ,
+	writer               VARCHAR2(20) NOT NULL ,
+	title                VARCHAR2(40) NOT NULL ,
+	content              VARCHAR2(40) NULL ,
 	creationDate         DATE NULL ,
-	image                VARCHAR() NULL ,
-	writer               VARCHAR() NOT NULL ,
-	animal_id            VARCHAR() NOT NULL 
+	image                VARCHAR2(40) NULL
 );
-
-CREATE SEQUENCE post_id_seq
-START WITH 1
-INCREMENT BY 1;
-
-CREATE UNIQUE INDEX XPKReview ON Review
-(post_id   ASC);
-
 ALTER TABLE Review
-	ADD CONSTRAINT  XPKReview PRIMARY KEY (post_id);
-
+	ADD  PRIMARY KEY (post_id);
 CREATE TABLE AdoptApply
 (
 	apply_id             INTEGER NOT NULL ,
-	content              VARCHAR() NULL ,
+	user_id              VARCHAR2(20) NULL ,
+	animal_id            VARCHAR2(40) NULL ,
+	content              VARCHAR2(40) NULL ,
+	living_environment   VARCHAR2(40) NULL ,
+	have_pets            VARCHAR2(40) NULL ,
 	apply_matched        INT NULL ,
-	user_no              INTEGER NULL ,
-	animal_id            VARCHAR() NULL ,
 	apply_date           DATE NULL ,
-	living_environment   VARCHAR() NULL ,
-	have_pets            VARCHAR() NULL ,
-	approval_date        DATE NULL 
+	approval_date        DATE NULL
 );
-
-CREATE SEQUENCE apply_id_seq
-START WITH 1
-INCREMENT BY 1;
-
-CREATE UNIQUE INDEX XPKAdoptApply ON AdoptApply
-(apply_id   ASC);
-
 ALTER TABLE AdoptApply
-	ADD CONSTRAINT  XPKAdoptApply PRIMARY KEY (apply_id);
-
+	ADD  PRIMARY KEY (apply_id);
 CREATE TABLE category
 (
-	species              VARCHAR() NULL ,
 	category_id          INTEGER NOT NULL ,
-	animal_type          VARCHAR() NULL 
+	species              VARCHAR2(40) NULL ,
+	animal_type          VARCHAR2(40) NULL
 );
-
+ALTER TABLE category
+	ADD  PRIMARY KEY (category_id);
+ALTER TABLE Animal
+	ADD (FOREIGN KEY (category_id) REFERENCES category (category_id));
+ALTER TABLE Review
+	ADD (FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE SET NULL);
+ALTER TABLE Review
+	ADD (FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
+ALTER TABLE AdoptApply
+	ADD (FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL);
+ALTER TABLE AdoptApply
+	ADD (FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
 CREATE SEQUENCE category_id_seq
 START WITH 1
 INCREMENT BY 1;
-
-CREATE UNIQUE INDEX XPKcategory ON category
-(category_id   ASC);
-
-ALTER TABLE category
-	ADD CONSTRAINT  XPKcategory PRIMARY KEY (category_id);
-
-ALTER TABLE Animal
-	ADD (CONSTRAINT R_27 FOREIGN KEY (category_id) REFERENCES category (category_id));
-
-ALTER TABLE Review
-	ADD (CONSTRAINT ÃˆÃ„Â±Ã¢Ã€Ã›Â¼Âº FOREIGN KEY (writer) REFERENCES Adopter (user_no) ON DELETE SET NULL);
-
-ALTER TABLE Review
-	ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
-
-ALTER TABLE AdoptApply
-	ADD (CONSTRAINT R_20 FOREIGN KEY (user_no) REFERENCES Adopter (user_no) ON DELETE SET NULL);
-
-ALTER TABLE AdoptApply
-	ADD (CONSTRAINT R_22 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
-
 CREATE SEQUENCE apply_id_seq
 START WITH 1
-INCREMENT BY 1; 
+INCREMENT BY 1;
+CREATE SEQUENCE post_id_seq
+START WITH 1
+INCREMENT BY 1;
+INSERT INTO Adopter VALUES ('admin', 'admin','admin', 'admin@dongduk.ac.kr', '02-940-9999');
+INSERT INTO Adopter VALUES ( 'hyunsoo', '1234', '¼ÛÇö¼ö', 'hyunsu@gmail.com', '010-1234-5678');
+INSERT INTO Adopter VALUES ( 'yujin', '1234', 'ÇÑÀ¯Áø', 'yujin@naver.com', '010-5323-7788');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '¹Í½º°ß', '°³');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'Áøµ¾°³', '°³');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'Ç³»ê°³', '°³');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'Ä¡¿Í¿Í', '°³');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '¿äÅ©¼ÅÅ×¸®¾î', '°³');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'ºñ¼õ', '°³');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'Çªµé', '°³');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '¸»Æ¼Áî', '°³');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '°ñµç¸®Æ®¸®¹ö', '°³');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '·¯½Ã¾Èºí·ç', '°í¾çÀÌ');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '¸ÕÄ¡Å²' '°í¾çÀÌ');
+, '°í¾çÀÌ');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '¼¤', '°í¾çÀÌ');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '¹ð°¥', '°í¾çÀÌ');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'ÄÚ¸®¾È¼ôÇì¾î', '°í¾çÀÌ');
+INSERT INTO category VALUES (category_id_seq.NEXTVAL, '½ºÇÎÅ©½º', '°í¾çÀÌ');

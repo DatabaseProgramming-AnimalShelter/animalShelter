@@ -29,7 +29,7 @@
     </style>
     <script>
 		function login() {
-			if (form.userId.value == "") {
+			if (form.user_id.value == "") {
 				alert("사용자 ID를 입력하십시오.");
 				form.userId.focus();
 				return false;
@@ -56,8 +56,8 @@
 	<form class="loginForm " name="form" method="POST" action="<c:url value='/user/login' />">
 		<div class="form-floating">   
 	       
-	        <input type="text" name="userId" class="form-control" id="userId" placeholder="사용자 ID"> 
-	        <label for="userId">사용자 ID</label>
+	        <input type="text" name="user_id" class="form-control" id="user_id" placeholder="사용자 ID"> 
+	        <label for="user_id">사용자 ID</label>
 	    </div>       
 	    <div class="form-floating">  
 	        <input type="password" name="password" class="form-control" id="password" placeholder="비밀번호"> 

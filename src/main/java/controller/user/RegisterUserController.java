@@ -9,10 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.Community;
-import model.User;
+import model.Adopter;
 import model.service.ExistingUserException;
-import model.service.UserManager;
+import model.service.AdopterManager;
 
 public class RegisterUserController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(RegisterUserController.class);
@@ -27,18 +26,18 @@ public class RegisterUserController implements Controller {
 	    }	
 
     	// POST request (회원정보가 parameter로 전송됨)
-       	User user = new User(
-			request.getParameter("userId"),
+       	Adopter user = new Adopter(
+			request.getParameter("user_id"),
 			request.getParameter("password"),
-			request.getParameter("name"),
+			request.getParameter("user_name"),
 			request.getParameter("email"),
-			request.getParameter("phone"),
-			Integer.parseInt(request.getParameter("commId")));
+			request.getParameter("phone")
+			);
 		
         log.debug("Create User : {}", user);
 
 		try {
-			UserManager manager = UserManager.getInstance();
+			AdopterManager manager = AdopterManager.getInstance();
 			manager.create(user);
 	        return "redirect:/";	// 성공 시 사용자 리스트 화면으로 redirect
 	        
