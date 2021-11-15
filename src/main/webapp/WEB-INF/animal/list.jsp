@@ -1,47 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
-<title>À¯±âµ¿¹° ¸ñ·Ï Á¶È¸</title>
+<title>ìœ ê¸°ë™ë¬¼ ëª©ë¡ ì¡°íšŒ</title>
 <script type="text/javascript">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
     $( document ).ready(function(){
        
-        //Å×½ºÆ®¿ë µ¥ÀÌÅÍ
+        //í…ŒìŠ¤íŠ¸ìš© ë°ì´í„°
         var type = {
-            "none":"Á¾ ¼±ÅÃ",
-            "dog":"°³",
-            "cat":"°í¾çÀÌ"
+            "none":"ì¢… ì„ íƒ",
+            "dog":"ê°œ",
+            "cat":"ê³ ì–‘ì´"
         };
         
-        //typeÀÌ °­¾ÆÁöÀÏ°æ¿ì
+        //typeì´ ê°•ì•„ì§€ì¼ê²½ìš°
         var species_1 = {
-            " ":"°³",
-            1: "¹Í½º°ß",
-            2: "Áøµ¾°³",
-            3: "Ç³»ê°³",
-            4: "Ä¡¿Í¿Í",
-            5: "¿äÅ©¼ÅÅ×¸®¾î",
-            6: "ºñ¼õ",
-            7: "Çªµé",
-            8: "¸»Æ¼Áî",
-            9: "°ñµç¸®Æ®¸®¹ö"
+            " ":"ê°œ",
+            1: "ë¯¹ìŠ¤ê²¬",
+            2: "ì§„ë—ê°œ",
+            3: "í’ì‚°ê°œ",
+            4: "ì¹˜ì™€ì™€",
+            5: "ìš”í¬ì…”í…Œë¦¬ì–´",
+            6: "ë¹„ìˆ‘",
+            7: "í‘¸ë“¤",
+            8: "ë§í‹°ì¦ˆ",
+            9: "ê³¨ë“ ë¦¬íŠ¸ë¦¬ë²„"
         };
         
-        //typeÀÌ °í¾çÀÌÀÏ°æ¿ì
+        //typeì´ ê³ ì–‘ì´ì¼ê²½ìš°
         var species_2 = {
-            " ":"°í¾çÀÌ",
-            10: "·¯½Ã¾Èºí·ç",
-            11: "¸ÕÄ¡Å²",
-            12: "¼¤",
-            13: "º¬°¥",
-            14: "ÄÚ¸®¾È¼ôÇì¾î",
-            15: "½ºÇÎÅ©½º"
+            " ":"ê³ ì–‘ì´",
+            10: "ëŸ¬ì‹œì•ˆë¸”ë£¨",
+            11: "ë¨¼ì¹˜í‚¨",
+            12: "ìƒ´",
+            13: "ë²µê°ˆ",
+            14: "ì½”ë¦¬ì•ˆìˆí—¤ì–´",
+            15: "ìŠ¤í•‘í¬ìŠ¤"
         };
-       //type¿¡ ¼­¹ö¿¡¼­ ¹Þ¾Æ¿Â °ªÀ» ³Ö±âÀ§ÇØ..
-       // map¹è¿­°ú select ÅÂ±× id¸¦ ³Ñ°ÜÁÖ¸é option ÅÂ±×¸¦ ºÙ¿©ÁÜ.
-       // map[Å°ÀÌ¸§] = ±× Å°¿¡ ÇØ´çÇÏ´Â value¸¦ ¹ÝÈ¯ÇÑ´Ù.
-       //retOption(µ¥ÀÌÅÍ¸Ê, selectÇÔ¼ö id)
+       //typeì— ì„œë²„ì—ì„œ ë°›ì•„ì˜¨ ê°’ì„ ë„£ê¸°ìœ„í•´..
+       // mapë°°ì—´ê³¼ select íƒœê·¸ idë¥¼ ë„˜ê²¨ì£¼ë©´ option íƒœê·¸ë¥¼ ë¶™ì—¬ì¤Œ.
+       // map[í‚¤ì´ë¦„] = ê·¸ í‚¤ì— í•´ë‹¹í•˜ëŠ” valueë¥¼ ë°˜í™˜í•œë‹¤.
+       //retOption(ë°ì´í„°ë§µ, selectí•¨ìˆ˜ id)
        function retOption(mapArr, select){
             var html = '';
             var keys = Object.keys(mapArr);
@@ -78,40 +78,40 @@
 
 <form method="POST" name="form" action="<c:url value='/animal/list' />">
    <div id="menu">
-     °ú:
+     ê³¼:
         <select name="type" id="type">
         </select>
         <br><br>
         
-        <!-- Á¾: species (Æ÷¸Þ¶ó´Ï¾È, ¿äÅ©¼ÅÅ×¸®¾î, Ä¡¿Í¿Í) -->
-      Á¾:
+        <!-- ì¢…: species (í¬ë©”ë¼ë‹ˆì•ˆ, ìš”í¬ì…”í…Œë¦¬ì–´, ì¹˜ì™€ì™€) -->
+      ì¢…:
         <select name="species" id="species" style="">
         </select>
         <br><br>
       
     
-      <span>ÀÔ¾çÀ¯¹«</span>
+      <span>ìž…ì–‘ìœ ë¬´</span>
       <select name="matched">
-         <option value=0 selected>ÀüÃ¼</option>
-         <option value=1>º¸È£Áß</option>
-         <option value=2>ÀÔ¾ç¿Ï·á</option>
+         <option value=0 selected>ì „ì²´</option>
+         <option value=1>ë³´í˜¸ì¤‘</option>
+         <option value=2>ìž…ì–‘ì™„ë£Œ</option>
       </select>
-     <!--   <span>¹ß°ßÀå¼Ò</span>
+     <!--   <span>ë°œê²¬ìž¥ì†Œ</span>
          <select name="location" >
-		    <option value="seoul" > ¼­¿ï </option>
-		    <option value="gyeonggi"> °æ±â </option>
-		    <option value="incheon" > ÀÎÃµ </option>
-		    <option value="etc"> ±âÅ¸ </option>
+		    <option value="seoul" > ì„œìš¸ </option>
+		    <option value="gyeonggi"> ê²½ê¸° </option>
+		    <option value="incheon" > ì¸ì²œ </option>
+		    <option value="etc"> ê¸°íƒ€ </option>
 	  	</select>-->
-  <!--   <input type="button" value="°Ë»ö" onClick="search()">-->
-  <input type="submit" value="°Ë»ö"  >
+  <!--   <input type="button" value="ê²€ìƒ‰" onClick="search()">-->
+  <input type="submit" value="ê²€ìƒ‰"  >
    </div>
 </form>
 
 
 <!-- Section
    <section class="selection">
-      <!-- search ÇØ¼­ ¹Þ¾Æ¿Â animal ¸®½ºÆ® ¸¸Å­ ¹Ýº¹ -->
+      <!-- search í•´ì„œ ë°›ì•„ì˜¨ animal ë¦¬ìŠ¤íŠ¸ ë§Œí¼ ë°˜ë³µ -->
        <c:forEach var="animal" items="${searchAnimalList}">
          <div class="item" onClick="<c:url value='/animal/view'><c:param name='animal_id' value='${animal.animal_id}'/> </c:url>">        
             <div class="imgParent">
@@ -119,8 +119,8 @@
             </div>
             <div class="info">
                <h3 class="fw-bolder">  ${animal.species}</h5><br>
-               1. ¼ºº° : ${animal.gender}<br><br>
-               2. ¹ß°ßÀå¼Ò : ${animal.location}<br><br> 
+               1. ì„±ë³„ : ${animal.gender}<br><br>
+               2. ë°œê²¬ìž¥ì†Œ : ${animal.location}<br><br> 
             </div>
          </div>
       </c:forEach>
@@ -129,9 +129,9 @@
    <table class="table table-bordered">
       <thead class="thead-inverse">
          <tr>
-        <td>µ¿¹° ³ªÀÌ</td>
-        <td>µ¿¹° ¾ÆÀÌµð</td>
-        <td>Àå¼Ò</td>
+        <td>ë™ë¬¼ ë‚˜ì´</td>
+        <td>ë™ë¬¼ ì•„ì´ë””</td>
+        <td>ìž¥ì†Œ</td>
       </tr>
       </thead>
       <tbody> 
