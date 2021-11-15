@@ -14,7 +14,7 @@ import model.Adopter;
 import model.service.AdoptApplyManager;
 import model.service.AdopterManager;
 import model.service.ExistingUserException;
-import model.service.UserManager;
+
 
 
 // view.jsp에서 동물 정보 받아서 createApplyForm으로 전달
@@ -34,27 +34,26 @@ public class CreateAdoptApplyController implements Controller{
 	    }	
 		
 		AdoptApply adopt = new AdoptApply(
-				request.getParameter("apply_id"),
+				Integer.parseInt(request.getParameter("apply_id")),
 				user_id,
-				request.getParameter("animal_id"),
+				Integer.parseInt(request.getParameter("animal_id")),
 				request.getParameter("content"),
 				request.getParameter("living_environment"),
 				request.getParameter("have_pets"),
-				request.getParameter("apply_matched"),
+				Integer.parseInt(request.getParameter("apply_matched")),
 				request.getParameter("apply_date"),
 				request.getParameter("approval_date"),
 				request.getParameter("image"),
-				request.getParameter()
-				// 현재 날짜 구하기 (시스템 시계, 시스템 타임존)
-				LocalDate.now(),
-				0,//입양승낙거부 미정-0
+				request.getParameter("user_name"),
+				request.getParameter("animal_type"),
+				request.getParameter("species")
 				);
 		try {
 			AdoptApplyManager manager = AdoptApplyManager.getInstance();
 			manager.create(adopt);
 			
 	    	log.debug("Create Adopt : {}", adopt);
-	        return "redirect:/adopt/applyList";	// 성공 시 adopt form으로 redirect
+	        return "redirect:/";	// 성공 시 adopt form으로 redirect
 	        
 		} catch (Exception e) {		// 예외 발생 시 입력 form으로 forwarding
             request.setAttribute("creationFailed", true);
