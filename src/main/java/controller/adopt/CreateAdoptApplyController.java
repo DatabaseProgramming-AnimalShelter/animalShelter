@@ -33,7 +33,7 @@ public class CreateAdoptApplyController implements Controller{
 			return "/adopt/createApplyForm.jsp";   // 검색한 사용자 정보를 update form으로 전송     	
 	    }	
 		
-		AdoptApply adopt = new AdoptApply(
+		AdoptApply apply = new AdoptApply(
 				Integer.parseInt(request.getParameter("apply_id")),
 				user_id,
 				Integer.parseInt(request.getParameter("animal_id")),
@@ -50,15 +50,15 @@ public class CreateAdoptApplyController implements Controller{
 				);
 		try {
 			AdoptApplyManager manager = AdoptApplyManager.getInstance();
-			manager.create(adopt);
+			manager.create(apply);
 			
-	    	log.debug("Create Adopt : {}", adopt);
+	    	log.debug("Create Adopt : {}", apply);
 	        return "redirect:/";	// 성공 시 adopt form으로 redirect
 	        
 		} catch (Exception e) {		// 예외 발생 시 입력 form으로 forwarding
             request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);
-			request.setAttribute("adopt", adopt);
+			request.setAttribute("apply", apply);
 			return "/adopt/createApplyForm.jsp";
 		}
 	}

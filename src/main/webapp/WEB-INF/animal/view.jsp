@@ -1,17 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>¿Ø±‚µøπ∞ ªÛºº¡§∫∏ ∫∏±‚</title>
-        <!-- Core theme CSS (includes Bootstrap)-->
+    pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/home/mainHeader.jsp" %>
         <link href="/css/styles.css" rel="stylesheet" />
 <script type="text/javascript">
-
 function apply(targetUri){
 	request.setAttribute("animal", $(animal));
 	
@@ -23,7 +14,6 @@ function apply(targetUri){
 .selection{
 	margin-top: 50px;
 }
-
 .item{
 	width:80%;
 	height:80%;
@@ -34,7 +24,6 @@ function apply(targetUri){
 	border: 1px solid;
 	border-radius: 1rem;
 }
-
 #imgParent{
 	text-align:center;
 	border: 1px solid;
@@ -43,7 +32,6 @@ function apply(targetUri){
 	margin-left:10px;
 	vertical-align:middle;
 }
-
 .info{
 	padding-left: 30px;
 	padding-right: 10px;
@@ -52,7 +40,6 @@ function apply(targetUri){
 	float: right;
 	margin:auto;
 }
-
 .btn{
 	margin:0 auto;
 	padding:10px;
@@ -60,48 +47,105 @@ function apply(targetUri){
 	margin-top: 20px;
 	width: 100px;
 	color:black;
-	height: 40px; 
+	height: 40px;
 	text-align: center;
 }
-
 .apply{
 	background-color: #FEC8E3;
-
 }
-
 h1{
 	text-align:center;
 }
-
 </style>
-</head>
-<body>
-<h1>¿Ø±‚µøπ∞ ªÛºº∫∏±‚</h1>
-<form name="form" method="post">
+<div class="container">
+<h1>Ïú†Í∏∞ÎèôÎ¨º ÏÉÅÏÑ∏Î≥¥Í∏∞</h1>
+<form name="form" action="<c:url value='/adopt/apply' />">
 	<div class="outer">
-		<div class="item">        
+		<div class="item">
 			<div id="imgParent">
 				<img class="img" src="'${animal.image}'" />
 			</div>
 			<div class="info">
 				<h2 class="fw-bolder">[${animal.animal_type}] > ${animal.species}</h2>
 				<div class="fs-5 mb-5">
-					<span>πﬂ∞ﬂ¿Âº“: ${animal.location}</span><br><br>
-		            <span>√ﬂ¡§≥™¿Ã: ${animal.age}</span><br><br>
-		            <span>º∫∫∞: ${animal.gender}</span><br><br>
-		            <span>∏ˆπ´∞‘: ${animal.weight}</span><br><br>
-	             	<span>∆Ø¿ÃªÁ«◊: ${animal.etc}</span>
+				<span>Î∞úÍ≤¨Ïû•ÏÜå</span>
+				<c:choose>
+					
+			        <c:when test="${animal.location=='seoul'}">
+			       <span>ÏÑúÏö∏</span>
+			   		</c:when>
+			   		<c:when test="${animal.location=='gyeonggi'}">
+			       <span>Í≤ΩÍ∏∞</span>
+			   		</c:when>
+			   		<c:when test="${animal.location=='incheon'}">
+			       <span>Ïù∏Ï≤ú</span>
+			   		</c:when>
+			   		<c:when test="${animal.location=='etc'}">
+			       <span>Í∏∞ÌÉÄ</span>
+			   		</c:when>
+			     </c:choose>
+					<br><br>
+					<span>ÎÇòÏù¥</span>
+					<c:choose>
+				        <c:when test="${animal.age==0}">
+				       <span>1ÏÇ¥ÎØ∏Îßå</span>
+				   		</c:when>
+				   		<c:otherwise>
+				       <span>${animal.age}</span>
+				   		</c:otherwise>
+				     </c:choose> <br><br>
+				     <span>ÏÑ±Î≥Ñ</span>
+					<c:choose>
+				        <c:when test="${animal.gender==female}">
+				       <span>Ïïî</span>
+				   		</c:when>
+				   		<c:otherwise>
+				       <span>Ïàò</span>
+				   		</c:otherwise>
+				     </c:choose> <br><br>
+				     <span>Î™∏Î¨¥Í≤å</span>
+					<c:choose>
+				        <c:when test="${animal.weight==0}">
+				       <span>2kgÎØ∏Îßå</span>
+				   		</c:when>
+				   		<c:when test="${animal.weight==1}">
+				       <span>2kg~3kg</span>
+				   		</c:when>
+				   		<c:when test="${animal.weight==2}">
+				       <span>3kg~4kg</span>
+				   		</c:when>
+				   		<c:when test="${animal.weight==3}">
+				       <span>4kg~5kg</span>
+				   		</c:when>
+				   		<c:when test="${animal.weight==4}">
+				       <span>5kg~6kg</span>
+				   		</c:when>
+				   		<c:when test="${animal.weight==5}">
+				       <span>7kg~10kg</span>
+				   		</c:when>
+				   		<c:when test="${animal.weight==6}">
+				       <span>11kg~15kg</span>
+				   		</c:when>
+				   		<c:when test="${animal.weight==7}">
+				       <span>15kg~20kg </span>
+				   		</c:when>
+				   		<c:when test="${animal.weight==8}">
+				       <span>20kg~</span>
+				   		</c:when>
+				     </c:choose> <br><br>
+	             	<span>ÌäπÏù¥ÏÇ¨Ìï≠: ${animal.etc}</span>
 	            </div>
-				</div>
+			</div>
 		</div>
 	
-		<div class="btn"> 
-			<button id="apply" type="button"
-						onClick="apply('<c:url value='/adopt/register' />')">
-					¿‘æÁΩ≈√ª
+		<div class="btn">
+			<button id="apply" type="submit"
+						>
+					ÏûÖÏñëÏã†Ï≤≠
 			</button>
 		</div>
 	</div>
-</form>
-</body>
-</html>
+	</form>
+</div>
+
+ <%@ include file="/WEB-INF/home/mainFooter.jsp" %>
