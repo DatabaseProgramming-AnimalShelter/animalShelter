@@ -1,12 +1,12 @@
-<!-- À¯±âµ¿¹° µî·Ï È­¸é -->
+<!-- ìœ ê¸°ë™ë¬¼ ë“±ë¡ í™”ë©´ -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>À¯±âµ¿¹° µî·Ï È­¸é - °ü¸®ÀÚ</title>
+    <title>ìœ ê¸°ë™ë¬¼ ë“±ë¡ í™”ë©´ - ê´€ë¦¬ìž</title>
     <style>
         body {
             text-align: center;
@@ -14,45 +14,45 @@
     </style>
 </head>
 <body>
-    <h2>À¯±âµ¿¹° µî·Ï - °ü¸®ÀÚ</h2>
+    <h2>ìœ ê¸°ë™ë¬¼ ë“±ë¡ - ê´€ë¦¬ìž</h2>
     <br>
     <form class="applyForm"name="form" method="POST" action="<c:url value='/animal/register'/>" enctype="multipart/form-data">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script>
             $( document ).ready(function(){
-                //Å×½ºÆ®¿ë µ¥ÀÌÅÍ
+                //í…ŒìŠ¤íŠ¸ìš© ë°ì´í„°
                 var animal_type = {
-                    " ":"Á¾ ¼±ÅÃ",
-                    "°³":"°³",
-                    "°í¾çÀÌ":"°í¾çÀÌ"
+                    " ":"ì¢… ì„ íƒ",
+                    "ê°œ":"ê°œ",
+                    "ê³ ì–‘ì´":"ê³ ì–‘ì´"
                 };
-                //animal_typeÀÌ °­¾ÆÁöÀÏ°æ¿ì
+                //animal_typeì´ ê°•ì•„ì§€ì¼ê²½ìš°
                 var species_1 = {
-                    " ":"°³",
-                    1: "¹Í½º°ß",
-                    2: "Áøµ¾°³",
-                    3: "Ç³»ê°³",
-                    4: "Ä¡¿Í¿Í",
-                    5: "¿äÅ©¼ÅÅ×¸®¾î",
-                    6: "ºñ¼õ",
-                    7: "Çªµé",
-                    8: "¸»Æ¼Áî",
-                    9: "°ñµç¸®Æ®¸®¹ö"
+                    " ":"ê°œ",
+                    1: "ë¯¹ìŠ¤ê²¬",
+                    2: "ì§„ë—ê°œ",
+                    3: "í’ì‚°ê°œ",
+                    4: "ì¹˜ì™€ì™€",
+                    5: "ìš”í¬ì…”í…Œë¦¬ì–´",
+                    6: "ë¹„ìˆ‘",
+                    7: "í‘¸ë“¤",
+                    8: "ë§í‹°ì¦ˆ",
+                    9: "ê³¨ë“ ë¦¬íŠ¸ë¦¬ë²„"
                 };
-                //animal_typeÀÌ °í¾çÀÌÀÏ°æ¿ì
+                //animal_typeì´ ê³ ì–‘ì´ì¼ê²½ìš°
                 var species_2 = {
-                    " ":"°í¾çÀÌ",
-                    10: "·¯½Ã¾Èºí·ç",
-                    11: "¸ÕÄ¡Å²",
-                    12: "¼¤",
-                    13: "º¬°¥",
-                    14: "ÄÚ¸®¾È¼ôÇì¾î",
-                    15: "½ºÇÎÅ©½º"
+                    " ":"ê³ ì–‘ì´",
+                    10: "ëŸ¬ì‹œì•ˆë¸”ë£¨",
+                    11: "ë¨¼ì¹˜í‚¨",
+                    12: "ìƒ´",
+                    13: "ë²µê°ˆ",
+                    14: "ì½”ë¦¬ì•ˆìˆí—¤ì–´",
+                    15: "ìŠ¤í•‘í¬ìŠ¤"
                 };
-               //animal_type¿¡ ¼­¹ö¿¡¼­ ¹Þ¾Æ¿Â °ªÀ» ³Ö±âÀ§ÇØ..
-               // map¹è¿­°ú select ÅÂ±× id¸¦ ³Ñ°ÜÁÖ¸é option ÅÂ±×¸¦ ºÙ¿©ÁÜ.
-               // map[Å°ÀÌ¸§] = ±× Å°¿¡ ÇØ´çÇÏ´Â value¸¦ ¹ÝÈ¯ÇÑ´Ù.
-               //retOption(µ¥ÀÌÅÍ¸Ê, selectÇÔ¼ö id)
+               //animal_typeì— ì„œë²„ì—ì„œ ë°›ì•„ì˜¨ ê°’ì„ ë„£ê¸°ìœ„í•´..
+               // mapë°°ì—´ê³¼ select íƒœê·¸ idë¥¼ ë„˜ê²¨ì£¼ë©´ option íƒœê·¸ë¥¼ ë¶™ì—¬ì¤Œ.
+               // map[í‚¤ì´ë¦„] = ê·¸ í‚¤ì— í•´ë‹¹í•˜ëŠ” valueë¥¼ ë°˜í™˜í•œë‹¤.
+               //retOption(ë°ì´í„°ë§µ, selectí•¨ìˆ˜ id)
                function retOption(mapArr, select){
                     var html = '';
                     var keys = Object.keys(mapArr);
@@ -64,9 +64,9 @@
                $("select[id='animal_type']").on("change", function(){
                     var option = $("#animal_type option:selected").val();
                     var subSelName = '';
-                    if(option == "°³") {
+                    if(option == "ê°œ") {
                         subSelName = "species_1";
-                    } else if(option == "°í¾çÀÌ"){
+                    } else if(option == "ê³ ì–‘ì´"){
                         subSelName = "species_2";
                     } else{
                         $("#species").hide();
@@ -78,49 +78,49 @@
                retOption(animal_type, "animal_type");
             });
             </script>
-        <!-- °ú: type (°³, °í¾çÀÌ, ±âÅ¸) -->
-        °ú:
+        <!-- ê³¼: type (ê°œ, ê³ ì–‘ì´, ê¸°íƒ€) -->
+        ê³¼:
         <select name="animal_type" id="animal_type">
         </select>
         <br><br>
-        <!-- Á¾: species (Æ÷¸Þ¶ó´Ï¾È, ¿äÅ©¼ÅÅ×¸®¾î, Ä¡¿Í¿Í) -->
-      Á¾:
+        <!-- ì¢…: species (í¬ë©”ë¼ë‹ˆì•ˆ, ìš”í¬ì…”í…Œë¦¬ì–´, ì¹˜ì™€ì™€) -->
+      ì¢…:
         <select name="species" id="species" style="">
         </select>
         <br><br>
-        <!-- ¼ºº°: gender  -->
-        ¼ºº°:
+        <!-- ì„±ë³„: gender  -->
+        ì„±ë³„:
         <select name="gender" id="gender" >
-        	<option value="female" selected>¾ÏÄÆ</option>
-        	<option value="male">¼öÄÆ</option>
+        	<option value="female" selected>ì•”ì»·</option>
+        	<option value="male">ìˆ˜ì»·</option>
         </select>
         <br><br>
-        <!-- ³ªÀÌ: age -->
-        ³ªÀÌ:
+        <!-- ë‚˜ì´: age -->
+        ë‚˜ì´:
          <select name="age" >
-		    <option value="0" > 1»ì¹Ì¸¸ </option>
-		    <option value="1"> 1»ì </option>
-		    <option value="2" > 2»ì </option>
-		    <option value="3"> 3»ì </option>
-		    <option value="4" > 4»ì</option>
-		    <option value="5"> 5»ì </option>
-		    <option value="6" > 6»ì </option>
-		    <option value="7"> 7»ì </option>
-		    <option value="8" > 8»ì </option>
-		    <option value="9"> 9»ì </option>
-		    <option value="10" > 10»ì </option>
-		    <option value="11"> 11»ì </option>
-		    <option value="12" > 12»ì </option>
-		    <option value="13"> 13»ì </option>
-		    <option value="14" > 14»ì </option>
-		    <option value="15"> 15»ì </option>
-		    <option value="16" > 16»ì </option>
-		    <option value="17"> 17»ì </option>
-		    <option value="18" > 18»ì </option>
-		    <option value="19"> 19»ì </option>
+		    <option value="0" > 1ì‚´ë¯¸ë§Œ </option>
+		    <option value="1"> 1ì‚´ </option>
+		    <option value="2" > 2ì‚´ </option>
+		    <option value="3"> 3ì‚´ </option>
+		    <option value="4" > 4ì‚´</option>
+		    <option value="5"> 5ì‚´ </option>
+		    <option value="6" > 6ì‚´ </option>
+		    <option value="7"> 7ì‚´ </option>
+		    <option value="8" > 8ì‚´ </option>
+		    <option value="9"> 9ì‚´ </option>
+		    <option value="10" > 10ì‚´ </option>
+		    <option value="11"> 11ì‚´ </option>
+		    <option value="12" > 12ì‚´ </option>
+		    <option value="13"> 13ì‚´ </option>
+		    <option value="14" > 14ì‚´ </option>
+		    <option value="15"> 15ì‚´ </option>
+		    <option value="16" > 16ì‚´ </option>
+		    <option value="17"> 17ì‚´ </option>
+		    <option value="18" > 18ì‚´ </option>
+		    <option value="19"> 19ì‚´ </option>
 	  	</select> <br><br>
-        <!-- ¸ö¹«°Ô: weight -->
-        ¸ö¹«°Ô:
+        <!-- ëª¸ë¬´ê²Œ: weight -->
+        ëª¸ë¬´ê²Œ:
         <select name="weight" >
 		    <option value="0" > ~2kg </option>
 		    <option value="1"> 2kg~3kg </option>
@@ -133,26 +133,26 @@
 		    <option value="8"> 20kg~ </option>
 	  	</select>
         <br><br>
-        <!-- °ø°í¹øÈ£: notice_number -->
-        <!-- ¹ß°ßÀå¼Ò: location -->
-        ¹ß°ßÀå¼Ò:
+        <!-- ê³µê³ ë²ˆí˜¸: notice_number -->
+        <!-- ë°œê²¬ìž¥ì†Œ: location -->
+        ë°œê²¬ìž¥ì†Œ:
          <select name="location" >
-		    <option value="seoul" > ¼­¿ï </option>
-		    <option value="gyeonggi"> °æ±â </option>
-		    <option value="incheon" > ÀÎÃµ </option>
+		    <option value="seoul" > ì„œìš¸ </option>
+		    <option value="gyeonggi"> ê²½ê¸° </option>
+		    <option value="incheon" > ì¸ì²œ </option>
 
-		    <option value="etc"> ±âÅ¸ </option>
+		    <option value="etc"> ê¸°íƒ€ </option>
 
 	  	</select>
         <br><br>
-        <!-- Æ¯ÀÌ»çÇ×: etc -->
-        Æ¯ÀÌ»çÇ×:
-        <textarea id="etc" name="etc" rows=10" cols="30" placeholder="Æ¯ÀÌ»çÇ×À» ÀÔ·ÂÇÏ½Ã¿À."></textarea>
+        <!-- íŠ¹ì´ì‚¬í•­: etc -->
+        íŠ¹ì´ì‚¬í•­:
+        <textarea id="etc" name="etc" rows=10" cols="30" placeholder="íŠ¹ì´ì‚¬í•­ì„ ìž…ë ¥í•˜ì‹œì˜¤."></textarea>
         <br><br>
 
          <input type="file" id="image" name="image">
          <br><br>
-        <input type="submit" value="µî·Ï" />
+        <input type="submit" value="ë“±ë¡" />
     </form>
 </body>
 </html>

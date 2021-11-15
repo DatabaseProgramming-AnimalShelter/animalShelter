@@ -143,6 +143,7 @@ public class AdoptApply {
 	public void setApply_matched(int apply_matched) {
 		this.apply_matched = apply_matched;
 	}
+}
 
 	public String getApply_date() {
 		return apply_date;
@@ -160,6 +161,7 @@ public class AdoptApply {
 		this.approval_date = approval_date;
 	}
 	
+<<<<<<< HEAD
 	public String getImage() {
 		return image;
 	}
@@ -195,3 +197,5 @@ public class AdoptApply {
 	
 
 }
+=======
+>>>>>>> branch 'hyein/6' of https://github.com/yujindonut/animalShelter

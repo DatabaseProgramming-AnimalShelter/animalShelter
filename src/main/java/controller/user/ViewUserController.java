@@ -23,15 +23,13 @@ public class ViewUserController implements Controller {
     	request.setAttribute("curUserId", 
     					UserSessionUtils.getLoginUserId(request.getSession()));
     	    	
-    	
+    	String curUserId=UserSessionUtils.getLoginUserId(request.getSession());
     	AdopterManager manager = AdopterManager.getInstance();
-		String user_id = request.getParameter("user_id");
-		System.out.println("-------------------user_id-----------------------"+user_id);
+		System.out.println("-------------------user_id-----------------------"+curUserId);
 		Adopter user = null;
     	try {
-			user = manager.findUser(user_id);	// 사용자 정보 검색
+			user = manager.findUser(curUserId);	// 사용자 정보 검색
 		} catch (UserNotFoundException e) {	
-			System.out.println("이거해??");
 			return "redirect:/";
 			//return "/user/mypage.jsp";
 		}	

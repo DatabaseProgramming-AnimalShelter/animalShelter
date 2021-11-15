@@ -24,7 +24,8 @@ public class ViewAnimalController implements Controller{
 	        return "redirect:/animal/list";
 		}	
 		
-    	request.setAttribute("animal", animal);		// 유기동물 정보 저장				
+    	request.setAttribute("animal", animal);		// 유기동물 정보 저장		
+    	System.out.println("#########################"+animal.getImage());
 		return "/animal/view.jsp";				// 유기동물 상세보기 화면으로 이동*/
 	}
 

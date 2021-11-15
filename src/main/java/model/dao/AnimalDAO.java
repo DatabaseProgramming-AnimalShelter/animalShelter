@@ -7,20 +7,21 @@ import java.util.List;
 
 import model.Adopter;
 import model.Animal;
+import model.service.AnimalManager;
 
 /**
- * »ç¿ëÀÚ °ü¸®¸¦ À§ÇØ µ¥ÀÌÅÍº£ÀÌ½º ÀÛ¾÷À» Àü´ãÇÏ´Â DAO Å¬·¡½º
- * Community Å×ÀÌºí¿¡¼­ Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ Ãß°¡, ¼öÁ¤, »èÁ¦, °Ë»ö ¼öÇà 
+ * å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì‹¶ë¸ì˜™å ì‹±ì™ì˜™ å ìŒœì–µì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì‹¹ëŒì˜™ DAO í´å ì™ì˜™å ì™ì˜™
+ * Community å ì™ì˜™å ì‹±ë¸ì˜™å ì™ì˜™ ì»¤å ìŠ¹ëŒì˜™í‹° å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ìŒ©ê³¤ì˜™, å ì™ì˜™å ì™ì˜™, å ì™ì˜™å ì™ì˜™, å ì‹¯ì‚¼ì˜™ å ì™ì˜™å ì™ì˜™ 
  */
 public class AnimalDAO {
 	private JDBCUtil jdbcUtil = null;
 	
 	public AnimalDAO() {			
-		jdbcUtil = new JDBCUtil();	// JDBCUtil °´Ã¼ »ı¼º
+		jdbcUtil = new JDBCUtil();	// JDBCUtil å ì™ì˜™ì²´ å ì™ì˜™å ì™ì˜™
 	}
 		
 	/**
-	 * Ä¿¹Â´ÏÆ¼ Å×ÀÌºí¿¡ »õ·Î¿î Çà »ı¼º (PK °ªÀº Sequence¸¦ ÀÌ¿ëÇÏ¿© ÀÚµ¿ »ı¼º)
+	 * ì»¤å ìŠ¹ëŒì˜™í‹° å ì™ì˜™å ì‹±ë¸ì˜™ å ì™ì˜™å ì‹¸ìš¸ì˜™ å ì™ì˜™ å ì™ì˜™å ì™ì˜™ (PK å ì™ì˜™å ì™ì˜™ Sequenceå ì™ì˜™ å ì‹±ìš¸ì˜™å ì‹¹ìš¸ì˜™ å ìŒ˜ë“¸ì˜™ å ì™ì˜™å ì™ì˜™)
 	 */
 	public int create(Animal animal) throws SQLException {
 		String sql = "INSERT INTO Animal VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";		
@@ -35,15 +36,15 @@ public class AnimalDAO {
 				animal.getEtc(),
 				animal.getAnimal_matched()
 				};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ¿¡ insert¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil å ì™ì˜™ insertå ì™ì˜™å ì™ì˜™ å ì‹ ê³¤ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 						
-		String key[] = {"animal_id"};	// PK ÄÃ·³ÀÇ ÀÌ¸§     
+		String key[] = {"animal_id"};	// PK å ì‹œë¤„ì˜™å ì™ì˜™ å ì‹±ëªŒì˜™     
 		try {    
-			int result = jdbcUtil.executeUpdate(key);  // insert ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate(key);  // insert å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
 		   	if(rs.next()) {
-		   		int generatedKey = rs.getInt(1);   // »ı¼ºµÈ PK °ª
-		   		animal.setAnimal_id(generatedKey); 	// idÇÊµå¿¡ ÀúÀå  
+		   		int generatedKey = rs.getInt(1);   // å ì™ì˜™å ì™ì˜™å ì™ì˜™ PK å ì™ì˜™
+		   		animal.setAnimal_id(generatedKey); 	// idå ì‹­ë“œì— å ì™ì˜™å ì™ì˜™  
 		   	}
 		   	return result;
 		} catch (Exception ex) {
@@ -51,13 +52,13 @@ public class AnimalDAO {
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹İÈ¯
+			jdbcUtil.close();	// resource å ì™ì˜™í™˜
 		}		
 		return 0;			
 	}
 
 	/**
-	 * ±âÁ¸ÀÇ µ¿¹° Á¤º¸¸¦ ¼öÁ¤
+	 * å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 	 */
 	public int update(Animal animal) throws SQLException {
 		String sql = "UPDATE Animal "
@@ -66,10 +67,10 @@ public class AnimalDAO {
 		Object[] param = new Object[] {animal.getAge(), animal.getLocation(),
 				animal.getImage(), animal.getGender(), animal.getWeight(),
 				animal.getEtc(), animal.getAnimal_matched()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil¿¡ update¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtilå ì™ì˜™ updateå ì™ì˜™å ì™ì˜™ å ì‹ ê³¤ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 			
 		try {				
-			int result = jdbcUtil.executeUpdate();	// update ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate();	// update å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -77,21 +78,21 @@ public class AnimalDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹İÈ¯
+			jdbcUtil.close();	// resource å ì™ì˜™í™˜
 		}		
 		return 0;
 	}
 
 	
 	/**
-	 * ÁÖ¾îÁø ID¿¡ ÇØ´çÇÏ´Â Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ »èÁ¦.
+	 * å ìŒì–µì˜™å ì™ì˜™ IDå ì™ì˜™ å ìŒ”ëŒì˜™å ì‹¹ëŒì˜™ ì»¤å ìŠ¹ëŒì˜™í‹° å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™.
 	 */
 	public int remove(int animal_id) throws SQLException {
 		String sql = "DELETE FROM Animal WHERE animal_id=?";		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil¿¡ delete¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtilå ì™ì˜™ deleteå ì™ì˜™å ì™ì˜™ å ì‹ ê³¤ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 
 		try {				
-			int result = jdbcUtil.executeUpdate();	// delete ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate();	// delete å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -99,7 +100,7 @@ public class AnimalDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹İÈ¯
+			jdbcUtil.close();	// resource å ì™ì˜™í™˜
 		}		
 		return 0;
 	}
@@ -109,12 +110,12 @@ public class AnimalDAO {
         String sql = "SELECT a.animal_id, a.category_id, a.age, a.location, a.animal_matched, a.image,a.gender,a.weight,a.etc, c.species, c.animal_type "
      		   + " FROM Animal a JOIN Category c ON a.category_id = c.category_id " 
      		  + "WHERE animal_id=?";  
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil¿¡ query¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtilå ì™ì˜™ queryå ì™ì˜™å ì™ì˜™ å ì‹ ê³¤ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query ½ÇÇà
-			if (rs.next()) {						// ÇĞ»ı Á¤º¸ ¹ß°ß
-				Animal animal = new Animal(		// User °´Ã¼¸¦ »ı¼ºÇÏ¿© ÇĞ»ı Á¤º¸¸¦ ÀúÀå
+			ResultSet rs = jdbcUtil.executeQuery();		// query å ì™ì˜™å ì™ì˜™
+			if (rs.next()) {						// å ì‹»ì‚¼ì˜™ å ì™ì˜™å ì™ì˜™ å ìŒ©ê³¤ì˜™
+				Animal animal = new Animal(		// User å ì™ì˜™ì²´å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì‹¹ìš¸ì˜™ å ì‹»ì‚¼ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 					rs.getInt("animal_id"),
 					rs.getInt("category_id"),
 					rs.getInt("age"),
@@ -131,23 +132,23 @@ public class AnimalDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹İÈ¯
+			jdbcUtil.close();		// resource å ì™ì˜™í™˜
 		}
 		return null;
 	}
 	/**
-	 * ÀüÃ¼ Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ °Ë»öÇÏ¿© List¿¡ ÀúÀå ¹× ¹İÈ¯
+	 * å ì™ì˜™ì²´ ì»¤å ìŠ¹ëŒì˜™í‹° å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì‹¯ì‚¼ì˜™å ì‹¹ìš¸ì˜™ Listå ì™ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™ å ì™ì˜™í™˜
 	 */
 	public List<Animal> findAnimalList() throws SQLException {
         String sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image "
         		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
         		   + "ORDER BY animal_id";        
         			
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil¿¡ query¹® ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtilå ì™ì˜™ queryå ì™ì˜™ å ì™ì˜™å ì™ì˜™
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
-			List<Animal> animalList = new ArrayList<Animal>();	// CommunityµéÀÇ ¸®½ºÆ® »ı¼º
+			ResultSet rs = jdbcUtil.executeQuery();			// query å ì™ì˜™å ì™ì˜™			
+			List<Animal> animalList = new ArrayList<Animal>();	// Communityå ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸ å ì™ì˜™å ì™ì˜™
 			while (rs.next()) {
 				Animal animal = new Animal(
 						rs.getInt("animal_id"), 
@@ -156,58 +157,75 @@ public class AnimalDAO {
 						rs.getString("location"),
 						rs.getString("image"));
 
-				animalList.add(animal);				// List¿¡ Community °´Ã¼ ÀúÀå
+				animalList.add(animal);				// Listå ì™ì˜™ Community å ì™ì˜™ì²´ å ì™ì˜™å ì™ì˜™
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹İÈ¯
+			jdbcUtil.close();		// resource å ì™ì˜™í™˜
 		}
 		return null;
 	}
 	
-	public List<Animal> searchAnimalList(int category_id, String animal_type, int matched) throws SQLException {
+	public List<Animal> searchAnimalList(String animal_type,int category_id, int matched) throws SQLException {
 		String sql = null;
-		// list.jsp¿¡¼­ species°¡ 0ÀÌ¸é  typeÀ» ÀüÃ¼·Î ¼±ÅÃÇÑ°ÍÀÌ´Ï category_id=?¸¦ ÁÖ¸é ¾ÈµÊ
-		if (category_id == 0) {
-			sql = "SELECT animal_id, category_id, age, location, image, animal_type, species, matched"
-		     		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id"
-		     		   + "WHERE animal_type=? or matched=?"
-		     		   + "ORDER BY a.animal_id"; 
-		}else {
-			sql = "SELECT animal_id, category_id, age, location, image, animal_type, species, matched"
-	        		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id"
-	        		   + "WHERE category_id=? or animal_type=? or matched=?"
-	        		   + "ORDER BY a.animal_id";    
+		Object[] param;
+		System.out.println("animal_type"+animal_type);
+		System.out.println("category_id"+category_id);
+		System.out.println("matched"+matched);
+		if (animal_type.equals("none") && matched == -1){
+			sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image "
+	        		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
+	        		   + "ORDER BY animal_id";   
+			 param = null;
+			 System.out.println("1ddddd");
 		}
-		
-        Object[] param = new Object[] { category_id, animal_type, matched};	// JDBCUtil¿¡ update¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
-        jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ¿¡ insert¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		else if (animal_type.equals("none")) {
+			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched "
+		     		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+		     		   + "WHERE a.animal_matched=? "
+		     		   + "ORDER BY a.animal_id"; 
+			 param = new Object[] { matched};
+			 System.out.println("2ddddd");
+		}else if (matched == -1){
+			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched "
+	        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+	        		   + "WHERE a.category_id=?  "
+	        		   + "ORDER BY a.animal_id";    
+			 param = new Object[] { category_id};
+			 System.out.println("3ddddd");
+		}
+		else {
+			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched "
+	        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+	        		   + "WHERE a.category_id=? and a.animal_matched=? "
+	        		   + "ORDER BY a.animal_id";    
+			 param = new Object[] { category_id,matched};
+			 System.out.println("4ddddd");
+		}
+        jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil å ì™ì˜™ insertå ì™ì˜™å ì™ì˜™ å ì‹ ê³¤ì˜™ å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
         
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
-			List<Animal> animalList = new ArrayList<Animal>();	// CommunityµéÀÇ ¸®½ºÆ® »ı¼º
+			ResultSet rs = jdbcUtil.executeQuery();			// query å ì™ì˜™å ì™ì˜™			
+			List<Animal> animalList = new ArrayList<Animal>();	// Communityå ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸ å ì™ì˜™å ì™ì˜™
 			while (rs.next()) {
 				Animal animal = new Animal(
 						rs.getInt("animal_id"), 
 						rs.getInt("category_id"),
 						rs.getInt("age"),
 						rs.getString("location"),
-						rs.getInt("matched"),
-						rs.getString("image"),
-						rs.getString("species"),
-						rs.getString("animal_type"));
+						rs.getString("image"));
 
-				animalList.add(animal);				// List¿¡ Community °´Ã¼ ÀúÀå
+				animalList.add(animal);				// Listå ì™ì˜™ Community å ì™ì˜™ì²´ å ì™ì˜™å ì™ì˜™
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹İÈ¯
+			jdbcUtil.close();		// resource å ì™ì˜™í™˜
 		}
 		return null;
 	}
