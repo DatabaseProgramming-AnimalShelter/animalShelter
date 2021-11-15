@@ -113,7 +113,7 @@
    <section class="selection">
       <!-- search 해서 받아온 animal 리스트 만큼 반복 -->
        <c:forEach var="animal" items="${searchAnimalList}">
-         <div class="item" onClick="<c:url value='/animal/view'><c:param name='animal_id' value='${animal.animal_id}'/> </c:url>">        
+         <a class="item" href="<c:url value='/animal/view'><c:param name='animal_id' value=''/></c:url>" class="nav-link link-dark px-2">${animal.animal_id}</a>       
             <div class="imgParent">
                <img class="img" src="'${animal.image}'" />
             </div>

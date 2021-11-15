@@ -32,6 +32,9 @@ public class RequestMapping {
         mappings.put("/animal/list", new ListAnimalController());
         mappings.put("/animal/register", new RegisterAnimalController());
         
+
+        mappings.put("/animal/apply", new ListAnimalController());
+        
         logger.info("Initialized Request Mapping!");
     }
 

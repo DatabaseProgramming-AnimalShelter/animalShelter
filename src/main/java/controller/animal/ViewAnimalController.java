@@ -19,13 +19,13 @@ public class ViewAnimalController implements Controller{
 		System.out.println("#########################"+animal_id);
 		
 		try {
-			animal = manager.findAnimal(animal_id);	// 유기동물 정보 검색  
+			animal = manager.findAnimal(animal_id);	  
 		} catch (AnimalNotFoundException e) {				
 	        return "redirect:/animal/list";
 		}	
 		
-    	request.setAttribute("animal", animal);		// 유기동물 정보 저장				
-		return "/animal/view.jsp";				// 유기동물 상세보기 화면으로 이동*/
+    	request.setAttribute("animal", animal);		
+		return "/animal/view.jsp";				
 	}
 
 }

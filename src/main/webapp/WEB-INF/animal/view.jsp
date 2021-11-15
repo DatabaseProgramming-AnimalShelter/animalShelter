@@ -68,7 +68,7 @@ h1{
 </style>
 <div class="container">
 <h1>유기동물 상세보기</h1>
-<form name="form" method="POST">
+<form name="form" method="POST" action="<c:url value='/animal/apply' />">
 	<div class="outer">
 		<div class="item">        
 			<div id="imgParent">
@@ -146,14 +146,12 @@ h1{
 	            </div>
 			</div>
 		</div>
-	
+	</div>
 		<div class="btn"> 
-			<button id="apply" type="button"
-						onClick="apply('<c:url value='/adopt/apply' />")'>
+			<button id="apply" type="submit">
 					입양신청
 			</button>
-		</div>
+		</div></form>
 	</div>
-	</div>
-	</form>
+	
  <%@ include file="/WEB-INF/home/mainFooter.jsp" %>
