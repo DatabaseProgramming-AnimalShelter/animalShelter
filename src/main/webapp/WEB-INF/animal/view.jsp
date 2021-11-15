@@ -59,11 +59,19 @@ h1{
 </style>
 <div class="container">
 <h1>유기동물 상세보기</h1>
-<form name="form" action="<c:url value='/adopt/apply' />">
+<form name="form" action="<c:url value='/adopt/register' />">
 	<div class="outer">
 		<div class="item">
 			<div id="imgParent">
-				<img class="img" src="'${animal.image}'" />
+			<c:choose>
+				        <c:when test="${animal.image}!=null}">
+				      <img class="img" src="'${animal.image}'" />
+				   		</c:when>
+				   		<c:otherwise>
+				       <span>사진없음</span>
+				   		</c:otherwise>
+				     </c:choose> <br>
+				
 			</div>
 			<div class="info">
 				<h2 class="fw-bolder">[${animal.animal_type}] > ${animal.species}</h2>

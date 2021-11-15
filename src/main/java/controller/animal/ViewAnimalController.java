@@ -19,13 +19,13 @@ public class ViewAnimalController implements Controller{
 		System.out.println("#########################"+animal_id);
 		
 		try {
-			animal = manager.findAnimal(animal_id);	// À¯±âµ¿¹° Á¤º¸ °Ë»ö  
+			animal = manager.findAnimal(animal_id);	// ï¿½ï¿½ï¿½âµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½  
 		} catch (AnimalNotFoundException e) {				
 	        return "redirect:/animal/list";
 		}	
 		
-    	request.setAttribute("animal", animal);		// À¯±âµ¿¹° Á¤º¸ ÀúÀå				
-		return "/animal/view.jsp";				// À¯±âµ¿¹° »ó¼¼º¸±â È­¸éÀ¸·Î ÀÌµ¿*/
+    	request.setAttribute("animal", animal);		// ï¿½ï¿½ï¿½âµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½				
+		return "/animal/view.jsp";				// ï¿½ï¿½ï¿½âµ¿ï¿½ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½*/
 	}
 
 }

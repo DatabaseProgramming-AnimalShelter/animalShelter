@@ -11,10 +11,10 @@ import model.Adopter;
 public class ViewUserController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {			
-    	// ·Î±×ÀÎ ¿©ºÎ È®ÀÎ
+    	// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
     
     	if (!UserSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/user/login/";		// login form ¿äÃ»À¸·Î redirect
+            return "redirect:/user/login/";		// login form ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ redirect
         }
     			
 
@@ -29,14 +29,14 @@ public class ViewUserController implements Controller {
 		System.out.println("-------------------user_id-----------------------"+user_id);
 		Adopter user = null;
     	try {
-			user = manager.findUser(user_id);	// »ç¿ëÀÚ Á¤º¸ °Ë»ö
+			user = manager.findUser(user_id);	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
 		} catch (UserNotFoundException e) {	
-			System.out.println("ÀÌ°ÅÇØ??");
+			System.out.println("ï¿½Ì°ï¿½ï¿½ï¿½??");
 			return "redirect:/";
 			//return "/user/mypage.jsp";
 		}	
     	request.setAttribute("user", user);		
-			// »ç¿ëÀÚ Á¤º¸ ÀúÀå				
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½				
     	return "/user/mypage.jsp";
     }
 }
