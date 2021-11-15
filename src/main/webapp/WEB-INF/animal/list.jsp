@@ -9,9 +9,9 @@
        
         //테스트용 데이터
         var type = {
-            " ":"종 선택",
-            "개":"개",
-            "고양이":"고양이"
+            "none":"종 선택",
+            "dog":"개",
+            "cat":"고양이"
         };
         
         //type이 강아지일경우
@@ -55,9 +55,9 @@
        $("select[id='type']").on("change", function(){
             var option = $("#type option:selected").val();
             var subSelName = '';
-            if(option == "개") {
+            if(option == "dog") {
                 subSelName = "species_1";
-            } else if(option == "고양이"){
+            } else if(option == "cat"){
                 subSelName = "species_2";
             } else{
                 $("#species").hide();
@@ -71,31 +71,12 @@
     
     </script>
     <script>
-<!-- 검색 버튼 누르면 파라미터 settings -->
-function search(){
-   String type = $("select[name='type']").val();
-   Integer matched = Integer.parseInt($("select[name='matched']").val());
-   Integer species = 0;
    
-   if(type.equals("dog")){
-      species = Integer.parseInt($("select[name='dogSpecies']").val());
-   }
-   else if(type.equals("dog")){
-      species = Integer.parseInt($("select[name='catSpecies']").val());
-   }
-   
-   request.setAttribute("type", type);
-   request.setAttribute("species", species);
-   request.setAttribute("matched", matched);
-}   
-
-f
-       
 }
    
 </script>
 
-<form name="form" action="<c:url value='/animal/search' />">
+<form method="POST" name="form" action="<c:url value='/animal/list' />">
    <div id="menu">
      과:
         <select name="type" id="type">
@@ -111,16 +92,24 @@ f
     
       <span>입양유무</span>
       <select name="matched">
-         <option value="matchedAll" selected>전체</option>
-         <option value="notMatched">보호중</option>
-         <option value="matched">입양완료</option>
+         <option value=0 selected>전체</option>
+         <option value=1>보호중</option>
+         <option value=2>입양완료</option>
       </select>
-   <input type="button" value="검색" onClick="search()">
+     <!--   <span>발견장소</span>
+         <select name="location" >
+		    <option value="seoul" > 서울 </option>
+		    <option value="gyeonggi"> 경기 </option>
+		    <option value="incheon" > 인천 </option>
+		    <option value="etc"> 기타 </option>
+	  	</select>-->
+  <!--   <input type="button" value="검색" onClick="search()">-->
+  <input type="submit" value="검색"  >
    </div>
 </form>
 
 
-<!-- Section-->
+<!-- Section
    <section class="selection">
       <!-- search 해서 받아온 animal 리스트 만큼 반복 -->
        <c:forEach var="animal" items="${searchAnimalList}">
@@ -129,14 +118,14 @@ f
                <img class="img" src="'${animal.image}'" />
             </div>
             <div class="info">
-               <h3 class="fw-bolder">${animal.type} > ${animal.species}</h5><br>
+               <h3 class="fw-bolder">  ${animal.species}</h5><br>
                1. 성별 : ${animal.gender}<br><br>
                2. 발견장소 : ${animal.location}<br><br> 
             </div>
          </div>
       </c:forEach>
    </section> 
-
+-->
    <table class="table table-bordered">
       <thead class="thead-inverse">
          <tr>

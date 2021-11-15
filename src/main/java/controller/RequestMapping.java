@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import controller.animal.RegisterAnimalController;
 import controller.animal.ListAnimalController;
 //import controller.animal.ListAnimalController;
-import controller.animal.SearchAnimalController;
 import controller.animal.ViewAnimalController;
 import controller.user.*;
 public class RequestMapping {
@@ -19,7 +18,7 @@ public class RequestMapping {
 
     public void initMapping() {
         mappings.put("/", new ForwardController("index.jsp"));
-        mappings.put("/home", new MainController());
+        mappings.put("/home", new ForwardController("/home/main.jsp"));
         mappings.put("/register",new ForwardController("/user/registerForm.jsp"));
         mappings.put("/user/register", new RegisterUserController());
         //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
@@ -29,7 +28,6 @@ public class RequestMapping {
 
         mappings.put("/user/register", new RegisterUserController());
        
-        mappings.put("/animal/search", new SearchAnimalController());
         mappings.put("/animal/view", new ViewAnimalController());
         mappings.put("/animal/list", new ListAnimalController());
         mappings.put("/animal/register", new RegisterAnimalController());

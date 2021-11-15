@@ -13,19 +13,44 @@ import model.service.AnimalManager;
 public class ListAnimalController implements Controller{
 	
 	
-	// ListAnimalController°¡ ÇÊ¿äÇÑ°¡?? 
+	// ListAnimalControllerï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½Ñ°ï¿½?? 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-    	
-    	// Controller¿Í Manager¸¦ ºĞ¸®ÇÑ ¹æ¹ı
+		if (request.getMethod().equals("POST")) {	
+			
+			/*request.setAttribute("animalList", request.getParameter("searchAnimalList"));	
+			System.out.println( request.getParameter("searchAnimalList"));
+			return "/animal/list.jsp";   // ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ update formï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
+			String type =  request.getParameter("type");System.out.println("ë¼ì•„ì•„ì•„ì•„ì•„ì•„ì•™ì•„"+type);
+			int category_id ;
+			int matched ;
+			if (request.getParameter("species") == null) {
+				category_id=0;
+			}
+			else {
+			category_id = Integer.parseInt( request.getParameter("species"));}
+			System.out.println("category_id"+category_id);
+			matched = Integer.parseInt( request.getParameter("matched"));
+			System.out.println("matched"+matched);
+			AnimalManager manager = AnimalManager.getInstance();
+			List<Animal> animalList = manager.searchAnimalList(type,category_id, matched);
+			System.out.println("animalList");
+			// animalList ï¿½ï¿½Ã¼ï¿½ï¿½  request ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ä¿¡ ï¿½ï¿½ï¿½ï¿½
+			request.setAttribute("animalList", animalList);						
+			System.out.println(animalList);
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½(forwarding)
+			return "/animal/list.jsp"; 
+	    }	
+		//System.out.println("here!??!?!?!?!?!?");
+    	// Controllerï¿½ï¿½ Managerï¿½ï¿½ ï¿½Ğ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		AnimalManager manager = AnimalManager.getInstance();
 		List<Animal> animalList = manager.findAnimalList();
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-"+animalList);
-		// animalList °´Ã¼¸¦  request °´Ã¼¿¡ ÀúÀåÇÏ¿© ºä¿¡ Àü´Ş
+		
+		// animalList ï¿½ï¿½Ã¼ï¿½ï¿½  request ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ä¿¡ ï¿½ï¿½ï¿½ï¿½
 		request.setAttribute("animalList", animalList);						
 
-		// »ç¿ëÀÚ ¸®½ºÆ® È­¸éÀ¸·Î ÀÌµ¿(forwarding)
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½(forwarding)
 		return "/animal/list.jsp";        
 	}
 
