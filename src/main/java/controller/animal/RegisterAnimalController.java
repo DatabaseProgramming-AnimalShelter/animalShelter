@@ -36,6 +36,7 @@ public class RegisterAnimalController implements Controller {
     	String weight = null;
     	String etc = null;
     	String filename = null;    	
+    	File dir = null;
     	
     	if (request.getMethod().equals("GET")) {	
     		// GET request: 회원정보 등록 form 요청	
@@ -52,7 +53,7 @@ public class RegisterAnimalController implements Controller {
 			// 아래와 같이 하면 Tomcat 내부에 복사된 프로젝트의 폴더 밑에 upload 폴더가 생성됨 
 			ServletContext context = request.getServletContext();
 			String path = context.getRealPath("/upload");
-			File dir = new File(path);
+			dir = new File(path);
 			
 			// Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
 			// File dir = new File("C:/Temp");
@@ -80,6 +81,7 @@ public class RegisterAnimalController implements Controller {
                 //upload 객체에 전송되어 온 모든 데이터를 Collection 객체에 담는다.
                 for(int i = 0; i < items.size(); ++i) {
                 	FileItem item = (FileItem)items.get(i);
+                	System.out.println(item);
                 	//commons-fileupload를 사용하여 전송받으면 
                 	//모든 parameter는 FileItem 클래스에 하나씩 저장된다.
                 	
@@ -111,9 +113,11 @@ public class RegisterAnimalController implements Controller {
                 			//실제 C:\Web_Java\aaa.gif라고 하면 aaa.gif만 추출하기 위한 코드이다.
                 			File file = new File(dir, filename);
                 			item.write(file);
-                			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+ filename);
+                			
                 			//파일을 upload 경로에 실제로 저장한다.
                 			//FileItem 객체를 통해 바로 출력 저장할 수 있다.
+         
+//                			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+ dir);
                 		}
                 	}
                 }
@@ -135,12 +139,18 @@ public class RegisterAnimalController implements Controller {
     			);
     	System.out.println("Create Animal :---------------------"+animal);
     	log.debug("Create Animal : {}", animal);
-    	
     	try {
     		AnimalManager manager = AnimalManager.getInstance();
-    		manager.create(animal);
+    		int animal_id = manager.create(animal);
+
+    		animal = manager.findAnimal(animal_id);
+    		request.setAttribute("dir", dir);
+    		request.setAttribute("filename", filename);
+    		request.setAttribute("animal", animal);		// 유기동물 정보 저장	
+    		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+ dir);
+
     		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+animal);
-    		return "redirect:/";	
+    		return "/animal/view.jsp";	
     		
     	} catch (ExistingUserException e) {	
     		request.setAttribute("registerFailed", true);

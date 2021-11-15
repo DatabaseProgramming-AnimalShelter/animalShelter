@@ -1,5 +1,4 @@
 package model;
-
 public class Animal {
 	private int animal_id;
 	private int category_id;
@@ -10,15 +9,12 @@ public class Animal {
 	public String getSpecies() {
 		return species;
 	}
-
 	public void setSpecies(String species) {
 		this.species = species;
 	}
-
 	public String getAnimal_type() {
 		return animal_type;
 	}
-
 	public void setAnimal_type(String animal_type) {
 		this.animal_type = animal_type;
 	}
@@ -27,7 +23,6 @@ public class Animal {
 	private String etc;
 	private String species;
 	private String animal_type;
-
 	
 	public Animal(int animal_id, int category_id, int age, String location, int matched, String image, String gender,
 			String weight, String etc, String species, String animal_type) {
@@ -44,7 +39,6 @@ public class Animal {
 		this.species = species;
 		this.animal_type = animal_type;
 	}
-
 	public Animal(int animal_id, int category_id, int age, String location, int matched, String image) {
 		super();
 		this.animal_id = animal_id;
@@ -79,7 +73,14 @@ public class Animal {
 		this.species = species;
 		this.animal_type = animal_type;
 	}
-	
+	public Animal(int animal_id, int category_id, int age, String location,  String image) {
+		super();
+		this.animal_id = animal_id;
+		this.category_id = category_id;
+		this.age = age;
+		this.location = location;
+		this.image = image;
+	}
 	public int getAnimal_id() {
 		return animal_id;
 	}
