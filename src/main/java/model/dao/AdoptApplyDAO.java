@@ -8,6 +8,7 @@ import java.util.Date;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import model.AdoptApply;
 import model.Adopter;
@@ -49,15 +50,25 @@ public class AdoptApplyDAO {
 	}*/
 	
 	public int create(AdoptApply adoptApply) throws SQLException {
-		String sql = "INSERT INTO AdoptApply VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";		
-		Object[] param = new Object[] {adoptApply.getApply_id(), adoptApply.getUser_id(), 
+		LocalDate now = LocalDate.now();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd"); 
+		String formatedNow = fm.format(now);
+		Date date = new Date(formatedNow);
+		
+		String sql = "INSERT INTO AdoptApply VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?";				
+		Object[] param = new Object[] {adoptApply.getUser_id(), 
 				adoptApply.getAnimal_id(), adoptApply.getContent(), adoptApply.getLiving_environment(),
-				adoptApply.getHave_pets(), adoptApply.getApply_matched(), adoptApply.getApply_date(), adoptApply.getApproval_date()}; 
-						//(user.getCommId()!=0) ? user.getCommId() : null };				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil �뿉 insert臾멸낵 留ㅺ컻 蹂��닔 �꽕�젙
-						
+				adoptApply.getHave_pets(), 0, date, 0}; 
+		jdbcUtil.setSqlAndParameters(sql, param);
+		
+		String key[] = {"apply_id"};
 		try {				
-			int result = jdbcUtil.executeUpdate();	// insert 臾� �떎�뻾
+			int result = jdbcUtil.executeUpdate(key);	// insert 臾� �떎�뻾
+			ResultSet rs = jdbcUtil.getGeneratedKeys();
+		   	if(rs.next()) {
+		   		int generatedKey = rs.getInt(1);   // ������ PK ��
+		   		adoptApply.setApply_id(generatedKey); 	// id�ʵ忡 ����  
+		   	}
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -70,18 +81,22 @@ public class AdoptApplyDAO {
 	}
 
 
-	// �엯�뼇 �떊泥� �닔�씫�븯硫� matched->1, �듅�씤�궇吏� 蹂�寃�
-	public int update(AdoptApply adoptApply) throws SQLException {
+	// 입양신청 승인시 matched = 1, approval_date 값 넣어주기
+	public int approval(AdoptApply adoptApply) throws SQLException {
+		LocalDate now = LocalDate.now();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd"); 
+		String formatedNow = fm.format(now);
+		Date date = new Date(formatedNow);
+		
 		String sql = "UPDATE AdoptApply "
 					+ "SET  matched=?, approval_date=? "
 					+ "WHERE apply_id=?";
-
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Object[] param = new Object[] {1, date, adoptApply.getApply_id()};
+		
+		//DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		
 		try {		
-			Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
-			// JDBCUtil�뿉 update臾멸낵 留ㅺ컻 蹂��닔 �꽕�젙
-			Object[] param = new Object[] { 1, date, adoptApply.getApply_id()};				
+			//Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());			
 			jdbcUtil.setSqlAndParameters(sql, param);
 			int result = jdbcUtil.executeUpdate();	// update 臾� �떎�뻾
 			return result;
@@ -95,23 +110,53 @@ public class AdoptApplyDAO {
 		}		
 		return 0;
 	}
+	
+	// 입양신청 거절시 matched = -1, approval_date 값 넣어주기
+	public int decline(AdoptApply adoptApply) throws SQLException {
+		LocalDate now = LocalDate.now();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd"); 
+		String formatedNow = fm.format(now);
+		Date date = new Date(formatedNow);
+			
+		String sql = "UPDATE AdoptApply "
+						+ "SET  matched=?, approval_date=? "
+						+ "WHERE apply_id=?";
+		Object[] param = new Object[] {-1, date, adoptApply.getApply_id()};
+			
+		//DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+			
+		try {		
+			//Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());			
+			jdbcUtil.setSqlAndParameters(sql, param);
+			int result = jdbcUtil.executeUpdate();	
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	
+		}		
+		return 0;
+	}
 
-	// �엯�뼇�떊泥� �닔�씫 �쟾 �떊泥�由ъ뒪�듃 李얘린
-	public AdoptApply findAdoptApply(String apply_id) throws SQLException {
-        String sql = "SELECT apply_id, user_id, animal_id, content, living_environment, have_pets, apply_matched, apply_date "
+	// 신청 승인/거절 전에 매칭 미정인 신청리스트 찾을 때 사용
+	public AdoptApply findAdoptApply(int apply_id) throws SQLException {
+        String sql = "SELECT apply_id, user_id, animal_id, content, living_environment, have_pets, apply_matched, apply_date, image, user_name, animal_type, species  "
         			+ "FROM AdoptApply "
         			+ "WHERE apply_matched=? ";              
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {0});	// JDBCUtil�뿉 query臾멸낵 留ㅺ컻 蹂��닔 �꽕�젙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {0});	
 		
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query �떎�뻾
+			ResultSet rs = jdbcUtil.executeQuery();		
 			if (rs.next()) {
 				Date apply_date = new Date(rs.getDate("apply_date").getTime());
 				String apply_dateString = df.format(apply_date);
 				
-				adoptApply = new AdoptApply(		// User 媛앹껜瑜� �깮�꽦�븯�뿬 �븰�깮 �젙蹂대�� ���옣
+				adoptApply = new AdoptApply(		
 					rs.getInt("apply_id"),
 					rs.getString("user_id"),
 					rs.getInt("animal_id"),
@@ -119,7 +164,12 @@ public class AdoptApplyDAO {
 					rs.getString("living_environment"),
 					rs.getString("have_pets"),
 					rs.getInt("apply_matched"),
-					apply_dateString);
+					apply_dateString,
+					rs.getString("image"),
+					rs.getString("user_name"),
+					rs.getString("animal_type"),
+					rs.getString("species")
+				);
 				return adoptApply;
 			}
 		} catch (Exception ex) {
@@ -130,9 +180,9 @@ public class AdoptApplyDAO {
 		return null;
 	}
 	
-	// �엯�뼇�떊泥� �닔�씫 �썑 �떊泥�由ъ뒪�듃 李얘린
+	// 신청 승인/거절 이후에 신청 결과 리스트 찾을 때 사용
 		public AdoptApply findAdoptApplyResult(String apply_id) throws SQLException {
-	        String sql = "SELECT apply_id, user_id, animal_id, content, living_environment, have_pets, apply_matched, apply_date "
+	        String sql = "SELECT apply_id, user_id, animal_id, content, living_environment, have_pets, apply_matched, apply_date, approval_date, image, user_name, animal_type, species "
 	        			+ "FROM AdoptApply "
 	        			+ "WHERE apply_matched IN (?,?) ";              
 			jdbcUtil.setSqlAndParameters(sql, new Object[] {-1, 1});	// JDBCUtil�뿉 query臾멸낵 留ㅺ컻 蹂��닔 �꽕�젙
@@ -158,7 +208,12 @@ public class AdoptApplyDAO {
 						rs.getString("have_pets"),
 						rs.getInt("apply_matched"),
 						apply_dateString,
-						approval_dateString);
+						approval_dateString,
+						rs.getString("image"),
+						rs.getString("user_name"),
+						rs.getString("animal_type"),
+						rs.getString("species")	
+							);
 					return adoptApply;
 				}
 			} catch (Exception ex) {

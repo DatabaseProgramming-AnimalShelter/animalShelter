@@ -3,12 +3,7 @@
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
         <link href="/css/styles.css" rel="stylesheet" />
 <script type="text/javascript">
-function apply(targetUri){
-	request.setAttribute("animal", $(animal));
-	
-	form.action = targetUri;
-	form.submit();
-}
+
 </script>
 <style type="text/css">
 .selection{
@@ -59,11 +54,9 @@ h1{
 </style>
 <div class="container">
 <h1>유기동물 상세보기</h1>
-<<<<<<< HEAD
-<form name="form" method="POST" action="<c:url value='/animal/apply' />">
-=======
-<form name="form" action="<c:url value='/adopt/apply' />">
->>>>>>> branch 'feature7' of https://github.com/yujindonut/animalShelter
+
+<form name="form">
+
 	<div class="outer">
 		<div class="item">
 			<div id="imgParent">
@@ -141,25 +134,18 @@ h1{
 	            </div>
 			</div>
 		</div>
-<<<<<<< HEAD
-	</div>
-		<div class="btn"> 
-			<button id="apply" type="submit">
-=======
 	
 		<div class="btn">
-			<button id="apply" type="submit"
-						>
->>>>>>> branch 'feature7' of https://github.com/yujindonut/animalShelter
-					입양신청
+			<button id="apply" type="submit">
+					<a href="<c:url value='/adopt/register'>
+                     <c:param name='animal_id' value='${animal.animal_id}'/>
+                    </c:url>">
+              	입양신청</a>  
 			</button>
-		</div></form>
+		</div>
 	</div>
-<<<<<<< HEAD
-	
-=======
+
 	</form>
 </div>
 
->>>>>>> branch 'feature7' of https://github.com/yujindonut/animalShelter
  <%@ include file="/WEB-INF/home/mainFooter.jsp" %>

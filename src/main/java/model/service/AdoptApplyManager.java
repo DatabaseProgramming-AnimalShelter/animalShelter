@@ -34,12 +34,16 @@ public class AdoptApplyManager {
 		return adoptApplyDAO.create(adoptApply);
 	}
 
-	public int update(AdoptApply adoptApply) throws SQLException {
+	public int approval(AdoptApply adoptApply) throws SQLException {
 
-		return adoptApplyDAO.update(adoptApply);
-	}	
+		return adoptApplyDAO.approval(adoptApply);
+	}
+	
+	public int decline(AdoptApply adoptApply) throws SQLException {
+		return adoptApplyDAO.decline(adoptApply);
+	}
 
-	public AdoptApply findAdoptApply(String apply_id)
+	public AdoptApply findAdoptApply(int apply_id)
 		throws SQLException {
 		AdoptApply adoptApply = adoptApplyDAO.findAdoptApply(apply_id);
 		

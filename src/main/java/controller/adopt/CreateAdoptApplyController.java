@@ -11,51 +11,71 @@ import controller.adopt.CreateAdoptApplyController;
 import controller.user.UserSessionUtils;
 import model.AdoptApply;
 import model.Adopter;
+import model.Animal;
 import model.service.AdoptApplyManager;
 import model.service.AdopterManager;
+import model.service.AnimalManager;
 import model.service.ExistingUserException;
 
 
 
-// view.jsp에서 동물 정보 받아서 createApplyForm으로 전달
 public class CreateAdoptApplyController implements Controller{
 	private static final Logger log = LoggerFactory.getLogger(CreateAdoptApplyController.class);
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// POST request (form의 입력데이터가 parameter로 전송됨)
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!"+request.getParameter("animal_id"));
+
+		
+		int animal_id = Integer.parseInt(request.getParameter("animal_id"));
+		
+		Animal animal = null;
+		Adopter adopter = null;
+		
+		AnimalManager animalManager = AnimalManager.getInstance();
+		AdopterManager adopterManager = AdopterManager.getInstance();
+		
+		animal = animalManager.findAnimal(animal_id);
+		adopter = adopterManager.findUser(user_id);
 		
 		if (request.getMethod().equals("GET")) {	
-    		// GET request: 회원정보 등록 form 요청	
     		log.debug("RegisterForm Request");
-
-			return "/adopt/createApplyForm.jsp";   // 검색한 사용자 정보를 update form으로 전송     	
+    		
+    		AdoptApply apply_default = new AdoptApply(
+    				user_id,
+    				animal.getAnimal_id(),
+    				animal.getImage(),
+    				adopter.getUser_name(),
+    				animal.getAnimal_type(),
+    				animal.getSpecies()
+    				);
+    		
+    		request.setAttribute("apply", apply_default);
+    		
+    		return "/adopt/createApplyForm.jsp";   
 	    }	
 		
 		AdoptApply apply = new AdoptApply(
-				Integer.parseInt(request.getParameter("apply_id")),
 				user_id,
 				Integer.parseInt(request.getParameter("animal_id")),
 				request.getParameter("content"),
-				request.getParameter("living_environment"),
+				request.getParameter("living_conditions"),
 				request.getParameter("have_pets"),
-				Integer.parseInt(request.getParameter("apply_matched")),
-				request.getParameter("apply_date"),
-				request.getParameter("approval_date"),
-				request.getParameter("image"),
-				request.getParameter("user_name"),
-				request.getParameter("animal_type"),
-				request.getParameter("species")
+				animal.getImage(),
+				adopter.getUser_name(),
+				animal.getAnimal_type(),
+				animal.getSpecies()
 				);
+		
 		try {
 			AdoptApplyManager manager = AdoptApplyManager.getInstance();
 			manager.create(apply);
 			
 	    	log.debug("Create Adopt : {}", apply);
-	        return "redirect:/";	// 성공 시 adopt form으로 redirect
+	        return "redirect:/";	
 	        
-		} catch (Exception e) {		// 예외 발생 시 입력 form으로 forwarding
+		} catch (Exception e) {		
             request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);
 			request.setAttribute("apply", apply);

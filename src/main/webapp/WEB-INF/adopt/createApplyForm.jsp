@@ -10,7 +10,7 @@
 <link rel=stylesheet href="<c:url value='/css/community.css' />"
 	type="text/css">
 <script>
-function create() {
+ function create() {
 	<!-- 
 	if (form.name.value == "") {
 		alert("이름을 입력하십시오.");
@@ -24,13 +24,28 @@ function create() {
 	}		
 	-->
 
-	form.submit();s
+	//String have_pets = document.getElementById("have_pets").value;
+	String content = document.getElementById("content").value;
+	String living_conditions = document.getElementById("living_conditions").value;
+	
+	request.setParameter("animal_id", <c:out value='${apply.animal_id}' />);
+	request.setParameter("content", content);
+	request.setParameter("living_environment", living_conditions);
+	request.setParameter("have_pets", have_pets);
+	
+	/* request.setParameter("animal_id", <c:out value='${apply.animal_id}' />);
+		request.setParameter("content", form.content.value);
+		request.setParameter("living_environment", form.living_conditions.value);
+		request.setParameter("have_pets", form.have_pets.value); */
+	
+	/* form.action = '/adopt/register';
+	form.submit(); */
 }
 
 function animalList(targetUri) {
 	form.action = targetUri;
 	form.submit();
-}
+} 
 </script>
 <style style type="text/css">
 .selection{
@@ -90,43 +105,24 @@ h1{
 	<!-- registration form  -->
 
 	<h1>입양 신청 하기</h1>
-	<form class="was-validated" name="form" method="POST"
-		action="<c:url value='/adopt/register' />">
+	<form class="was-validated" name="form" method="POST">
 		<div id="apply">
 		<div id="imgParent">
-			<img class="img" src="'${animal.image}'" />
+			<img class="img" src="'${apply.image}'" />
 		</div>
 		<div id="info">
 			<div class="form-group row">
 				<label for="userName" class="col-sm-2 col-form-label">1. 이름</label>
 				<div class="col-sm-10">
 					<input type="text" readonly class="form-control-plaintext"
-						id="userName" value="${apply.userName}">
+						id="userName" value="${apply.user_name}">
 					<!-- apply객체 안의 userName? -->
 				</div>
 			</div><br>
-			<div class="form-group row">
-				<label for="address" class="col-sm-2 col-form-label">2. 사는지역</label>
-				<div class="col-sm-10">
-					<input type="text" readonly class="form-control-plaintext"
-						id="address">
-				</div>
-			</div><br>
-			<!-- <div class="mb-3">
-				<label for="select_animal" class="form-label">신청 반려동물</label> <select
-					id="select_animal" class="form-select" required
-					aria-label="select example">
-					<option value="">신청하고 싶은 반려동물을 선택하세요</option>
-					
-					<c:forEach var="animal" items="${apply.animalList}">
-						<option value="${animal.animal_id}">${animal.animal_name}</option>
-					</c:forEach>
-					옵션에 동물들 id (matched안된) 동물들나오도록
-				</select>
-				<div class="invalid-feedback">반려동물 선택은 필수입니다</div>
-			</div> -->
+			
+			
 			<div class="mb-3">
-				<label for="select_animal" class="form-label">3. 신청 반려동물</label> 
+				<label for="select_animal" class="form-label">2. 신청 반려동물</label> 
 					<div class="col-sm-10">
 						<input type="text" readonly class="form-control-plaintext"
 							id="select_animal" value="${apply.animal_type} > ${apply.species}">
@@ -134,18 +130,18 @@ h1{
 			</div><br>
 	
 			<div class="form-group row">
-				<label for="have_pets" class="col-sm-2 col-form-label">4. 반려동물
+				<label for="have_pets" class="col-sm-2 col-form-label">3. 반려동물
 					유무</label>
 				<div class="col-sm-10">
-					<input type="text" readonly class="form-control-plaintext"
-						id="have_pets" placeholder="예) 고양이(러시안블루)-6년 "
+					<input type="text" class="form-control-plaintext"
+						name="have_pets" id="have_pets" placeholder="예) 고양이(러시안블루)-6년 "
 						value="${apply.have_pets}">
 					<c:if test="${creationFailed}">value="${apply.have_pets}"</c:if>
 				</div>
 				<div class="invalid-feedback">*반려동물 유무 기재는 필수입니다</div>
 			</div><br>
 	
-			<label for="living_conditions" class="form-label">5. 거주 환경</label>
+			<label for="living_conditions" class="form-label">4. 거주 환경</label>
 			<div class="form-check form-check-inline">
 	
 				<label class="form-check-label"><input
@@ -172,19 +168,59 @@ h1{
 			<div class="mb-3">
 				<label for="content" class="form-label">6. 나의 조건</label><br>
 				<textarea class="form-control is-invalid" id="content"
-					placeholder="분양을 할 수 있는 조건인지 상세히 적어주세요!" required>
+					name="content" placeholder="분양을 할 수 있는 조건인지 상세히 적어주세요!" required>
 					<c:if test="${creationFailed}">value="${apply.content}"</c:if>
 				</textarea>
 				<div class="invalid-feedback">*조건 기재는 필수입니다</div>
 			</div><br>
 		</div>
 		</div>
-		<div class="btnAll">
+		
+		<%-- <button id="apply" type="submit">
+					<a href="<c:url value='/adopt/register'>
+                     <c:param name='animal_id' value='${animal.animal_id}'/>
+                    </c:url>">
+              	입양신청</a>  
+			</button> --%>
+		
+		<%-- <div class="btnAll">
 			<input id="submit" type="button" value="신청" onClick="create()">
 			&nbsp; 
 			<input id="cancel" type="button" value="취소"
 				onClick="animalList('<c:url value='/animal/list' />')">
+		</div> --%>
+		<div class="btnAll">
+			<!-- <input id="submit" type="button" value="신청"> -->
+			<button id="submit" type="submit">
+					<a href="<c:url value='/adopt/register'>
+                    </c:url>">
+              	신청</a>  
+			</button>
+			<a href="<c:url value='/adopt/register'>
+                        <c:param name='animal_id' value='${apply.animal_id}'/>
+                     </c:url>">
+             	 신청</a>
+			&nbsp; 
+			<button id="cancel" type="submit">
+					<a href="<c:url value='/animal/list'>
+                    </c:url>">
+              	취소</a>  
+			</button>
 		</div>
 	</form>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#submit").click(function(){
+				/* 
+				if($("#id").val() == ''){
+					alert("id를 입력해주세요");
+					return;
+				} */
+				$("#frm").attr("action", "/adopt/register"); // attribute setting
+				$("#frm").submit();
+			});
+		});
+		
+	</script>
 </body>
 </html>
