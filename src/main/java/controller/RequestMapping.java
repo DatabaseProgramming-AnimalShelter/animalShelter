@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.animal.RegisterAnimalController;
+import controller.adopt.CreateAdoptApplyController;
 import controller.animal.ListAnimalController;
 //import controller.animal.ListAnimalController;
 import controller.animal.SearchAnimalController;
@@ -33,6 +34,8 @@ public class RequestMapping {
         mappings.put("/animal/view", new ViewAnimalController());
         mappings.put("/animal/list", new ListAnimalController());
         mappings.put("/animal/register", new RegisterAnimalController());
+        
+        mappings.put("/adopt/register", new CreateAdoptApplyController());
         
         logger.info("Initialized Request Mapping!");
     }
