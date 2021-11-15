@@ -55,10 +55,10 @@ public class RegisterAnimalController implements Controller {
 			// 아래와 같이 하면 Tomcat 내부에 복사된 프로젝트의 폴더 밑에 upload 폴더가 생성됨
 			ServletContext context = request.getServletContext();
 			String path = context.getRealPath("/upload");
-//			dir = new File(path);
+			dir = new File(path);
 
 			// Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
-			 dir = new File("C:/Temp");
+//			 dir = new File("C:/Temp");
 
 			if (!dir.exists())
 				dir.mkdir();

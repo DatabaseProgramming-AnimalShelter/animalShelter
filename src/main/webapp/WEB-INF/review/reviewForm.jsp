@@ -1,6 +1,6 @@
 <!-- 후기 작성 폼 화면 -->
- 
- <%@page contentType="text/html; charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
 <html lang="ko-kr">

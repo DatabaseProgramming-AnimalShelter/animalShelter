@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>ют╬Г╫ец╩╪╜</title>
+<title>Л·┘Л√▒Л▀═Л╡╜Л└°</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel=stylesheet href="<c:url value='/css/community.css' />"
 	type="text/css">
@@ -13,12 +13,12 @@
 function create() {
 	<!-- 
 	if (form.name.value == "") {
-		alert("юл╦╖ю╩ ют╥бго╫й╫ц©ю.");
+		alert("Л²╢К╕└Л²└ Л·┘К═╔М∙≤Л▀╜Л▀°Л≤╓.");
 		form.name.focus();
 		return false;
 	} 
 	if (form.desc.value == "") {
-		alert("╪Ё╦Мю╩ ют╥бго╫й╫ц©ю.");
+		alert("Л└╓К╙┘Л²└ Л·┘К═╔М∙≤Л▀╜Л▀°Л≤╓.");
 		form.desc.focus();
 		return false;
 	}		
@@ -88,7 +88,7 @@ h1 {
 <body>
 	<!-- registration form  -->
 
-	<h1>ют╬Г ╫ец╩ го╠Б</h1>
+	<h1>Л·┘Л√▒ Л▀═Л╡╜ М∙≤Й╦╟</h1>
 	<form class="was-validated" name="form" method="POST" action="<c:url value='/adopt/register' />">
 		<div id="apply">
 			<div id="imgParent">
@@ -96,17 +96,17 @@ h1 {
 			</div>
 			<div id="info">
 				<div class="form-group row">
-					<label for="userName" class="col-sm-2 col-form-label">1. юл╦╖</label>
+					<label for="userName" class="col-sm-2 col-form-label">1. Л²╢К╕└</label>
 					<div class="col-sm-10">
 						<input type="text" readonly class="form-control-plaintext"
 							id="userName" value="${user_id}">
-						<!-- apply╟╢ц╪ ╬хюг userName? -->
+						<!-- applyЙ╟²Л╡╢ Л∙┬Л²≤ userName? -->
 					</div>
 				</div>
 				<br>
 				<div class="form-group row">
 					<label for="address" class="col-sm-2 col-form-label">2.
-						╩Г╢баЖ©╙</label>
+						Л┌╛К┼■Л╖─Л≈╜</label>
 					<div class="col-sm-10">
 						<input type="text" readonly class="form-control-plaintext"
 							id="address">
@@ -114,7 +114,7 @@ h1 {
 				</div>
 				<br>
 				<div class="mb-3">
-					<label for="select_animal" class="form-label">3. ╫ец╩ ╧щ╥а╣©╧╟</label>
+					<label for="select_animal" class="form-label">3. Л▀═Л╡╜ К╟≤К═╓К▐≥К╛╪</label>
 					<div class="col-sm-10">
 						<input type="text" readonly class="form-control-plaintext"
 							id="select_animal"
@@ -125,55 +125,55 @@ h1 {
 
 				<div class="form-group row">
 					<label for="have_pets" class="col-sm-2 col-form-label">4.
-						╧щ╥а╣©╧╟ ю╞╧╚</label>
+						К╟≤К═╓К▐≥К╛╪ Л°═К╛╢</label>
 					<div class="col-sm-10">
 						<input type="text" readonly class="form-control-plaintext"
-							id="have_pets" placeholder="©╧) ╟М╬Гюл(╥╞╫ц╬х╨М╥Г)-6ЁБ "
+							id="have_pets" placeholder="Л≤┬) ЙЁ═Л√▒Л²╢(К÷╛Л▀°Л∙┬К╦■Кё╗)-6К┘└ "
 							value="${apply.have_pets}">
 						<c:if test="${creationFailed}">value="${apply.have_pets}"</c:if>
 					</div>
-					<div class="invalid-feedback">*╧щ╥а╣©╧╟ ю╞╧╚ ╠БюГ╢б гй╪Жют╢о╢ы</div>
+					<div class="invalid-feedback">*К╟≤К═╓К▐≥К╛╪ Л°═К╛╢ Й╦╟Л·╛К┼■ М∙└Л┬≤Л·┘К▀┬К▀╓</div>
 				</div>
 				<br> <label for="living_conditions" class="form-label">5.
-					╟еаж х╞╟Ф</label>
+					Й╠╟Лё╪ М≥≤Й╡╫</label>
 				<div class="form-check form-check-inline">
 
 					<label class="form-check-label"><input
 						class="form-check-input" type="radio" name="living_conditions"
-						id="living_conditions" value="apartment">╬ффдф╝</label>
+						id="living_conditions" value="apartment">Л∙└М▄▄М┼╦</label>
 				</div>
 				<div class="form-check form-check-inline">
 					<label class="form-check-label"><input
 						class="form-check-input" type="radio" name="living_conditions"
-						id="living_conditions" value="villa">╨Т╤С</label>
+						id="living_conditions" value="villa">К╧▄К²╪</label>
 				</div>
 				<div class="form-check form-check-inline">
 					<label class="form-check-label"><input
 						class="form-check-input" type="radio" name="living_conditions"
-						id="living_conditions" value="withYard">╢э╣╤ажец(╦╤╢ГO)</label>
+						id="living_conditions" value="withYard">К▀╗К▐┘Лё╪М┐²(К╖┬К▀╧O)</label>
 				</div>
 				<div class="form-check form-check-inline">
 					<label class="form-check-label"><input
 						class="form-check-input" type="radio" name="living_conditions"
-						id="living_conditions" value="noYard">╢э╣╤ажец(╦╤╢ГX)</label>
+						id="living_conditions" value="noYard">К▀╗К▐┘Лё╪М┐²(К╖┬К▀╧X)</label>
 				</div>
-				<div class="invalid-feedback">*╟еажх╞╟Ф ╠БюГ╢б гй╪Жют╢о╢ы</div>
+				<div class="invalid-feedback">*Й╠╟Лё╪М≥≤Й╡╫ Й╦╟Л·╛К┼■ М∙└Л┬≤Л·┘К▀┬К▀╓</div>
 				<br>
 
 				<div class="mb-3">
-					<label for="content" class="form-label">6. Ё╙юг а╤╟г</label><br>
+					<label for="content" class="form-label">6. К┌≤Л²≤ Л║╟Й╠╢</label><br>
 					<textarea class="form-control is-invalid" id="content"
-						placeholder="╨п╬Гю╩ гр ╪Ж юж╢б а╤╟гюнаЖ ╩С╪╪хВ юШ╬Наж╪╪©Д!" required>
+						placeholder="К╤└Л√▒Л²└ М∙═ Л┬≤ Л·┬К┼■ Л║╟Й╠╢Л²╦Л╖─ Л┐│Л└╦М·┬ Л═│Л√╢Лё╪Л└╦Л ■!" required>
 					<c:if test="${creationFailed}">value="${apply.content}"</c:if>
 				</textarea>
-					<div class="invalid-feedback">*а╤╟г ╠БюГ╢б гй╪Жют╢о╢ы</div>
+					<div class="invalid-feedback">*Л║╟Й╠╢ Й╦╟Л·╛К┼■ М∙└Л┬≤Л·┘К▀┬К▀╓</div>
 				</div>
 				<br>
 			</div>
 		</div>
 		<div class="btnAll">
-			<input id="submit" type="button" value="╫ец╩" onClick="create()">
-			&nbsp; <input id="cancel" type="button" value="цК╪р"
+			<input id="submit" type="button" value="Л▀═Л╡╜" onClick="create()">
+			&nbsp; <input id="cancel" type="button" value="Л╥╗Л├▄"
 				onClick="animalList('<c:url value='/animal/list' />')">
 		</div>
 	</form>

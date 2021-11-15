@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/home/mainHeader.jsp"%>
 <link href="/css/styles.css" rel="stylesheet" />
 <script type="text/javascript">
@@ -63,8 +65,11 @@ h1 {
 </style>
 <div class="container">
 	<h1>유기동물 상세보기</h1>
-	사진 저장 경로 : ${dir} <br /> 사진 파일 이름 : ${filename} <br /> 사진 파일 이름 :
-	${animal.image} <br /> 
+사진 저장 경로 : ${dir} <br/>
+사진 파일 이름 : ${animal.image} <br/>
+<img src="${dir}/${filename}" /> <br/> 
+${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}<br/>
+<img  src="<%=request.getSession().getServletContext().getRealPath("/")%>/upload/${animal.image}">
 
 	<form name="form" action="<c:url value='/adopt/register' />">
 		<div class="outer">
@@ -76,7 +81,7 @@ h1 {
 								src="${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}" />
 						</c:when>
 						<c:otherwise>
-							<span>사진없음</span>
+							<span>사진없음</span>
 						</c:otherwise>
 					</c:choose>
 					<br>
@@ -102,7 +107,8 @@ h1 {
 								<span>기타</span>
 							</c:when>
 						</c:choose>
-						<br> <br> <span>나이</span>
+						<br>
+						<br> <span>나이</span>
 						<c:choose>
 							<c:when test="${animal.age==0}">
 								<span>1살미만</span>
@@ -111,7 +117,8 @@ h1 {
 								<span>${animal.age}</span>
 							</c:otherwise>
 						</c:choose>
-						<br> <br> <span>성별</span>
+						<br>
+						<br> <span>성별</span>
 						<c:choose>
 							<c:when test="${animal.gender==female}">
 								<span>암</span>
@@ -120,7 +127,8 @@ h1 {
 								<span>수</span>
 							</c:otherwise>
 						</c:choose>
-						<br> <br> <span>몸무게</span>
+						<br>
+						<br> <span>몸무게</span>
 						<c:choose>
 							<c:when test="${animal.weight==0}">
 								<span>2kg미만</span>
@@ -150,14 +158,16 @@ h1 {
 								<span>20kg~</span>
 							</c:when>
 						</c:choose>
-						<br> <br> <span>특이사항: ${animal.etc}</span>
+						<br>
+						<br> <span>특이사항: ${animal.etc}</span>
 					</div>
 				</div>
 			</div>
+
 			<a class="btn btn-primary"
 				href="<c:url value='/adopt/register'>
 	     		   <c:param name='animal_id' value='${animal.animal_id}'/>
-			  </c:url>">신청</a>
+			  </c:url>">입양신청</a>
 			<div class="btn">
 				<button id="apply" type="submit">입양신청</button>
 			</div>
