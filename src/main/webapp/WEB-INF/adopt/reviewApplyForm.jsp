@@ -6,14 +6,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>유기동무 입양 상세보기 & 신청 수락/거절</title>
+<title>유기동물 입양 상세보기 & 신청 수락/거절</title>
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<%@include file="/WEB-INF/navbar.jsp" %>
+
 <body>
 	<br>
 	<table class="table table-hover table-borderless">
@@ -54,11 +54,11 @@
 		  </tr>
 		  <tr>
 		  	<th>
-		  	<a class="btn btn-outline-danger" href="<c:url value='/adopt/acceptApply'/>" role="button">
+		  	<a class="btn btn-outline-danger" href="<c:url value='/adopt/accept'/>" role="button">
 		  	<c:param name='apply_id' value='${adopt.apply_id}'/>
 		  	수락</a></th>
 		  	<th>
-		  	<a class="btn btn-outline-secondary" href="<c:url value='/adopt/viewApply'/>" role="button">거부</a></th>
+		  	<a class="btn btn-outline-secondary" href="<c:url value='/adopt/result'/>" role="button">거부</a></th>
 		  </tr>
 		</tbody>
 	</table>	

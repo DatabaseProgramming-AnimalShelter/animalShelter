@@ -22,15 +22,13 @@
 				<th scope="col">no</th>
 				<th scope="col">동물 번호</th>
 				<th scope="col">신청자 이름</th>
-				<th scope="col">승인 날짜</th>
-				<!-- 신청날짜를 보여주는 이유는 : 선착순의 느낌도 주기 위해서 -->
-				<th scope="col">입양 승인 거부 여부</th>
+				<th scope="col">신청 날짜</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="adopt" items="${adopterList}">
 				<th scope="row"><a
-						href="<c:url value='/adopt/viewApply'>
+						href="<c:url value='/adopt/view'>
 					   <c:param name='apply_id' value='${adopt.apply_id}'/>
 			 		 </c:url>">
 							${adopt.apply_id}</a>
@@ -38,8 +36,7 @@
 				<tr>
 					<td>${adopt.userName}</td>
 					<td>${adopt.animal_id}</td>
-					<td>${adopt.approval_date}</td>
-					<td>${adopt.matched}</td>
+					<td>${adopt.apply_date}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

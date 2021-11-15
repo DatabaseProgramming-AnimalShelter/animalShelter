@@ -5,62 +5,72 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Community;
+import model.Adopter;
+import model.Animal;
 
 /**
- * »ç¿ëÀÚ °ü¸®¸¦ À§ÇØ µ¥ÀÌÅÍº£ÀÌ½º ÀÛ¾÷À» Àü´ãÇÏ´Â DAO Å¬·¡½º
- * Community Å×ÀÌºí¿¡¼­ Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ Ãß°¡, ¼öÁ¤, »èÁ¦, °Ë»ö ¼öÇà 
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ DAO Å¬ï¿½ï¿½ï¿½ï¿½
+ * Community ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ 
  */
 public class AnimalDAO {
 	private JDBCUtil jdbcUtil = null;
 	
 	public AnimalDAO() {			
-		jdbcUtil = new JDBCUtil();	// JDBCUtil °´Ã¼ »ý¼º
+		jdbcUtil = new JDBCUtil();	// JDBCUtil ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 	}
 		
 	/**
-	 * Ä¿¹Â´ÏÆ¼ Å×ÀÌºí¿¡ »õ·Î¿î Çà »ý¼º (PK °ªÀº Sequence¸¦ ÀÌ¿ëÇÏ¿© ÀÚµ¿ »ý¼º)
+	 * Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (PK ï¿½ï¿½ï¿½ï¿½ Sequenceï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ï¿ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½)
 	 */
-	public Community create(Community comm) throws SQLException {
-		String sql = "INSERT INTO Community VALUES (commId_seq.nextval, ?, ?, SYSDATE, ?)";		
-		Object[] param = new Object[] {comm.getName(), comm.getDescription(),
-			comm.getChairId()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ¿¡ insert¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+	public int create(Animal animal) throws SQLException {
+		String sql = "INSERT INTO Animal VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";		
+		Object[] param = new Object[] {
+				
+				animal.getCategory_id(),
+				animal.getAge(),
+				animal.getLocation(),
+				animal.getImage(),
+				animal.getGender(),
+				animal.getWeight(),
+				animal.getEtc(),
+				animal.getAnimal_matched()
+				};				
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ï¿½ï¿½ insertï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 						
-		String key[] = {"cId"};	// PK ÄÃ·³ÀÇ ÀÌ¸§     
+		String key[] = {"animal_id"};	// PK ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½     
+		int generatedKey = 0;
 		try {    
-			jdbcUtil.executeUpdate(key);  // insert ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate(key);  // insert ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
 		   	if(rs.next()) {
-		   		int generatedKey = rs.getInt(1);   // »ý¼ºµÈ PK °ª
-		   		comm.setId(generatedKey); 	// idÇÊµå¿¡ ÀúÀå  
+		   		generatedKey = rs.getInt(1);   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PK ï¿½ï¿½
+		   		animal.setAnimal_id(generatedKey); 	// idï¿½Êµå¿¡ ï¿½ï¿½ï¿½ï¿½  
 		   	}
-		   	return comm;
+		   	return generatedKey;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹ÝÈ¯
+			jdbcUtil.close();	// resource ï¿½ï¿½È¯
 		}		
-		return null;			
+		return 0;			
 	}
 
 	/**
-	 * ±âÁ¸ÀÇ Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ ¼öÁ¤
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 */
-	public int update(Community comm) throws SQLException {
-		String sql = "UPDATE Community "
-					+ "SET cName=?, descr=?, chairId=? "
-					+ "WHERE cId=?";
-		String chairId = comm.getChairId();
-		if (chairId.equals("")) chairId = null;
-		Object[] param = new Object[] {comm.getName(), comm.getDescription(),
-				chairId, comm.getId()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil¿¡ update¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+	public int update(Animal animal) throws SQLException {
+		String sql = "UPDATE Animal "
+					+ "SET age=?, location=?, image=?, gender=?, weight=?, etc=?, animal_matched=?  "
+					+ "WHERE animal_id=?";
+		Object[] param = new Object[] {animal.getAge(), animal.getLocation(),
+				animal.getImage(), animal.getGender(), animal.getWeight(),
+				animal.getEtc(), animal.getAnimal_matched()};				
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtilï¿½ï¿½ updateï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
 		try {				
-			int result = jdbcUtil.executeUpdate();	// update ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate();	// update ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -68,44 +78,21 @@ public class AnimalDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹ÝÈ¯
+			jdbcUtil.close();	// resource ï¿½ï¿½È¯
 		}		
 		return 0;
 	}
 
-	/**
-	 * Ä¿¹Â´ÏÆ¼ÀÇ È¸ÀåÀ» º¯°æ  
-	 */
-	public int updateChair(Community comm) {
-		String sql = "UPDATE Community "
-					+ "SET chairId= ? "
-					+ "WHERE cId=?";
-		Object[] param = new Object[] {comm.getChairId(), comm.getId()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil¿¡ update¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
-			
-		try {				
-			int result = jdbcUtil.executeUpdate();	// update ¹® ½ÇÇà
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		}
-		finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹ÝÈ¯
-		}		
-		return 0;
-	}
 	
 	/**
-	 * ÁÖ¾îÁø ID¿¡ ÇØ´çÇÏ´Â Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ »èÁ¦.
+	 * ï¿½Ö¾ï¿½ï¿½ï¿½ IDï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	 */
-	public int remove(String commId) throws SQLException {
-		String sql = "DELETE FROM Community WHERE cId=?";		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {commId});	// JDBCUtil¿¡ delete¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+	public int remove(int animal_id) throws SQLException {
+		String sql = "DELETE FROM Animal WHERE animal_id=?";		
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtilï¿½ï¿½ deleteï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 		try {				
-			int result = jdbcUtil.executeUpdate();	// delete ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate();	// delete ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -113,89 +100,118 @@ public class AnimalDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹ÝÈ¯
+			jdbcUtil.close();	// resource ï¿½ï¿½È¯
 		}		
 		return 0;
 	}
 
-	/**
-	 * ÁÖ¾îÁø  ID¿¡ ÇØ´çÇÏ´Â Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ Ã£¾Æ Community µµ¸ÞÀÎ Å¬·¡½º¿¡ 
-	 * ÀúÀåÇÏ¿© ¹ÝÈ¯.
-	 */
-	public Community findCommunity(int commId) throws SQLException {
-        String sql = "SELECT cName, descr, startDate, chairId, u.name As chairName "
-        			+ "FROM Community c LEFT OUTER JOIN UserInfo u ON c.chairId = u.userId "
-        			+ "WHERE cId=? ";              
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {commId});	// JDBCUtil¿¡ query¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
-		Community comm = null;
+	//animal detail
+	public Animal findAnimal(int animal_id) throws SQLException {
+        String sql = "SELECT a.animal_id, a.category_id, a.age, a.location, a.animal_matched, a.image,a.gender,a.weight,a.etc, c.species, c.animal_type "
+     		   + " FROM Animal a JOIN Category c ON a.category_id = c.category_id " 
+     		  + "WHERE animal_id=?";  
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtilï¿½ï¿½ queryï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query ½ÇÇà
-			if (rs.next()) {						// ÇÐ»ý Á¤º¸ ¹ß°ß
-				comm = new Community(		// Community °´Ã¼¸¦ »ý¼ºÇÏ¿© Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ ÀúÀå
-					commId,
-					rs.getString("cName"),
-					rs.getString("descr"),
-					rs.getDate("startDate"),
-					rs.getString("chairId"),
-					rs.getString("chairName"));
+			ResultSet rs = jdbcUtil.executeQuery();		// query ï¿½ï¿½ï¿½ï¿½
+			if (rs.next()) {						// ï¿½Ð»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+				Animal animal = new Animal(		// User ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ð»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+					rs.getInt("animal_id"),
+					rs.getInt("category_id"),
+					rs.getInt("age"),
+					rs.getString("location"),
+					rs.getInt("animal_matched"),
+					rs.getString("image"),
+					rs.getString("gender"),
+					rs.getString("weight"),
+					rs.getString("etc"),
+					rs.getString("species"),
+					rs.getString("animal_type"));
+				return animal;
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹ÝÈ¯
+			jdbcUtil.close();		// resource ï¿½ï¿½È¯
 		}
-		return comm;
+		return null;
 	}
-
 	/**
-	 * ÀüÃ¼ Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ °Ë»öÇÏ¿© List¿¡ ÀúÀå ¹× ¹ÝÈ¯
+	 * ï¿½ï¿½Ã¼ Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï¿ï¿½ Listï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
 	 */
-	public List<Community> findCommunityList() throws SQLException {
-        String sql = "SELECT cId, cName, descr, COUNT(u.userId) AS numOfMem "
-        		   + "FROM Community c LEFT OUTER JOIN UserInfo u ON c.cId = u.commId "
-        		   + "GROUP BY cId, cName, descr "
-        		   + "ORDER BY cName";        
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil¿¡ query¹® ¼³Á¤
+	public List<Animal> findAnimalList() throws SQLException {
+        String sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image "
+        		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
+        		   + "ORDER BY animal_id";        
+        			
+		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtilï¿½ï¿½ queryï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
-			List<Community> commList = new ArrayList<Community>();	// CommunityµéÀÇ ¸®½ºÆ® »ý¼º
+			ResultSet rs = jdbcUtil.executeQuery();			// query ï¿½ï¿½ï¿½ï¿½			
+			List<Animal> animalList = new ArrayList<Animal>();	// Communityï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 			while (rs.next()) {
-				Community comm = new Community(			// Community °´Ã¼¸¦ »ý¼ºÇÏ¿© ÇöÀç ÇàÀÇ Á¤º¸¸¦ ÀúÀå
-						rs.getInt("cId"),
-						rs.getString("cName"),
-						rs.getString("descr"),
-						rs.getInt("numOfMem"));
-				commList.add(comm);				// List¿¡ Community °´Ã¼ ÀúÀå
+				Animal animal = new Animal(
+						rs.getInt("animal_id"), 
+						rs.getInt("category_id"),
+						rs.getInt("age"),
+						rs.getString("location"),
+						rs.getString("image"));
+
+				animalList.add(animal);				// Listï¿½ï¿½ Community ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 			}		
-			return commList;					
+			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹ÝÈ¯
+			jdbcUtil.close();		// resource ï¿½ï¿½È¯
 		}
 		return null;
 	}
 	
-	/**
-	 * ÁÖ¾îÁø  ID¿¡ ÇØ´çÇÏ´Â Ä¿¹Â´ÏÆ¼°¡ Á¸ÀçÇÏ´ÂÁö °Ë»ç 
-	 */
-	public boolean existingCommunity(String commId) throws SQLException {
-		String sql = "SELECT count(*) FROM Community WHRE cId=?";      
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {commId});	// JDBCUtil¿¡ query¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
-
+	public List<Animal> searchAnimalList(int category_id, String animal_type, int matched) throws SQLException {
+		String sql = null;
+		// list.jspï¿½ï¿½ï¿½ï¿½ speciesï¿½ï¿½ 0ï¿½Ì¸ï¿½  typeï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½Ì´ï¿½ category_id=?ï¿½ï¿½ ï¿½Ö¸ï¿½ ï¿½Èµï¿½
+		if (category_id == 0) {
+			sql = "SELECT animal_id, category_id, age, location, image, animal_type, species, matched"
+		     		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id"
+		     		   + "WHERE animal_type=? or matched=?"
+		     		   + "ORDER BY a.animal_id"; 
+		}else {
+			sql = "SELECT animal_id, category_id, age, location, image, animal_type, species, matched"
+	        		   + "FROM Animal a JOIN Category c ON a.animal_id = c.animal_id"
+	        		   + "WHERE category_id=? or animal_type=? or matched=?"
+	        		   + "ORDER BY a.animal_id";    
+		}
+		
+        Object[] param = new Object[] { category_id, animal_type, matched};	// JDBCUtilï¿½ï¿½ updateï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ï¿½ï¿½ insertï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query ½ÇÇà
-			if (rs.next()) {
-				int count = rs.getInt(1);
-				return (count == 1 ? true : false);
-			}
+			ResultSet rs = jdbcUtil.executeQuery();			// query ï¿½ï¿½ï¿½ï¿½			
+			List<Animal> animalList = new ArrayList<Animal>();	// Communityï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+			while (rs.next()) {
+				Animal animal = new Animal(
+						rs.getInt("animal_id"), 
+						rs.getInt("category_id"),
+						rs.getInt("age"),
+						rs.getString("location"),
+						rs.getInt("matched"),
+						rs.getString("image"),
+						rs.getString("species"),
+						rs.getString("animal_type"));
+
+				animalList.add(animal);				// Listï¿½ï¿½ Community ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
+			}		
+			return animalList;					
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹ÝÈ¯
+			jdbcUtil.close();		// resource ï¿½ï¿½È¯
 		}
-		return false;
+		return null;
 	}
+	
+
 }
