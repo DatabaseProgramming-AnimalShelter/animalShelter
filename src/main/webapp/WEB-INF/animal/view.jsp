@@ -3,7 +3,6 @@
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
         <link href="/css/styles.css" rel="stylesheet" />
 <script type="text/javascript">
-
 function apply(targetUri){
 	request.setAttribute("animal", $(animal));
 	
@@ -15,7 +14,6 @@ function apply(targetUri){
 .selection{
 	margin-top: 50px;
 }
-
 .item{
 	width:80%;
 	height:80%;
@@ -26,7 +24,6 @@ function apply(targetUri){
 	border: 1px solid;
 	border-radius: 1rem;
 }
-
 #imgParent{
 	text-align:center;
 	border: 1px solid;
@@ -35,7 +32,6 @@ function apply(targetUri){
 	margin-left:10px;
 	vertical-align:middle;
 }
-
 .info{
 	padding-left: 30px;
 	padding-right: 10px;
@@ -44,7 +40,6 @@ function apply(targetUri){
 	float: right;
 	margin:auto;
 }
-
 .btn{
 	margin:0 auto;
 	padding:10px;
@@ -52,25 +47,25 @@ function apply(targetUri){
 	margin-top: 20px;
 	width: 100px;
 	color:black;
-	height: 40px; 
+	height: 40px;
 	text-align: center;
 }
-
 .apply{
 	background-color: #FEC8E3;
-
 }
-
 h1{
 	text-align:center;
 }
-
 </style>
 <div class="container">
 <h1>유기동물 상세보기</h1>
+<<<<<<< HEAD
 <form name="form" method="POST" action="<c:url value='/animal/apply' />">
+=======
+<form name="form" action="<c:url value='/adopt/apply' />">
+>>>>>>> branch 'feature7' of https://github.com/yujindonut/animalShelter
 	<div class="outer">
-		<div class="item">        
+		<div class="item">
 			<div id="imgParent">
 				<img class="img" src="'${animal.image}'" />
 			</div>
@@ -92,7 +87,7 @@ h1{
 			   		<c:when test="${animal.location=='etc'}">
 			       <span>기타</span>
 			   		</c:when>
-			     </c:choose> 
+			     </c:choose>
 					<br><br>
 					<span>나이</span>
 					<c:choose>
@@ -146,12 +141,25 @@ h1{
 	            </div>
 			</div>
 		</div>
+<<<<<<< HEAD
 	</div>
 		<div class="btn"> 
 			<button id="apply" type="submit">
+=======
+	
+		<div class="btn">
+			<button id="apply" type="submit"
+						>
+>>>>>>> branch 'feature7' of https://github.com/yujindonut/animalShelter
 					입양신청
 			</button>
 		</div></form>
 	</div>
+<<<<<<< HEAD
 	
+=======
+	</form>
+</div>
+
+>>>>>>> branch 'feature7' of https://github.com/yujindonut/animalShelter
  <%@ include file="/WEB-INF/home/mainFooter.jsp" %>

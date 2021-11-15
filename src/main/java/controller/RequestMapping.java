@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.animal.RegisterAnimalController;
+import controller.adopt.CreateAdoptApplyController;
 import controller.animal.ListAnimalController;
 //import controller.animal.ListAnimalController;
 import controller.animal.ViewAnimalController;
@@ -32,8 +33,12 @@ public class RequestMapping {
         mappings.put("/animal/list", new ListAnimalController());
         mappings.put("/animal/register", new RegisterAnimalController());
         
+<<<<<<< HEAD
 
         mappings.put("/animal/apply", new ListAnimalController());
+=======
+        mappings.put("/adopt/register", new CreateAdoptApplyController());
+>>>>>>> branch 'feature7' of https://github.com/yujindonut/animalShelter
         
         logger.info("Initialized Request Mapping!");
     }

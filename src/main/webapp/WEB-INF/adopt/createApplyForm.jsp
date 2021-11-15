@@ -24,7 +24,7 @@ function create() {
 	}		
 	-->
 
-	form.submit();
+	form.submit();s
 }
 
 function animalList(targetUri) {
@@ -91,7 +91,7 @@ h1{
 
 	<h1>입양 신청 하기</h1>
 	<form class="was-validated" name="form" method="POST"
-		action="<c:url value='/adopt/createForm' />">
+		action="<c:url value='/adopt/register' />">
 		<div id="apply">
 		<div id="imgParent">
 			<img class="img" src="'${animal.image}'" />
@@ -109,7 +109,7 @@ h1{
 				<label for="address" class="col-sm-2 col-form-label">2. 사는지역</label>
 				<div class="col-sm-10">
 					<input type="text" readonly class="form-control-plaintext"
-						id="address" value="${apply.address}">
+						id="address">
 				</div>
 			</div><br>
 			<!-- <div class="mb-3">
