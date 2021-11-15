@@ -88,6 +88,24 @@ public class AdoptApply {
 		this.species = species;
 	}
 
+	public AdoptApply(String user_id, int animal_id, String content, String living_environment, String have_pets,
+			int apply_matched, String apply_date, String approval_date, String image, String user_name,
+			String animal_type, String species) {
+		super();
+		this.user_id = user_id;
+		this.animal_id = animal_id;
+		this.content = content;
+		this.living_environment = living_environment;
+		this.have_pets = have_pets;
+		this.apply_matched = apply_matched;
+		this.apply_date = apply_date;
+		this.approval_date = approval_date;
+		this.image = image;
+		this.user_name = user_name;
+		this.animal_type = animal_type;
+		this.species = species;
+	}
+
 	public int getApply_id() {
 		return apply_id;
 	}

@@ -11,11 +11,10 @@ import controller.adopt.CreateAdoptApplyController;
 import controller.user.UserSessionUtils;
 import model.AdoptApply;
 import model.Adopter;
+import model.Animal;
 import model.service.AdoptApplyManager;
-import model.service.AdopterManager;
+import model.service.AnimalManager;
 import model.service.ExistingUserException;
-
-
 
 // view.jsp���� ���� ���� �޾Ƽ� createApplyForm���� ����
 public class CreateAdoptApplyController implements Controller{
@@ -23,18 +22,19 @@ public class CreateAdoptApplyController implements Controller{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// POST request (form�� �Էµ����Ͱ� parameter�� ���۵�)
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		
-		if (request.getMethod().equals("GET")) {	
-    		// GET request: ȸ������ ��� form ��û	
+		if (request.getMethod().equals("GET")) {
+//			AnimalManager manager = AnimalManager.getInstance();
+//			int animal_id = Integer.parseInt(request.getParameter("animal_id"));
+//			Animal animal = manager.findAnimal(animal_id);
+//			request.setAttribute("user_id", user_id);
+//			request.setAttribute("animal", animal);
     		log.debug("RegisterForm Request");
-
 			return "/adopt/createApplyForm.jsp";   // �˻��� ����� ������ update form���� ����     	
 	    }	
 		
 		AdoptApply apply = new AdoptApply(
-				Integer.parseInt(request.getParameter("apply_id")),
 				user_id,
 				Integer.parseInt(request.getParameter("animal_id")),
 				request.getParameter("content"),

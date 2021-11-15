@@ -10,40 +10,43 @@ import controller.user.UserSessionUtils;
 import model.Animal;
 import model.service.AnimalManager;
 
-public class ListAnimalController implements Controller{
-	
+public class ListAnimalController implements Controller {
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		if (request.getMethod().equals("POST")) {	
-			
-			/*request.setAttribute("animalList", request.getParameter("searchAnimalList"));	
-			System.out.println( request.getParameter("searchAnimalList"));
-			return "/animal/list.jsp";   */
-			String type =  request.getParameter("type");System.out.println("type"+type);
-			int category_id ;
-			int matched ;
+		if (request.getMethod().equals("POST")) {
+
+			/*
+			 * request.setAttribute("animalList", request.getParameter("searchAnimalList"));
+			 * System.out.println( request.getParameter("searchAnimalList")); return
+			 * "/animal/list.jsp";
+			 */
+			String type = request.getParameter("type");
+			System.out.println("type" + type);
+			int category_id;
+			int matched;
 			if (request.getParameter("species") == null) {
-				category_id=0;
+				category_id = 0;
+			} else {
+				category_id = Integer.parseInt(request.getParameter("species"));
 			}
-			else {
-			category_id = Integer.parseInt( request.getParameter("species"));}
-			System.out.println("category_id"+category_id);
-			matched = Integer.parseInt( request.getParameter("matched"));
-			System.out.println("matched"+matched);
+			System.out.println("category_id" + category_id);
+			matched = Integer.parseInt(request.getParameter("matched"));
+			System.out.println("matched" + matched);
 			AnimalManager manager = AnimalManager.getInstance();
 			List<Animal> animalList = manager.searchAnimalList(type,category_id, matched);
 			System.out.println("animalList");
 			request.setAttribute("animalList", animalList);						
 			System.out.println(animalList);
-			return "/animal/list.jsp"; 
-	    }	
+			return "/animal/list.jsp";
+		}
 		AnimalManager manager = AnimalManager.getInstance();
 		List<Animal> animalList = manager.findAnimalList();
 
-		request.setAttribute("animalList", animalList);						
+		request.setAttribute("animalList", animalList);
 
-		return "/animal/list.jsp";        
+		return "/animal/list.jsp";
 	}
 
 }

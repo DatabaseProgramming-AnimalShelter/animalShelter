@@ -1,116 +1,90 @@
 DROP SEQUENCE apply_id_seq;
-DROP SEQUENCE category_id_seq;
+DROP SEQUENCE cat_id_seq;
+DROP SEQUENCE dog_id_seq;
 DROP SEQUENCE post_id_seq;
-<<<<<<< HEAD
 DROP SEQUENCE animal_id_seq;
-=======
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
+
 DROP TABLE Review CASCADE CONSTRAINTS PURGE;
 DROP TABLE AdoptApply CASCADE CONSTRAINTS PURGE;
 DROP TABLE Animal CASCADE CONSTRAINTS PURGE;
 DROP TABLE category CASCADE CONSTRAINTS PURGE;
 DROP TABLE Adopter CASCADE CONSTRAINTS PURGE;
+
 CREATE TABLE Adopter
 (
-	user_id              VARCHAR2(20) NOT NULL ,
-	password             VARCHAR2(40) NOT NULL ,
-	user_name            VARCHAR2(40) NOT NULL ,
-	email                VARCHAR2(40) NOT NULL ,
-	phone                VARCHAR2(40) NOT NULL
+   user_id              VARCHAR2(20) NOT NULL ,
+   password             VARCHAR2(40) NOT NULL ,
+   user_name            VARCHAR2(40) NOT NULL ,
+   email                VARCHAR2(40) NOT NULL ,
+   phone                VARCHAR2(40) NOT NULL
 );
 ALTER TABLE Adopter
-	ADD  PRIMARY KEY (user_id);
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
+   ADD  PRIMARY KEY (user_id);
 CREATE TABLE Animal
 (
-<<<<<<< HEAD
-	animal_id            INTEGER NOT NULL ,
-=======
-	animal_id            VARCHAR2(40) NOT NULL ,
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
-	category_id          INTEGER NOT NULL ,
-	age                  INT NULL ,
-	location             VARCHAR2(40) NULL ,
-	image                VARCHAR2(40) NULL ,
-	gender               VARCHAR2(40) NULL ,
-	weight               VARCHAR2(40) NULL ,
-	etc                  VARCHAR2(40) NULL ,
-	animal_matched       INT NULL
+   animal_id            INTEGER NOT NULL ,
+   category_id          INTEGER NOT NULL ,
+   age                  INT NULL ,
+   location             VARCHAR2(40) NULL ,
+   image                VARCHAR2(40) NULL ,
+   gender               VARCHAR2(40) NULL ,
+   weight               VARCHAR2(40) NULL ,
+   etc                  VARCHAR2(40) NULL ,
+   animal_matched       INT NULL
 );
 ALTER TABLE Animal
-	ADD  PRIMARY KEY (animal_id);
+   ADD  PRIMARY KEY (animal_id);
 CREATE TABLE Review
 (
-	post_id              INTEGER NOT NULL ,
-	animal_id            VARCHAR2(40) NOT NULL ,
-	writer               VARCHAR2(20) NOT NULL ,
-	title                VARCHAR2(40) NOT NULL ,
-	writer               VARCHAR2(20) NOT NULL ,
-	animal_id            INTEGER NOT NULL ,
-	content              VARCHAR2(40) NULL ,
-	creationDate         DATE NULL ,
-	image                VARCHAR2(40) NULL 
+   post_id              INTEGER NOT NULL ,
+   animal_id            INTEGER NOT NULL ,
+   writer               VARCHAR2(20) NOT NULL ,
+   title                VARCHAR2(40) NOT NULL ,
+   content              VARCHAR2(40) NULL ,
+   creationDate         DATE NULL ,
+   image                VARCHAR2(40) NULL
 );
 ALTER TABLE Review
-	ADD  PRIMARY KEY (post_id);
+   ADD  PRIMARY KEY (post_id);
 CREATE TABLE AdoptApply
 (
-	apply_id             INTEGER NOT NULL ,
-	user_id              VARCHAR2(20) NULL ,
-<<<<<<< HEAD
-	animal_id            INTEGER NULL ,
-=======
-	animal_id            VARCHAR2(40) NULL ,
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
-	content              VARCHAR2(40) NULL ,
-	living_environment   VARCHAR2(40) NULL ,
-	have_pets            VARCHAR2(40) NULL ,
-	apply_matched        INT NULL ,
-	apply_date           DATE NULL ,
-<<<<<<< HEAD
-	approval_date        DATE NULL ,
-	apply_matched        INT NULL 
-=======
-	approval_date        DATE NULL
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
+   apply_id             INTEGER NOT NULL ,
+   user_id              VARCHAR2(20) NULL ,
+   animal_id            INTEGER NOT NULL ,
+   content              VARCHAR2(40) NULL ,
+   living_environment   VARCHAR2(40) NULL ,
+   have_pets            VARCHAR2(40) NULL ,
+   apply_matched        INT NULL ,
+   apply_date           DATE NULL ,
+   approval_date        DATE NULL
 );
 ALTER TABLE AdoptApply
-	ADD  PRIMARY KEY (apply_id);
+   ADD  PRIMARY KEY (apply_id);
 CREATE TABLE category
 (
-	category_id          INTEGER NOT NULL ,
-	species              VARCHAR2(40) NULL ,
-	animal_type          VARCHAR2(40) NULL
+   category_id          INTEGER NOT NULL ,
+   species              VARCHAR2(40) NULL ,
+   animal_type          VARCHAR2(40) NULL
 );
+   
 ALTER TABLE category
-	ADD  PRIMARY KEY (category_id);
+   ADD  PRIMARY KEY (category_id);
 ALTER TABLE Animal
-	ADD (FOREIGN KEY (category_id) REFERENCES category (category_id));
+   ADD (FOREIGN KEY (category_id) REFERENCES category (category_id));
 ALTER TABLE Review
-	ADD (FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE SET NULL);
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
+   ADD (FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE SET NULL);
 ALTER TABLE Review
-	ADD (FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
+   ADD (FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
 ALTER TABLE AdoptApply
-	ADD (FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL);
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
+   ADD (FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL);
 ALTER TABLE AdoptApply
-	ADD (FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
-CREATE SEQUENCE category_id_seq
-START WITH 1
+   ADD (FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
+   
+CREATE SEQUENCE dog_id_seq
+START WITH 100
+INCREMENT BY 1;
+CREATE SEQUENCE cat_id_seq
+START WITH 200
 INCREMENT BY 1;
 CREATE SEQUENCE apply_id_seq
 START WITH 1
@@ -118,29 +92,28 @@ INCREMENT BY 1;
 CREATE SEQUENCE post_id_seq
 START WITH 1
 INCREMENT BY 1;
-<<<<<<< HEAD
 CREATE SEQUENCE animal_id_seq
 START WITH 1
 INCREMENT BY 1;
-
-=======
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
 INSERT INTO Adopter VALUES ('admin', 'admin','admin', 'admin@dongduk.ac.kr', '02-940-9999');
-INSERT INTO Adopter VALUES ( 'hyunsoo', '1234', 'º€«ˆºˆ', 'hyunsu@gmail.com', '010-1234-5678');
-INSERT INTO Adopter VALUES ( 'yujin', '1234', '«—¿Ø¡¯', 'yujin@naver.com', '010-5323-7788');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'πÕΩ∫∞ﬂ', '∞≥');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '¡¯µæ∞≥', '∞≥');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '«≥ªÍ∞≥', '∞≥');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'ƒ°øÕøÕ', '∞≥');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'ø‰≈©º≈≈◊∏ÆæÓ', '∞≥');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '∫Òºı', '∞≥');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '«™µÈ', '∞≥');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '∏ª∆º¡Ó', '∞≥');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '∞ÒµÁ∏Æ∆Æ∏Æπˆ', '∞≥');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '∑ØΩ√æ»∫Ì∑Á', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, '∏’ƒ°≈≤' '∞ÌæÁ¿Ã');
-, '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'º§', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'π∞•', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'ƒ⁄∏Ææ»ºÙ«ÏæÓ', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (category_id_seq.NEXTVAL, 'Ω∫«Œ≈©Ω∫', '∞ÌæÁ¿Ã');
+INSERT INTO Adopter VALUES ( 'hyunsoo', '1234', 'ÏÜ°ÌòÑÏàò', 'hyunsu@gmail.com', '010-1234-5678');
+INSERT INTO Adopter VALUES ( 'yujin', '1234', 'ÌïúÏú†ÏßÑ', 'yujin@naver.com', '010-5323-7788');
+
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Í∞ïÏïÑÏßÄÏ†ÑÏ≤¥', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÎØπÏä§Í≤¨', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÏßÑÎèóÍ∞ú', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÌíçÏÇ∞Í∞ú', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÏπòÏôÄÏôÄ', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÏöîÌÅ¨ÏÖîÌÖåÎ¶¨Ïñ¥', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÎπÑÏàë', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Ìë∏Îì§', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÎßêÌã∞Ï¶à', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Í≥®Îì†Î¶¨Ìä∏Î¶¨Î≤Ñ', 'Í∞ú');
+
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Í≥†ÏñëÏù¥Ï†ÑÏ≤¥', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ÎØπÏä§', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ÏΩîÎ¶¨ÏïàÏàèÌó§Ïñ¥' ,'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ÏÉ¥', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Î±ÖÍ∞à', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Î®ºÏπòÌÇ®', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Ïä§ÌïëÌÅ¨Ïä§', 'Í≥†ÏñëÏù¥');

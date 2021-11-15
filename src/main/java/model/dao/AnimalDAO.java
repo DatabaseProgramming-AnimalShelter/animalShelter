@@ -14,17 +14,14 @@ import model.service.AnimalManager;
  * Community 占쏙옙占싱븝옙占쏙옙 커占승댐옙티 占쏙옙占쏙옙占쏙옙 占쌩곤옙, 占쏙옙占쏙옙, 占쏙옙占쏙옙, 占싯삼옙 占쏙옙占쏙옙 
  */
 public class AnimalDAO {
-	private JDBCUtil jdbcUtil = null;
+	private static JDBCUtil jdbcUtil = null;
 	
 	public AnimalDAO() {			
 		jdbcUtil = new JDBCUtil();	// JDBCUtil 占쏙옙체 占쏙옙占쏙옙
 	}
-		
-	/**
-	 * 커占승댐옙티 占쏙옙占싱븝옙 占쏙옙占싸울옙 占쏙옙 占쏙옙占쏙옙 (PK 占쏙옙占쏙옙 Sequence占쏙옙 占싱울옙占싹울옙 占쌘듸옙 占쏙옙占쏙옙)
-	 */
+
 	public int create(Animal animal) throws SQLException {
-		String sql = "INSERT INTO Animal VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";		
+		String sql = "INSERT INTO Animal VALUES (animal_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";		
 		Object[] param = new Object[] {
 				
 				animal.getCategory_id(),
@@ -41,7 +38,7 @@ public class AnimalDAO {
 		String key[] = {"animal_id"};	// PK 占시뤄옙占쏙옙 占싱몌옙     
 		int generatedKey = 0;
 		try {    
-			int result = jdbcUtil.executeUpdate(key);  // insert 占쏙옙 占쏙옙占쏙옙
+			jdbcUtil.executeUpdate(key);  // insert 占쏙옙 占쏙옙占쏙옙
 		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
 		   	if(rs.next()) {
 		   		generatedKey = rs.getInt(1);   // ������ PK ��
@@ -107,7 +104,7 @@ public class AnimalDAO {
 	}
 
 	//animal detail
-	public Animal findAnimal(int animal_id) throws SQLException {
+	public static Animal findAnimal(int animal_id) throws SQLException {
         String sql = "SELECT a.animal_id, a.category_id, a.age, a.location, a.animal_matched, a.image,a.gender,a.weight,a.etc, c.species, c.animal_type "
      		   + " FROM Animal a JOIN Category c ON a.category_id = c.category_id " 
      		  + "WHERE animal_id=?";  
@@ -218,7 +215,6 @@ public class AnimalDAO {
 						rs.getInt("age"),
 						rs.getString("location"),
 						rs.getString("image"));
-
 				animalList.add(animal);				// List占쏙옙 Community 占쏙옙체 占쏙옙占쏙옙
 			}		
 			return animalList;					

@@ -14,29 +14,28 @@
             "cat":"고양이"
         };
         
-        //type이 강아지일경우
+        //animal_type이 강아지일경우
         var species_1 = {
-            " ":"개",
-            1: "믹스견",
-            2: "진돗개",
-            3: "풍산개",
-            4: "치와와",
-            5: "요크셔테리어",
-            6: "비숑",
-            7: "푸들",
-            8: "말티즈",
-            9: "골든리트리버"
+            100:"강아지전체",
+            101: "믹스견",
+            102: "진돗개",
+            103: "풍산개",
+            104: "치와와",
+            105: "요크셔테리어",
+            106: "비숑",
+            107: "푸들",
+            108: "말티즈",
+            109: "골든리트리버"
         };
-        
-        //type이 고양이일경우
+        //animal_type이 고양이일경우
         var species_2 = {
-            " ":"고양이",
-            10: "러시안블루",
-            11: "먼치킨",
-            12: "샴",
-            13: "벵갈",
-            14: "코리안숏헤어",
-            15: "스핑크스"
+            200:"고양이전체",
+            201: "믹스",
+            202: "코리안숏헤어",
+            203: "샴",
+            204: "벵갈",
+            205: "먼치킨",
+            206: "스핑크스"
         };
        //type에 서버에서 받아온 값을 넣기위해..
        // map배열과 select 태그 id를 넘겨주면 option 태그를 붙여줌.
@@ -107,25 +106,6 @@
   <input type="submit" value="검색"  >
    </div>
 </form>
-
-
-<!-- Section
-   <section class="selection">
-      <!-- search 해서 받아온 animal 리스트 만큼 반복 -->
-       <c:forEach var="animal" items="${searchAnimalList}">
-         <div class="item" onClick="<c:url value='/animal/view'><c:param name='animal_id' value='${animal.animal_id}'/> </c:url>">        
-            <div class="imgParent">
-               <img class="img" src="'${animal.image}'" />
-            </div>
-            <div class="info">
-               <h3 class="fw-bolder">  ${animal.species}</h5><br>
-               1. 성별 : ${animal.gender}<br><br>
-               2. 발견장소 : ${animal.location}<br><br> 
-            </div>
-         </div>
-      </c:forEach>
-   </section> 
--->
    <table class="table table-bordered">
       <thead class="thead-inverse">
          <tr>

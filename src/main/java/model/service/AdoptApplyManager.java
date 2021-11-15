@@ -4,8 +4,9 @@ import java.sql.SQLException;
 
 import model.AdoptApply;
 import model.Adopter;
+import model.Animal;
 import model.dao.AdoptApplyDAO;
-import model.dao.AdopterDAO;
+import model.dao.AnimalDAO;
 
 public class AdoptApplyManager {
 	private static AdoptApplyManager applyMan = new AdoptApplyManager();
@@ -39,6 +40,10 @@ public class AdoptApplyManager {
 		return adoptApplyDAO.update(adoptApply);
 	}	
 
+	public Animal getAnimal(int animal_id) throws SQLException {
+
+		return AnimalDAO.findAnimal(animal_id);
+	}	
 	public AdoptApply findAdoptApply(String apply_id)
 		throws SQLException {
 		AdoptApply adoptApply = adoptApplyDAO.findAdoptApply(apply_id);

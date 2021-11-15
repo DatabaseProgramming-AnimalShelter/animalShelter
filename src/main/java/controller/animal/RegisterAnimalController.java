@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import controller.Controller;
 
 import org.slf4j.Logger;
@@ -54,10 +55,10 @@ public class RegisterAnimalController implements Controller {
 			// 아래와 같이 하면 Tomcat 내부에 복사된 프로젝트의 폴더 밑에 upload 폴더가 생성됨
 			ServletContext context = request.getServletContext();
 			String path = context.getRealPath("/upload");
-			dir = new File(path);
+//			dir = new File(path);
 
 			// Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
-			// File dir = new File("C:/Temp");
+			 dir = new File("C:/Temp");
 
 			if (!dir.exists())
 				dir.mkdir();
@@ -111,20 +112,17 @@ public class RegisterAnimalController implements Controller {
 						// key 값이 pw이면 pw 변수에 값을 저장한다.
 					} else {// 파일이라면...
 						if (item.getFieldName().equals("image")) {
-							// key 값이 picture이면 파일 저장을 한다.
-							filename = item.getName();// 파일 이름 획득 (자동 한글 처리 됨)
-							if (filename == null || filename.trim().length() == 0)
-								continue;
-							// 파일이 전송되어 오지 않았다면 건너 뛴다.
-							filename = filename.substring(filename.lastIndexOf("\\") + 1);
-							// 파일 이름이 파일의 전체 경로까지 포함하기 때문에 이름 부분만 추출해야 한다.
-							// 실제 C:\Web_Java\aaa.gif라고 하면 aaa.gif만 추출하기 위한 코드이다.
-							File file = new File(dir, filename);
-							item.write(file);
-							request.setAttribute("dir", dir);
-							System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + filename);
-							// 파일을 upload 경로에 실제로 저장한다.
-							// FileItem 객체를 통해 바로 출력 저장할 수 있다.
+							//key 값이 picture이면 파일 저장을 한다.
+                			filename = item.getName();//파일 이름 획득 (자동 한글 처리 됨)
+                			if(filename == null || filename.trim().length() == 0) continue;
+                			//파일이 전송되어 오지 않았다면 건너 뛴다.
+                			filename = filename.substring(filename.lastIndexOf("\\") + 1);
+                			//파일 이름이 파일의 전체 경로까지 포함하기 때문에 이름 부분만 추출해야 한다.
+                			//실제 C:\Web_Java\aaa.gif라고 하면 aaa.gif만 추출하기 위한 코드이다.
+                			File file = new File(dir, filename);
+                			item.write(file);
+                			//파일을 upload 경로에 실제로 저장한다.
+                			//FileItem 객체를 통해 바로 출력 저장할 수 있다.
 						}
 					}
 				}
@@ -149,6 +147,7 @@ public class RegisterAnimalController implements Controller {
 			animal_id = manager.create(animal);
 			animal = manager.findAnimal(animal_id);
 			request.setAttribute("animal", animal);
+			request.setAttribute("dir", dir);
 			request.setAttribute("filename", filename);
 			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + animal);
 			return "/animal/view.jsp";
