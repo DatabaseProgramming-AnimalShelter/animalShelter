@@ -16,7 +16,7 @@ public class ViewApplyController implements Controller {
 		int adopt_id = Integer.parseInt(request.getParameter("apply_id"));
 		
 		try {
-			
+			apply = manager.find
 		}
 		request.setAttribute("apply", apply);	// Ŀ�´�Ƽ ���� ����				
 		return "/adopt/viewApplyForm.jsp";				// Ŀ�´�Ƽ ���� ȭ������ �̵�

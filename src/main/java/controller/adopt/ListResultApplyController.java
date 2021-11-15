@@ -14,7 +14,7 @@ public class ListResultApplyController implements Controller {
     	UserManager manager = UserManager.getInstance();
 		List<AdoptApply> adopterList = manager.getAdoptResultList();
 		
-		// commList °´Ã¼¸¦ request¿¡ ÀúÀåÇÏ¿© Ä¿¹Â´ÏÆ¼ ¸®½ºÆ® È­¸éÀ¸·Î ÀÌµ¿(forwarding)
+		// commList ï¿½ï¿½Ã¼ï¿½ï¿½ requestï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½Æ® È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½(forwarding)
 		request.setAttribute("adopterList", adopterList);				
 		return "/adopt/applyResult.jsp";        
     }

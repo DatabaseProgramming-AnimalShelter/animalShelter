@@ -16,13 +16,13 @@ public class CreateAdoptApplyController implements Controller{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// POST request (formÀÇ ÀÔ·Âµ¥ÀÌÅÍ°¡ parameter·Î Àü¼ÛµÊ)
+		// POST request (formï¿½ï¿½ ï¿½Ô·Âµï¿½ï¿½ï¿½ï¿½Í°ï¿½ parameterï¿½ï¿½ ï¿½ï¿½ï¿½Ûµï¿½)
 		AdoptApply adopt = new AdoptApply(
 				Integer.parseInt(request.getParameter("user_id")),
 				Integer.parseInt(request.getParameter("animal_id")),
-				// ÇöÀç ³¯Â¥ ±¸ÇÏ±â (½Ã½ºÅÛ ½Ã°è, ½Ã½ºÅÛ Å¸ÀÓÁ¸)
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½Ï±ï¿½ (ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½, ï¿½Ã½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½)
 				LocalDate.now(),
-				0,//ÀÔ¾ç½Â³«°ÅºÎ ¹ÌÁ¤-0
+				0,//ï¿½Ô¾ï¿½Â³ï¿½ï¿½Åºï¿½ ï¿½ï¿½ï¿½ï¿½-0
 				request.getParameter("content"),
 				request.getParameter("living_environment"),
 				request.getParameter("have_pets")
@@ -32,9 +32,9 @@ public class CreateAdoptApplyController implements Controller{
 			manager.createAdoptApply(adopt);
 			
 	    	log.debug("Create Adopt : {}", adopt);
-	        return "redirect:/adopt/applyList";	// ¼º°ø ½Ã adopt formÀ¸·Î redirect
+	        return "redirect:/adopt/applyList";	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ adopt formï¿½ï¿½ï¿½ï¿½ redirect
 	        
-		} catch (Exception e) {		// ¿¹¿Ü ¹ß»ý ½Ã ÀÔ·Â formÀ¸·Î forwarding
+		} catch (Exception e) {		// ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ ï¿½Ô·ï¿½ formï¿½ï¿½ï¿½ï¿½ forwarding
             request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);
 			request.setAttribute("adopt", adopt);

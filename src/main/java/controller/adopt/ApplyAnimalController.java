@@ -12,7 +12,7 @@ import model.User;
 import model.service.ExistingUserException;
 import model.service.UserManager;
 
-// À¯±âµ¿¹° ÀÔ¾ç ½ÅÃ»
+// ï¿½ï¿½ï¿½âµ¿ï¿½ï¿½ ï¿½Ô¾ï¿½ ï¿½ï¿½Ã»
 public class ApplyAnimalController implements Controller{
 
 	@Override
@@ -26,9 +26,9 @@ public class ApplyAnimalController implements Controller{
 		try {
 			AdoptApplyManager manager = AdoptApplyManager.getInstance();
 			manager.create(adoptApply);
-	        return "redirect:/animal/list";	// ¼º°ø ½Ã À¯±âµ¿¹° ¸®½ºÆ® È­¸éÀ¸·Î redirect
+	        return "redirect:/animal/list";	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½âµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ redirect
 	        
-		} catch (ExistingUserException e) {	// ¿¹¿Ü ¹ß»ý ½Ã ÀÔ¾ç½ÅÃ» formÀ¸·Î forwarding
+		} catch (ExistingUserException e) {	// ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ ï¿½Ô¾ï¿½ï¿½Ã» formï¿½ï¿½ï¿½ï¿½ forwarding
             request.setAttribute("applyFailed", true);
 			request.setAttribute("exception", e);
 			request.setAttribute("adoptApply", adoptApply);

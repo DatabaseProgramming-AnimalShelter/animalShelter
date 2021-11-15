@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="utf-8"%>
-<%@ include file="/WEB-INF/home/mainHeader.jsp" %>
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>유기동물 상세정보 보기</title>
+        <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
 <script type="text/javascript">
 
@@ -67,9 +75,9 @@ h1{
 
 </style>
 <div class="container">
-<h1>유기동물 상세보기</h1>
-사진 저장 경로 : ${dir} <br/>
-사진 파일 이름 : ${filename} <br/>
+<h1>��湲곕��臾� ���몃낫湲�</h1>
+�ъ� ���� 寃쎈� : ${dir} <br/>
+�ъ� ���� �대� : ${filename} <br/>
 <img src="${dir}/${filename}" /> <br/>
 	<form name="form" method="POST">
 		<div class="outer">
@@ -81,47 +89,47 @@ h1{
 					<h2 class="fw-bolder">[${animal.animal_type}] >
 						${animal.species}</h2>
 					<div class="fs-5 mb-5">
-						<span>발견장소</span>
+						<span>諛�寃ъ�μ��</span>
 						<c:choose>
 
 							<c:when test="${animal.location=='seoul'}">
-								<span>서울</span>
+								<span>����</span>
 							</c:when>
 							<c:when test="${animal.location=='gyeonggi'}">
-								<span>경기</span>
+								<span>寃쎄린</span>
 							</c:when>
 							<c:when test="${animal.location=='incheon'}">
-								<span>인천</span>
+								<span>�몄�</span>
 							</c:when>
 							<c:when test="${animal.location=='etc'}">
-								<span>기타</span>
+								<span>湲고��</span>
 							</c:when>
 						</c:choose>
 						<br>
-						<br> <span>나이</span>
+						<br> <span>����</span>
 						<c:choose>
 							<c:when test="${animal.age==0}">
-								<span>1살미만</span>
+								<span>1�대�몃�</span>
 							</c:when>
 							<c:otherwise>
 								<span>${animal.age}</span>
 							</c:otherwise>
 						</c:choose>
 						<br>
-						<br> <span>성별</span>
+						<br> <span>�깅�</span>
 						<c:choose>
 							<c:when test="${animal.gender==female}">
-								<span>암</span>
+								<span>��</span>
 							</c:when>
 							<c:otherwise>
-								<span>수</span>
+								<span>��</span>
 							</c:otherwise>
 						</c:choose>
 						<br>
-						<br> <span>몸무게</span>
+						<br> <span>紐몃Т寃�</span>
 						<c:choose>
 							<c:when test="${animal.weight==0}">
-								<span>2kg미만</span>
+								<span>2kg誘몃�</span>
 							</c:when>
 							<c:when test="${animal.weight==1}">
 								<span>2kg~3kg</span>
@@ -149,16 +157,9 @@ h1{
 							</c:when>
 						</c:choose>
 						<br>
-						<br> <span>특이사항: ${animal.etc}</span>
+						<br> <span>�뱀�댁�ы��: ${animal.etc}</span>
 					</div>
 				</div>
-			</div>
 
-			<div class="btn">
-				<button id="apply" type="button"
-					onClick="apply('<c:url value='/adopt/apply' />")'>입양신청</button>
-			</div>
-		</div>
-	</form>
-</div>
  <%@ include file="/WEB-INF/home/mainFooter.jsp" %>
+

@@ -5,19 +5,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import model.AdoptApply;
-import model.service.UserManager;
-//(°³ÀÎÀÇ)ÀÔ¾ç½ÅÃ»³»¿ª?
+import model.service.AdoptApplyManager;
+//(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½Ô¾ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½?
 public class ViewApprovalController implements Controller{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		AdoptApply adopt = null;
-		UserManager manager = UserManager.getInstance();
+		AdoptApplyManager manager = AdoptApplyManager.getInstance();
 		int adopt_id = Integer.parseInt(request.getParameter("user_id"));
-//		comm = manager.findCommunity(commId);		// Ä¿¹Â´ÏÆ¼ Á¤º¸ °Ë»ö			
+//		comm = manager.findCommunity(commId);		// Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½			
 		//adopt = manager.findAdoptApply(user_id);
-		request.setAttribute("AdoptApply", adopt);	// Ä¿¹Â´ÏÆ¼ Á¤º¸ ÀúÀå				
-		return "/user/mypage.jsp";				// Ä¿¹Â´ÏÆ¼ º¸±â È­¸éÀ¸·Î ÀÌµ¿
+		request.setAttribute("AdoptApply", adopt);	// Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½				
+		return "/user/mypage.jsp";				// Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 
 	}
 }
