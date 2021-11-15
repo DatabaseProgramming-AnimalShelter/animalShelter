@@ -1,6 +1,5 @@
 package model;
 
-<<<<<<< HEAD
 import java.time.LocalDate;
 /**
  * 입양신청서 관리를 위해 필요한 도메인 클래스
@@ -103,12 +102,7 @@ public class AdoptApply {
 	public void setAnimal(Animal animal) {
 		this.animal = animal;
 	}
+}
 
 
 	
-=======
-public class AdoptApply {
-
-
->>>>>>> branch 'temp' of https://github.com/yujindonut/animalShelter.git
-}
