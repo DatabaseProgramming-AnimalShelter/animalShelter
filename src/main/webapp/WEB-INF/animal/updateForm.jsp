@@ -1,13 +1,13 @@
-<!-- À¯±âµ¿¹° µî·Ï È­¸é -->
+<!-- ìœ ê¸°ë™ë¬¼ ë“±ë¡ í™”ë©´ -->
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>À¯±âµ¿¹° µî·Ï È­¸é - °ü¸®ÀÚ</title>
+    <title>ìœ ê¸°ë™ë¬¼ ë“±ë¡ í™”ë©´ - ê´€ë¦¬ìž</title>
     <style>
         body {
             text-align: center;
@@ -16,49 +16,49 @@
 
 </head>
 <body>
-    <h2>À¯±âµ¿¹° µî·Ï - °ü¸®ÀÚ</h2>
+    <h2>ìœ ê¸°ë™ë¬¼ ë“±ë¡ - ê´€ë¦¬ìž</h2>
     <br>
     <form method="post" action=".jsp" encType = "multipart/form-data">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script>
             $( document ).ready(function(){
                
-                //Å×½ºÆ®¿ë µ¥ÀÌÅÍ
+                //í…ŒìŠ¤íŠ¸ìš© ë°ì´í„°
                 var sel1 = {
-                    " ":"Á¾ ¼±ÅÃ",
-                    "°³":"°³",
-                    "°í¾çÀÌ":"°í¾çÀÌ"
+                    " ":"ì¢… ì„ íƒ",
+                    "ê°œ":"ê°œ",
+                    "ê³ ì–‘ì´":"ê³ ì–‘ì´"
                 };
                 
-                //sel1ÀÌ °­¾ÆÁöÀÏ°æ¿ì
+                //sel1ì´ ê°•ì•„ì§€ì¼ê²½ìš°
                 var sel2_1 = {
-                    " ":"°³",
-                    1: "¹Í½º°ß",
-                    2: "Áøµ¾°³",
-                    3: "Ç³»ê°³",
-                    4: "Ä¡¿Í¿Í",
-                    5: "¿äÅ©¼ÅÅ×¸®¾î",
-                    6: "ºñ¼õ",
-                    7: "Çªµé",
-                    8: "¸»Æ¼Áî",
-                    9: "°ñµç¸®Æ®¸®¹ö"
+                    " ":"ê°œ",
+                    1: "ë¯¹ìŠ¤ê²¬",
+                    2: "ì§„ë—ê°œ",
+                    3: "í’ì‚°ê°œ",
+                    4: "ì¹˜ì™€ì™€",
+                    5: "ìš”í¬ì…”í…Œë¦¬ì–´",
+                    6: "ë¹„ìˆ‘",
+                    7: "í‘¸ë“¤",
+                    8: "ë§í‹°ì¦ˆ",
+                    9: "ê³¨ë“ ë¦¬íŠ¸ë¦¬ë²„"
                 };
                 
-                //sel1ÀÌ °í¾çÀÌÀÏ°æ¿ì
+                //sel1ì´ ê³ ì–‘ì´ì¼ê²½ìš°
                 var sel2_2 = {
-                    " ":"°í¾çÀÌ",
-                    10: "·¯½Ã¾Èºí·ç",
-                    11: "¸ÕÄ¡Å²",
-                    12: "¼¤",
-                    13: "º¬°¥",
-                    14: "ÄÚ¸®¾È¼ôÇì¾î",
-                    15: "½ºÇÎÅ©½º"
+                    " ":"ê³ ì–‘ì´",
+                    10: "ëŸ¬ì‹œì•ˆë¸”ë£¨",
+                    11: "ë¨¼ì¹˜í‚¨",
+                    12: "ìƒ´",
+                    13: "ë²µê°ˆ",
+                    14: "ì½”ë¦¬ì•ˆìˆí—¤ì–´",
+                    15: "ìŠ¤í•‘í¬ìŠ¤"
                 };
                 
-               //sel1¿¡ ¼­¹ö¿¡¼­ ¹Þ¾Æ¿Â °ªÀ» ³Ö±âÀ§ÇØ..
-               // map¹è¿­°ú select ÅÂ±× id¸¦ ³Ñ°ÜÁÖ¸é option ÅÂ±×¸¦ ºÙ¿©ÁÜ.
-               // map[Å°ÀÌ¸§] = ±× Å°¿¡ ÇØ´çÇÏ´Â value¸¦ ¹ÝÈ¯ÇÑ´Ù.
-               //retOption(µ¥ÀÌÅÍ¸Ê, selectÇÔ¼ö id)
+               //sel1ì— ì„œë²„ì—ì„œ ë°›ì•„ì˜¨ ê°’ì„ ë„£ê¸°ìœ„í•´..
+               // mapë°°ì—´ê³¼ select íƒœê·¸ idë¥¼ ë„˜ê²¨ì£¼ë©´ option íƒœê·¸ë¥¼ ë¶™ì—¬ì¤Œ.
+               // map[í‚¤ì´ë¦„] = ê·¸ í‚¤ì— í•´ë‹¹í•˜ëŠ” valueë¥¼ ë°˜í™˜í•œë‹¤.
+               //retOption(ë°ì´í„°ë§µ, selectí•¨ìˆ˜ id)
                function retOption(mapArr, select){
                     var html = '';
                     var keys = Object.keys(mapArr);
@@ -72,9 +72,9 @@
                $("select[id='sel1']").on("change", function(){
                     var option = $("#sel1 option:selected").val();
                     var subSelName = '';
-                    if(option == "°³") {
+                    if(option == "ê°œ") {
                         subSelName = "sel2_1";
-                    } else if(option == "°í¾çÀÌ"){
+                    } else if(option == "ê³ ì–‘ì´"){
                         subSelName = "sel2_2";
                     } else{
                         $("#sel2").hide();
@@ -88,53 +88,53 @@
             
             </script>
 
-        <!-- Á¾: type (°³, °í¾çÀÌ, ±âÅ¸) -->
-        Á¾:
+        <!-- ì¢…: type (ê°œ, ê³ ì–‘ì´, ê¸°íƒ€) -->
+        ì¢…:
         <select name="sel1" id="sel1">
         </select>
         <br><br>
         
-        <!-- Ç°Á¾: species (Æ÷¸Þ¶ó´Ï¾È, ¿äÅ©¼ÅÅ×¸®¾î, Ä¡¿Í¿Í) -->
-      Ç°Á¾:
+        <!-- í’ˆì¢…: species (í¬ë©”ë¼ë‹ˆì•ˆ, ìš”í¬ì…”í…Œë¦¬ì–´, ì¹˜ì™€ì™€) -->
+      í’ˆì¢…:
         <select name="sel2" id="sel2" style="">
         </select>
         <br><br>
             
-        <!-- ¼ºº°: gender  -->
-        ¼ºº°:
+        <!-- ì„±ë³„: gender  -->
+        ì„±ë³„:
         <select name="gender" id="gender" >
-        	<option value="female" selected>¾ÏÄÆ</option>
-        	<option value="male">¼öÄÆ</option>
+        	<option value="female" selected>ì•”ì»·</option>
+        	<option value="male">ìˆ˜ì»·</option>
         </select>
         <br><br>
         
-        <!-- ³ªÀÌ: age -->
-        ³ªÀÌ:
-        <input type="text" name="age" placeholder="³ªÀÌ ÀÔ·Â" />
+        <!-- ë‚˜ì´: age -->
+        ë‚˜ì´:
+        <input type="text" name="age" placeholder="ë‚˜ì´ ìž…ë ¥" />
         <br><br>
         
-        <!-- ¸ö¹«°Ô: weight -->
-        ¸ö¹«°Ô:
-        <input type="text" name="weight" placeholder="¸ö¹«°Ô ÀÔ·Â" />
+        <!-- ëª¸ë¬´ê²Œ: weight -->
+        ëª¸ë¬´ê²Œ:
+        <input type="text" name="weight" placeholder="ëª¸ë¬´ê²Œ ìž…ë ¥" />
         <br><br>
         
-        <!-- °ø°í¹øÈ£: notice_number -->
+        <!-- ê³µê³ ë²ˆí˜¸: notice_number -->
         
-        <!-- ¹ß°ßÀå¼Ò: location -->
-        ¹ß°ßÀå¼Ò:
-        <input type="text" name="location" placeholder="¹ß°ßÀå¼Ò ÀÔ·Â" />
+        <!-- ë°œê²¬ìž¥ì†Œ: location -->
+        ë°œê²¬ìž¥ì†Œ:
+        <input type="text" name="location" placeholder="ë°œê²¬ìž¥ì†Œ ìž…ë ¥" />
         <br><br>
         
-        <!-- Æ¯ÀÌ»çÇ×: etc -->
-        Æ¯ÀÌ»çÇ×:
-        <textarea id="etc" name="etc" rows=10" cols="30" placeholder="Æ¯ÀÌ»çÇ×À» ÀÔ·ÂÇÏ½Ã¿À."></textarea>
+        <!-- íŠ¹ì´ì‚¬í•­: etc -->
+        íŠ¹ì´ì‚¬í•­:
+        <textarea id="etc" name="etc" rows=10" cols="30" placeholder="íŠ¹ì´ì‚¬í•­ì„ ìž…ë ¥í•˜ì‹œì˜¤."></textarea>
         <br><br>
         
-        <!-- »çÁø -->
+        <!-- ì‚¬ì§„ -->
         <input type="file" id="image" name="image" accept="image/png, image/jpeg">
          <br><br>
         
-        <input type="submit" value="µî·Ï" />
+        <input type="submit" value="ë“±ë¡" />
     </form>
 </body>
 </html>
