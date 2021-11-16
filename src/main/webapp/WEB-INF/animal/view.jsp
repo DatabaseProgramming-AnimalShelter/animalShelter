@@ -148,4 +148,4 @@ h1{
 	</form>
 </div>
 
-<%@ include file="/WEB-INF/home/mainFooter.jsp" %>
+ <%@ include file="/WEB-INF/home/mainFooter.jsp" %>
