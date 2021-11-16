@@ -7,13 +7,7 @@ import java.util.List;
 import model.Adopter;
 import model.dao.AdopterDAO;
 
-/**
- * »ç¿ëÀÚ °ü¸® API¸¦ »ç¿ëÇÏ´Â °³¹ßÀÚµéÀÌ Á÷Á¢ Á¢±ÙÇÏ°Ô µÇ´Â Å¬·¡½º.
- * UserDAO¸¦ ÀÌ¿ëÇÏ¿© µ¥ÀÌÅÍº£ÀÌ½º¿¡ µ¥ÀÌÅÍ Á¶ÀÛ ÀÛ¾÷ÀÌ °¡´ÉÇÏµµ·Ï ÇÏ¸ç,
- * µ¥ÀÌÅÍº£ÀÌ½ºÀÇ µ¥ÀÌÅÍµéÀ» ÀÌ¿ëÇÏ¿© ºñÁö´Ï½º ·ÎÁ÷À» ¼öÇàÇÏ´Â ¿ªÇÒÀ» ÇÑ´Ù.
- * ºñÁö´Ï½º ·ÎÁ÷ÀÌ º¹ÀâÇÑ °æ¿ì¿¡´Â ºñÁö´Ï½º ·ÎÁ÷¸¸À» Àü´ãÇÏ´Â Å¬·¡½º¸¦ 
- * º°µµ·Î µÑ ¼ö ÀÖ´Ù.
- */
+
 public class AdopterManager {
 	private static AdopterManager userMan = new AdopterManager();
 	private AdopterDAO adopterDAO;
@@ -39,7 +33,7 @@ public class AdopterManager {
 	
 	public int create(Adopter user) throws SQLException, ExistingUserException {
 		if (adopterDAO.existingUser(user.getUser_id()) == true) {
-			throw new ExistingUserException(user.getUser_id() + "´Â Á¸ÀçÇÏ´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+			throw new ExistingUserException(user.getUser_id() + "ëŠ” ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤.");
 		}
 		return adopterDAO.create(user);
 	}
@@ -59,7 +53,7 @@ public class AdopterManager {
 		Adopter user = adopterDAO.findUser(user_id);
 		
 		if (user == null) {
-			throw new UserNotFoundException(user_id + "´Â Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+			throw new UserNotFoundException(user_id + "ëŠ” ì—†ëŠ” ì‚¬ìš©ì ì…ë‹ˆë‹¤.");
 		}		
 		return user;
 	}
@@ -78,7 +72,7 @@ public class AdopterManager {
 		Adopter user = findUser(user_id);
 
 		if (!user.matchPassword(password)) {
-			throw new PasswordMismatchException("ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			throw new PasswordMismatchException("ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 		}
 		return true;
 	}

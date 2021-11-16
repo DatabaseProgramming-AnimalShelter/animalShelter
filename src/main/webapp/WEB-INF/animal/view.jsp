@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
-        <link href="/css/styles.css" rel="stylesheet" />
+<link href="/css/styles.css" rel="stylesheet" />
 <script type="text/javascript">
 
 </script>
@@ -148,4 +148,4 @@ h1{
 	</form>
 </div>
 
- <%@ include file="/WEB-INF/home/mainFooter.jsp" %>
+<%@ include file="/WEB-INF/home/mainFooter.jsp" %>

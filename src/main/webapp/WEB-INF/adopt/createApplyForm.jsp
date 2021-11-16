@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -25,13 +25,13 @@
 	-->
 
 	//String have_pets = document.getElementById("have_pets").value;
-	String content = document.getElementById("content").value;
+	/* String content = document.getElementById("content").value;
 	String living_conditions = document.getElementById("living_conditions").value;
 	
 	request.setParameter("animal_id", <c:out value='${apply.animal_id}' />);
 	request.setParameter("content", content);
 	request.setParameter("living_environment", living_conditions);
-	request.setParameter("have_pets", have_pets);
+	request.setParameter("have_pets", have_pets); */
 	
 	/* request.setParameter("animal_id", <c:out value='${apply.animal_id}' />);
 		request.setParameter("content", form.content.value);
@@ -136,7 +136,7 @@ h1{
 					<input type="text" class="form-control-plaintext"
 						name="have_pets" id="have_pets" placeholder="예) 고양이(러시안블루)-6년 "
 						value="${apply.have_pets}">
-					<c:if test="${creationFailed}">value="${apply.have_pets}"</c:if>
+					<c:if test="${creationFailed}"></c:if>
 				</div>
 				<div class="invalid-feedback">*반려동물 유무 기재는 필수입니다</div>
 			</div><br>
@@ -169,7 +169,7 @@ h1{
 				<label for="content" class="form-label">6. 나의 조건</label><br>
 				<textarea class="form-control is-invalid" id="content"
 					name="content" placeholder="분양을 할 수 있는 조건인지 상세히 적어주세요!" required>
-					<c:if test="${creationFailed}">value="${apply.content}"</c:if>
+					<c:if test="${creationFailed}">${apply.content}</c:if>
 				</textarea>
 				<div class="invalid-feedback">*조건 기재는 필수입니다</div>
 			</div><br>
@@ -191,15 +191,17 @@ h1{
 		</div> --%>
 		<div class="btnAll">
 			<!-- <input id="submit" type="button" value="신청"> -->
-			<button id="submit" type="submit">
+			<%-- <button id="submit" type="submit">
 					<a href="<c:url value='/adopt/register'>
                     </c:url>">
               	신청</a>  
-			</button>
-			<a href="<c:url value='/adopt/register'>
+			</button> --%>
+			<button id="submit" type="submit">
+				<a href="<c:url value='/adopt/register'>
                         <c:param name='animal_id' value='${apply.animal_id}'/>
                      </c:url>">
              	 신청</a>
+             </button>
 			&nbsp; 
 			<button id="cancel" type="submit">
 					<a href="<c:url value='/animal/list'>
@@ -208,7 +210,7 @@ h1{
 			</button>
 		</div>
 	</form>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		$(document).ready(function(){
 			$("#submit").click(function(){
 				/* 
@@ -221,6 +223,6 @@ h1{
 			});
 		});
 		
-	</script>
+	</script> -->
 </body>
 </html>
