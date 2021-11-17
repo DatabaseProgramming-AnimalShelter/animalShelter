@@ -20,43 +20,54 @@
 	<table class="table table-hover table-borderless">
 		<thead>
 			<tr>
-				<th scope="col">no</th>
-				<th scope="col">동물 번호</th>
-				<th scope="col">신청자 이름</th>
-				<th scope="col">신청 날짜</th>
 				<!-- 신청날짜를 보여주는 이유는 : 선착순의 느낌도 주기 위해서 -->
+				<th scope="col">신청 날짜</th>
+				<th scope="col">no</th>
+				<th scope="col">품종</th>
+				<th scope="col">신청자 이름</th>
+				<th scope="col">반려동물 유무</th>
+				<th scope="col">거주환경</th>
+				<th scope="col">나의 조건</th>
 				<th scope="col">입양완료 여부</th>
 			</tr>
 		</thead>
 		<tbody> 
-	  	  <tr>
-			<th>이름</th>
-			<td>${apply.userName}</td>
+		  <tr>
+			<!-- <th>신청 반려동물</th> -->
+			<td>${apply.apply_date}</td>
 		  </tr>
 		  <tr>
-			<th>사는 지역</th>
-			<td>${apply.address}</td>
-		  </tr>
-		  <tr>
-			<th>신청 반려동물</th>
+			<!-- <th>신청 반려동물</th> -->
 			<td>${apply.animal_id}</td>
 		  </tr>
 		  <tr>
-			<th>반려동물 유무</th>
+			<!-- <th>품종</th> -->
+			<td>[${apply.animal_type}] > ${apply.species}</td>
+		  </tr>
+		  <tr>
+			<!-- <th>이름</th> -->
+			<td>${apply.user_name}</td>
+		  </tr>
+		  <tr>
+			<!-- <th>반려동물 유무</th> -->
 			<td>${apply.have_pets}</td>
 		  </tr>
 		  <tr>
-			<th>거주 환경</th>
+			<!-- <th>거주 환경</th> -->
 			<td>${apply.living_environment}</td>
 		  </tr>
 		  <tr>
-			<th>나의 조건</th>
+			<!-- <th>나의 조건</th> -->
 			<td>${apply.content}</td>
+		  </tr>
+		  <tr>
+			<!-- <th>입양완료여부</th> -->
+			<td>${apply.apply_matched}</td>
 		  </tr>
 		  <tr>
 		  	<th>
 		  	<a class="btn btn-outline-danger" href="<c:url value='/adopt/accept'/>" role="button">
-		  	<c:param name='apply_id' value='${adopt.apply_id}'/>
+		  	<c:param name='apply_id' value='${apply.apply_id}'/>
 		  	수락</a></th>
 		  	<th>
 		  	<a class="btn btn-outline-secondary" href="<c:url value='/adopt/result'/>" role="button">거부</a></th>

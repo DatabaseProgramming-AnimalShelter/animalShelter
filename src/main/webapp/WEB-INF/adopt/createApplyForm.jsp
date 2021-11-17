@@ -1,5 +1,3 @@
-createApplyForm.jsp
-
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
@@ -9,37 +7,6 @@ createApplyForm.jsp
 <link rel=stylesheet href="<c:url value='/css/community.css' />"
 	type="text/css">
 <script>
- function create() {
-	<!-- 
-	if (form.name.value == "") {
-		alert("이름을 입력하십시오.");
-		form.name.focus();
-		return false;
-	} 
-	if (form.desc.value == "") {
-		alert("설명을 입력하십시오.");
-		form.desc.focus();
-		return false;
-	}		
-	-->
-
-	//String have_pets = document.getElementById("have_pets").value;
-	/* String content = document.getElementById("content").value;
-	String living_conditions = document.getElementById("living_conditions").value;
-	
-	request.setParameter("animal_id", <c:out value='${apply.animal_id}' />);
-	request.setParameter("content", content);
-	request.setParameter("living_environment", living_conditions);
-	request.setParameter("have_pets", have_pets); */
-	
-	/* request.setParameter("animal_id", <c:out value='${apply.animal_id}' />);
-		request.setParameter("content", form.content.value);
-		request.setParameter("living_environment", form.living_conditions.value);
-		request.setParameter("have_pets", form.have_pets.value); */
-	
-	/* form.action = '/adopt/register';
-	form.submit(); */
-}
 
 function animalList(targetUri) {
 	form.action = targetUri;

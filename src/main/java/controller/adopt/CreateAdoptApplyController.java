@@ -25,9 +25,6 @@ public class CreateAdoptApplyController implements Controller{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!"+request.getParameter("animal_id"));
-
-		
 		int animal_id = Integer.parseInt(request.getParameter("animal_id"));
 		
 		Animal animal = null;
@@ -54,14 +51,7 @@ public class CreateAdoptApplyController implements Controller{
     		request.setAttribute("apply", apply_default);
     		
     		return "/adopt/createApplyForm.jsp";   
-	    }	
-		
-		int animal_id2 = Integer.parseInt(request.getParameter("animal_id"));
-		
-		 String content = request.getParameter("content"); String lc =
-		 request.getParameter("living_conditions"); String hp =
-		 request.getParameter("have_pets");
-		 
+	    }		 
 		
 		AdoptApply apply = new AdoptApply(
 				user_id,
@@ -76,11 +66,7 @@ public class CreateAdoptApplyController implements Controller{
 				);
 		
 		try {
-			//System.out.println("%%%%%%%%%%%%%%%%%%%ai : "+animal_id2 + "content: "+content+"lc: "+ lc+ "hp:"+hp);
-			System.out.println("%%%%%%%%%%%%%%%%%%%%img:"+animal.getImage()+"username:"+adopter.getUser_name()+"atype:"+animal.getAnimal_type()+"aspecies:"+animal.getSpecies());
-			System.out.println("%%%%%%%%%%%%%%"+apply);
 			AdoptApplyManager manager = AdoptApplyManager.getInstance();
-			System.out.println("%%%%%%%%%%%%%%"+apply);
 			manager.create(apply);
 			
 	    	log.debug("Create Adopt : {}", apply);
