@@ -26,7 +26,7 @@ public class CreateAdoptApplyController implements Controller{
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!"+request.getParameter("animal_id"));
-
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!"+request.getParameter("user_id"));
 		
 		int animal_id = Integer.parseInt(request.getParameter("animal_id"));
 		
