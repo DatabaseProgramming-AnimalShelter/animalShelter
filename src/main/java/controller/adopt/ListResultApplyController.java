@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import model.service.AdoptApplyManager;
 import model.AdoptApply;
-import model.service.AnimalManager;
 
 public class ListResultApplyController implements Controller {
 	@Override

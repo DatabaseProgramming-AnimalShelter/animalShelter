@@ -20,8 +20,6 @@ import model.service.AdopterManager;
 import model.service.AnimalManager;
 import model.service.ExistingUserException;
 
-
-
 public class CreateAdoptApplyController implements Controller{
    private static final Logger log = LoggerFactory.getLogger(CreateAdoptApplyController.class);
 

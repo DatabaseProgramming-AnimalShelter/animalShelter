@@ -101,6 +101,7 @@ INSERT INTO Adopter VALUES ( 'yujin', '1234', '한유진', 'yujin@naver.com', '0
 
 INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '강아지전체', '개');
 INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '믹스견', '개');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '기타', '개');
 INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '진돗개', '개');
 INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '풍산개', '개');
 INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '치와와', '개');

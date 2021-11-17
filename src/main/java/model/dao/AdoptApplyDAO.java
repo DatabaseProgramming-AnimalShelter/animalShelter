@@ -50,17 +50,19 @@ public class AdoptApplyDAO {
       return 0;
    }
 
-   // 엯 뼇 떊泥 듅 씤 떆 matched = 1, approval_date 媛 꽔 뼱二쇨린
+   // adoptapply의 matched 값: 1 + animal의 matched: 1
    public int approval(AdoptApply adoptApply) throws SQLException {
 
       String sql = "UPDATE AdoptApply " + "SET  matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
       Object[] param = new Object[] { 1, adoptApply.getApply_id() };
-
+      String sql2 = "UPDATE Animal " + "SET  animal_matched=? " + "WHERE animal_id=?";
+      Object[] param2 = new Object[] { 1, adoptApply.getAnimal_id() };
       // DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
       try {
          // Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
          jdbcUtil.setSqlAndParameters(sql, param);
+         jdbcUtil.setSqlAndParameters(sql2, param2);
          int result = jdbcUtil.executeUpdate(); // update 눧占 占쎈뼄占쎈뻬
          return result;
       } catch (Exception ex) {
@@ -73,12 +75,12 @@ public class AdoptApplyDAO {
       return 0;
    }
 
-   // 엯 뼇 떊泥 嫄곗젅 떆 matched = -1, approval_date 媛 꽔 뼱二쇨린
+   // adoptapply의 matched 값만 1 
    public int decline(AdoptApply adoptApply) throws SQLException {
 
       String sql = "UPDATE AdoptApply " + "SET  matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
-      Object[] param = new Object[] { -1, adoptApply.getApply_id() };
-
+      Object[] param = new Object[] { 1, adoptApply.getApply_id() };
+      
       // DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
       try {
@@ -98,32 +100,41 @@ public class AdoptApplyDAO {
 
    // view
    public AdoptApply findAdoptApply(int apply_id) throws SQLException {
-      String sql = "SELECT adp.apply_id, adp.user_id, adp.animal_id, adp.content, adp.living_environment, have_pets, adp.apply_matched, adp.apply_date, a.image, u.user_name, c.animal_type, c.species  "
-            + "FROM AdoptApply adp JOIN User u ON adp.user_id = u.user_id and Animal a JOIN adp ON a.animal_id = adp.animal_id and a JOIN Category c ON a.category_id = c.category_id"
-            + "WHERE apply_id=? ";
-      jdbcUtil.setSqlAndParameters(sql, new Object[] { apply_id });
-
-      DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
-      try {
-         ResultSet rs = jdbcUtil.executeQuery();
-         if (rs.next()) {
-            Date apply_date = new Date(rs.getDate("apply_date").getTime());
-            String apply_dateString = df.format(apply_date);
-
-            adoptApply = new AdoptApply(rs.getInt("apply_id"), rs.getString("user_id"), rs.getInt("animal_id"),
-                  rs.getString("content"), rs.getString("living_environment"), rs.getString("have_pets"),
-                  rs.getInt("apply_matched"), apply_dateString, rs.getString("image"), rs.getString("user_name"),
-                  rs.getString("animal_type"), rs.getString("species"));
-            return adoptApply;
-         }
-      } catch (Exception ex) {
-         ex.printStackTrace();
-      } finally {
-         jdbcUtil.close(); // resource 獄쏆꼹 넎
-      }
-      return null;
-   }
+       String sql = "SELECT adp.apply_id, adp.user_id, adp.animal_id, adp.content, adp.living_environment, adp.have_pets, adp.apply_matched, adp.apply_date, a.image, u.user_name, c.animal_type, c.species  "
+                + "FROM AdoptApply adp , Adopter u , Animal a ,Category c "
+                + "WHERE adp.user_id = u.user_id and a.animal_id = adp.animal_id and a.category_id = c.category_id and adp.apply_id=? ";              
+     jdbcUtil.setSqlAndParameters(sql, new Object[] {apply_id});   
+     
+     DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+     
+     try {
+        ResultSet rs = jdbcUtil.executeQuery();      
+        if (rs.next()) {
+           Date apply_date = new Date(rs.getDate("apply_date").getTime());
+           String apply_dateString = df.format(apply_date);
+           adoptApply = new AdoptApply(      
+              rs.getInt("apply_id"),
+              rs.getString("user_id"),
+              rs.getInt("animal_id"),
+              rs.getString("content"),
+              rs.getString("living_environment"),
+              rs.getString("have_pets"),
+              rs.getInt("apply_matched"),
+              apply_dateString,
+              rs.getString("image"),
+              rs.getString("user_name"),
+              rs.getString("animal_type"),
+              rs.getString("species")
+           );
+           return adoptApply;
+        }
+     } catch (Exception ex) {
+        ex.printStackTrace();
+     } finally {
+        jdbcUtil.close();     
+     }
+     return null;
+  }
 
    //로그인한 user_id인 사람의 입양신청폼만 뜨도록
    public List<AdoptApply> findAdoptApplyResult(String user_id) throws SQLException {
@@ -192,7 +203,8 @@ public class AdoptApplyDAO {
    // 입양결과를 다 보여주는 페이지 ( 관리자가 승인 거부 이후)
    public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
       String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
-            + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " + "WHERE apply_matched = ? "
+            + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " 
+            + "WHERE apply_matched = ? "
             + "ORDER BY apply_id ";
       jdbcUtil.setSqlAndParameters(sql, new Object[] { 1 });
 
