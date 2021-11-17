@@ -1,5 +1,7 @@
 package controller.adopt;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +18,7 @@ public class ViewApprovalController implements Controller{
 		
 		List<AdoptApply> list = manager.approval(null);
 		
-		request.setAttribute("AdoptApply", adopt);	
+		request.setAttribute("AdoptApply", list);	
 		return "/user/mypage.jsp";				
 
 	}
