@@ -13,18 +13,7 @@
 	padding:auto;
 	text-align:center;
 	}
-	a{
-            font-weight: 900;
-            color: rgb(54, 27, 27);
-            text-decoration: none;
-        }
-        a:hover{
-            color: rgb(54, 27, 27);
-            text-decoration: none;
-        }
-        a:visited{
-            color: rgb(54, 27, 27);
-        }
+	
 	.card-title{
 	font-size:20px;
 	}
@@ -39,33 +28,32 @@
             "cat":"고양이"
         };
         
-        //animal_type이 강아지일경우
         var species_1 = {
             100:"강아지전체",
-            101: "믹스견",
-            102: "진돗개",
-            103: "풍산개",
-            104: "치와와",
-            105: "요크셔테리어",
-            106: "비숑",
-            107: "푸들",
-            108: "말티즈",
-            109: "골든리트리버"
+            101:"믹스견",
+            102:"기타",
+            103:"진돗개",
+            104:"풍산개",
+            105:"치와와",
+            106:"요크셔테리어",
+            107:"비숑",
+            108:"푸들",
+            109:"말티즈",
+            110:"골든리트리버",
+            111:"포메라니안",
+            112:"웰시코기"
         };
-        //animal_type이 고양이일경우
         var species_2 = {
             200:"고양이전체",
-            201: "믹스",
-            202: "코리안숏헤어",
-            203: "샴",
-            204: "벵갈",
-            205: "먼치킨",
-            206: "스핑크스"
+            201:"믹스",
+            202:"기타",
+            203:"코리안숏헤어",
+            204:"샴",
+            205:"뱅갈",
+            206:"먼치킨",
+            207:"스핑크스"
         };
-       //type에 서버에서 받아온 값을 넣기위해..
-       // map배열과 select 태그 id를 넘겨주면 option 태그를 붙여줌.
-       // map[키이름] = 그 키에 해당하는 value를 반환한다.
-       //retOption(데이터맵, select함수 id)
+        
        function retOption(mapArr, select){
             var html = '';
             var keys = Object.keys(mapArr);
@@ -96,33 +84,37 @@
     </script>
 <div class="container">  
 <form method="POST" name="form" action="<c:url value='/animal/list' />">
-   <div id="menu">
-     과:
-        <select name="type" id="type">
+<br>
+<table class="table" style="background-color: #e0d8cb">
+  <tr><td> </td><td> </td><td> </td>
+      <th scope="row">과</th>
+      <td>  <select name="type" id="type">
+        </select></td>
+         <th scope="row">종</th>
+      <td>   <select name="species" id="species" style="">
         </select>
-        
-        <!-- 종: species (포메라니안, 요크셔테리어, 치와와) -->
-      종:
-        <select name="species" id="species" style="">
-        </select>
-      
-    
-      <span>입양유무</span>
-      <select name="matched">
+      </td>
+       <th scope="row">입양유무</th>
+      <td>   <select name="matched">
          <option value=-1 selected>전체</option>
          <option value=0>보호중</option>
          <option value=1>입양완료</option>
       </select>
-     <!--   <span>발견장소</span>
-         <select name="location" >
+      </td>
+       <th scope="row">발견장소</th>
+      <td>    <select name="location" >
 		    <option value="seoul" > 서울 </option>
 		    <option value="gyeonggi"> 경기 </option>
 		    <option value="incheon" > 인천 </option>
 		    <option value="etc"> 기타 </option>
-	  	</select>-->
+	  	</select>
+      </td>
+      <td><input type="submit" value="검색"  ></td>
+   <td> </td><td> </td> </tr>
+    </table>
   <!--   <input type="button" value="검색" onClick="search()">-->
-  <input type="submit" value="검색"  >
-   </div>
+  
+ 
 </form>
  <c:forEach var="animal" items="${animalList}">                
   <span class="card" style="width: 18rem;">

@@ -46,15 +46,15 @@ public class AnimalManager {
 	 * UserNotFoundException { Adopter user = adopterDAO.findUser(user_id);
 	 * 
 	 * if (user == null) { throw new UserNotFoundException(user_id +
-	 * "�� �������� �ʴ� ���̵��Դϴ�."); } return user; }
+	 * "占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占십댐옙 占쏙옙占싱듸옙占쌉니댐옙."); } return user; }
 	 */
 
 	public List<Animal> findAnimalList() throws SQLException {
 		return animalDAO.findAnimalList();
 	}
 
-	public List<Animal> searchAnimalList( String animal_type, int category_id, int matched) throws SQLException {
-		return animalDAO.searchAnimalList(animal_type, category_id, matched);
+	public List<Animal> searchAnimalList( String animal_type, int category_id, int matched,String location) throws SQLException {
+		return animalDAO.searchAnimalList(animal_type, category_id, matched,location);
 	}
 
 	public Animal findAnimal(int animal_id) throws SQLException, AnimalNotFoundException {
@@ -62,7 +62,7 @@ public class AnimalManager {
 		Animal animal = animalDAO.findAnimal(animal_id);
 
 		if (animal == null) {
-			throw new AnimalNotFoundException(animal_id + "가 존재하지않습니다.");
+			throw new AnimalNotFoundException(animal_id + "媛� 議댁옱�븯吏��븡�뒿�땲�떎.");
 		}
 
 		return animal;
@@ -80,7 +80,7 @@ public class AnimalManager {
 	 * findUser(user_id);
 	 * 
 	 * if (!user.matchPassword(password)) { throw new
-	 * PasswordMismatchException("��й�ȣ�� ��ġ���� �ʽ��ϴ�."); } return true; }
+	 * PasswordMismatchException("占쏙옙橘占싫ｏ옙占� 占쏙옙치占쏙옙占쏙옙 占십쏙옙占싹댐옙."); } return true; }
 	 */
 
 	/*

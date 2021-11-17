@@ -158,42 +158,43 @@ public class AnimalDAO {
 		return null;
 	}
 	
-	public List<Animal> searchAnimalList(String animal_type,int category_id, int matched) throws SQLException {
+	public List<Animal> searchAnimalList(String animal_type,int category_id, int matched,String location) throws SQLException {
 		String sql = null;
 		Object[] param;
 		System.out.println("animal_type"+animal_type);
 		System.out.println("category_id"+category_id);
 		System.out.println("matched"+matched);
+		System.out.println("location"+location);
 		if (animal_type.equals("none") && matched == -1){
 			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
 	        		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
+	        		   + "WHERE a.location=? "
 	        		   + "ORDER BY animal_id desc";   
-			 param = null;
+			 param = new Object[] { location};
+			 // param = null;
 			 System.out.println("1ddddd");
 		}
 		else if (animal_type.equals("none")) {
 			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
 		     		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-		     		   + "WHERE a.animal_matched=? "
+		     		   + "WHERE a.animal_matched=? and a.location=? "
 		     		   + "ORDER BY a.animal_id desc"; 
-			 param = new Object[] { matched};
+			 param = new Object[] { matched,location};
 			 System.out.println("2ddddd");
 		}else if (matched == -1){
 			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
 	        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-					
-	        		   
-	        		   + "WHERE a.category_id=?  "
+	        		   + "WHERE a.category_id=? and a.location=? "
 	        		   + "ORDER BY a.animal_id desc";    
-			 param = new Object[] { category_id};
+			 param = new Object[] { category_id,location};
 			 System.out.println("3ddddd");
 		}
 		else {
 			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender,a.etc "
 	        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-	        		   + "WHERE a.category_id=? and a.animal_matched=? "
+	        		   + "WHERE a.category_id=? and a.animal_matched=? and a.location=? "
 	        		   + "ORDER BY a.animal_id desc";    
-			 param = new Object[] { category_id,matched};
+			 param = new Object[] { category_id,matched,location};
 			 System.out.println("4ddddd");
 		}
         jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil �뜝�룞�삕 insert�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕

@@ -21,6 +21,7 @@ public class ListAnimalController implements Controller {
 			System.out.println("type" + type);
 			int category_id;
 			int matched;
+			String location= request.getParameter("location");
 			if (request.getParameter("species") == null) {
 				category_id = 0;
 			} else {
@@ -30,7 +31,7 @@ public class ListAnimalController implements Controller {
 			matched = Integer.parseInt(request.getParameter("matched"));
 			System.out.println("matched" + matched);
 			AnimalManager manager = AnimalManager.getInstance();
-			List<Animal> animalList = manager.searchAnimalList(type,category_id, matched);
+			List<Animal> animalList = manager.searchAnimalList(type,category_id, matched,location);
 			System.out.println("animalList");
 			request.setAttribute("animalList", animalList);						
 			System.out.println(animalList);
