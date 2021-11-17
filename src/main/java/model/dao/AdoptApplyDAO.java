@@ -53,17 +53,19 @@ public class AdoptApplyDAO {
    // adoptapply의 matched 값: 1 + animal의 matched: 1
    public int approval(AdoptApply adoptApply) throws SQLException {
 
-      String sql = "UPDATE AdoptApply " + "SET  matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
+      String sql = "UPDATE AdoptApply " + "SET apply_matched=? , approval_date=SYSDATE " + "WHERE apply_id=? ";
       Object[] param = new Object[] { 1, adoptApply.getApply_id() };
-      String sql2 = "UPDATE Animal " + "SET  animal_matched=? " + "WHERE animal_id=?";
+      String sql2 = "UPDATE Animal " + "SET  animal_matched=? " + "WHERE animal_id=? ";
       Object[] param2 = new Object[] { 1, adoptApply.getAnimal_id() };
       // DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
       try {
          // Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
          jdbcUtil.setSqlAndParameters(sql, param);
+         jdbcUtil.executeUpdate();
+         jdbcUtil.commit();
+         jdbcUtil.close();
          jdbcUtil.setSqlAndParameters(sql2, param2);
-         int result = jdbcUtil.executeUpdate(); // update 눧占 占쎈뼄占쎈뻬
+         int result = jdbcUtil.executeUpdate();
          return result;
       } catch (Exception ex) {
          jdbcUtil.rollback();
@@ -78,11 +80,10 @@ public class AdoptApplyDAO {
    // adoptapply의 matched 값만 1 
    public int decline(AdoptApply adoptApply) throws SQLException {
 
-      String sql = "UPDATE AdoptApply " + "SET  matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
+      String sql = "UPDATE AdoptApply " + "SET  apply_matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
       Object[] param = new Object[] { 1, adoptApply.getApply_id() };
       
       // DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
       try {
          // Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
          jdbcUtil.setSqlAndParameters(sql, param);
@@ -209,9 +210,7 @@ public class AdoptApplyDAO {
       jdbcUtil.setSqlAndParameters(sql, new Object[] { 1 });
 
       DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-      jdbcUtil.setSqlAndParameters(sql, null);
       try {
-
          ResultSet rs = jdbcUtil.executeQuery();
          List<AdoptApply> adoptApplyList = new ArrayList<AdoptApply>();
          while (rs.next()) {

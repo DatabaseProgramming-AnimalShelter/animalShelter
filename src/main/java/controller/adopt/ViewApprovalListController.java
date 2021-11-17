@@ -17,9 +17,8 @@ public class ViewApprovalListController implements Controller{
 		AdoptApplyManager manager = AdoptApplyManager.getInstance();
 		
 		List<AdoptApply> list = manager.findAdoptApplyResultList();
-		
 		request.setAttribute("AdoptApplyList", list);	
-		return "/adopt/applyResult.jsp";				
+		return "/adopt/applyResultList.jsp";				
 
 	}
 }

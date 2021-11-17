@@ -8,9 +8,12 @@ import org.slf4j.LoggerFactory;
 import controller.animal.RegisterAnimalController;
 import controller.adopt.CreateAdoptApplyController;
 import controller.adopt.ListResultApplyController;
+import controller.adopt.ManagerAcceptController;
+import controller.adopt.ManagerDeclineController;
 import controller.adopt.ViewApplyController;
-import controller.animal.ListAnimalController;
 import controller.adopt.ViewApprovalListController;
+import controller.animal.ListAnimalController;
+import controller.adopt.ListResultApplyController;
 import controller.animal.ViewAnimalController;
 import controller.user.*;
 public class RequestMapping {
@@ -31,23 +34,24 @@ public class RequestMapping {
 
         mappings.put("/user/register", new RegisterUserController());
        
+//        mappings.put("/animal/search", new SearchAnimalController());
         mappings.put("/animal/view", new ViewAnimalController());
         mappings.put("/animal/list", new ListAnimalController());
         mappings.put("/animal/register", new RegisterAnimalController());
- 
+        
+        // 엯 뼇 떊泥   룞臾쇱삁 빟
         mappings.put("/adopt/register", new CreateAdoptApplyController());
         mappings.put("/adopt/view", new ViewApplyController());
-
-
         mappings.put("/adopt/accept", new RegisterAnimalController());
         mappings.put("/adopt/list", new ListResultApplyController());
-
         mappings.put("/adopt/approved_list", new ViewApprovalListController());
-
+        mappings.put("/adopt/approval", new ManagerAcceptController());
+        mappings.put("/adopt/decline", new ManagerDeclineController());
+        
         logger.info("Initialized Request Mapping!");
     }
 
-    public Controller findController(String uri) {	
+    public Controller findController(String uri) {   
         return mappings.get(uri);
     }
 }

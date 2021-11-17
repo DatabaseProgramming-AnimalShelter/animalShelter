@@ -11,14 +11,16 @@ import model.service.AnimalManager;
 import model.AdoptApply;
 import model.Animal;
 
-public class ManagerAcceptController implements Controller {
+public class ManagerDeclineController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		int apply_id = Integer.parseInt(request.getParameter("apply_id"));
 		AdoptApplyManager manager = AdoptApplyManager.getInstance();
 		AdoptApply adoptApply = manager.findAdoptApply(apply_id);
-		manager.approval(adoptApply);
 
+		manager.decline(adoptApply);
+		
 		List<AdoptApply> list = manager.findAdoptApplyResultList();
 
 		request.setAttribute("AdoptApplyList", list);
