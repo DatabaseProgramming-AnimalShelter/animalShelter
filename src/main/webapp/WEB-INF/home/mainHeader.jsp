@@ -42,6 +42,18 @@
         }
         footer{
         clear:both;}
+        a{
+            font-weight: 900;
+            color: rgb(54, 27, 27);
+            text-decoration: none;
+        }
+        a:hover{
+            color: rgb(54, 27, 27);
+            text-decoration: none;
+        }
+        a:visited{
+            color: rgb(54, 27, 27);
+        }
     </style>
 <body>
   <div class="main">

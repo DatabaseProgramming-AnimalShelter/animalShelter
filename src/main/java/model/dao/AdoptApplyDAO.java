@@ -53,14 +53,18 @@ public class AdoptApplyDAO {
    // adoptapply의 matched 값: 1 + animal의 matched: 1
    public int approval(AdoptApply adoptApply) throws SQLException {
 
+
       String sql = "UPDATE AdoptApply " + "SET apply_matched=? , approval_date=SYSDATE " + "WHERE apply_id=? ";
       Object[] param = new Object[] { 1, adoptApply.getApply_id() };
+
       String sql2 = "UPDATE Animal " + "SET  animal_matched=? " + "WHERE animal_id=? ";
       Object[] param2 = new Object[] { 1, adoptApply.getAnimal_id() };
       // DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+
       try {
          // Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
          jdbcUtil.setSqlAndParameters(sql, param);
+
          jdbcUtil.executeUpdate();
          jdbcUtil.commit();
          jdbcUtil.close();
@@ -175,7 +179,8 @@ public class AdoptApplyDAO {
    // 관리자 입장에서 입양신청의 리스트를 보여주는 페이지
    public List<AdoptApply> findAdoptApplyList() throws SQLException {
       String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
-            + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " + "ORDER BY apply_id";
+            + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id "+"WHERE adp.apply_matched=0 " + "ORDER BY apply_id "
+    		 ;
       DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
       jdbcUtil.setSqlAndParameters(sql, null);
       System.out.println("1ddddddd");

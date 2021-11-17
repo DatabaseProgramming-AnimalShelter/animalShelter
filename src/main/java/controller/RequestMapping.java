@@ -13,7 +13,6 @@ import controller.adopt.ManagerDeclineController;
 import controller.adopt.ViewApplyController;
 import controller.adopt.ViewApprovalListController;
 import controller.animal.ListAnimalController;
-import controller.adopt.ListResultApplyController;
 import controller.animal.ViewAnimalController;
 import controller.user.*;
 public class RequestMapping {
@@ -44,10 +43,11 @@ public class RequestMapping {
         mappings.put("/adopt/view", new ViewApplyController());
         mappings.put("/adopt/accept", new RegisterAnimalController());
         mappings.put("/adopt/list", new ListResultApplyController());
+
         mappings.put("/adopt/approved_list", new ViewApprovalListController());
         mappings.put("/adopt/approval", new ManagerAcceptController());
         mappings.put("/adopt/decline", new ManagerDeclineController());
-        
+
         logger.info("Initialized Request Mapping!");
     }
 

@@ -3,17 +3,35 @@
     pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
+<style>
+.container{
+margin:auto;
+}
+</style>
     <title>유기동물 등록 화면 - 관리자</title>
-    <style>
-        body {
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
+
+    <script>
+	function register() {
+		if (form.species.value == "") {
+			alert("과와 종을 선택하십시오.");
+			form.species.focus();
+			return false;
+		} 
+		else if (form.etc.value == "") {
+			alert("특이사항을 입력하십시오.");
+			form.etc.focus();
+			return false;
+		}	
+		else if (form.image.value == "") {
+			alert("사진파일을 올리세요.");
+			form.image.focus();
+			return false;
+		}	
+		form.submit();
+	}
+	
+</script>
+<div class="container">  
     <h2>유기동물 등록 - 관리자</h2>
     <br>
     <form class="applyForm"name="form" method="POST" action="<c:url value='/animal/register'/>" enctype="multipart/form-data">
@@ -22,32 +40,34 @@
             $( document ).ready(function(){
                 //테스트용 데이터
                 var animal_type = {
-                    " ":"종 선택",
+                    " ":"과 선택",
                     "개":"개",
                     "고양이":"고양이"
                 };
                 //animal_type이 강아지일경우
                 var species_1 = {
-                    100:"강아지전체",
                     101: "믹스견",
-                    102: "진돗개",
-                    103: "풍산개",
-                    104: "치와와",
-                    105: "요크셔테리어",
-                    106: "비숑",
-                    107: "푸들",
-                    108: "말티즈",
-                    109: "골든리트리버"
+                    102: "기타",
+                    103: "진돗개",
+                    104: "풍산개",
+                    105: "치와와",
+                    106: "요크셔테리어",
+                    107: "비숑",
+                    108: "푸들",
+                    109: "말티즈",
+                    110: "골든리트리버",
+                    111:"포메라니안",
+                    112:"웰시코기"
                 };
                 //animal_type이 고양이일경우
                 var species_2 = {
-                    200:"고양이전체",
-                    201: "믹스",
-                    202: "코리안숏헤어",
-                    203: "샴",
-                    204: "벵갈",
-                    205: "먼치킨",
-                    206: "스핑크스"
+                    201:"믹스",
+                    202: "기타",
+                    203: "코리안숏헤어",
+                    204: "샴",
+                    205: "벵갈",
+                    206: "먼치킨",
+                    207: "스핑크스"
                 };
                //animal_type에 서버에서 받아온 값을 넣기위해..
                // map배열과 select 태그 id를 넘겨주면 option 태그를 붙여줌.
@@ -152,8 +172,7 @@
 
          <input type="file" id="image" name="image">
          <br><br>
-        <input type="submit" value="등록" />
+        <input type="button" value="등록" onClick="register()"/>
     </form>
-</body>
-</html>
+</div>
  <%@ include file="/WEB-INF/home/mainFooter.jsp" %>

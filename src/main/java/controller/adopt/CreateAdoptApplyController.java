@@ -56,7 +56,6 @@ public class CreateAdoptApplyController implements Controller {
 		try {
 			AdoptApplyManager manager = AdoptApplyManager.getInstance();
 			manager.create(apply);
-
 			log.debug("Create Adopt : {}", apply);
 			return "redirect:/";
 
