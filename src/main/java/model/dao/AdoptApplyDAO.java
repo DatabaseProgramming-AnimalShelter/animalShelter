@@ -170,9 +170,9 @@ public class AdoptApplyDAO {
 
    // view 
    public AdoptApply findAdoptApply(int apply_id) throws SQLException {
-        String sql = "SELECT adp.apply_id, adp.user_id, adp.animal_id, adp.content, adp.living_environment, have_pets, adp.apply_matched, adp.apply_date, a.image, u.user_name, c.animal_type, c.species  "
-                 + "FROM AdoptApply adp JOIN User u ON adp.user_id = u.user_id and Animal a JOIN adp ON a.animal_id = adp.animal_id and a JOIN Category c ON a.category_id = c.category_id"
-                 + "WHERE apply_id=? ";              
+        String sql = "SELECT adp.apply_id, adp.user_id, adp.animal_id, adp.content, adp.living_environment, adp.have_pets, adp.apply_matched, adp.apply_date, a.image, u.user_name, c.animal_type, c.species  "
+                 + "FROM AdoptApply adp , Adopter u , Animal a ,Category c "
+                 + "WHERE adp.user_id = u.user_id and a.animal_id = adp.animal_id and a.category_id = c.category_id and adp.apply_id=? ";              
       jdbcUtil.setSqlAndParameters(sql, new Object[] {apply_id});   
       
       DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
@@ -182,7 +182,6 @@ public class AdoptApplyDAO {
          if (rs.next()) {
             Date apply_date = new Date(rs.getDate("apply_date").getTime());
             String apply_dateString = df.format(apply_date);
-            
             adoptApply = new AdoptApply(      
                rs.getInt("apply_id"),
                rs.getString("user_id"),

@@ -1,21 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
+<%@ include file="/WEB-INF/home/mainHeader.jsp"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 매니저 일때만 가능하게 -->
-<html lang="ko-kr">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>유기동물 입양 상세보기 & 신청 수락/거절</title>
-<!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
 
-<body>
 	<br>
 	<table class="table table-hover table-borderless">
 		<thead>
@@ -33,7 +24,6 @@
 		</thead>
 		<tbody> 
 		  <tr>
-			<!-- <th>신청 반려동물</th> -->
 			<td>${apply.apply_date}</td>
 		  </tr>
 		  <tr>
@@ -66,18 +56,18 @@
 		  </tr>
 		  <tr>
 		  	<th>
-		  	<a class="btn btn-outline-danger" href="<c:url value='/adopt/accept'/>" role="button">
-		  	<c:param name='apply_id' value='${apply.apply_id}'/>
-		  	수락</a></th>
+		  	<a class="btn btn-outline-danger" role="button" href="<c:url value='adopt/approved_list'><c:param name='apply_id' value='${apply.apply_id}'/>
+                    </c:url>">
+              	수락</a> 
+             </th>
 		  	<th>
-		  	<a class="btn btn-outline-secondary" href="<c:url value='/adopt/result'/>" role="button">거부</a></th>
+		  	<a class="btn btn-outline-secondary" href="<c:url value='/adopt/list'/>" role="button">거부</a></th>
 		  </tr>
 		</tbody>
 	</table>	
 	<br> 		     
 	<!-- 수정 또는 삭제가  실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
-	<c:if test="${updateFailed}">
-		<h6 class="text-danger"><c:out value="${exception.getMessage()}"/></h6>
+	<c:if test="${creationFailed}">
+		<h6 class="text-danger"><c:out value="${exception}"/></h6>
     </c:if>    
-</body>
-</html>
+<%@ include file="/WEB-INF/home/mainFooter.jsp"%>

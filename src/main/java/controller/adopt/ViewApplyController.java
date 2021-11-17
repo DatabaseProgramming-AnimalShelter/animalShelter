@@ -1,4 +1,6 @@
 package controller.adopt;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,18 +24,18 @@ public class ViewApplyController implements Controller {
     	AdoptApplyManager manager = AdoptApplyManager.getInstance();
     	int apply_id = Integer.parseInt(request.getParameter("apply_id"));
 		
+    	log.debug("View Appply Adopt id : {}", apply_id);
 		try {
 			apply = manager.findAdoptApply(apply_id);
-			manager.create(apply);
+			request.setAttribute("apply", apply);
 			
-			log.debug("View Appply Adopt : {}", apply);
-	        return "redirect:/";	
+			log.debug("View Appply Adopt apply: {}", apply);
+	        return "/adopt/reviewApplyForm.jsp";	
 	        
-		} catch (Exception e) {		
+		} catch (Exception e) {	
             request.setAttribute("creationFailed", true);
 			request.setAttribute("exception", e);
-			request.setAttribute("apply", apply);
-			return "/adopt/viewApplyForm.jsp";	
+			return "/adopt/list";	
 		}
   }
 }
