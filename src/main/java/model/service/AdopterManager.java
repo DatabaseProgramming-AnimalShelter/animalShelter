@@ -7,17 +7,9 @@ import java.util.List;
 import model.Adopter;
 import model.dao.AdopterDAO;
 
-/**
- * ����� ���� API�� ����ϴ� �����ڵ��� ���� �����ϰ� �Ǵ� Ŭ����.
- * UserDAO�� �̿��Ͽ� �����ͺ��̽��� ������ ���� �۾��� �����ϵ��� �ϸ�,
- * �����ͺ��̽��� �����͵��� �̿��Ͽ� �����Ͻ� ������ �����ϴ� ������ �Ѵ�.
- * �����Ͻ� ������ ������ ��쿡�� �����Ͻ� �������� �����ϴ� Ŭ������ 
- * ������ �� �� �ִ�.
- */
 public class AdopterManager {
 	private static AdopterManager userMan = new AdopterManager();
 	private AdopterDAO adopterDAO;
-	//private AnimalDAO commDAO;
 
 	public AdopterDAO getAdopterDAO() {
 		return this.adopterDAO;
@@ -39,7 +31,7 @@ public class AdopterManager {
 	
 	public int create(Adopter user) throws SQLException, ExistingUserException {
 		if (adopterDAO.existingUser(user.getUser_id()) == true) {
-			throw new ExistingUserException(user.getUser_id() + "�� �����ϴ� ���̵��Դϴ�.");
+			throw new ExistingUserException(user.getUser_id() + "占쏙옙 占쏙옙占쏙옙占싹댐옙 占쏙옙占싱듸옙占쌉니댐옙.");
 		}
 		return adopterDAO.create(user);
 	}
@@ -64,50 +56,14 @@ public class AdopterManager {
 		return user;
 	}
 
-//	public List<User> findUserList() throws SQLException {
-//			return userDAO.findUserList();
-//	}
-//	
-//	public List<User> findUserList(int currentPage, int countPerPage)
-//		throws SQLException {
-//		return userDAO.findUserList(currentPage, countPerPage);
-//	}
-
 	public boolean login(String user_id, String password)
 		throws SQLException, UserNotFoundException, PasswordMismatchException {
 		Adopter user = findUser(user_id);
 
 		if (!user.matchPassword(password)) {
-			throw new PasswordMismatchException("��й�ȣ�� ��ġ���� �ʽ��ϴ�.");
+			throw new PasswordMismatchException("PasswordMismatchException");
 		}
 		return true;
 	}
-
-	/*
-	 * public List<User> makeFriends(String userId) throws Exception { return
-	 * userAanlysis.recommendFriends(userId); }
-	 * 
-	 * public Community createCommunity(Community comm) throws SQLException { return
-	 * commDAO.create(comm); }
-	 * 
-	 * public int updateCommunity(Community comm) throws SQLException { return
-	 * commDAO.update(comm); }
-	 * 
-	 * public Community findCommunity(int commId) throws SQLException { Community
-	 * comm = commDAO.findCommunity(commId);
-	 * 
-	 * List<User> memberList = userDAO.findUsersInCommunity(commId);
-	 * comm.setMemberList(memberList);
-	 * 
-	 * int numOfMembers = userDAO.getNumberOfUsersInCommunity(commId);
-	 * comm.setNumOfMembers(numOfMembers); return comm; }
-	 * 
-	 * public List<Community> findCommunityList() throws SQLException { return
-	 * commDAO.findCommunityList(); }
-	 * 
-	 * public List<User> findCommunityMembers(int commId) throws SQLException {
-	 * return userDAO.findUsersInCommunity(commId); }
-	 */
-
 	
 }

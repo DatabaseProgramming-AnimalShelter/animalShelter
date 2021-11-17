@@ -4,6 +4,31 @@
 <title>유기동물 목록 조회</title>
 <script type="text/javascript">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<style>
+	.card{ 
+	float : left;
+	margin:30px;
+	margin-left:20px;
+	color: rgb(54, 27, 27);
+	padding:auto;
+	text-align:center;
+	}
+	a{
+            font-weight: 900;
+            color: rgb(54, 27, 27);
+            text-decoration: none;
+        }
+        a:hover{
+            color: rgb(54, 27, 27);
+            text-decoration: none;
+        }
+        a:visited{
+            color: rgb(54, 27, 27);
+        }
+	.card-title{
+	font-size:20px;
+	}
+</style>
 <script>
     $( document ).ready(function(){
        
@@ -69,24 +94,17 @@
     });
     
     </script>
-    <script>
-   
-}
-   
-</script>
-
+<div class="container">  
 <form method="POST" name="form" action="<c:url value='/animal/list' />">
    <div id="menu">
      과:
         <select name="type" id="type">
         </select>
-        <br><br>
         
         <!-- 종: species (포메라니안, 요크셔테리어, 치와와) -->
       종:
         <select name="species" id="species" style="">
         </select>
-        <br><br>
       
     
       <span>입양유무</span>
@@ -106,33 +124,67 @@
   <input type="submit" value="검색"  >
    </div>
 </form>
-   <table class="table table-bordered">
-      <thead class="thead-inverse">
-         <tr>
-        <td>동물 나이</td>
-        <td>동물 아이디</td>
-        <td>장소</td>
-      </tr>
-      </thead>
-      <tbody> 
-      <c:forEach var="animal" items="${animalList}">                
-            <tr>
-           <td>
-              ${animal.age}     
-           </td>
-           <td>
-           
-            <a href="<c:url value='/animal/view'>
+ <c:forEach var="animal" items="${animalList}">                
+  <span class="card" style="width: 18rem;">
+  	<a href="<c:url value='/animal/view'>
                      <c:param name='animal_id' value='${animal.animal_id}'/>
-                    </c:url>">
-              ${animal.animal_id}</a>    
-           </td>
-           <td>
-             ${animal.location} 
-           </td>
-         </tr>
-       </c:forEach> 
-     </tbody>
-   </table>   
+                    </c:url>">	<c:choose>
+						<c:when test="${not empty animal.image}">
+							<img
+								src="${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}"  class="card-img-top" height="200px"/>
+						</c:when>
+						<c:otherwise>
+							<span>사진없음</span>
+						</c:otherwise>
+					</c:choose>
+       
+          <span class="card-title">   
+             동물아이디 :  ${animal.animal_id}    </span>
+       <!--   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> --> 
+  
+          <br>
+          동물나이 : 
+<c:choose>
+							<c:when test="${animal.age==0}">
+								<span>1살미만</span>
+							</c:when>
+							<c:otherwise>
+								<span>${animal.age}</span>
+							</c:otherwise>
+						</c:choose>     <br>
+          장소 :  
+				<c:choose>
 
+							<c:when test="${animal.location=='seoul'}">
+								<span>서울</span>
+							</c:when>
+							<c:when test="${animal.location=='gyeonggi'}">
+								<span>경기</span>
+							</c:when>
+							<c:when test="${animal.location=='incheon'}">
+								<span>인천</span>
+							</c:when>
+							<c:when test="${animal.location=='etc'}">
+								<span>기타</span>
+							</c:when>
+						</c:choose>
+		 <br>
+		
+		   성별 :
+			<c:choose>
+							<c:when test="${animal.gender=='female'}">
+								<span>암컷</span>
+							</c:when>
+							<c:otherwise>
+								<span>수컷</span>
+							</c:otherwise>
+						</c:choose>
+		
+       
+       
+        </a>
+      </span>
+    </c:forEach> 
+  
+</div>
 <%@ include file="/WEB-INF/home/mainFooter.jsp" %>

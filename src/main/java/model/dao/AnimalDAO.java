@@ -1,3 +1,4 @@
+
 package model.dao;
 
 import java.sql.ResultSet;
@@ -9,15 +10,12 @@ import model.Adopter;
 import model.Animal;
 import model.service.AnimalManager;
 
-/**
- * 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占싶븝옙占싱쏙옙 占쌜억옙占쏙옙 占쏙옙占쏙옙占싹댐옙 DAO 클占쏙옙占쏙옙
- * Community 占쏙옙占싱븝옙占쏙옙 커占승댐옙티 占쏙옙占쏙옙占쏙옙 占쌩곤옙, 占쏙옙占쏙옙, 占쏙옙占쏙옙, 占싯삼옙 占쏙옙占쏙옙 
- */
+
 public class AnimalDAO {
 	private static JDBCUtil jdbcUtil = null;
 	
 	public AnimalDAO() {			
-		jdbcUtil = new JDBCUtil();	// JDBCUtil 占쏙옙체 占쏙옙占쏙옙
+		jdbcUtil = new JDBCUtil();	// JDBCUtil �뜝�룞�삕泥� �뜝�룞�삕�뜝�룞�삕
 	}
 
 	public int create(Animal animal) throws SQLException {
@@ -33,16 +31,16 @@ public class AnimalDAO {
 				animal.getEtc(),
 				animal.getAnimal_matched()
 				};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 占쏙옙 insert占쏙옙占쏙옙 占신곤옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil �뜝�룞�삕 insert�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 						
-		String key[] = {"animal_id"};	// PK 占시뤄옙占쏙옙 占싱몌옙     
+		String key[] = {"animal_id"};	// PK �뜝�떆琉꾩삕�뜝�룞�삕 �뜝�떛紐뚯삕     
 		int generatedKey = 0;
 		try {    
-			jdbcUtil.executeUpdate(key);  // insert 占쏙옙 占쏙옙占쏙옙
+			jdbcUtil.executeUpdate(key);  // insert �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
 		   	if(rs.next()) {
-		   		generatedKey = rs.getInt(1);   // ������ PK ��
-		   		animal.setAnimal_id(generatedKey); 	// id�ʵ忡 ����  
+		   		generatedKey = rs.getInt(1);   // 占쏙옙占쏙옙占쏙옙 PK 占쏙옙
+		   		animal.setAnimal_id(generatedKey); 	// id占십드에 占쏙옙占쏙옙  
 		   	}
 		   	return generatedKey;
 		} catch (Exception ex) {
@@ -50,14 +48,12 @@ public class AnimalDAO {
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 占쏙옙환
+			jdbcUtil.close();	// resource �뜝�룞�삕�솚
 		}		
 		return 0;			
 	}
 
-	/**
-	 * 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
-	 */
+
 	public int update(Animal animal) throws SQLException {
 		String sql = "UPDATE Animal "
 					+ "SET age=?, location=?, image=?, gender=?, weight=?, etc=?, animal_matched=?  "
@@ -65,10 +61,10 @@ public class AnimalDAO {
 		Object[] param = new Object[] {animal.getAge(), animal.getLocation(),
 				animal.getImage(), animal.getGender(), animal.getWeight(),
 				animal.getEtc(), animal.getAnimal_matched()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil占쏙옙 update占쏙옙占쏙옙 占신곤옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil�뜝�룞�삕 update�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 			
 		try {				
-			int result = jdbcUtil.executeUpdate();	// update 占쏙옙 占쏙옙占쏙옙
+			int result = jdbcUtil.executeUpdate();	// update �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -76,21 +72,18 @@ public class AnimalDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 占쏙옙환
+			jdbcUtil.close();	// resource �뜝�룞�삕�솚
 		}		
 		return 0;
 	}
 
-	
-	/**
-	 * 占쌍억옙占쏙옙 ID占쏙옙 占쌔댐옙占싹댐옙 커占승댐옙티 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙.
-	 */
+
 	public int remove(int animal_id) throws SQLException {
 		String sql = "DELETE FROM Animal WHERE animal_id=?";		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil占쏙옙 delete占쏙옙占쏙옙 占신곤옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil�뜝�룞�삕 delete�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 
 		try {				
-			int result = jdbcUtil.executeUpdate();	// delete 占쏙옙 占쏙옙占쏙옙
+			int result = jdbcUtil.executeUpdate();	// delete �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -98,7 +91,7 @@ public class AnimalDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 占쏙옙환
+			jdbcUtil.close();	// resource �뜝�룞�삕�솚
 		}		
 		return 0;
 	}
@@ -108,12 +101,12 @@ public class AnimalDAO {
         String sql = "SELECT a.animal_id, a.category_id, a.age, a.location, a.animal_matched, a.image,a.gender,a.weight,a.etc, c.species, c.animal_type "
      		   + " FROM Animal a JOIN Category c ON a.category_id = c.category_id " 
      		  + "WHERE animal_id=?";  
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil占쏙옙 query占쏙옙占쏙옙 占신곤옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil�뜝�룞�삕 query�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query 占쏙옙占쏙옙
-			if (rs.next()) {						// 占싻삼옙 占쏙옙占쏙옙 占쌩곤옙
-				Animal animal = new Animal(		// User 占쏙옙체占쏙옙 占쏙옙占쏙옙占싹울옙 占싻삼옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
+			ResultSet rs = jdbcUtil.executeQuery();		// query �뜝�룞�삕�뜝�룞�삕
+			if (rs.next()) {						// �뜝�떩�궪�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�뙥怨ㅼ삕
+				Animal animal = new Animal(		// User �뜝�룞�삕泥닷뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떦�슱�삕 �뜝�떩�궪�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 					rs.getInt("animal_id"),
 					rs.getInt("category_id"),
 					rs.getInt("age"),
@@ -130,39 +123,37 @@ public class AnimalDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource �뜝�룞�삕�솚
 		}
 		return null;
 	}
-	/**
-	 * 占쏙옙체 커占승댐옙티 占쏙옙占쏙옙占쏙옙 占싯삼옙占싹울옙 List占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙환
-	 */
+
 	public List<Animal> findAnimalList() throws SQLException {
-        String sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image "
+        String sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image ,a.gender "
         		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
-        		   + "ORDER BY animal_id";        
+        		   + "ORDER BY animal_id desc";        
         			
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil占쏙옙 query占쏙옙 占쏙옙占쏙옙
+		jdbcUtil.setSqlAndParameters(sql, null);		
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query 占쏙옙占쏙옙			
-			List<Animal> animalList = new ArrayList<Animal>();	// Community占쏙옙占쏙옙 占쏙옙占쏙옙트 占쏙옙占쏙옙
+			ResultSet rs = jdbcUtil.executeQuery();			
+			List<Animal> animalList = new ArrayList<Animal>();	
 			while (rs.next()) {
 				Animal animal = new Animal(
 						rs.getInt("animal_id"), 
 						rs.getInt("category_id"),
 						rs.getInt("age"),
 						rs.getString("location"),
-						rs.getString("image"));
-
-				animalList.add(animal);				// List占쏙옙 Community 占쏙옙체 占쏙옙占쏙옙
+						rs.getString("image"),
+						rs.getString("gender"));
+				animalList.add(animal);				
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		
 		}
 		return null;
 	}
@@ -174,55 +165,59 @@ public class AnimalDAO {
 		System.out.println("category_id"+category_id);
 		System.out.println("matched"+matched);
 		if (animal_type.equals("none") && matched == -1){
-			sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image "
+			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
 	        		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
-	        		   + "ORDER BY animal_id";   
+	        		   + "ORDER BY animal_id desc";   
 			 param = null;
 			 System.out.println("1ddddd");
 		}
 		else if (animal_type.equals("none")) {
-			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched "
+			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
 		     		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
 		     		   + "WHERE a.animal_matched=? "
-		     		   + "ORDER BY a.animal_id"; 
+		     		   + "ORDER BY a.animal_id desc"; 
 			 param = new Object[] { matched};
 			 System.out.println("2ddddd");
 		}else if (matched == -1){
-			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched "
+			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
 	        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+					
+	        		   
 	        		   + "WHERE a.category_id=?  "
-	        		   + "ORDER BY a.animal_id";    
+	        		   + "ORDER BY a.animal_id desc";    
 			 param = new Object[] { category_id};
 			 System.out.println("3ddddd");
 		}
 		else {
-			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched "
+			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender,a.etc "
 	        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
 	        		   + "WHERE a.category_id=? and a.animal_matched=? "
-	        		   + "ORDER BY a.animal_id";    
+	        		   + "ORDER BY a.animal_id desc";    
 			 param = new Object[] { category_id,matched};
 			 System.out.println("4ddddd");
 		}
-        jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 占쏙옙 insert占쏙옙占쏙옙 占신곤옙 占쏙옙占쏙옙 占쏙옙占쏙옙
+        jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil �뜝�룞�삕 insert�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
         
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query 占쏙옙占쏙옙			
-			List<Animal> animalList = new ArrayList<Animal>();	// Community占쏙옙占쏙옙 占쏙옙占쏙옙트 占쏙옙占쏙옙
+			ResultSet rs = jdbcUtil.executeQuery();			// query �뜝�룞�삕�뜝�룞�삕			
+			List<Animal> animalList = new ArrayList<Animal>();	// Community�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�듃 �뜝�룞�삕�뜝�룞�삕
 			while (rs.next()) {
 				Animal animal = new Animal(
 						rs.getInt("animal_id"), 
 						rs.getInt("category_id"),
 						rs.getInt("age"),
 						rs.getString("location"),
-						rs.getString("image"));
-				animalList.add(animal);				// List占쏙옙 Community 占쏙옙체 占쏙옙占쏙옙
+						rs.getString("image"),
+						rs.getString("gender"),
+						rs.getString("etc"));
+				animalList.add(animal);				// List�뜝�룞�삕 Community �뜝�룞�삕泥� �뜝�룞�삕�뜝�룞�삕
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource 占쏙옙환
+			jdbcUtil.close();		// resource �뜝�룞�삕�솚
 		}
 		return null;
 	}

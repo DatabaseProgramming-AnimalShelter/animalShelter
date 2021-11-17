@@ -40,6 +40,8 @@
         .searchForm{
           margin-left: 70%
         }
+        footer{
+        clear:both;}
     </style>
 <body>
   <div class="main">
