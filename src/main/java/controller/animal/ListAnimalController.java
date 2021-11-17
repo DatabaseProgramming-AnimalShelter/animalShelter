@@ -17,11 +17,6 @@ public class ListAnimalController implements Controller {
 		// TODO Auto-generated method stub
 		if (request.getMethod().equals("POST")) {
 
-			/*
-			 * request.setAttribute("animalList", request.getParameter("searchAnimalList"));
-			 * System.out.println( request.getParameter("searchAnimalList")); return
-			 * "/animal/list.jsp";
-			 */
 			String type = request.getParameter("type");
 			System.out.println("type" + type);
 			int category_id;

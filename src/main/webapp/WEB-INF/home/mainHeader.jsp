@@ -45,7 +45,7 @@
     </style>
 <body>
   <div class="main">
-    <br>${curUserId}${user}
+    <br>
     <!--  
     <form class="d-flex searchForm">
       <input class="form-control me-2 searchInput" type="search" placeholder="Search" width="200px"aria-label="Search">
@@ -58,10 +58,13 @@
         <ul class="nav me-auto">
           <li class="nav-item"><a href="<c:url value="/animal/list"></c:url>" class="nav-link link-dark px-2 active" aria-current="page">유기동물</a></li>
           <li class="nav-item"><a href="<c:url value="/review/list"></c:url>" class="nav-link link-dark px-2">후기</a></li>
-          <li class="nav-item"><a href="<c:url value="/animal/register"></c:url>" class="nav-link link-dark px-2">유기동물등록</a></li>
-          <li class="nav-item"><a href="<c:url value="/adopt/register" />" class="nav-link link-dark px-2">입양신청</a></li>
-          <li class="nav-item"><a href="<c:url value="/adopt/list" />" class="nav-link link-dark px-2">입양신청목록</a></li>
-          <li class="nav-item"><a href="#" class="nav-link link-dark px-2">입양결과</a></li>
+          <c:choose>
+	        <c:when test="${user_id=='admin'}">
+	          	<li class="nav-item"><a href="<c:url value="/animal/register"></c:url>" class="nav-link link-dark px-2">유기동물등록</a></li>
+	          	<li class="nav-item"><a href="<c:url value="/adopt/list" />" class="nav-link link-dark px-2">입양신청목록</a></li>
+	          	<li class="nav-item"><a href="<c:url value="/adopt/approved_list" />" class="nav-link link-dark px-2">입양결과</a></li>
+	   		</c:when>
+          </c:choose> 
         </ul>
         <ul class="nav">
         <c:choose>

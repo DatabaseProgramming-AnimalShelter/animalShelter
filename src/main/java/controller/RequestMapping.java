@@ -9,6 +9,7 @@ import controller.animal.RegisterAnimalController;
 import controller.adopt.CreateAdoptApplyController;
 import controller.adopt.ListResultApplyController;
 import controller.adopt.ViewApplyController;
+import controller.adopt.ViewApprovalController;
 import controller.animal.ListAnimalController;
 import controller.adopt.ListResultApplyController;
 import controller.animal.ViewAnimalController;
@@ -43,6 +44,8 @@ public class RequestMapping {
 
         mappings.put("/adopt/accept", new RegisterAnimalController());
         mappings.put("/adopt/list", new ListResultApplyController());
+
+        mappings.put("/adopt/approved_list", new ViewApprovalController());
 
         logger.info("Initialized Request Mapping!");
     }

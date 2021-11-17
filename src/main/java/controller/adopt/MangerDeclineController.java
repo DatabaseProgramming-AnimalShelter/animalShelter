@@ -1,27 +1,18 @@
 package controller.adopt;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controller.Controller;
-import model.service.AdoptApplyManager;
-import model.service.AnimalManager;
 import model.AdoptApply;
-import model.Animal;
+import model.service.AdoptApplyManager;
 
-
-
-// 신청한 항목 다 보이게
-
-public class ViewApplyController implements Controller {
+public class MangerDeclineController {
+	
 	private static final Logger log = LoggerFactory.getLogger(CreateAdoptApplyController.class);
 
-    @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {			
     	
     	AdoptApply apply = null;
@@ -41,5 +32,5 @@ public class ViewApplyController implements Controller {
 			return "/adopt/list";	
 		}
     }
-}
 
+}

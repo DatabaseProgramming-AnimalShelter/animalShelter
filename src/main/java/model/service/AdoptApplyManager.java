@@ -56,22 +56,24 @@ public class AdoptApplyManager {
    
    public AdoptApply findAdoptApplyResult(String apply_id)
          throws SQLException {
-         AdoptApply adoptApply = adoptApplyDAO.findAdoptApplyResult(apply_id);
+         AdoptApply adoptApply = (AdoptApply) adoptApplyDAO.findAdoptApplyResult(apply_id);
          
          return adoptApply;
-      }
+	}
 
-//   public List<User> findUserList() throws SQLException {
-//         return userDAO.findUserList();
-//   }
-//   
 
    public List<AdoptApply> findAdoptApplyList() throws SQLException {
       return adoptApplyDAO.findAdoptApplyList();
    }
+   //관리자가 승인 거절한 결과를 보여주는 리스트
+   public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
+         return adoptApplyDAO.findAdoptApplyResultList();
+      }
+
 
    /*public List<AdoptApply> searchAnimalList( String animal_type, int category_id, int matched) throws SQLException {
       return adoptApplyDAO.searchAnimalList(animal_type, category_id, matched);
    }*/
+
 
 }

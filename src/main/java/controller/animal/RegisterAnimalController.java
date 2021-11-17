@@ -58,7 +58,7 @@ public class RegisterAnimalController implements Controller {
 			dir = new File(path);
 
 			// Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
-//			 dir = new File("C:/Temp");
+//			dir = new File("C:/Temp");
 
 			if (!dir.exists())
 				dir.mkdir();

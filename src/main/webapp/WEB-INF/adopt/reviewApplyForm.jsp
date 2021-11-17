@@ -56,12 +56,12 @@
 		  </tr>
 		  <tr>
 		  	<th>
-		  	<a class="btn btn-outline-danger" role="button" href="<c:url value='adopt/approved_list'><c:param name='apply_id' value='${apply.apply_id}'/>
+		  	<a class="btn btn-outline-danger" role="button" href="<c:url value='adopt/approval'><c:param name='apply_id' value='${apply.apply_id}'/>
                     </c:url>">
               	수락</a> 
              </th>
 		  	<th>
-		  	<a class="btn btn-outline-secondary" href="<c:url value='/adopt/list'/>" role="button">거부</a></th>
+		  	<a class="btn btn-outline-secondary" href="<c:url value='/adopt/decline'/>" role="button">거부</a></th>
 		  </tr>
 		</tbody>
 	</table>	
