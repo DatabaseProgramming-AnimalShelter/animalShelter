@@ -78,8 +78,7 @@ public class AdoptApplyDAO {
 				adoptApply.getAnimal_id(), adoptApply.getContent(), adoptApply.getLiving_environment(),
 				adoptApply.getHave_pets(), 0, date, 0};*/ 
 		
-		//Date approvalDate = new Date
-		String sql = "INSERT INTO AdoptApply VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, SYSDATE, SYSDATE)"; 
+		String sql = "INSERT INTO AdoptApply VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, SYSDATE, null)"; 
 		Object[] param = new Object[] { adoptApply.getUser_id(), adoptApply.getAnimal_id(), adoptApply.getContent(),
 	            adoptApply.getLiving_environment(), adoptApply.getHave_pets(),
 	            0};
