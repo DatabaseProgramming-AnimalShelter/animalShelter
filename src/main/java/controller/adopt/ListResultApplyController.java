@@ -8,14 +8,16 @@ import model.service.AdoptApplyManager;
 import model.AdoptApply;
 
 public class ListResultApplyController implements Controller {
-	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		AdoptApplyManager manager = AdoptApplyManager.getInstance();
-		List<AdoptApply> adoptApplyList = manager.findAdoptApplyList();
+    @Override
+    public String execute(HttpServletRequest request, HttpServletResponse response)   throws Exception {
+      
+       AdoptApplyManager manager = AdoptApplyManager.getInstance();
+      List<AdoptApply> adoptApplyList = manager.findAdoptApplyList();
 
-		request.setAttribute("adoptApplyList", adoptApplyList);
+      request.setAttribute("adoptApplyList", adoptApplyList);
 
-		return "/adopt/beforeApplyList.jsp";
-	}
+      return "/adopt/beforeApplyList.jsp";     
+    }
+
 }

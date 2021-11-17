@@ -1,5 +1,3 @@
-createApplyForm.jsp
-
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
@@ -9,6 +7,7 @@ createApplyForm.jsp
 <link rel=stylesheet href="<c:url value='/css/community.css' />"
    type="text/css">
 <script>
+<<<<<<< HEAD
  function create() {
    <!-- 
    if (form.name.value == "") {
@@ -24,6 +23,8 @@ createApplyForm.jsp
    -->
 
 }
+=======
+>>>>>>> refs/remotes/origin/feature15
 
 function animalList(targetUri) {
    form.action = targetUri;

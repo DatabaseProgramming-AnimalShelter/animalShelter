@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import controller.animal.RegisterAnimalController;
 import controller.adopt.CreateAdoptApplyController;
 import controller.adopt.ListResultApplyController;
-
 import controller.adopt.ViewApplyController;
 import controller.animal.ListAnimalController;
 import controller.adopt.ViewApprovalListController;
@@ -38,10 +37,13 @@ public class RequestMapping {
  
         mappings.put("/adopt/register", new CreateAdoptApplyController());
         mappings.put("/adopt/view", new ViewApplyController());
+
+
         mappings.put("/adopt/accept", new RegisterAnimalController());
         mappings.put("/adopt/list", new ListResultApplyController());
+
         mappings.put("/adopt/approved_list", new ViewApprovalListController());
-        
+
         logger.info("Initialized Request Mapping!");
     }
 

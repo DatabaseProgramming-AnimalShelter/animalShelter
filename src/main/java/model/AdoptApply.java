@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class AdoptApply {
 
-   private int apply_id; //sequence 뜝 룞 삕  뜝 룞 삕 뜝 룞 삕 뜝 뙓 슱 삕 parameter 뜝 떕 꽔 뼱 룄?
+   private int apply_id; 
    private String user_id;
    private int animal_id;
    private String content;
