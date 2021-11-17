@@ -171,7 +171,7 @@ public class AdoptApplyDAO {
    // view 
    public AdoptApply findAdoptApply(int apply_id) throws SQLException {
         String sql = "SELECT adp.apply_id, adp.user_id, adp.animal_id, adp.content, adp.living_environment, have_pets, adp.apply_matched, adp.apply_date, a.image, u.user_name, c.animal_type, c.species  "
-                 + "FROM AdoptApply adp JOIN Adopter u ON adp.user_id = u.user_id and Animal a JOIN adp ON a.animal_id = adp.animal_id and a JOIN Category c ON a.category_id = c.category_id"
+                 + "FROM AdoptApply adp JOIN User u ON adp.user_id = u.user_id and Animal a JOIN adp ON a.animal_id = adp.animal_id and a JOIN Category c ON a.category_id = c.category_id"
                  + "WHERE apply_id=? ";              
       jdbcUtil.setSqlAndParameters(sql, new Object[] {apply_id});   
       
@@ -255,13 +255,14 @@ public class AdoptApplyDAO {
    
     
    public List<AdoptApply> findAdoptApplyList() throws SQLException {
-       String sql = "SELECT adp.apply_id, adp.user_id,  u.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
-              + "FROM AdoptApply adp JOIN Adopter u ON adp.user_id = u.user_id "
+       String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
+              + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id "
                  + "ORDER BY apply_id";
        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-         
-               
+       jdbcUtil.setSqlAndParameters(sql, null);   
+               System.out.println("1ddddddd");
       try {
+         System.out.println("2ddddddd");
          ResultSet rs = jdbcUtil.executeQuery();         // query 占쎈뼄占쎈뻬         
          List<AdoptApply> adoptApplyList = new ArrayList<AdoptApply>();   
          while (rs.next()) {
