@@ -172,7 +172,8 @@ public class AdoptApplyDAO {
    // 관리자 입장에서 입양신청의 리스트를 보여주는 페이지
    public List<AdoptApply> findAdoptApplyList() throws SQLException {
       String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
-            + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " + "ORDER BY apply_id";
+            + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " + "ORDER BY apply_id"
+    		 +"WHERE adp.apply_matched=0 ";
       DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
       jdbcUtil.setSqlAndParameters(sql, null);
       System.out.println("1ddddddd");
