@@ -208,10 +208,10 @@ public class AdoptApplyDAO {
 
    // 입양결과를 다 보여주는 페이지 ( 관리자가 승인 거부 이후)
    public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
-      String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
-            + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " 
-            + "WHERE apply_matched = ? "
-            + "ORDER BY apply_id ";
+      String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date, adp.approval_date ,an.animal_matched "
+            + "FROM AdoptApply adp, Adopter a ,Animal an " 
+            + "WHERE apply_matched = ? and adp.user_id = a.user_id  and adp.animal_id = an.animal_id "
+            + "ORDER BY adp.apply_id ";
       jdbcUtil.setSqlAndParameters(sql, new Object[] { 1 });
 
       DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
@@ -220,10 +220,12 @@ public class AdoptApplyDAO {
          List<AdoptApply> adoptApplyList = new ArrayList<AdoptApply>();
          while (rs.next()) {
             Date apply_date = new Date(rs.getDate("apply_date").getTime());
+            Date approval_date = new Date(rs.getDate("approval_date").getTime());
             String apply_dateString = df.format(apply_date);
+            String approval_dateString = df.format(approval_date);
             AdoptApply adoptApply = new AdoptApply(rs.getInt("apply_id"), rs.getString("user_id"),
                   rs.getInt("animal_id"), rs.getInt("apply_matched"), apply_dateString,
-                  rs.getString("user_name"));
+                  rs.getString("user_name"),approval_dateString, rs.getInt("animal_matched"));
             adoptApplyList.add(adoptApply);
          }
          return adoptApplyList;

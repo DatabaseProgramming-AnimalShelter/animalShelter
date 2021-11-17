@@ -5,27 +5,26 @@ import java.util.Date;
 
 public class AdoptApply {
 
-   private int apply_id; 
+   private int apply_id;
    private String user_id;
    private int animal_id;
+   private int animal_matched;
    private String content;
    private String living_environment;
    private String have_pets;
    private int apply_matched;
    private String apply_date;
    private String approval_date;
-   private String image; 
+   private String image;
    private String user_name;
    private String animal_type;
    private String species;
-   
-   
-   public AdoptApply() { }
-    
-   
 
-   public AdoptApply(String user_id, int animal_id,
-         String image, String user_name, String animal_type, String species) {
+   public AdoptApply() {
+   }
+
+   public AdoptApply(String user_id, int animal_id, String image, String user_name, String animal_type,
+         String species) {
       super();
       this.user_id = user_id;
       this.animal_id = animal_id;
@@ -71,7 +70,21 @@ public class AdoptApply {
       this.animal_type = animal_type;
       this.species = species;
    }
-   public AdoptApply(int apply_id, String user_id, int animal_id, int apply_matched, String apply_date, 
+
+   public AdoptApply(int apply_id, String user_id, int animal_id, int apply_matched, String apply_date,
+         String user_name, String approval_date, int animal_matched) {
+      super();
+      this.apply_id = apply_id;
+      this.user_id = user_id;
+      this.animal_id = animal_id;
+      this.apply_matched = apply_matched;
+      this.apply_date = apply_date;
+      this.user_name = user_name;
+      this.approval_date = approval_date;
+      this.animal_matched = animal_matched;
+   }
+
+   public AdoptApply(int apply_id, String user_id, int animal_id, int apply_matched, String apply_date,
          String user_name) {
       super();
       this.apply_id = apply_id;
@@ -81,6 +94,7 @@ public class AdoptApply {
       this.apply_date = apply_date;
       this.user_name = user_name;
    }
+
    public AdoptApply(String user_id, int animal_id, String content, String living_environment, String have_pets,
          String image, String user_name, String animal_type, String species) {
       super();
@@ -94,7 +108,7 @@ public class AdoptApply {
       this.animal_type = animal_type;
       this.species = species;
    }
-   
+
    public int getApply_id() {
       return apply_id;
    }
@@ -166,7 +180,7 @@ public class AdoptApply {
    public void setApproval_date(String approval_date) {
       this.approval_date = approval_date;
    }
-   
+
    public String getImage() {
       return image;
    }
@@ -198,7 +212,13 @@ public class AdoptApply {
    public void setSpecies(String species) {
       this.species = species;
    }
-   
-   
+
+   public int getAnimal_matched() {
+      return animal_matched;
+   }
+
+   public void setAnimal_matched(int animal_matched) {
+      this.animal_matched = animal_matched;
+   }
 
 }
