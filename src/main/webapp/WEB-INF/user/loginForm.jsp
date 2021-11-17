@@ -7,7 +7,7 @@
           height: 700px;
           /*시도해봄
           background :url("${pageContext.request.contextPath}loginLogo.png");
-           background-image:url("<c:url value='../../images/loginLogo.png'/>");
+          background-image:url("<c:url value='../../images/loginLogo.png'/>");
           background-image:url("images/loginLogo.png");
           background-image:url("<c:url value='loginLogo.png'/>");
           background-image:url("/user/loginLogo.png");*/

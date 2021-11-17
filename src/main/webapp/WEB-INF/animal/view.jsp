@@ -11,10 +11,12 @@
 	}
 </script>
 <style type="text/css">
-.selection {
+.container{
+	border: 1px solid;
+}
+form{
 	margin-top: 50px;
 }
-
 .item {
 	width: 80%;
 	height: 80%;
@@ -26,14 +28,6 @@
 	border-radius: 1rem;
 }
 
-#imgParent {
-	text-align: center;
-	border: 1px solid;
-	width: 30%;
-	line-height: 100%;
-	margin-left: 10px;
-	vertical-align: middle;
-}
 
 .info {
 	padding-left: 30px;
@@ -64,21 +58,19 @@ h1 {
 }
 </style>
 <div class="container">
-	<h1>유기동물 상세보기</h1>
-사진 저장 경로 : ${dir} <br/>
-사진 파일 이름 : ${animal.image} <br/>
-<img src="${dir}/${filename}" /> <br/> 
-${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}<br/>
-<img  src="<%=request.getSession().getServletContext().getRealPath("/")%>/upload/${animal.image}">
+	
 
 	<form name="form" action="<c:url value='/adopt/register' />">
+	
 		<div class="outer">
+		<h2 class="fw-bolder" text-align="left">[${animal.animal_type}] >
+						${animal.species}</h2>
 			<div class="item">
 				<div id="imgParent">
 					<c:choose>
 						<c:when test="${not empty animal.image}">
 							<img
-								src="${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}" />
+								src="${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}" height="400px" width="400px" />
 						</c:when>
 						<c:otherwise>
 							<span>사진없음</span>
@@ -87,10 +79,11 @@ ${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}
 					<br>
 
 				</div>
+				
 				<div class="info">
-					<h2 class="fw-bolder">[${animal.animal_type}] >
-						${animal.species}</h2>
+					
 					<div class="fs-5 mb-5">
+					<span>동물아이디 :  ${animal.animal_id} </span><br><br>
 						<span>발견장소</span>
 						<c:choose>
 
@@ -120,7 +113,7 @@ ${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}
 						<br>
 						<br> <span>성별</span>
 						<c:choose>
-							<c:when test="${animal.gender==female}">
+							<c:when test="${animal.gender=='female'}">
 								<span>암</span>
 							</c:when>
 							<c:otherwise>

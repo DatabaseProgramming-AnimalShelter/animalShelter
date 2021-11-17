@@ -1,3 +1,4 @@
+
 package model.dao;
 
 import java.sql.ResultSet;
@@ -9,10 +10,7 @@ import model.Adopter;
 import model.Animal;
 import model.service.AnimalManager;
 
-/**
- * �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떢釉앹삕�뜝�떛�룞�삕 �뜝�뙗�뼲�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떦�뙋�삕 DAO �겢�뜝�룞�삕�뜝�룞�삕
- * Community �뜝�룞�삕�뜝�떛釉앹삕�뜝�룞�삕 而ㅵ뜝�듅�뙋�삕�떚 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�뙥怨ㅼ삕, �뜝�룞�삕�뜝�룞�삕, �뜝�룞�삕�뜝�룞�삕, �뜝�떙�궪�삕 �뜝�룞�삕�뜝�룞�삕 
- */
+
 public class AnimalDAO {
 	private static JDBCUtil jdbcUtil = null;
 	
@@ -55,9 +53,7 @@ public class AnimalDAO {
 		return 0;			
 	}
 
-	/**
-	 * �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
-	 */
+
 	public int update(Animal animal) throws SQLException {
 		String sql = "UPDATE Animal "
 					+ "SET age=?, location=?, image=?, gender=?, weight=?, etc=?, animal_matched=?  "
@@ -81,10 +77,7 @@ public class AnimalDAO {
 		return 0;
 	}
 
-	
-	/**
-	 * �뜝�뙇�뼲�삕�뜝�룞�삕 ID�뜝�룞�삕 �뜝�뙏�뙋�삕�뜝�떦�뙋�삕 而ㅵ뜝�듅�뙋�삕�떚 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕.
-	 */
+
 	public int remove(int animal_id) throws SQLException {
 		String sql = "DELETE FROM Animal WHERE animal_id=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil�뜝�룞�삕 delete�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
@@ -108,12 +101,12 @@ public class AnimalDAO {
         String sql = "SELECT a.animal_id, a.category_id, a.age, a.location, a.animal_matched, a.image,a.gender,a.weight,a.etc, c.species, c.animal_type "
      		   + " FROM Animal a JOIN Category c ON a.category_id = c.category_id " 
      		  + "WHERE animal_id=?";  
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil�뜝�룞�삕 query�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		
-			if (rs.next()) {						
-				Animal animal = new Animal(		
+			ResultSet rs = jdbcUtil.executeQuery();		// query �뜝�룞�삕�뜝�룞�삕
+			if (rs.next()) {						// �뜝�떩�궪�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�뙥怨ㅼ삕
+				Animal animal = new Animal(		// User �뜝�룞�삕泥닷뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떦�슱�삕 �뜝�떩�궪�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 					rs.getInt("animal_id"),
 					rs.getInt("category_id"),
 					rs.getInt("age"),
@@ -140,11 +133,11 @@ public class AnimalDAO {
         		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
         		   + "ORDER BY animal_id desc";        
         			
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil�뜝�룞�삕 query�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
+		jdbcUtil.setSqlAndParameters(sql, null);		
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query �뜝�룞�삕�뜝�룞�삕			
-			List<Animal> animalList = new ArrayList<Animal>();	// Community�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�듃 �뜝�룞�삕�뜝�룞�삕
+			ResultSet rs = jdbcUtil.executeQuery();			
+			List<Animal> animalList = new ArrayList<Animal>();	
 			while (rs.next()) {
 				Animal animal = new Animal(
 						rs.getInt("animal_id"), 
@@ -153,14 +146,14 @@ public class AnimalDAO {
 						rs.getString("location"),
 						rs.getString("image"),
 						rs.getString("gender"));
-				animalList.add(animal);				// List�뜝�룞�삕 Community �뜝�룞�삕泥� �뜝�룞�삕�뜝�룞�삕
+				animalList.add(animal);				
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource �뜝�룞�삕�솚
+			jdbcUtil.close();		
 		}
 		return null;
 	}
@@ -172,7 +165,7 @@ public class AnimalDAO {
 		System.out.println("category_id"+category_id);
 		System.out.println("matched"+matched);
 		if (animal_type.equals("none") && matched == -1){
-			sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image "
+			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
 	        		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
 	        		   + "ORDER BY animal_id desc";   
 			 param = null;

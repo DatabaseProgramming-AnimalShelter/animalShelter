@@ -8,9 +8,25 @@
 	.card{ 
 	float : left;
 	margin:30px;
+	margin-left:20px;
+	color: rgb(54, 27, 27);
+	padding:auto;
+	text-align:center;
 	}
+	a{
+            font-weight: 900;
+            color: rgb(54, 27, 27);
+            text-decoration: none;
+        }
+        a:hover{
+            color: rgb(54, 27, 27);
+            text-decoration: none;
+        }
+        a:visited{
+            color: rgb(54, 27, 27);
+        }
 	.card-title{
-	font-size:30px;
+	font-size:20px;
 	}
 </style>
 <script>
@@ -78,13 +94,7 @@
     });
     
     </script>
-    <script>
-   
-}
-   
-</script>
-
-
+<div class="container">  
 <form method="POST" name="form" action="<c:url value='/animal/list' />">
    <div id="menu">
      과:
@@ -121,7 +131,7 @@
                     </c:url>">	<c:choose>
 						<c:when test="${not empty animal.image}">
 							<img
-								src="${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}"  class="card-img-top" height="380px"/>
+								src="${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}"  class="card-img-top" height="200px"/>
 						</c:when>
 						<c:otherwise>
 							<span>사진없음</span>
@@ -131,10 +141,9 @@
           <span class="card-title">   
              동물아이디 :  ${animal.animal_id}    </span>
        <!--   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> --> 
- 
-        <ul class="list-group list-group-flush">
-         <li class="list-group-item"> </li>
-          <li class="list-group-item">동물나이 : 
+  
+          <br>
+          동물나이 : 
 <c:choose>
 							<c:when test="${animal.age==0}">
 								<span>1살미만</span>
@@ -142,8 +151,8 @@
 							<c:otherwise>
 								<span>${animal.age}</span>
 							</c:otherwise>
-						</c:choose>     </li>
-          <li class="list-group-item">장소 :  
+						</c:choose>     <br>
+          장소 :  
 				<c:choose>
 
 							<c:when test="${animal.location=='seoul'}">
@@ -159,26 +168,23 @@
 								<span>기타</span>
 							</c:when>
 						</c:choose>
+		 <br>
 		
-		 </li>
-		    <li class="list-group-item">성별 : 
+		   성별 :
 			<c:choose>
-							<c:when test="${animal.gender==female}">
+							<c:when test="${animal.gender=='female'}">
 								<span>암컷</span>
 							</c:when>
 							<c:otherwise>
 								<span>수컷</span>
 							</c:otherwise>
 						</c:choose>
-		 </li>
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
+		
+       
+       
         </a>
       </span>
     </c:forEach> 
   
-
+</div>
 <%@ include file="/WEB-INF/home/mainFooter.jsp" %>
