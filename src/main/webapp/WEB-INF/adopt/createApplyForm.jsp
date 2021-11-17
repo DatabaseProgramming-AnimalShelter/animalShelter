@@ -28,7 +28,11 @@
 .selection {
 	margin-top: 50px;
 }
-
+.container {
+	border: 1px solid;
+	height: 700px;
+	background-image: url("<c:url value='/images/grass.png'/>");
+}
 #apply {
 	width: 70%;
 	height: 80%;
@@ -38,6 +42,7 @@
 	margin-top: 20px;
 	border: 1px solid;
 	border-radius: 1rem;
+	background-color:white;
 }
 
 #imgParent {
@@ -82,7 +87,7 @@ h1 {
 </style>
 
 <!-- registration form  -->
-
+<div class="container">
 <h1>입양 신청 하기</h1>
 <form class="was-validated" name="form" method="POST"
 	action="<c:url value='/adopt/register'>
@@ -171,5 +176,5 @@ h1 {
 		</button>
 	</div>
 </form>
-
+</div>
 <%@ include file="/WEB-INF/home/mainFooter.jsp"%>

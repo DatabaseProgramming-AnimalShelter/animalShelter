@@ -13,7 +13,7 @@
 .container {
 	border: 1px solid;
 	height: 700px;
-	background-image: url("<c:url value='/images/grass.png'/>");
+	background-image: url("<c:url value='/images/yg1.png'/>");
 }
 
 form {
@@ -99,7 +99,9 @@ h1 {
 						</tr>
 						<tr>
 							<th scope="row">동물아이디</th>
-							<td>${apply.animal_id}</td>
+							<td><a href="<c:url value='/animal/view'>
+	                     <c:param name='animal_id' value='${apply.animal_id}'/>
+	                    </c:url>">${apply.animal_id}</a></td>
 						</tr>
 						<tr>
 							<th scope="row">품종</th>

@@ -11,8 +11,11 @@
 	}
 </script>
 <style type="text/css">
-.container{
+
+.container {
 	border: 1px solid;
+	height: 700px;
+	background-image: url("<c:url value='/images/grass.png'/>");
 }
 form{
 	margin-top: 50px;
