@@ -1,6 +1,9 @@
 package controller.adopt;
 
+import java.io.File;
 import java.time.LocalDate;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -20,77 +23,68 @@ import model.service.ExistingUserException;
 
 
 public class CreateAdoptApplyController implements Controller{
-	private static final Logger log = LoggerFactory.getLogger(CreateAdoptApplyController.class);
+   private static final Logger log = LoggerFactory.getLogger(CreateAdoptApplyController.class);
 
-	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!"+request.getParameter("animal_id"));
-
-		
-		int animal_id = Integer.parseInt(request.getParameter("animal_id"));
-		
-		Animal animal = null;
-		Adopter adopter = null;
-		
-		AnimalManager animalManager = AnimalManager.getInstance();
-		AdopterManager adopterManager = AdopterManager.getInstance();
-		
-		animal = animalManager.findAnimal(animal_id);
-		adopter = adopterManager.findUser(user_id);
-		
-		if (request.getMethod().equals("GET")) {	
-    		log.debug("RegisterForm Request");
-    		
-    		AdoptApply apply_default = new AdoptApply(
-    				user_id,
-    				animal.getAnimal_id(),
-    				animal.getImage(),
-    				adopter.getUser_name(),
-    				animal.getAnimal_type(),
-    				animal.getSpecies()
-    				);
-    		
-    		request.setAttribute("apply", apply_default);
-    		
-    		return "/adopt/createApplyForm.jsp";   
-	    }	
-		
-		int animal_id2 = Integer.parseInt(request.getParameter("animal_id"));
-		
-		 String content = request.getParameter("content"); String lc =
-		 request.getParameter("living_conditions"); String hp =
-		 request.getParameter("have_pets");
-		 
-		
-		AdoptApply apply = new AdoptApply(
-				user_id,
-				Integer.parseInt(request.getParameter("animal_id")),
-				request.getParameter("content"),
-				request.getParameter("living_conditions"),
-				request.getParameter("have_pets"),
-				animal.getImage(),
-				adopter.getUser_name(),
-				animal.getAnimal_type(),
-				animal.getSpecies()
-				);
-		
-		try {
-			//System.out.println("%%%%%%%%%%%%%%%%%%%ai : "+animal_id2 + "content: "+content+"lc: "+ lc+ "hp:"+hp);
-			System.out.println("%%%%%%%%%%%%%%%%%%%%img:"+animal.getImage()+"username:"+adopter.getUser_name()+"atype:"+animal.getAnimal_type()+"aspecies:"+animal.getSpecies());
-			System.out.println("%%%%%%%%%%%%%%"+apply);
-			AdoptApplyManager manager = AdoptApplyManager.getInstance();
-			System.out.println("%%%%%%%%%%%%%%"+apply);
-			manager.create(apply);
-			
-	    	log.debug("Create Adopt : {}", apply);
-	        return "redirect:/";	
-	        
-		} catch (Exception e) {		
+   @Override
+   public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+      String user_id = UserSessionUtils.getLoginUserId(request.getSession());
+      int animal_id = Integer.parseInt(request.getParameter("animal_id"));
+      
+      Animal animal = null;
+      Adopter adopter = null;
+      
+      AnimalManager animalManager = AnimalManager.getInstance();
+      AdopterManager adopterManager = AdopterManager.getInstance();
+      
+      animal = animalManager.findAnimal(animal_id);
+      adopter = adopterManager.findUser(user_id);
+      
+      if (request.getMethod().equals("GET")) {   
+          log.debug("RegisterForm Request");
+          
+          AdoptApply apply_default = new AdoptApply(
+                user_id,
+                animal.getAnimal_id(),
+                animal.getImage(),
+                adopter.getUser_name(),
+                animal.getAnimal_type(),
+                animal.getSpecies()
+                );
+          
+          request.setAttribute("apply", apply_default);
+          ServletContext context = request.getServletContext();
+          String path = context.getRealPath("/upload");
+          File dir = new File(path);
+          request.setAttribute("dir", dir);
+          request.setAttribute("apply", apply_default);
+          
+          return "/adopt/createApplyForm.jsp";   
+       }       
+      
+      AdoptApply apply = new AdoptApply(
+            user_id,
+            Integer.parseInt(request.getParameter("animal_id")),
+            request.getParameter("content"),
+            request.getParameter("living_conditions"),
+            request.getParameter("have_pets"),
+            animal.getImage(),
+            adopter.getUser_name(),
+            animal.getAnimal_type(),
+            animal.getSpecies()
+            );
+      
+      try {
+         AdoptApplyManager manager = AdoptApplyManager.getInstance();
+         manager.create(apply);
+         
+          log.debug("Create Adopt : {}", apply);
+           return "redirect:/";   
+           
+      } catch (Exception e) {      
             request.setAttribute("creationFailed", true);
-			request.setAttribute("exception", e);
-			request.setAttribute("apply", apply);
-			return "/adopt/createApplyForm.jsp";
-		}
-	}
+         request.setAttribute("exception", e);
+         request.setAttribute("apply", apply);
+         return "/adopt/createApplyForm.jsp";
+      }
+   }
 }
