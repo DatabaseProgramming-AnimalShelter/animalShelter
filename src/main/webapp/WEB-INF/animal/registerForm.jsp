@@ -4,31 +4,30 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
 
-<head>
     <title>유기동물 등록 화면 - 관리자</title>
-    <style>
-        body {
-            text-align: center;
-        }
-    </style>
+
     <script>
 	function register() {
-		if (form.userId.value == "") {
-			alert("사용자 ID를 입력하십시오.");
-			form.userId.focus();
+		if (form.species.value == "") {
+			alert("과와 종을 선택하십시오.");
+			form.species.focus();
 			return false;
 		} 
-		if (form.password.value == "") {
-			alert("비밀번호를 입력하십시오.");
-			form.password.focus();
+		else if (form.etc.value == "") {
+			alert("특이사항을 입력하십시오.");
+			form.etc.focus();
 			return false;
-		}		
+		}	
+		else if (form.image.value == "") {
+			alert("사진파일을 올리세요.");
+			form.image.focus();
+			return false;
+		}	
 		form.submit();
 	}
 	
 </script>
-</head>
-<body>
+<div class="container">
     <h2>유기동물 등록 - 관리자</h2>
     <br>
     <form class="applyForm"name="form" method="POST" action="<c:url value='/animal/register'/>" enctype="multipart/form-data">
@@ -52,7 +51,9 @@
                     107: "비숑",
                     108: "푸들",
                     109: "말티즈",
-                    110: "골든리트리버"
+                    110: "골든리트리버",
+                    111:"포메라니안",
+                    112:"웰시코기"
                 };
                 //animal_type이 고양이일경우
                 var species_2 = {
@@ -167,8 +168,7 @@
 
          <input type="file" id="image" name="image">
          <br><br>
-        <input type="submit" value="등록" onClick="register()"/>
+        <input type="button" value="등록" onClick="register()"/>
     </form>
-</body>
-</html>
+</div>
  <%@ include file="/WEB-INF/home/mainFooter.jsp" %>
