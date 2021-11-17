@@ -20,10 +20,11 @@ public class AdoptApplyDAO {
 	AdoptApply adoptApply = new AdoptApply();
 
 	public AdoptApplyDAO() {
-		jdbcUtil = new JDBCUtil(); // JDBCUtil 揶쏆빘猿 占쎄문占쎄쉐
+		jdbcUtil = new JDBCUtil(); 
 	}
 
 	public int create(AdoptApply adoptApply) throws SQLException {
+
 		String sql = "INSERT INTO AdoptApply VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, SYSDATE, null)";
 		Object[] param = new Object[] { adoptApply.getUser_id(), adoptApply.getAnimal_id(), adoptApply.getContent(),
 				adoptApply.getLiving_environment(), adoptApply.getHave_pets(), 0 };
@@ -49,12 +50,16 @@ public class AdoptApplyDAO {
 		return 0;
 	}
 
+	// 엯 뼇 떊泥 듅 씤 떆 matched = 1, approval_date 媛 꽔 뼱二쇨린
 	public int approval(AdoptApply adoptApply) throws SQLException {
 
 		String sql = "UPDATE AdoptApply " + "SET  matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
 		Object[] param = new Object[] { 1, adoptApply.getApply_id() };
 
+		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+
 		try {
+			// Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
 			jdbcUtil.setSqlAndParameters(sql, param);
 			int result = jdbcUtil.executeUpdate(); // update 눧占 占쎈뼄占쎈뻬
 			return result;
@@ -68,13 +73,16 @@ public class AdoptApplyDAO {
 		return 0;
 	}
 
+	// 엯 뼇 떊泥 嫄곗젅 떆 matched = -1, approval_date 媛 꽔 뼱二쇨린
 	public int decline(AdoptApply adoptApply) throws SQLException {
 
 		String sql = "UPDATE AdoptApply " + "SET  matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
 		Object[] param = new Object[] { -1, adoptApply.getApply_id() };
 
-		try {
+		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
+		try {
+			// Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
 			jdbcUtil.setSqlAndParameters(sql, param);
 			int result = jdbcUtil.executeUpdate();
 			return result;
@@ -91,7 +99,7 @@ public class AdoptApplyDAO {
 	// view
 	public AdoptApply findAdoptApply(int apply_id) throws SQLException {
 		String sql = "SELECT adp.apply_id, adp.user_id, adp.animal_id, adp.content, adp.living_environment, have_pets, adp.apply_matched, adp.apply_date, a.image, u.user_name, c.animal_type, c.species  "
-				+ "FROM AdoptApply adp JOIN A u ON adp.user_id = u.user_id and Animal a JOIN adp ON a.animal_id = adp.animal_id and a JOIN Category c ON a.category_id = c.category_id"
+				+ "FROM AdoptApply adp JOIN User u ON adp.user_id = u.user_id and Animal a JOIN adp ON a.animal_id = adp.animal_id and a JOIN Category c ON a.category_id = c.category_id"
 				+ "WHERE apply_id=? ";
 		jdbcUtil.setSqlAndParameters(sql, new Object[] { apply_id });
 
@@ -117,29 +125,33 @@ public class AdoptApplyDAO {
 		return null;
 	}
 
-	public AdoptApply findAdoptApplyResult(String apply_id) throws SQLException {
+	//로그인한 user_id인 사람의 입양신청폼만 뜨도록
+	public List<AdoptApply> findAdoptApplyResult(String user_id) throws SQLException {
 		String sql = "SELECT apply_id, user_id, animal_id, content, living_environment, have_pets, apply_matched, apply_date, approval_date, image, user_name, animal_type, species "
-				+ "FROM AdoptApply a" + "WHERE apply_matched = ? ";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] { 1 }); 
-
+				+ "FROM AdoptApply a" 
+				+ "WHERE user_id = ? ";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id });
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery(); // query 占쎈뼄占쎈뻬
-			if (rs.next()) {
-				Date apply_date = new Date(rs.getDate("apply_date").getTime());
-				String apply_dateString = df.format(apply_date);
+			ResultSet rs = jdbcUtil.executeQuery();
+			Date apply_date = new Date(rs.getDate("apply_date").getTime());
+			String apply_dateString = df.format(apply_date);
 
-				Date approval_date = new Date(rs.getDate("approval_date").getTime());
-				String approval_dateString = df.format(approval_date);
-
-				adoptApply = new AdoptApply( 
+			Date approval_date = new Date(rs.getDate("approval_date").getTime());
+			String approval_dateString = df.format(approval_date);
+			
+			List<AdoptApply> adoptApplyList = new ArrayList<AdoptApply>();
+			
+			while (rs.next()) {
+				adoptApply = new AdoptApply(
 						rs.getInt("apply_id"), rs.getString("user_id"), rs.getInt("animal_id"), rs.getString("content"),
 						rs.getString("living_environment"), rs.getString("have_pets"), rs.getInt("apply_matched"),
 						apply_dateString, approval_dateString, rs.getString("image"), rs.getString("user_name"),
 						rs.getString("animal_type"), rs.getString("species"));
-				return adoptApply;
+				adoptApplyList.add(adoptApply);
 			}
+			return adoptApplyList;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -148,12 +160,15 @@ public class AdoptApplyDAO {
 		return null;
 	}
 
+	// 관리자 입장에서 입양신청의 리스트를 보여주는 페이지
 	public List<AdoptApply> findAdoptApplyList() throws SQLException {
-		String sql = "SELECT adp.apply_id, adp.user_id,  u.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
-				+ "FROM AdoptApply adp JOIN User u ON adp.user_id = u.user_id " + "ORDER BY apply_id";
+		String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
+				+ "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " + "ORDER BY apply_id";
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
+		jdbcUtil.setSqlAndParameters(sql, null);
+		System.out.println("1ddddddd");
 		try {
+			System.out.println("2ddddddd");
 			ResultSet rs = jdbcUtil.executeQuery(); // query 占쎈뼄占쎈뻬
 			List<AdoptApply> adoptApplyList = new ArrayList<AdoptApply>();
 			while (rs.next()) {
@@ -174,4 +189,34 @@ public class AdoptApplyDAO {
 		return null;
 	}
 
+	// 입양결과를 다 보여주는 페이지 ( 관리자가 승인 거부 이후)
+	public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
+		String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
+				+ "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " + "WHERE apply_matched = ? "
+				+ "ORDER BY apply_id ";
+		jdbcUtil.setSqlAndParameters(sql, new Object[] { 1 });
+
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		jdbcUtil.setSqlAndParameters(sql, null);
+		try {
+
+			ResultSet rs = jdbcUtil.executeQuery();
+			List<AdoptApply> adoptApplyList = new ArrayList<AdoptApply>();
+			while (rs.next()) {
+				Date apply_date = new Date(rs.getDate("apply_date").getTime());
+				String apply_dateString = df.format(apply_date);
+				AdoptApply adoptApply = new AdoptApply(rs.getInt("apply_id"), rs.getString("user_id"),
+						rs.getInt("animal_id"), rs.getInt("apply_matched"), apply_dateString,
+						rs.getString("user_name"));
+				adoptApplyList.add(adoptApply);
+			}
+			return adoptApplyList;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close(); // resource 獄쏆꼹 넎
+		}
+		return null;
+	}
 }

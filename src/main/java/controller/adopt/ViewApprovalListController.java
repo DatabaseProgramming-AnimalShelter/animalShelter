@@ -1,5 +1,7 @@
 package controller.adopt;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -7,17 +9,17 @@ import controller.Controller;
 import model.AdoptApply;
 import model.service.AdoptApplyManager;
 
-public class ViewApprovalController implements Controller{
+//네브바에 보여질 승인결과 페이지
+public class ViewApprovalListController implements Controller{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		AdoptApplyManager manager = AdoptApplyManager.getInstance();
-		int adopt_id = Integer.parseInt(request.getParameter("user_id"));
 		
-		List<AdoptApply> list = manager.approval(null);
+		List<AdoptApply> list = manager.findAdoptApplyResultList();
 		
-		request.setAttribute("AdoptApply", adopt);	
-		return "/user/mypage.jsp";				
+		request.setAttribute("AdoptApplyList", list);	
+		return "/adopt/applyResult.jsp";				
 
 	}
 }

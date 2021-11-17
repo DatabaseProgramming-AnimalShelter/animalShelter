@@ -53,16 +53,18 @@ public class AdoptApplyManager {
       
       return adoptApply;
    }
-   
-   public AdoptApply findAdoptApplyResult(String apply_id)
+   //개인mypage에서 보일 result list
+   public List<AdoptApply> findAdoptApplyResult(String user_id)
          throws SQLException {
-         AdoptApply adoptApply = adoptApplyDAO.findAdoptApplyResult(apply_id);
-         
-         return adoptApply;
+         return adoptApplyDAO.findAdoptApplyResult(user_id);
       }
 
    public List<AdoptApply> findAdoptApplyList() throws SQLException {
       return adoptApplyDAO.findAdoptApplyList();
    }
+   //관리자가 승인 거절한 결과를 보여주는 리스트
+   public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
+	      return adoptApplyDAO.findAdoptApplyResultList();
+	   }
 
 }

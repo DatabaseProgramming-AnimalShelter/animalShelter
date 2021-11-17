@@ -2,7 +2,10 @@ package model;
 
 import java.time.LocalDate;
 import java.util.Date;
-
+/**
+ *  뜝 뙃 뼲 삕 뜝 떆 궪 삕 뜝占   뜝 룞 삕 뜝 룞 삕 뜝 룞 삕  뜝 룞 삕 뜝 룞 삕  뜝 떗 슱 삕 뜝 룞 삕  뜝 룞 삕 뜝 룞 삕 뜝 룞 삕  겢 뜝 룞 삕 뜝 룞 삕
+ * AdoptApply  뜝 룞 삕 뜝 떛釉앹삕 뜝占   뜝 룞 삕 뜝 룞 삕 뜝 룞 삕
+ */
 public class AdoptApply {
 
    private int apply_id; //sequence 뜝 룞 삕  뜝 룞 삕 뜝 룞 삕 뜝 뙓 슱 삕 parameter 뜝 떕 꽔 뼱 룄?
@@ -18,8 +21,11 @@ public class AdoptApply {
    private String user_name;
    private String animal_type;
    private String species;
-      
+   
+   
    public AdoptApply() { }
+    
+   
 
    public AdoptApply(String user_id, int animal_id,
          String image, String user_name, String animal_type, String species) {

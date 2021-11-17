@@ -9,9 +9,8 @@ import controller.animal.RegisterAnimalController;
 import controller.adopt.CreateAdoptApplyController;
 import controller.adopt.ListResultApplyController;
 import controller.adopt.ViewApplyController;
-import controller.adopt.ViewApprovalController;
 import controller.animal.ListAnimalController;
-//import controller.animal.ListAnimalController;
+import controller.adopt.ViewApprovalListController;
 import controller.animal.ViewAnimalController;
 import controller.user.*;
 public class RequestMapping {
@@ -32,17 +31,15 @@ public class RequestMapping {
 
         mappings.put("/user/register", new RegisterUserController());
        
-//        mappings.put("/animal/search", new SearchAnimalController());
         mappings.put("/animal/view", new ViewAnimalController());
         mappings.put("/animal/list", new ListAnimalController());
         mappings.put("/animal/register", new RegisterAnimalController());
-        
-        //입양신청 동물예약
+ 
         mappings.put("/adopt/register", new CreateAdoptApplyController());
         mappings.put("/adopt/view", new ViewApplyController());
         mappings.put("/adopt/accept", new RegisterAnimalController());
         mappings.put("/adopt/list", new ListResultApplyController());
-        mappings.put("/adopt/approved_list", new ViewApprovalController());
+        mappings.put("/adopt/approved_list", new ViewApprovalListController());
         
         logger.info("Initialized Request Mapping!");
     }
