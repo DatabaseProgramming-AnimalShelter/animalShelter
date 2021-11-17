@@ -8,11 +8,11 @@ import model.Adopter;
 import model.dao.AdopterDAO;
 
 /**
- * ����� ���� API�� ����ϴ� �����ڵ��� ���� �����ϰ� �Ǵ� Ŭ����.
- * UserDAO�� �̿��Ͽ� �����ͺ��̽��� ������ ���� �۾��� �����ϵ��� �ϸ�,
- * �����ͺ��̽��� �����͵��� �̿��Ͽ� �����Ͻ� ������ �����ϴ� ������ �Ѵ�.
- * �����Ͻ� ������ ������ ��쿡�� �����Ͻ� �������� �����ϴ� Ŭ������ 
- * ������ �� �� �ִ�.
+ * 占쏙옙占쏙옙占� 占쏙옙占쏙옙 API占쏙옙 占쏙옙占쏙옙求占� 占쏙옙占쏙옙占쌘듸옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占싹곤옙 占실댐옙 클占쏙옙占쏙옙.
+ * UserDAO占쏙옙 占싱울옙占싹울옙 占쏙옙占쏙옙占싶븝옙占싱쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쌜억옙占쏙옙 占쏙옙占쏙옙占싹듸옙占쏙옙 占싹몌옙,
+ * 占쏙옙占쏙옙占싶븝옙占싱쏙옙占쏙옙 占쏙옙占쏙옙占싶듸옙占쏙옙 占싱울옙占싹울옙 占쏙옙占쏙옙占싹쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싹댐옙 占쏙옙占쏙옙占쏙옙 占싼댐옙.
+ * 占쏙옙占쏙옙占싹쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙荑∽옙占� 占쏙옙占쏙옙占싹쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싹댐옙 클占쏙옙占쏙옙占쏙옙 
+ * 占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙 占쌍댐옙.
  */
 public class AdopterManager {
 	private static AdopterManager userMan = new AdopterManager();
@@ -39,7 +39,7 @@ public class AdopterManager {
 	
 	public int create(Adopter user) throws SQLException, ExistingUserException {
 		if (adopterDAO.existingUser(user.getUser_id()) == true) {
-			throw new ExistingUserException(user.getUser_id() + "�� �����ϴ� ���̵��Դϴ�.");
+			throw new ExistingUserException(user.getUser_id() + "占쏙옙 占쏙옙占쏙옙占싹댐옙 占쏙옙占싱듸옙占쌉니댐옙.");
 		}
 		return adopterDAO.create(user);
 	}
@@ -59,7 +59,7 @@ public class AdopterManager {
 		Adopter user = adopterDAO.findUser(user_id);
 		
 		if (user == null) {
-			throw new UserNotFoundException(user_id + "�� �������� �ʴ� ���̵��Դϴ�.");
+			throw new UserNotFoundException(user_id );
 		}		
 		return user;
 	}
@@ -78,7 +78,7 @@ public class AdopterManager {
 		Adopter user = findUser(user_id);
 
 		if (!user.matchPassword(password)) {
-			throw new PasswordMismatchException("��й�ȣ�� ��ġ���� �ʽ��ϴ�.");
+			throw new PasswordMismatchException("PasswordMismatchException");
 		}
 		return true;
 	}
