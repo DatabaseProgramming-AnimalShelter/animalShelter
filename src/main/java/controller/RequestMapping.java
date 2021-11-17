@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import controller.animal.RegisterAnimalController;
 import controller.adopt.CreateAdoptApplyController;
+import controller.adopt.ViewApplyController;
 import controller.animal.ListAnimalController;
 //import controller.animal.ListAnimalController;
 import controller.animal.ViewAnimalController;
@@ -36,11 +37,9 @@ public class RequestMapping {
         
         //입양신청 동물예약
         mappings.put("/adopt/register", new CreateAdoptApplyController());
-        mappings.put("/adopt/view", new CreateAdoptApplyController());
+        mappings.put("/adopt/view", new ViewApplyController());
         mappings.put("/adopt/accept", new RegisterAnimalController());
-        mappings.put("/adopt/view", new RegisterAnimalController());
-
-        
+      
         logger.info("Initialized Request Mapping!");
     }
 

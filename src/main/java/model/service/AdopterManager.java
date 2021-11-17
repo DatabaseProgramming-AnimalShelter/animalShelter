@@ -57,9 +57,9 @@ public class AdopterManager {
 	public Adopter findUser(String user_id)
 		throws SQLException, UserNotFoundException {
 		Adopter user = adopterDAO.findUser(user_id);
-		
+		System.out.println(user);
 		if (user == null) {
-			throw new UserNotFoundException(user_id + "�� �������� �ʴ� ���̵��Դϴ�.");
+			throw new UserNotFoundException(user_id + "없는 회원입니다");
 		}		
 		return user;
 	}

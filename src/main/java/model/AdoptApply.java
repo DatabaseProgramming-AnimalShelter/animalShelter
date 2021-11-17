@@ -38,6 +38,17 @@ public class AdoptApply {
 		this.apply_date = apply_date;
 	}
 
+	public AdoptApply(String user_id, int animal_id, String content, String living_environment, String have_pets,
+			int apply_matched) {
+		super();
+		this.user_id = user_id;
+		this.animal_id = animal_id;
+		this.content = content;
+		this.living_environment = living_environment;
+		this.have_pets = have_pets;
+		this.apply_matched = apply_matched;
+	}
+
 	public AdoptApply(int apply_id, String user_id, int animal_id, String content, String living_environment,
 			String have_pets, int apply_matched, String apply_date, String approval_date) {
 		super();
