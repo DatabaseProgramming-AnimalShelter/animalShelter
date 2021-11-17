@@ -181,22 +181,67 @@ public class AnimalDAO {
 		     		   + "ORDER BY a.animal_id desc"; 
 			 param = new Object[] { matched,location};
 			 System.out.println("2ddddd");
-		}else if (matched == -1){
-			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
-	        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-	        		   + "WHERE a.category_id=? and a.location=? "
-	        		   + "ORDER BY a.animal_id desc";    
-			 param = new Object[] { category_id,location};
-			 System.out.println("3ddddd");
 		}
 		else {
-			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender,a.etc "
-	        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-	        		   + "WHERE a.category_id=? and a.animal_matched=? and a.location=? "
-	        		   + "ORDER BY a.animal_id desc";    
-			 param = new Object[] { category_id,matched,location};
-			 System.out.println("4ddddd");
+			if (category_id == 100){
+				 if (matched == -1){
+						sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+				        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+				        		   + "WHERE a.category_id in (101,102,103,104,105,106,107,108,109,110,111,112,113) and a.location=? "
+				        		   + "ORDER BY a.animal_id desc";    
+						 param = new Object[] { location};
+						 System.out.println("category_id == 100ddddd");
+						 
+					}
+				 else{
+						sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+				        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+				        		   + "WHERE a.category_id in (101,102,103,104,105,106,107,108,109,110,111,112,113) and a.location=? and a.animal_matched=? "
+				        		   + "ORDER BY a.animal_id desc";    
+						 param = new Object[] { location, matched};
+						 System.out.println("category_id == 100ddddd");
+						 
+					}
+				 
+			}
+			else if (category_id == 200 ){
+				
+				 if (matched == -1){
+					 sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			        		   + "WHERE a.category_id in (201,202,203,204,205,206,207) and a.location=?"
+			        		   + "ORDER BY a.animal_id desc";    
+					 param = new Object[] { location};
+					 System.out.println("category_id == 200ddddd");
+					}
+				 else{
+					 sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			        		   + "WHERE a.category_id in (201,202,203,204,205,206,207) and a.location=? and a.animal_matched=? "
+			        		   + "ORDER BY a.animal_id desc";    
+					 param = new Object[] { location, matched};
+					 System.out.println("category_id == 200ddddd");
+					}
+			}
+			else if (matched == -1){
+				sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+		        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+		        		   + "WHERE a.category_id=? and a.location=? "
+		        		   + "ORDER BY a.animal_id desc";    
+				 param = new Object[] { category_id,location};
+				 System.out.println("3ddddd");
+			}
+			else {
+				sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender,a.etc "
+		        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+		        		   + "WHERE a.category_id=? and a.animal_matched=? and a.location=? "
+		        		   + "ORDER BY a.animal_id desc";    
+				 param = new Object[] { category_id,matched,location};
+				 System.out.println("4ddddd");
+			}
 		}
+		
+		
         jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil �뜝�룞�삕 insert�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
         
 		try {
