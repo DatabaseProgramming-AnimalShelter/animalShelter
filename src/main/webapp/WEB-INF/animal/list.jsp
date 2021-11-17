@@ -231,7 +231,7 @@
 									<span>기타</span>
 								</c:when>
 							</c:choose>
-							"에 대한 결과</h2></c:when>
+							"에 대한 검색결과</h2></c:when>
 						</c:choose>
 	
 	<c:choose>
