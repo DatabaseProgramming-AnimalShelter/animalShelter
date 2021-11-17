@@ -3,12 +3,12 @@ package model;
 import java.time.LocalDate;
 import java.util.Date;
 /**
- * 占쌉억옙占시삼옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占십울옙占쏙옙 占쏙옙占쏙옙占쏙옙 클占쏙옙占쏙옙
- * AdoptApply 占쏙옙占싱븝옙占� 占쏙옙占쏙옙占쏙옙
+ * �뜝�뙃�뼲�삕�뜝�떆�궪�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�떗�슱�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �겢�뜝�룞�삕�뜝�룞�삕
+ * AdoptApply �뜝�룞�삕�뜝�떛釉앹삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
  */
 public class AdoptApply {
 
-	private int apply_id; //sequence占쏙옙 占쏙옙占쏙옙占쌘울옙 parameter占싫넣어도?
+	private int apply_id; //sequence�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�뙓�슱�삕 parameter�뜝�떕�꽔�뼱�룄?
 	private String user_id;
 	private int animal_id;
 	private String content;
@@ -74,7 +74,16 @@ public class AdoptApply {
 		this.animal_type = animal_type;
 		this.species = species;
 	}
-
+	public AdoptApply(int apply_id, String user_id, int animal_id, int apply_matched, String apply_date, 
+			String user_name) {
+		super();
+		this.apply_id = apply_id;
+		this.user_id = user_id;
+		this.animal_id = animal_id;
+		this.apply_matched = apply_matched;
+		this.apply_date = apply_date;
+		this.user_name = user_name;
+	}
 	public AdoptApply(String user_id, int animal_id, String content, String living_environment, String have_pets,
 			String image, String user_name, String animal_type, String species) {
 		super();
@@ -88,7 +97,7 @@ public class AdoptApply {
 		this.animal_type = animal_type;
 		this.species = species;
 	}
-
+	
 	public int getApply_id() {
 		return apply_id;
 	}

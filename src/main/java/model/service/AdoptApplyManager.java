@@ -1,9 +1,11 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import model.AdoptApply;
 import model.Adopter;
+import model.Animal;
 import model.dao.AdoptApplyDAO;
 import model.dao.AdopterDAO;
 
@@ -63,10 +65,13 @@ public class AdoptApplyManager {
 //			return userDAO.findUserList();
 //	}
 //	
-//	public List<User> findUserList(int currentPage, int countPerPage)
-//		throws SQLException {
-//		return userDAO.findUserList(currentPage, countPerPage);
-//	}
 
-	
+	public List<AdoptApply> findAdoptApplyList() throws SQLException {
+		return adoptApplyDAO.findAdoptApplyList();
+	}
+
+	/*public List<AdoptApply> searchAnimalList( String animal_type, int category_id, int matched) throws SQLException {
+		return adoptApplyDAO.searchAnimalList(animal_type, category_id, matched);
+	}*/
+
 }
