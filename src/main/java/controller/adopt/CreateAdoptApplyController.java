@@ -56,6 +56,13 @@ public class CreateAdoptApplyController implements Controller{
     		return "/adopt/createApplyForm.jsp";   
 	    }	
 		
+		int animal_id2 = Integer.parseInt(request.getParameter("animal_id"));
+		
+		 String content = request.getParameter("content"); String lc =
+		 request.getParameter("living_conditions"); String hp =
+		 request.getParameter("have_pets");
+		 
+		
 		AdoptApply apply = new AdoptApply(
 				user_id,
 				Integer.parseInt(request.getParameter("animal_id")),
@@ -69,7 +76,11 @@ public class CreateAdoptApplyController implements Controller{
 				);
 		
 		try {
+			//System.out.println("%%%%%%%%%%%%%%%%%%%ai : "+animal_id2 + "content: "+content+"lc: "+ lc+ "hp:"+hp);
+			System.out.println("%%%%%%%%%%%%%%%%%%%%img:"+animal.getImage()+"username:"+adopter.getUser_name()+"atype:"+animal.getAnimal_type()+"aspecies:"+animal.getSpecies());
+			System.out.println("%%%%%%%%%%%%%%"+apply);
 			AdoptApplyManager manager = AdoptApplyManager.getInstance();
+			System.out.println("%%%%%%%%%%%%%%"+apply);
 			manager.create(apply);
 			
 	    	log.debug("Create Adopt : {}", apply);

@@ -106,10 +106,12 @@ h1{
 	<!-- registration form  -->
 
 	<h1>입양 신청 하기</h1>
-	<form class="was-validated" name="form" method="POST">
+	<form class="was-validated" name="form" method="POST" action="<c:url value='/adopt/register'>
+                        <c:param name='animal_id' value='${apply.animal_id}'/>
+                     </c:url>">
 		<div id="apply">
 		<div id="imgParent">
-			<img class="img" src="'${apply.image}'" />
+			<img class="img" src="<%=request.getSession().getServletContext().getRealPath("/")%>/upload/${apply.image}">
 		</div>
 		<div id="info">
 			<div class="mb-3">
@@ -169,8 +171,8 @@ h1{
 			<div class="mb-3">
 				<label for="content" class="form-label">5. 나의 조건</label><br>
 				<textarea class="form-control is-invalid" id="content"
-					name="content" placeholder="분양을 할 수 있는 조건인지 상세히 적어주세요!" required>
-					<c:if test="${creationFailed}">${apply.content}</c:if>
+					name="content" placeholder="분양을 할 수 있는 조건인지 상세히 적어주세요!" required>	
+					${apply.content}
 				</textarea>
 				<div class="invalid-feedback">*3번, 4번, 5번은  필수항목 입니다</div>
 			</div>
@@ -197,12 +199,13 @@ h1{
                     </c:url>">
               	신청</a>  
 			</button> --%>
-			<button id="submit" type="submit">
+			<%-- <button id="submit" type="submit">
 				<a href="<c:url value='/adopt/register'>
                         <c:param name='animal_id' value='${apply.animal_id}'/>
                      </c:url>">
              	 신청</a>
-             </button>
+             </button> --%>
+            <input type="submit" value="신청" /> 
 			&nbsp; 
 			<button id="cancel" type="submit">
 					<a href="<c:url value='/animal/list'>

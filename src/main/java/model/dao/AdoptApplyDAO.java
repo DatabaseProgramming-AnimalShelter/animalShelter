@@ -50,32 +50,57 @@ public class AdoptApplyDAO {
 	}*/
 	
 	public int create(AdoptApply adoptApply) throws SQLException {
-		LocalDate now = LocalDate.now();
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd"); 
-		String formatedNow = fm.format(now);
-		Date date = new Date(formatedNow);
+		/*
+		 * System.out.println("create0.%%%%%%%%%%%%%%%%%%%%"+adoptApply);
+		 * 
+		 * LocalDate now = LocalDate.now();
+		 * 
+		 * System.out.println("LocalDate.%%%%%%%%%%%%%%%%%%%%"+adoptApply);
+		 * 
+		 * 
+		 * SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd");
+		 * 
+		 * System.out.println("SimpleDate.%%%%%%%%%%%%%%%%%%%%"+adoptApply);
+		 * 
+		 * 
+		 * String formatedNow = fm.format(now);
+		 * 
+		 * System.out.println("formateN.%%%%%%%%%%%%%%%%%%%%"+adoptApply);
+		 * 
+		 * 
+		 * Date date = new Date(formatedNow);
+		 * 
+		 * System.out.println("create1.%%%%%%%%%%%%%%%%%%%%"+now +"::"+ date);
+		 */
 		
-		String sql = "INSERT INTO AdoptApply VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?";				
+		/*String sql = "INSERT INTO AdoptApply VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?";				
 		Object[] param = new Object[] {adoptApply.getUser_id(), 
 				adoptApply.getAnimal_id(), adoptApply.getContent(), adoptApply.getLiving_environment(),
-				adoptApply.getHave_pets(), 0, date, 0}; 
-		jdbcUtil.setSqlAndParameters(sql, param);
+				adoptApply.getHave_pets(), 0, date, 0};*/ 
 		
-		String key[] = {"apply_id"};
-		try {				
-			int result = jdbcUtil.executeUpdate(key);	// insert 臾� �떎�뻾
-			ResultSet rs = jdbcUtil.getGeneratedKeys();
+		//Date approvalDate = new Date
+		String sql = "INSERT INTO AdoptApply VALUES (apply_id_seq.nextval, ?, ?, ?, ?, ?, ?, SYSDATE, SYSDATE)"; 
+		Object[] param = new Object[] { adoptApply.getUser_id(), adoptApply.getAnimal_id(), adoptApply.getContent(),
+	            adoptApply.getLiving_environment(), adoptApply.getHave_pets(),
+	            0};
+		jdbcUtil.setSqlAndParameters(sql, param);
+	
+		String key[] = {"apply_id"};	
+		int generatedKey = 0;
+		try {    
+			jdbcUtil.executeUpdate(key);  
+		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
 		   	if(rs.next()) {
-		   		int generatedKey = rs.getInt(1);   // ������ PK ��
-		   		adoptApply.setApply_id(generatedKey); 	// id�ʵ忡 ����  
+		   		generatedKey = rs.getInt(1);   
+		   		adoptApply.setAnimal_id(generatedKey); 	
 		   	}
-			return result;
+		   	return generatedKey;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 諛섑솚
+			jdbcUtil.close();	
 		}		
 		return 0;			
 	}
@@ -83,15 +108,16 @@ public class AdoptApplyDAO {
 
 	// 입양신청 승인시 matched = 1, approval_date 값 넣어주기
 	public int approval(AdoptApply adoptApply) throws SQLException {
-		LocalDate now = LocalDate.now();
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd"); 
-		String formatedNow = fm.format(now);
-		Date date = new Date(formatedNow);
+		/*
+		 * LocalDate now = LocalDate.now(); SimpleDateFormat fm = new
+		 * SimpleDateFormat("yyyy/MM/dd"); String formatedNow = fm.format(now); Date
+		 * date = new Date(formatedNow);
+		 */
 		
 		String sql = "UPDATE AdoptApply "
-					+ "SET  matched=?, approval_date=? "
+					+ "SET  matched=?, approval_date=SYSDATE "
 					+ "WHERE apply_id=?";
-		Object[] param = new Object[] {1, date, adoptApply.getApply_id()};
+		Object[] param = new Object[] {1, adoptApply.getApply_id()};
 		
 		//DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		
@@ -113,15 +139,16 @@ public class AdoptApplyDAO {
 	
 	// 입양신청 거절시 matched = -1, approval_date 값 넣어주기
 	public int decline(AdoptApply adoptApply) throws SQLException {
-		LocalDate now = LocalDate.now();
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd"); 
-		String formatedNow = fm.format(now);
-		Date date = new Date(formatedNow);
+		/*
+		 * LocalDate now = LocalDate.now(); SimpleDateFormat fm = new
+		 * SimpleDateFormat("yyyy/MM/dd"); String formatedNow = fm.format(now); Date
+		 * date = new Date(formatedNow);
+		 */
 			
 		String sql = "UPDATE AdoptApply "
-						+ "SET  matched=?, approval_date=? "
+						+ "SET  matched=?, approval_date=SYSDATE "
 						+ "WHERE apply_id=?";
-		Object[] param = new Object[] {-1, date, adoptApply.getApply_id()};
+		Object[] param = new Object[] {-1, adoptApply.getApply_id()};
 			
 		//DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 			

@@ -62,7 +62,7 @@ public class AnimalManager {
 		Animal animal = animalDAO.findAnimal(animal_id);
 
 		if (animal == null) {
-			throw new AnimalNotFoundException(animal_id + "�� �������� �ʴ� �����Դϴ�.");
+			throw new AnimalNotFoundException(animal_id + "가 존재하지않습니다.");
 		}
 
 		return animal;

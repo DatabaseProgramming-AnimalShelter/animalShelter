@@ -108,12 +108,12 @@ public class AnimalDAO {
         String sql = "SELECT a.animal_id, a.category_id, a.age, a.location, a.animal_matched, a.image,a.gender,a.weight,a.etc, c.species, c.animal_type "
      		   + " FROM Animal a JOIN Category c ON a.category_id = c.category_id " 
      		  + "WHERE animal_id=?";  
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	// JDBCUtil�뜝�룞�삕 query�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});	
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query �뜝�룞�삕�뜝�룞�삕
-			if (rs.next()) {						// �뜝�떩�궪�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�뙥怨ㅼ삕
-				Animal animal = new Animal(		// User �뜝�룞�삕泥닷뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떦�슱�삕 �뜝�떩�궪�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
+			ResultSet rs = jdbcUtil.executeQuery();		
+			if (rs.next()) {						
+				Animal animal = new Animal(		
 					rs.getInt("animal_id"),
 					rs.getInt("category_id"),
 					rs.getInt("age"),
