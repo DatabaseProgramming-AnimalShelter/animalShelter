@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
+<link rel=stylesheet href="<c:url value='/css/user.css' />" type="text/css">
 <title>입양신청 목록 조회</title>
 <div class="container"> 
-	<table class="table table-hover table-borderless">
-		<thead>
+	<table class="table table-hover " >
+		<thead style="background-color: #e0d8cb">
 			<tr>
 				<th scope="col">no</th>
 				<th scope="col">동물 번호</th>
@@ -14,13 +15,12 @@
 		</thead>
 		<tbody>
 			<c:forEach var="adopt" items="${adoptApplyList}">
-				<th scope="row"><a
-						href="<c:url value='/adopt/view'>
+			
+			 		 <tr onclick='location.href="<c:url value='/adopt/view'>
 					   <c:param name='apply_id' value='${adopt.apply_id}'/>
-			 		 </c:url>">
-							${adopt.apply_id}</a>
-				</th>
-				<tr>
+			 		 </c:url>"'>	<th scope="row">
+							
+			 	${adopt.apply_id} </th>
 					<td>${adopt.user_name}</td>
 					<td>${adopt.animal_id}</td>
 					<td>${adopt.apply_date}</td>
