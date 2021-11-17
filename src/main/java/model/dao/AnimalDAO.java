@@ -165,82 +165,143 @@ public class AnimalDAO {
 		System.out.println("category_id"+category_id);
 		System.out.println("matched"+matched);
 		System.out.println("location"+location);
+		
 		if (animal_type.equals("none") && matched == -1){
-			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
-	        		   + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
-	        		   + "WHERE a.location=? "
-	        		   + "ORDER BY animal_id desc";   
-			 param = new Object[] { location};
-			 // param = null;
-			 System.out.println("1ddddd");
-		}
-		else if (animal_type.equals("none")) {
-			sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
-		     		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-		     		   + "WHERE a.animal_matched=? and a.location=? "
-		     		   + "ORDER BY a.animal_id desc"; 
-			 param = new Object[] { matched,location};
-			 System.out.println("2ddddd");
-		}
-		else {
-			if (category_id == 100){
-				 if (matched == -1){
-						sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
-				        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-				        		   + "WHERE a.category_id in (101,102,103,104,105,106,107,108,109,110,111,112,113) and a.location=? "
-				        		   + "ORDER BY a.animal_id desc";    
-						 param = new Object[] { location};
-						 System.out.println("category_id == 100ddddd");
-						 
-					}
-				 else{
-						sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
-				        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-				        		   + "WHERE a.category_id in (101,102,103,104,105,106,107,108,109,110,111,112,113) and a.location=? and a.animal_matched=? "
-				        		   + "ORDER BY a.animal_id desc";    
-						 param = new Object[] { location, matched};
-						 System.out.println("category_id == 100ddddd");
-						 
-					}
-				 
+			  if (location.equals("all")){
+			  sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
+			             + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
+			             + "ORDER BY animal_id desc";   
+			    param = null;
+			   System.out.println("싹다전체1ddddd");
 			}
-			else if (category_id == 200 ){
-				
-				 if (matched == -1){
-					 sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
-			        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-			        		   + "WHERE a.category_id in (201,202,203,204,205,206,207) and a.location=?"
-			        		   + "ORDER BY a.animal_id desc";    
-					 param = new Object[] { location};
-					 System.out.println("category_id == 200ddddd");
-					}
-				 else{
-					 sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
-			        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-			        		   + "WHERE a.category_id in (201,202,203,204,205,206,207) and a.location=? and a.animal_matched=? "
-			        		   + "ORDER BY a.animal_id desc";    
-					 param = new Object[] { location, matched};
-					 System.out.println("category_id == 200ddddd");
-					}
+			  else{
+			  sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
+			             + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
+			             + "WHERE a.location=? "
+			             + "ORDER BY animal_id desc";   
+			   param = new Object[] { location};
+			   // param = null;
+			   System.out.println("다른건 전체 지역만 검색");
 			}
-			else if (matched == -1){
-				sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
-		        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-		        		   + "WHERE a.category_id=? and a.location=? "
-		        		   + "ORDER BY a.animal_id desc";    
-				 param = new Object[] { category_id,location};
-				 System.out.println("3ddddd");
+			}
+			else if (animal_type.equals("none")) {
+			  if (location.equals("all")){
+			  sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
+			            + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			            + "WHERE a.animal_matched=? "
+			            + "ORDER BY a.animal_id desc"; 
+			   param = new Object[] { matched};
+			   System.out.println("입양여부만 검색");}
+			  else{
+			  sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
+			            + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			            + "WHERE a.animal_matched=? and a.location=? "
+			            + "ORDER BY a.animal_id desc"; 
+			   param = new Object[] { matched,location};
+			   System.out.println("입양여부랑 지역검색");}
 			}
 			else {
-				sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender,a.etc "
-		        		   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
-		        		   + "WHERE a.category_id=? and a.animal_matched=? and a.location=? "
-		        		   + "ORDER BY a.animal_id desc";    
-				 param = new Object[] { category_id,matched,location};
-				 System.out.println("4ddddd");
+			  if (category_id == 100){
+			     if (matched == -1){
+			        if (location.equals("all")){
+			        sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                   + "WHERE a.category_id in (101,102,103,104,105,106,107,108,109,110,111,112,113) "
+			                   + "ORDER BY a.animal_id desc";    
+			         param = null;
+			         System.out.println("강아지에서 전체 검색");
+			         
+			      }
+			         else{
+			        sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                   + "WHERE a.category_id in (101,102,103,104,105,106,107,108,109,110,111,112,113) and a.location=? "
+			                   + "ORDER BY a.animal_id desc";    
+			         param = new Object[] { location};
+			         System.out.println("강아지전체에서 지역검색");
+			         
+			      }
+			         
+			      }
+			     else{		if (location.equals("all")){
+			        sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                   + "WHERE a.category_id in (101,102,103,104,105,106,107,108,109,110,111,112,113) and a.animal_matched=? "
+			                   + "ORDER BY a.animal_id desc";    
+			         param = new Object[] { matched};
+			         System.out.println("강아지전체에서 입양여부검색");}
+			        else {
+			        sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                   + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                   + "WHERE a.category_id in (101,102,103,104,105,106,107,108,109,110,111,112,113) and a.location=? and a.animal_matched=? "
+			                   + "ORDER BY a.animal_id desc";    
+			         param = new Object[] { location, matched};
+			         System.out.println("강아지 전체에서 지역이랑 입양여부검색");}
+			         
+			      }
+			     
+			  }
+			  else if (category_id == 200 ){
+			    
+			     if (matched == -1){
+			    if (location.equals("all")){
+			       sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                 + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                 + "WHERE a.category_id in (201,202,203,204,205,206,207) "
+			                 + "ORDER BY a.animal_id desc";    
+			       param = null;
+			       System.out.println("고양이전체에서 지역검색");}
+			      else{
+			       sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                 + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                 + "WHERE a.category_id in (201,202,203,204,205,206,207) and a.location=?"
+			                 + "ORDER BY a.animal_id desc";    
+			       param = new Object[] { location};
+			       System.out.println("c고양이전체에서 지역검색");}
+
+			      }
+			     else{
+			      if (location.equals("all")){
+			       sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                 + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                 + "WHERE a.category_id in (201,202,203,204,205,206,207)  and a.animal_matched=? "
+			                 + "ORDER BY a.animal_id desc";    
+			       param = new Object[] {  matched};
+			       System.out.println("c고양이전체에서 입양여부검색");}
+			       else{
+			        sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                  + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                  + "WHERE a.category_id in (201,202,203,204,205,206,207) and a.location=? and a.animal_matched=? "
+			                  + "ORDER BY a.animal_id desc";    
+			        param = new Object[] { location, matched};
+			        System.out.println("ca고양이전체에서 지역이랑 입양여부검색");}
+			      }
+			  }
+			  else if (matched == -1){
+			    if (location.equals("all")){
+			      sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                + "WHERE a.category_id=? "
+			                + "ORDER BY a.animal_id desc";    
+			      param = new Object[] { category_id};
+			      System.out.println("입양안된애들중에서 카테고리검색");}
+			    else{
+			      sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender ,a.etc "
+			                + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			                + "WHERE a.category_id=? and a.location=? "
+			                + "ORDER BY a.animal_id desc";    
+			      param = new Object[] { category_id,location};
+			      System.out.println("입양안된애들중에서 카테고리랑 지역검색");}
+			  }
+			  else {
+			    sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched ,a.gender,a.etc "
+			               + "FROM Animal a JOIN Category c ON a.category_id = c.category_id "
+			               + "WHERE a.category_id=? and a.animal_matched=? and a.location=? "
+			               + "ORDER BY a.animal_id desc";    
+			     param = new Object[] { category_id,matched,location};
+			     System.out.println("모두 검색필드 입력됨");
+			  }
 			}
-		}
-		
 		
         jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil �뜝�룞�삕 insert�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
         

@@ -102,6 +102,7 @@
 	      </td>
 	       <th scope="row">발견장소</th>
 	      <td>    <select name="location" >
+	      		<option value="all" > 전체 </option>
 			    <option value="seoul" > 서울 </option>
 			    <option value="gyeonggi"> 경기 </option>
 			    <option value="incheon" > 인천 </option>
@@ -214,7 +215,9 @@
 							</c:choose>
 							/지역 :
 							<c:choose>
-	
+								<c:when test="${location=='all'}">
+									<span>전체</span>
+								</c:when>
 								<c:when test="${location=='seoul'}">
 									<span>서울</span>
 								</c:when>
