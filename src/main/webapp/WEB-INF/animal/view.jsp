@@ -16,6 +16,7 @@
 }
 form{
 	margin-top: 50px;
+	
 }
 .item {
 	width: 80%;
@@ -26,6 +27,7 @@ form{
 	margin-top: 20px;
 	border: 1px solid;
 	border-radius: 1rem;
+	background-color:white;
 }
 
 
@@ -56,6 +58,13 @@ form{
 h1 {
 	text-align: center;
 }
+.type{
+	margin-left:10%;
+}
+.btn{
+margin-bottom:30px;
+background-color: #e0d8cb;
+border: 1px black solid}
 </style>
 <div class="container">
 	
@@ -63,7 +72,7 @@ h1 {
 	<form name="form" action="<c:url value='/adopt/register' />">
 	
 		<div class="outer">
-		<h2 class="fw-bolder" text-align="left">[${animal.animal_type}] >
+		<h2 class="fw-bolder type" >[${animal.animal_type}] >
 						${animal.species}</h2>
 			<div class="item">
 				<div id="imgParent">
@@ -82,78 +91,91 @@ h1 {
 				
 				<div class="info">
 					
-					<div class="fs-5 mb-5">
-					<span>동물아이디 :  ${animal.animal_id} </span><br><br>
-						<span>발견장소</span>
-						<c:choose>
+					<table class="table">
+  
+  
+    <tr>
+      <th scope="row">동물아이디</th>
+      <td> ${animal.animal_id}</td>
+    </tr>
+    <tr>
+      <th scope="row">발견장소</th>
+      <td><c:choose>
 
-							<c:when test="${animal.location=='seoul'}">
-								<span>서울</span>
-							</c:when>
-							<c:when test="${animal.location=='gyeonggi'}">
-								<span>경기</span>
-							</c:when>
-							<c:when test="${animal.location=='incheon'}">
-								<span>인천</span>
-							</c:when>
-							<c:when test="${animal.location=='etc'}">
-								<span>기타</span>
-							</c:when>
-						</c:choose>
-						<br>
-						<br> <span>나이</span>
-						<c:choose>
-							<c:when test="${animal.age==0}">
-								<span>1살미만</span>
-							</c:when>
-							<c:otherwise>
-								<span>${animal.age}</span>
-							</c:otherwise>
-						</c:choose>
-						<br>
-						<br> <span>성별</span>
-						<c:choose>
-							<c:when test="${animal.gender=='female'}">
-								<span>암</span>
-							</c:when>
-							<c:otherwise>
-								<span>수</span>
-							</c:otherwise>
-						</c:choose>
-						<br>
-						<br> <span>몸무게</span>
-						<c:choose>
-							<c:when test="${animal.weight==0}">
-								<span>2kg미만</span>
-							</c:when>
-							<c:when test="${animal.weight==1}">
-								<span>2kg~3kg</span>
-							</c:when>
-							<c:when test="${animal.weight==2}">
-								<span>3kg~4kg</span>
-							</c:when>
-							<c:when test="${animal.weight==3}">
-								<span>4kg~5kg</span>
-							</c:when>
-							<c:when test="${animal.weight==4}">
-								<span>5kg~6kg</span>
-							</c:when>
-							<c:when test="${animal.weight==5}">
-								<span>7kg~10kg</span>
-							</c:when>
-							<c:when test="${animal.weight==6}">
-								<span>11kg~15kg</span>
-							</c:when>
-							<c:when test="${animal.weight==7}">
-								<span>15kg~20kg </span>
-							</c:when>
-							<c:when test="${animal.weight==8}">
-								<span>20kg~</span>
-							</c:when>
-						</c:choose>
-						<br>
-						<br> <span>특이사항: ${animal.etc}</span>
-					</div>
+        <c:when test="${animal.location=='seoul'}">
+          <span>서울</span>
+        </c:when>
+        <c:when test="${animal.location=='gyeonggi'}">
+          <span>경기</span>
+        </c:when>
+        <c:when test="${animal.location=='incheon'}">
+          <span>인천</span>
+        </c:when>
+        <c:when test="${animal.location=='etc'}">
+          <span>기타</span>
+        </c:when>
+      </c:choose></td>
+    </tr>
+    <tr>
+      <th scope="row">나이</th>
+      <td><c:choose>
+        <c:when test="${animal.age==0}">
+          <span>1살미만</span>
+        </c:when>
+        <c:otherwise>
+          <span>${animal.age}</span>
+        </c:otherwise>
+      </c:choose></td>
+    </tr>
+    <tr>
+      <th scope="row">성별</th>
+      <td> <c:choose>
+        <c:when test="${animal.gender=='female'}">
+          <span>암</span>
+        </c:when>
+        <c:otherwise>
+          <span>수</span>
+        </c:otherwise>
+      </c:choose></td>
+    </tr>
+    
+    <tr>
+      <th scope="row">몸무게</th>
+      <td><c:choose>
+        <c:when test="${animal.weight==0}">
+          <span>2kg미만</span>
+        </c:when>
+        <c:when test="${animal.weight==1}">
+          <span>2kg~3kg</span>
+        </c:when>
+        <c:when test="${animal.weight==2}">
+          <span>3kg~4kg</span>
+        </c:when>
+        <c:when test="${animal.weight==3}">
+          <span>4kg~5kg</span>
+        </c:when>
+        <c:when test="${animal.weight==4}">
+          <span>5kg~6kg</span>
+        </c:when>
+        <c:when test="${animal.weight==5}">
+          <span>7kg~10kg</span>
+        </c:when>
+        <c:when test="${animal.weight==6}">
+          <span>11kg~15kg</span>
+        </c:when>
+        <c:when test="${animal.weight==7}">
+          <span>15kg~20kg </span>
+        </c:when>
+        <c:when test="${animal.weight==8}">
+          <span>20kg~</span>
+        </c:when>
+      </c:choose></td>
+    </tr>
+    <tr>
+      <th scope="row">특이사항</th>
+      <td> ${animal.etc}</td>
+    </tr>
+</table>
 				</div>
 			</div>
 
@@ -161,9 +183,6 @@ h1 {
 				href="<c:url value='/adopt/register'>
 	     		   <c:param name='animal_id' value='${animal.animal_id}'/>
 			  </c:url>">입양신청</a>
-			<div class="btn">
-				<button id="apply" type="submit">입양신청</button>
-			</div>
 		</div>
 	</form>
 </div>

@@ -95,7 +95,7 @@ h1{
                      </c:url>">
       <div id="apply">
       <div id="imgParent">
-        <img src="${pageContext.request.session.servletContext.contextPath}/upload/${apply.image}" height="500px" width="500px" />
+        <img src="${pageContext.request.session.servletContext.contextPath}/upload/${apply.image}" height="400px" width="400px" />
       </div>
       <div id="info">
          <div class="mb-3">
