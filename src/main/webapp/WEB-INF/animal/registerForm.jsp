@@ -3,7 +3,11 @@
     pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
-
+<style>
+.container{
+margin:auto;
+}
+</style>
     <title>유기동물 등록 화면 - 관리자</title>
 
     <script>
@@ -27,7 +31,7 @@
 	}
 	
 </script>
-<div class="container">
+<div class="container">  
     <h2>유기동물 등록 - 관리자</h2>
     <br>
     <form class="applyForm"name="form" method="POST" action="<c:url value='/animal/register'/>" enctype="multipart/form-data">

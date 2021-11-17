@@ -7,26 +7,25 @@
 <link rel=stylesheet href="<c:url value='/css/community.css' />"
    type="text/css">
 <script>
- function create() {
-   <!-- 
-   if (form.name.value == "") {
-      alert("이름을 입력하십시오.");
-      form.name.focus();
-      return false;
-   } 
-   if (form.desc.value == "") {
-      alert("설명을 입력하십시오.");
-      form.desc.focus();
-      return false;
-   }      
-   -->
-
+function register() {
+	if (form.have_pets.value == "") {
+		alert("반려동물 유무를 입력하십시오.");
+		form.have_pets.focus();
+		return false;
+	} 
+	else if (form.living_conditions.value == "") {
+		alert("거주환경을 입력하십시오.");
+		form.living_conditions.focus();
+		return false;
+	}	
+	else if (form.content.value == "") {
+		alert("나의 조건을 적어주세요.");
+		form.content.focus();
+		return false;
+	}	
+	form.submit();
 }
 
-function animalList(targetUri) {
-   form.action = targetUri;
-   form.submit();
-} 
 </script>
 <style style type="text/css">
 .selection{
@@ -71,7 +70,7 @@ function animalList(targetUri) {
    margin-top: 30px;
 }
 
-#submit, #cancel{
+.submit, #cancel{
    text-align:center;
    width:45%;
 }
@@ -161,7 +160,7 @@ h1{
          </div>
       </div>
       <div class="btnAll">
-            <input type="submit" value="신청" /> 
+            <input class="submit" type="button" value="신청" onClick="register()"/> 
          &nbsp; 
          <button id="cancel" type="submit">
                <a href="<c:url value='/animal/list'>
