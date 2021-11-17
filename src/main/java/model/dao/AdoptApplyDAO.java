@@ -50,17 +50,19 @@ public class AdoptApplyDAO {
       return 0;
    }
 
-   // 엯 뼇 떊泥 듅 씤 떆 matched = 1, approval_date 媛 꽔 뼱二쇨린
+   // adoptapply의 matched 값: 1 + animal의 matched: 1
    public int approval(AdoptApply adoptApply) throws SQLException {
 
       String sql = "UPDATE AdoptApply " + "SET  matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
       Object[] param = new Object[] { 1, adoptApply.getApply_id() };
-
+      String sql2 = "UPDATE Animal " + "SET  animal_matched=? " + "WHERE animal_id=?";
+      Object[] param2 = new Object[] { 1, adoptApply.getAnimal_id() };
       // DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
       try {
          // Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
          jdbcUtil.setSqlAndParameters(sql, param);
+         jdbcUtil.setSqlAndParameters(sql2, param2);
          int result = jdbcUtil.executeUpdate(); // update 눧占 占쎈뼄占쎈뻬
          return result;
       } catch (Exception ex) {
@@ -73,12 +75,12 @@ public class AdoptApplyDAO {
       return 0;
    }
 
-   // 엯 뼇 떊泥 嫄곗젅 떆 matched = -1, approval_date 媛 꽔 뼱二쇨린
+   // adoptapply의 matched 값만 1 
    public int decline(AdoptApply adoptApply) throws SQLException {
 
       String sql = "UPDATE AdoptApply " + "SET  matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
-      Object[] param = new Object[] { -1, adoptApply.getApply_id() };
-
+      Object[] param = new Object[] { 1, adoptApply.getApply_id() };
+      
       // DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
       try {
@@ -201,7 +203,8 @@ public class AdoptApplyDAO {
    // 입양결과를 다 보여주는 페이지 ( 관리자가 승인 거부 이후)
    public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
       String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
-            + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " + "WHERE apply_matched = ? "
+            + "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " 
+            + "WHERE apply_matched = ? "
             + "ORDER BY apply_id ";
       jdbcUtil.setSqlAndParameters(sql, new Object[] { 1 });
 

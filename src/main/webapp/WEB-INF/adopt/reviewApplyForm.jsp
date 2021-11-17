@@ -6,52 +6,120 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style type="text/css">
+.container{
+	border: 1px solid;
 
-	<br>
-	<table class="table table-hover table-borderless">
-		<thead>
-			<tr>
-				<!-- 신청날짜를 보여주는 이유는 : 선착순의 느낌도 주기 위해서 -->
-				<th scope="col">신청 날짜</th>
-				<th scope="col">no</th>
-				<th scope="col">품종</th>
-				<th scope="col">신청자 이름</th>
-				<th scope="col">반려동물 유무</th>
-				<th scope="col">거주환경</th>
-				<th scope="col">나의 조건</th>
-				<th scope="col">입양완료 여부</th>
-			</tr>
-		</thead>
-		<tbody> 
+          height: 700px;
+         
+          background-image:url("<c:url value='/images/grass.png'/>");
+          
+         
+        }
+form{
+	margin-top: 50px;
+	
+}
+.item {
+	width: 80%;
+	height: 80%;
+	margin: 0 auto;
+	padding: 10px;
+	display: flex;
+	margin-top: 20px;
+	border: 1px solid;
+	border-radius: 1rem;
+	background-color:white;
+}
+
+
+.info {
+	padding-left: 30px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	width: 70%;
+	float: right;
+	margin: auto;
+}
+
+.btn {
+	margin: 0 auto;
+	padding: 10px;
+	display: flex;
+	margin-top: 20px;
+	width: 100px;
+	color: black;
+	height: 40px;
+	text-align: center;
+}
+
+.apply {
+	background-color: #FEC8E3;
+}
+
+h1 {
+	text-align: center;
+}
+.type{
+	margin-left:10%;
+}
+.btn{
+margin-bottom:30px;
+background-color: #e0d8cb;
+border: 1px black solid}
+</style>
+<div class="container">
+<form name="form" action="<c:url value='/adopt/register' />">
+<h2 class="fw-bolder type" >no.${apply.apply_id}</h2>
+	<div class="outer">
+	<div class="item">
+				<div id="imgParent">
+					<c:choose>
+						<c:when test="${not empty apply.image}">
+							<img
+								src="${pageContext.request.session.servletContext.contextPath}/upload/${apply.image}" height="400px" width="400px" />
+						</c:when>
+						<c:otherwise>
+							<span>사진없음</span>
+						</c:otherwise>
+					</c:choose>
+					<br>
+
+				</div>
+				
+				<div class="info">
+					
+					<table class="table">
 		  <tr>
+		  	<th scope="row">신청 날짜</th>
 			<td>${apply.apply_date}</td>
 		  </tr>
 		  <tr>
-			<!-- <th>신청 반려동물</th> -->
+			<th scope="row">동물아이디</th>
 			<td>${apply.animal_id}</td>
 		  </tr>
 		  <tr>
-			<!-- <th>품종</th> -->
+			<th scope="row">품종</th>
 			<td>[${apply.animal_type}] > ${apply.species}</td>
 		  </tr>
 		  <tr>
-			<!-- <th>이름</th> -->
+			<th scope="row">신청자 이름</th>
 			<td>${apply.user_name}</td>
 		  </tr>
 		  <tr>
-			<!-- <th>반려동물 유무</th> -->
+			<th scope="col">반려동물 유무</th>
 			<td>${apply.have_pets}</td>
 		  </tr>
 		  <tr>
-			<!-- <th>거주 환경</th> -->
+			<th scope="row">거주환경</th>
 			<td>${apply.living_environment}</td>
 		  </tr>
 		  <tr>
-			<!-- <th>나의 조건</th> -->
+			<th scope="row">나의 조건</th>
 			<td>${apply.content}</td>
 		  </tr>
 		  <tr>
-			<!-- <th>입양완료여부</th> -->
+			<th scope="row">입양완료 여부</th>
 			<td>${apply.apply_matched}</td>
 		  </tr>
 		  <tr>
@@ -63,8 +131,16 @@
 		  	<th>
 		  	<a class="btn btn-outline-secondary" href="<c:url value='/adopt/decline'/>" role="button">거부</a></th>
 		  </tr>
+</table>
+	</div>
+	</div>
+	</div>
+	</form>
+</div>
+
+		  </tr>
 		</tbody>
-	</table>	
+	</table>	 --%>
 	<br> 		     
 	<!-- 수정 또는 삭제가  실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
 	<c:if test="${creationFailed}">
