@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
 <title>입양신청 목록 조회</title>
 <div class="container"> 
+<h1>입양신청 목록</h1>
 	<table class="table table-hover " >
 		<thead style="background-color: #e0d8cb">
 			<tr>

@@ -33,7 +33,12 @@ public class ListAnimalController implements Controller {
 			AnimalManager manager = AnimalManager.getInstance();
 			List<Animal> animalList = manager.searchAnimalList(type,category_id, matched,location);
 			System.out.println("animalList");
-			request.setAttribute("animalList", animalList);						
+			request.setAttribute("animalList", animalList);					
+			request.setAttribute("type", type);		
+			request.setAttribute("category_id", category_id);
+			request.setAttribute("matched", matched);
+			request.setAttribute("location", location);
+			request.setAttribute("ispost", 1);
 			System.out.println(animalList);
 			return "/animal/list.jsp";
 		}

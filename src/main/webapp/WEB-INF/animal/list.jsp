@@ -102,6 +102,7 @@
 	      </td>
 	       <th scope="row">발견장소</th>
 	      <td>    <select name="location" >
+	      		<option value="all" > 전체 </option>
 			    <option value="seoul" > 서울 </option>
 			    <option value="gyeonggi"> 경기 </option>
 			    <option value="incheon" > 인천 </option>
@@ -116,6 +117,128 @@
 	 
 	</form>
 	<div class="list">
+		<c:choose>
+		<c:when test="${ispost==1}">
+							<h2>"과 : 
+							<c:choose>
+								<c:when test="${type=='none'}">
+									<span>전체</span>
+								</c:when>
+								<c:when test="${type=='dog'}">
+									<span>개</span>
+								</c:when>
+								<c:when test="${type=='cat'}">
+									<span>고양이</span>
+								</c:when>
+							</c:choose>
+							/종 : 
+							<c:choose>
+								<c:when test="${category_id==0}">
+									<span>전체</span>
+								</c:when>
+								<c:when test="${category_id==100}">
+									<span>강아지 전체</span>
+								</c:when>
+								<c:when test="${category_id==101}">
+									<span>믹스견</span>
+								</c:when>
+								<c:when test="${category_id==102}">
+									<span>기타</span>
+								</c:when>
+								<c:when test="${category_id==103}">
+									<span>진돗개</span>
+								</c:when>
+								<c:when test="${category_id==104}">
+									<span>풍산개</span>
+								</c:when>
+								<c:when test="${category_id==105}">
+									<span>치와와</span>
+								</c:when>
+								<c:when test="${category_id==106}">
+									<span>요크셔테리어</span>
+								</c:when>
+								<c:when test="${category_id==107}">
+									<span>비숑</span>
+								</c:when>
+								<c:when test="${category_id==108}">
+									<span>푸들</span>
+								</c:when>
+								<c:when test="${category_id==109}">
+									<span>말티즈</span>
+								</c:when>
+								<c:when test="${category_id==110}">
+									<span>골든리트리버</span>
+								</c:when>
+								<c:when test="${category_id==111}">
+									<span>포메라니안</span>
+								</c:when>
+								<c:when test="${category_id==112}">
+									<span>웰시코기</span>
+								</c:when>
+								<c:when test="${category_id==200}">
+									<span>고양이 전체</span>
+								</c:when>
+								<c:when test="${category_id==201}">
+									<span>믹스</span>
+								</c:when>
+								<c:when test="${category_id==202}">
+									<span>기타</span>
+								</c:when>
+								<c:when test="${category_id==203}">
+									<span>코리안숏헤어</span>
+								</c:when>
+								<c:when test="${category_id==204}">
+									<span>샴</span>
+								</c:when>
+								<c:when test="${category_id==205}">
+									<span>뱅갈</span>
+								</c:when>
+								<c:when test="${category_id==206}">
+									<span>먼치킨</span>
+								</c:when>
+								<c:when test="${category_id==207}">
+									<span>스핑크스</span>
+								</c:when>
+							</c:choose>
+							/입양유무 : 
+							<c:choose>
+	
+								<c:when test="${matched==-1}">
+									<span>전체</span>
+								</c:when>
+								<c:when test="${matched==0}">
+									<span>보호중</span>
+								</c:when>
+								<c:when test="${matched==1}">
+									<span>입양완료</span>
+								</c:when>
+							</c:choose>
+							/지역 :
+							<c:choose>
+								<c:when test="${location=='all'}">
+									<span>전체</span>
+								</c:when>
+								<c:when test="${location=='seoul'}">
+									<span>서울</span>
+								</c:when>
+								<c:when test="${location=='gyeonggi'}">
+									<span>경기</span>
+								</c:when>
+								<c:when test="${location=='incheon'}">
+									<span>인천</span>
+								</c:when>
+								<c:when test="${location=='etc'}">
+									<span>기타</span>
+								</c:when>
+							</c:choose>
+							"에 대한 검색결과</h2></c:when>
+						</c:choose>
+	
+	<c:choose>
+		<c:when test="${empty animalList}">
+							결과없음</c:when>
+						</c:choose>
+						
 	 <c:forEach var="animal" items="${animalList}">                
 	  <span class="card" style="width: 18rem;">
 	  	<a href="<c:url value='/animal/view'>

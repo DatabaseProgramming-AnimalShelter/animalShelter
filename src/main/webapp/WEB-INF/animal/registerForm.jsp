@@ -3,39 +3,23 @@
     pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/home/mainHeader.jsp" %>
-<style>
-.container{
-margin:auto;
-}
+ <style>
+  .container{
+         border: 1px solid;
+		background-image: url("<c:url value='/images/grass.png'/>");
+          padding-bottom:20px;
+        }
+        .applyForm{
+          margin: auto;
+          width: 500px;
+          background-color:#e0d8cb;
+          padding: 30px;
+          margin-bottom:50px;
+          border:5px dashed white;
+        }
+        .title{text-align:center;}
 </style>
-    <title>유기동물 등록 화면 - 관리자</title>
-
-    <script>
-	function register() {
-		if (form.species.value == "") {
-			alert("과와 종을 선택하십시오.");
-			form.species.focus();
-			return false;
-		} 
-		else if (form.etc.value == "") {
-			alert("특이사항을 입력하십시오.");
-			form.etc.focus();
-			return false;
-		}	
-		else if (form.image.value == "") {
-			alert("사진파일을 올리세요.");
-			form.image.focus();
-			return false;
-		}	
-		form.submit();
-	}
-	
-</script>
-<div class="container">  
-    <h2>유기동물 등록 - 관리자</h2>
-    <br>
-    <form class="applyForm"name="form" method="POST" action="<c:url value='/animal/register'/>" enctype="multipart/form-data">
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script>
             $( document ).ready(function(){
                 //테스트용 데이터
@@ -98,81 +82,130 @@ margin:auto;
                retOption(animal_type, "animal_type");
             });
             </script>
+    <title>유기동물 등록 화면 - 관리자</title>
+
+    <script>
+	function register() {
+		if (form.species.value == "") {
+			alert("과와 종을 선택하십시오.");
+			form.species.focus();
+			return false;
+		} 
+		else if (form.etc.value == "") {
+			alert("특이사항을 입력하십시오.");
+			form.etc.focus();
+			return false;
+		}	
+		else if (form.image.value == "") {
+			alert("사진파일을 올리세요.");
+			form.image.focus();
+			return false;
+		}	
+		form.submit();
+	}
+	
+</script>
+
+<div class="container">  
+<br>
+    <h2 class="title">유기동물 등록 - 관리자</h2>
+    <br>
+    <form class="applyForm"name="form" method="POST" action="<c:url value='/animal/register'/>" enctype="multipart/form-data">
+        
         <!-- 과: type (개, 고양이, 기타) -->
-        과:
-        <select name="animal_type" id="animal_type">
-        </select>
-        <br><br>
-        <!-- 종: species (포메라니안, 요크셔테리어, 치와와) -->
-      종:
-        <select name="species" id="species" style="">
-        </select>
-        <br><br>
-        <!-- 성별: gender  -->
-        성별:
-        <select name="gender" id="gender" >
-        	<option value="female" selected>암컷</option>
-        	<option value="male">수컷</option>
-        </select>
-        <br><br>
-        <!-- 나이: age -->
-        나이:
-         <select name="age" >
-		    <option value="0" > 1살미만 </option>
-		    <option value="1"> 1살 </option>
-		    <option value="2" > 2살 </option>
-		    <option value="3"> 3살 </option>
-		    <option value="4" > 4살</option>
-		    <option value="5"> 5살 </option>
-		    <option value="6" > 6살 </option>
-		    <option value="7"> 7살 </option>
-		    <option value="8" > 8살 </option>
-		    <option value="9"> 9살 </option>
-		    <option value="10" > 10살 </option>
-		    <option value="11"> 11살 </option>
-		    <option value="12" > 12살 </option>
-		    <option value="13"> 13살 </option>
-		    <option value="14" > 14살 </option>
-		    <option value="15"> 15살 </option>
-		    <option value="16" > 16살 </option>
-		    <option value="17"> 17살 </option>
-		    <option value="18" > 18살 </option>
-		    <option value="19"> 19살 </option>
-	  	</select> <br><br>
-        <!-- 몸무게: weight -->
-        몸무게:
-        <select name="weight" >
-		    <option value="0" > ~2kg </option>
-		    <option value="1"> 2kg~3kg </option>
-		    <option value="2" > 3kg~4kg  </option>
-		    <option value="3" > 4kg~5kg</option>
-		    <option value="4"> 5kg~6kg </option>
-		    <option value="5" > 7kg~10kg </option>
-		    <option value="6"> 11kg~15kg </option>
-		    <option value="7" > 15kg~20kg  </option>
-		    <option value="8"> 20kg~ </option>
-	  	</select>
-        <br><br>
-        <!-- 공고번호: notice_number -->
-        <!-- 발견장소: location -->
-        발견장소:
-         <select name="location" >
-		    <option value="seoul" > 서울 </option>
-		    <option value="gyeonggi"> 경기 </option>
-		    <option value="incheon" > 인천 </option>
-
-		    <option value="etc"> 기타 </option>
-
-	  	</select>
-        <br><br>
-        <!-- 특이사항: etc -->
-        특이사항:
-        <textarea id="etc" name="etc" rows=10" cols="30" placeholder="특이사항을 입력하시오."></textarea>
-        <br><br>
-
-         <input type="file" id="image" name="image">
-         <br><br>
-        <input type="button" value="등록" onClick="register()"/>
+      <div class="form-group row">   
+          <label for="animal_type" class="col-lg-3 col-form-label">과</label>
+          <div class="col-lg-8">
+            <select name="animal_type" id="animal_type">
+            </select>
+          </div>
+      </div>       
+      <div class="form-group row">   
+          <label for="species" class="col-lg-3 col-form-label">종</label>
+          <div class="col-lg-8">
+            <select name="species" id="species" style="">
+            </select>
+          </div>
+      </div>       
+      <div class="form-group row">  
+          <label for="gender" class="col-lg-3 col-form-label">성별</label>
+          <div class="col-lg-8">
+            <select name="gender" id="gender" >
+              <option value="female" selected>암컷</option>
+              <option value="male">수컷</option>
+            </select>
+          </div> 
+      </div> 
+    <div class="form-group row">   
+          <label for="age" class="col-lg-3 col-form-label">나이</label>
+          <div class="col-lg-8">
+            <select name="age" >
+              <option value="0" > 1살미만 </option>
+              <option value="1"> 1살 </option>
+              <option value="2" > 2살 </option>
+              <option value="3"> 3살 </option>
+              <option value="4" > 4살</option>
+              <option value="5"> 5살 </option>
+              <option value="6" > 6살 </option>
+              <option value="7"> 7살 </option>
+              <option value="8" > 8살 </option>
+              <option value="9"> 9살 </option>
+              <option value="10" > 10살 </option>
+              <option value="11"> 11살 </option>
+              <option value="12" > 12살 </option>
+              <option value="13"> 13살 </option>
+              <option value="14" > 14살 </option>
+              <option value="15"> 15살 </option>
+              <option value="16" > 16살 </option>
+              <option value="17"> 17살 </option>
+              <option value="18" > 18살 </option>
+              <option value="19"> 19살 </option>
+            </select> 
+          </div>
+      </div>       
+      <div class="form-group row">  
+          <label for="weight" class="col-lg-3 col-form-label"> 몸무게</label>
+          <div class="col-lg-8">
+            <select name="weight" >
+              <option value="0" > ~2kg </option>
+              <option value="1"> 2kg~3kg </option>
+              <option value="2" > 3kg~4kg  </option>
+              <option value="3" > 4kg~5kg</option>
+              <option value="4"> 5kg~6kg </option>
+              <option value="5" > 7kg~10kg </option>
+              <option value="6"> 11kg~15kg </option>
+              <option value="7" > 15kg~20kg  </option>
+              <option value="8"> 20kg~ </option>
+            </select>
+          </div>
+      </div> 
+    <div class="form-group row">  
+          <label for="location" class="col-lg-3 col-form-label">발견장소</label>
+          <div class="col-lg-8">
+            <select name="location" >
+              <option value="seoul" > 서울 </option>
+              <option value="gyeonggi"> 경기 </option>
+              <option value="incheon" > 인천 </option>
+              <option value="etc"> 기타 </option>
+      
+            </select>
+          </div>
+      </div> 
+      <div class="form-group row">  
+        <label for="location" class="col-lg-3 col-form-label">특이사항</label>
+        <div class="col-lg-8">
+          <textarea id="etc" name="etc" rows=10" cols="30" placeholder="특이사항을 입력하시오."></textarea>
+        </div>
+    </div> 
+    <div class="form-group row">  
+      <label for="location" class="col-lg-3 col-form-label">파일</label>
+      <div class="col-lg-8">
+        <input type="file" id="image" name="image">
+      </div>
+  </div> 
+  <div class="form-group">        
+				  <input type="button"value="등록" onClick="register()" style=background-color:white class=" w-100 btn"/>
+			</div>   
     </form>
 </div>
  <%@ include file="/WEB-INF/home/mainFooter.jsp" %>

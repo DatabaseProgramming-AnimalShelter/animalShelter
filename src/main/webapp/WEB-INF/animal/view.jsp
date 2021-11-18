@@ -5,14 +5,15 @@
 <script type="text/javascript">
 	function apply(targetUri) {
 		request.setAttribute("animal", $(animal));
-
 		form.action = targetUri;
 		form.submit();
 	}
 </script>
 <style type="text/css">
-.container{
+.container {
 	border: 1px solid;
+	height: 700px;
+	background-image: url("<c:url value='/images/grass.png'/>");
 }
 form{
 	margin-top: 50px;
@@ -29,8 +30,6 @@ form{
 	border-radius: 1rem;
 	background-color:white;
 }
-
-
 .info {
 	padding-left: 30px;
 	padding-right: 10px;
@@ -39,7 +38,6 @@ form{
 	float: right;
 	margin: auto;
 }
-
 .btn {
 	margin: 0 auto;
 	padding: 10px;
@@ -50,11 +48,9 @@ form{
 	height: 40px;
 	text-align: center;
 }
-
 .apply {
 	background-color: #FEC8E3;
 }
-
 h1 {
 	text-align: center;
 }
