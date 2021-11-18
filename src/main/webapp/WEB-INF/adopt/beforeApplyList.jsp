@@ -7,8 +7,8 @@
 		<thead style="background-color: #e0d8cb">
 			<tr>
 				<th scope="col">no</th>
-				<th scope="col">동물 번호</th>
 				<th scope="col">신청자 이름</th>
+				<th scope="col">동물 번호</th>
 				<th scope="col">신청 날짜</th>
 			</tr>
 		</thead>

@@ -110,9 +110,12 @@ INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '비숑', '개');
 INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '푸들', '개');
 INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '말티즈', '개');
 INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '골든리트리버', '개');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '포메라니안', '개');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '웰시코기', '개');
 
 INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '고양이전체', '고양이');
 INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '믹스', '고양이');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '기타', '고양이');
 INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '코리안숏헤어' ,'고양이');
 INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '샴', '고양이');
 INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '뱅갈', '고양이');
