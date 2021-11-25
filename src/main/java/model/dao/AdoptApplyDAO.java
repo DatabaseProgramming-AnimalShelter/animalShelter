@@ -178,39 +178,6 @@ public class AdoptApplyDAO {
 		return null;
 	}
 
-	// 로그인한 user_id인 사람의 입양신청폼만 뜨도록
-	public List<AdoptApply> findAdoptApplyResult(String user_id) throws SQLException {
-		String sql = "SELECT apply_id, user_id, animal_id, content, living_environment, have_pets, apply_matched, apply_date, approval_date, image, user_name, animal_type, species "
-				+ "FROM AdoptApply a" + "WHERE user_id = ? ";
-		jdbcUtil.setSqlAndParameters(sql, new Object[] { user_id });
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();
-			Date apply_date = new Date(rs.getDate("apply_date").getTime());
-			String apply_dateString = df.format(apply_date);
-
-			Date approval_date = new Date(rs.getDate("approval_date").getTime());
-			String approval_dateString = df.format(approval_date);
-
-			List<AdoptApply> adoptApplyList = new ArrayList<AdoptApply>();
-
-			while (rs.next()) {
-				adoptApply = new AdoptApply(rs.getInt("apply_id"), rs.getString("user_id"), rs.getInt("animal_id"),
-						rs.getString("content"), rs.getString("living_environment"), rs.getString("have_pets"),
-						rs.getInt("apply_matched"), apply_dateString, approval_dateString, rs.getString("image"),
-						rs.getString("user_name"), rs.getString("animal_type"), rs.getString("species"));
-				adoptApplyList.add(adoptApply);
-			}
-			return adoptApplyList;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close(); // resource 獄쏆꼹 넎
-		}
-		return null;
-	}
-
 	// 관리자 입장에서 입양신청의 리스트를 보여주는 페이지
 	public List<AdoptApply> findAdoptApplyList() throws SQLException {
 		String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "

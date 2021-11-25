@@ -15,11 +15,9 @@
 	height: 700px;
 	background-image: url("<c:url value='/images/yg1.png'/>");
 }
-
 form {
 	margin-top: 50px;
 }
-
 .item {
 	width: 80%;
 	height: 80%;
@@ -31,7 +29,6 @@ form {
 	border-radius: 1rem;
 	background-color: white;
 }
-
 .info {
 	padding-left: 30px;
 	padding-right: 10px;
@@ -40,7 +37,6 @@ form {
 	float: right;
 	margin: auto;
 }
-
 .btn {
 	margin: 0 auto;
 	padding: 10px;
@@ -51,19 +47,15 @@ form {
 	height: 40px;
 	text-align: center;
 }
-
 .apply {
 	background-color: #FEC8E3;
 }
-
 h1 {
 	text-align: center;
 }
-
 .type {
 	margin-left: 10%;
 }
-
 .btn {
 	margin-bottom: 30px;
 	background-color: #e0d8cb;

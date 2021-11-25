@@ -206,7 +206,6 @@
   <div class="form-group">        
 				  <input type="button"value="등록" onClick="register()" style=background-color:white class=" w-100 btn"/>
 			</div>   
-
     </form>
 </div>
  <%@ include file="/WEB-INF/home/mainFooter.jsp" %>

@@ -44,7 +44,6 @@
 	border-radius: 1rem;
 	background-color:white;
 }
-
 #imgParent {
 	text-align: center;
 	border: 1px solid;
@@ -54,7 +53,6 @@
 	margin-top: 50px;
 	vertical-align: middle;
 }
-
 #info {
 	padding-left: 30px;
 	padding-right: 10px;
@@ -63,7 +61,6 @@
 	float: right;
 	margin: auto;
 }
-
 .btnAll {
 	width: 200px;
 	height: 40px;
@@ -71,16 +68,13 @@
 	display: flex;
 	margin-top: 30px;
 }
-
 .submit, #cancel {
 	text-align: center;
 	width: 45%;
 }
-
 h1 {
 	text-align: center;
 }
-
 .read_only_text {
 	text-color: blue;
 }
