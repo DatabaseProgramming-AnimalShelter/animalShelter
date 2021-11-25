@@ -71,7 +71,9 @@ h1 {
 }
 </style>
 <div class="container">
-	<form name="form" action="<c:url value='/adopt/register' />">
+	<form method="POST" name="form" action="<c:url value='/adopt/result'>
+												<c:param name='apply_id' value='${apply.apply_id}'/>
+										</c:url>">
 		<h2 class="fw-bolder type">no.${apply.apply_id}</h2>
 		<div class="outer">
 			<div class="item">
@@ -127,7 +129,7 @@ h1 {
 							<th scope="row">입양완료 여부</th>
 							<td>${apply.apply_matched}</td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<th><a class="btn btn-outline-danger" role="button"
 								href="<c:url value='/adopt/approval'><c:param name='apply_id' value='${apply.apply_id}'/>
                     </c:url>">
@@ -136,6 +138,20 @@ h1 {
 								href="<c:url value='/adopt/decline'><c:param name='apply_id' value='${apply.apply_id}'/>
                     </c:url>"
 								role="button">거부</a></th>
+						</tr> --%>
+						<tr>
+							<th><a class="btn btn-outline-danger" role="button"
+								href="<c:url value='/adopt/result'><c:param name='apply_id' value='${apply.apply_id}'/>
+                    </c:url>">
+									수락</a></th>
+							<%-- <th><a class="btn btn-outline-secondary"
+								href="<c:url value='/adopt/result'><c:param name='apply_id' value='${apply.apply_id}'/>
+											<c:param name='apply_result' value='0'/>
+                   				 	</c:url>"
+								role="button">거부</a></th> --%>
+							<th>
+								<input class="btn btn-outline-secondary" type="submit" value="거부"  >
+							</th>
 						</tr>
 					</table>
 				</div>

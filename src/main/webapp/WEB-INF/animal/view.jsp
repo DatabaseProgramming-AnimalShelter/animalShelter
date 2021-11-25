@@ -180,12 +180,15 @@ border: 1px black solid}
     </tr>
 </table>
 				</div>
-			</div>
+			</div>	
 
-			<a class="btn btn-primary"
+			<c:if test="${animal.animal_matched == 0}">
+           		<a class="btn btn-primary"
 				href="<c:url value='/adopt/register'>
 	     		   <c:param name='animal_id' value='${animal.animal_id}'/>
 			  </c:url>">입양신청</a>
+            </c:if>	
+		
 		</div>
 	</form>
 </div>

@@ -47,6 +47,11 @@ public class AdoptApplyManager {
 	public int decline(AdoptApply adoptApply) throws SQLException {
 		return adoptApplyDAO.decline(adoptApply);
 	}
+	
+	// 승인과 거절 합친 메소드
+	public int apply_result(AdoptApply adoptApply, int apply_result) throws SQLException {
+		return adoptApplyDAO.apply_result(adoptApply, apply_result);
+	}
 
 	public AdoptApply findAdoptApply(int apply_id) throws SQLException {
 		AdoptApply adoptApply = adoptApplyDAO.findAdoptApply(apply_id);

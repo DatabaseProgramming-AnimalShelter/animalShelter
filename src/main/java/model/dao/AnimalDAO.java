@@ -6,12 +6,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import controller.adopt.CreateAdoptApplyController;
 import model.Adopter;
 import model.Animal;
 import model.service.AnimalManager;
 
 
 public class AnimalDAO {
+	private static final Logger log = LoggerFactory.getLogger(CreateAdoptApplyController.class);
 	private static JDBCUtil jdbcUtil = null;
 	
 	public AnimalDAO() {			
@@ -31,6 +37,9 @@ public class AnimalDAO {
 				animal.getEtc(),
 				animal.getAnimal_matched()
 				};				
+		
+		log.debug("%%%%%%%%%%%%%%%animal_matched : " + animal.getAnimal_matched());
+		
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil �뜝�룞�삕 insert�뜝�룞�삕�뜝�룞�삕 �뜝�떊怨ㅼ삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 						
 		String key[] = {"animal_id"};	// PK �뜝�떆琉꾩삕�뜝�룞�삕 �뜝�떛紐뚯삕     
