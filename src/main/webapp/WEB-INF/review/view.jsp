@@ -28,6 +28,10 @@ function communityRemove() {
 	<br>
 	<table class="table table-sm table-striped">
     	<tbody> 
+		  <tr>
+			<th>동물번호</th>
+			<td>${review.animal_id}</td>
+		  </tr>
 	  	  <tr>
 			<th>제목</th>
 			<td>${review.title}</td>
@@ -55,13 +59,13 @@ function communityRemove() {
 	
     <a class="btn btn-primary" 
     	href="<c:url value='/review/update'>
-	     		   <c:param name='commId' value='${review.post_id}'/>
+	     		   <c:param name='post_id' value='${review.post_id}'/>
 			  </c:url>">수정</a>
 			  
     <a class="btn btn-warning" 
    		href="<c:url value='/review/delete'>
-				   <c:param name='commId' value='${review.post_id}'/>
-			 </c:url>" onclick="return communityRemove();">삭제(미구현)</a>
+				   <c:param name='post_id' value='${review.post_id}'/>
+			 </c:url>" onclick="return reviewRemove();">삭제</a>
 			 
     <a class="btn btn-success" href="<c:url value='/review/list' />">후기 목록</a> 
     <br>	   

@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Review {
 	private int post_id;
-	private String animal_id;
+	private int animal_id;
 	private String writer;
 	private String title;
-	private String content;
 	private Date creationDate;
+	private String content;
 	private String image;
 	
-	public Review(int post_id, String animal_id, String writer, String title, String content, Date creationDate,
-			String image) {
+	public Review(int post_id, int animal_id, String writer, String title, 
+			String content, Date creationDate, String image) {
 		super();
 		this.post_id = post_id;
 		this.animal_id = animal_id;
@@ -23,16 +23,83 @@ public class Review {
 		this.image = image;
 	}
 	
+	public Review( int animal_id, String writer, String title, 
+			String content, Date creationDate, String image) {
+		super();
+		this.animal_id = animal_id;
+		this.writer = writer;
+		this.title = title;
+		this.content = content;
+		this.creationDate = creationDate;
+		this.image = image;
+	}
+	
+	public Review( int animal_id, String writer, 
+			String title, String content) {
+		super();
+		this.animal_id = animal_id;
+		this.writer = writer;
+		this.title = title;
+		this.content = content;
+	}
+	
+	public Review( int post_id, int animal_id, String writer, 
+			String title, String content) {
+		super();
+		this.post_id = post_id;
+		this.animal_id = animal_id;
+		this.writer = writer;
+		this.title = title;
+		this.content = content;
+	}
+	
+	public Review( int post_id, int animal_id, String writer, 
+			String title, String content, Date creationDate) {
+		super();
+		this.post_id = post_id;
+		this.animal_id = animal_id;
+		this.writer = writer;
+		this.title = title;
+		this.content = content;
+		this.creationDate = creationDate;
+	}
+	
+	
+	public Review(int post_id, String title, String content) {
+		super();
+		this.post_id = post_id;
+		this.title = title;
+		this.content = content;
+	}
+	
+
+	public Review(Object parseInt) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Review(int post_id, String title, String content, 
+			java.sql.Date creationDate, String writer, int animal_id) {
+		// TODO Auto-generated constructor stub
+		super();
+		this.post_id = post_id;
+		this.title = title;
+		this.content = content;
+		this.creationDate = creationDate;
+		this.writer = writer;
+		this.animal_id = animal_id;
+	}
+
+
 	public int getPost_id() {
 		return post_id;
 	}
 	public void setPost_id(int post_id) {
 		this.post_id = post_id;
 	}
-	public String getAnimal_id() {
+	public int getAnimal_id() {
 		return animal_id;
 	}
-	public void setAnimal_id(String animal_id) {
+	public void setAnimal_id(int animal_id) {
 		this.animal_id = animal_id;
 	}
 	public String getWriter() {

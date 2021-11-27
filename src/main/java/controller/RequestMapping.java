@@ -15,6 +15,11 @@ import controller.adopt.ViewApplyController;
 import controller.adopt.ViewApprovalListController;
 import controller.animal.ListAnimalController;
 import controller.animal.ViewAnimalController;
+import controller.review.DeleteReviewController;
+import controller.review.ListReviewController;
+import controller.review.RegisterReviewController;
+import controller.review.UpdateReviewController;
+import controller.review.ViewReviewController;
 import controller.user.*;
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -49,6 +54,12 @@ public class RequestMapping {
         mappings.put("/adopt/approval", new ManagerAcceptController());
         mappings.put("/adopt/decline", new ManagerDeclineController()); 
         mappings.put("/adopt/result", new ManagerResultController());
+
+        mappings.put("/review/list", new ListReviewController());
+        mappings.put("/review/register", new RegisterReviewController());
+        mappings.put("/review/view", new ViewReviewController());
+        mappings.put("/review/update", new UpdateReviewController());
+        mappings.put("/review/delete", new DeleteReviewController());
 
         
         

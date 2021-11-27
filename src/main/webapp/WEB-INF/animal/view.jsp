@@ -181,6 +181,12 @@ border: 1px black solid}
 	     		   <c:param name='animal_id' value='${animal.animal_id}'/>
 			  </c:url>">입양신청</a>
             </c:if>	
+            
+           	<a class="btn btn-primary" 
+           	href="<c:url value='/review/register'>
+	     		   	<c:param name='animal_id' value='${animal.animal_id}'/>
+			  	  </c:url>">
+			후기작성</a>
 		
 		</div>
 	</form>
