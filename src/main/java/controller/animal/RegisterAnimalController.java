@@ -13,10 +13,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.animal.RegisterAnimalController;
+import controller.user.UserSessionUtils;
 import model.Animal;
 import model.service.ExistingUserException;
 import model.service.AnimalManager;
 import model.service.AnimalNotFoundException;
+
+import model.Heart;
+import model.service.HeartManager;
+//import model.service.AnimalNotFoundException;
 
 //파일 업로드를 위한 API를 사용하기 위해...
 import org.apache.commons.fileupload.*;
@@ -139,13 +144,27 @@ public class RegisterAnimalController implements Controller {
 		System.out.println("@@@@@@@@@@@@Create Animal :---------------------" + species);
 		Animal animal = new Animal(Integer.parseInt(species), Integer.parseInt(age), location, filename, gender, weight,
 				etc, 0);
-		System.out.println("Create Animal :---------------------" + animal);
+		System.out.println("Create Animal :---------------------" + animal.getAge());
+	
+		
 		log.debug("Create Animal : {}", animal);
 		int animal_id = 0;
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		try {
 			AnimalManager manager = AnimalManager.getInstance();
 			animal_id = manager.create(animal);
+			//동물 id받아온거로 여기서 하트 객체 추기
+			System.out.println("-------+id"+ animal_id+user_id);
+			Heart heart = new Heart(animal_id, user_id);
+			System.out.println("111111111Create Heart :-------+id"+ heart.getUser_id()+"---------------" + heart);
+			HeartManager h_manager = HeartManager.getInstance();
+			h_manager.create(heart);
+			System.out.println("22222222222h_manager.cCreate Heart :--------------------" + heart);
+			
+			
+			
 			animal = manager.findAnimal(animal_id);
+			
 			request.setAttribute("animal", animal);
 			request.setAttribute("dir", dir);
 			request.setAttribute("filename", filename);

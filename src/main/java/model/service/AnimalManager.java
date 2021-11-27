@@ -68,45 +68,6 @@ public class AnimalManager {
 		return animal;
 	}
 
-	// currentPage ??
-//	public List<User> findUserList(int currentPage, int countPerPage)
-//	throws SQLException {
-//	return userDAO.findUserList(currentPage, countPerPage);
-//}
-
-	/*
-	 * public boolean login(String user_id, String password) throws SQLException,
-	 * UserNotFoundException, PasswordMismatchException { Adopter user =
-	 * findUser(user_id);
-	 * 
-	 * if (!user.matchPassword(password)) { throw new
-	 * PasswordMismatchException("占쏙옙橘占싫ｏ옙占� 占쏙옙치占쏙옙占쏙옙 占십쏙옙占싹댐옙."); } return true; }
-	 */
-
-	/*
-	 * public List<User> makeFriends(String userId) throws Exception { return
-	 * userAanlysis.recommendFriends(userId); }
-	 * 
-	 * public Community createCommunity(Community comm) throws SQLException { return
-	 * commDAO.create(comm); }
-	 * 
-	 * public int updateCommunity(Community comm) throws SQLException { return
-	 * commDAO.update(comm); }
-	 * 
-	 * public Community findCommunity(int commId) throws SQLException { Community
-	 * comm = commDAO.findCommunity(commId);
-	 * 
-	 * List<User> memberList = userDAO.findUsersInCommunity(commId);
-	 * comm.setMemberList(memberList);
-	 * 
-	 * int numOfMembers = userDAO.getNumberOfUsersInCommunity(commId);
-	 * comm.setNumOfMembers(numOfMembers); return comm; }
-	 * 
-	 * public List<Community> findCommunityList() throws SQLException { return
-	 * commDAO.findCommunityList(); }
-	 * 
-	 * public List<User> findCommunityMembers(int commId) throws SQLException {
-	 * return userDAO.findUsersInCommunity(commId); }
-	 */
+	
 
 }

@@ -19,7 +19,7 @@ public class AnimalDAO {
    }
 
    public int create(Animal animal) throws SQLException {
-      String sql = "INSERT INTO Animal VALUES (animal_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?)";      
+      String sql = "INSERT INTO Animal VALUES (animal_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?) " ;      
       Object[] param = new Object[] {
             
             animal.getCategory_id(),
@@ -38,7 +38,7 @@ public class AnimalDAO {
       try {    
          jdbcUtil.executeUpdate(key);  // insert  뜝 룞 삕  뜝 룞 삕 뜝 룞 삕
             ResultSet rs = jdbcUtil.getGeneratedKeys();
-            if(rs.next()) {
+            if(rs.next()) {//함수를 새로 쓰는게 낫나?
                generatedKey = rs.getInt(1);   // 占쏙옙占쏙옙占쏙옙 PK 占쏙옙
                animal.setAnimal_id(generatedKey);    // id占십드에 占쏙옙占쏙옙  
             }
@@ -52,8 +52,7 @@ public class AnimalDAO {
       }      
       return 0;         
    }
-
-
+ 
    public int update(Animal animal) throws SQLException {
       String sql = "UPDATE Animal "
                + "SET age=?, location=?, image=?, gender=?, weight=?, etc=?, animal_matched=?  "
@@ -330,4 +329,10 @@ public class AnimalDAO {
    }
    
 
+   
+   
+   
+   
+   
+   
 }
