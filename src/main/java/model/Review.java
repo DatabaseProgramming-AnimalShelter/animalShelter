@@ -43,6 +43,16 @@ public class Review {
 		this.content = content;
 	}
 	
+	public Review( int animal_id, String writer, 
+			String title, String content, String image) {
+		super();
+		this.animal_id = animal_id;
+		this.writer = writer;
+		this.title = title;
+		this.content = content;
+		this.image = image;
+	}
+	
 	public Review( int post_id, int animal_id, String writer, 
 			String title, String content) {
 		super();
@@ -71,6 +81,8 @@ public class Review {
 		this.title = title;
 		this.content = content;
 	}
+	
+	
 	
 
 	public Review(Object parseInt) {

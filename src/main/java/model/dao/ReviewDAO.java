@@ -37,7 +37,7 @@ CREATE TABLE Review
 		Object[] param = new Object[] {
 				review.getTitle(),
 				review.getContent(),
-				"imageimage",
+				review.getImage(),
 				review.getWriter(),
 				review.getAnimal_id()
 				};				
@@ -125,11 +125,12 @@ CREATE TABLE Review
 			if (rs.next()) {						// 학생 정보 발견
 				Review review = new Review(		// User 객체를 생성하여 학생 정보를 저장
 					rs.getInt("post_id"),
+					rs.getInt("animal_id"),
+					rs.getString("writer"),
 					rs.getString("title"),
 					rs.getString("content"),
 					rs.getDate("creationDate"),
-					rs.getString("writer"),
-					rs.getInt("animal_id")
+					rs.getString("image")
 					);
 				return review;
 			}

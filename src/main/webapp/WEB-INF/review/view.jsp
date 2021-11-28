@@ -50,7 +50,17 @@ function communityRemove() {
 		  </tr>
 		  <tr>
 			<th>사진</th>
-			<td>${review.image}</td>
+			<td>
+				<c:choose>
+					<c:when test="${not empty review.image}">
+						<img
+							src="${pageContext.request.session.servletContext.contextPath}/upload/${review.image}"  class="" height="300px"/>
+					</c:when>
+					<c:otherwise>
+						<span>사진없음</span>
+					</c:otherwise>
+				</c:choose>
+			</td>
 		  </tr>
 		</tbody>
 	</table>
