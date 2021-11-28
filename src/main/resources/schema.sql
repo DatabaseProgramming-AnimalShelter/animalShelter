@@ -40,12 +40,11 @@ ALTER TABLE Adopter
 
 CREATE TABLE Animal
 (
-   
    animal_id            INTEGER NOT NULL ,
-    category_id          INTEGER NOT NULL ,
-    age                  INT NULL ,
+   category_id          INTEGER NOT NULL ,
+   age                  INT NULL ,
    location             VARCHAR2(40) NULL ,
-    image                VARCHAR2(40) NULL ,
+   image                VARCHAR2(40) NULL ,
    gender               VARCHAR2(40) NULL ,
    weight               VARCHAR2(40) NULL ,
    etc                  VARCHAR2(40) NULL ,
@@ -53,17 +52,16 @@ CREATE TABLE Animal
    
 );
 
-
 ALTER TABLE Animal
    ADD CONSTRAINT  XPKAnimal PRIMARY KEY (animal_id);
 
 CREATE TABLE AdoptApply
 (
    apply_id             INTEGER NOT NULL ,
-    user_id              VARCHAR2(20) NULL ,
-    animal_id            INTEGER NULL ,
+   user_id              VARCHAR2(20) NULL ,
+   animal_id            INTEGER NULL ,
    content              VARCHAR2(40) NULL ,
-    living_environment   VARCHAR2(40) NULL ,
+   living_environment   VARCHAR2(40) NULL ,
    apply_matched        INT NULL ,
    have_pets            VARCHAR2(40) NULL ,
    apply_date           DATE NULL ,
@@ -146,37 +144,35 @@ ALTER TABLE Animal
    ADD (CONSTRAINT R_27 FOREIGN KEY (category_id) REFERENCES category (category_id));
 
 ALTER TABLE AdoptApply
-   ADD (CONSTRAINT R_20 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_20 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE AdoptApply
-   ADD (CONSTRAINT R_22 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_22 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE;);
 
 ALTER TABLE A_heart
-   ADD (CONSTRAINT R_28 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_28 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE;);
 
 ALTER TABLE A_heart
-   ADD (CONSTRAINT R_29 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_29 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE;);
 
 ALTER TABLE Qna
-   ADD (CONSTRAINT R_32 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_32 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE;);
 
 ALTER TABLE Qna
-   ADD (CONSTRAINT R_33 FOREIGN KEY (qna_category_id) REFERENCES qna_category (qna_category_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_33 FOREIGN KEY (qna_category_id) REFERENCES qna_category (qna_category_id) ON DELETE CASCADE;);
 
 ALTER TABLE Review
-   ADD (CONSTRAINT 후기작성 FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT 후기작성 FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE;);
 
 ALTER TABLE Review
-   ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE;);
 
 ALTER TABLE R_heart
-   ADD (CONSTRAINT R_30 FOREIGN KEY (post_id) REFERENCES Review (post_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_30 FOREIGN KEY (post_id) REFERENCES Review (post_id) ON DELETE CASCADE;);
 
 ALTER TABLE R_heart
-   ADD (CONSTRAINT R_34 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_34 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE;);
 
-
-   
 CREATE SEQUENCE dog_id_seq
 START WITH 100
 INCREMENT BY 1;
@@ -232,7 +228,6 @@ INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '샴', '고양이');
 INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '뱅갈', '고양이');
 INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '먼치킨', '고양이');
 INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '스핑크스', '고양이');
-
 
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'suggest');
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'inquiry');
