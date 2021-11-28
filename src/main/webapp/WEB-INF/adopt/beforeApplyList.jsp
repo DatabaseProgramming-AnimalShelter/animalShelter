@@ -18,9 +18,8 @@
 			
 			 		 <tr onclick='location.href="<c:url value='/adopt/view'>
 					   <c:param name='apply_id' value='${adopt.apply_id}'/>
-			 		 </c:url>"'>	<th scope="row">
-							
-			 	${adopt.apply_id} </th>
+			 		 </c:url>"'>
+					<th scope="row">${adopt.apply_id}</th>
 					<td>${adopt.user_name}</td>
 					<td>${adopt.animal_id}</td>
 					<td>${adopt.apply_date}</td>

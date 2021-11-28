@@ -69,7 +69,7 @@ public class AnimalDAO {
                + "WHERE animal_id=?";
       Object[] param = new Object[] {animal.getAge(), animal.getLocation(),
             animal.getImage(), animal.getGender(), animal.getWeight(),
-            animal.getEtc(), animal.getAnimal_matched()};            
+            animal.getEtc(), animal.getMatched(), animal.getAnimal_id()};            
       jdbcUtil.setSqlAndParameters(sql, param);   // JDBCUtil 뜝 룞 삕 update 뜝 룞 삕 뜝 룞 삕  뜝 떊怨ㅼ삕  뜝 룞 삕 뜝 룞 삕  뜝 룞 삕 뜝 룞 삕
          
       try {            
@@ -88,7 +88,7 @@ public class AnimalDAO {
 
 
    public int remove(int animal_id) throws SQLException {
-      String sql = "DELETE FROM Animal WHERE animal_id=?";      
+      String sql = "DELETE FROM Animal WHERE animal_id=? ";      
       jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});   // JDBCUtil 뜝 룞 삕 delete 뜝 룞 삕 뜝 룞 삕  뜝 떊怨ㅼ삕  뜝 룞 삕 뜝 룞 삕  뜝 룞 삕 뜝 룞 삕
 
       try {            
@@ -109,7 +109,7 @@ public class AnimalDAO {
    public static Animal findAnimal(int animal_id) throws SQLException {
         String sql = "SELECT a.animal_id, a.category_id, a.age, a.location, a.animal_matched, a.image,a.gender,a.weight,a.etc, c.species, c.animal_type "
               + " FROM Animal a JOIN Category c ON a.category_id = c.category_id " 
-             + "WHERE animal_id=?";  
+             + "WHERE a.animal_id=?";  
       jdbcUtil.setSqlAndParameters(sql, new Object[] {animal_id});   // JDBCUtil 뜝 룞 삕 query 뜝 룞 삕 뜝 룞 삕  뜝 떊怨ㅼ삕  뜝 룞 삕 뜝 룞 삕  뜝 룞 삕 뜝 룞 삕
 
       try {
@@ -140,7 +140,7 @@ public class AnimalDAO {
    public List<Animal> findAnimalList() throws SQLException {
         String sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image ,a.gender "
                  + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
-                 + "ORDER BY animal_id desc";        
+                 + "ORDER BY a.animal_id desc";        
                  
       jdbcUtil.setSqlAndParameters(sql, null);      
                
@@ -187,7 +187,7 @@ public class AnimalDAO {
            sql = "SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc "
                       + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
                       + "WHERE a.location=? "
-                      + "ORDER BY animal_id desc";   
+                      + "ORDER BY a.animal_id desc";   
             param = new Object[] { location};
             // param = null;
             System.out.println("다른건 전체 지역만 검색");

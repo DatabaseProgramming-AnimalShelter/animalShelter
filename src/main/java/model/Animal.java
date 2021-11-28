@@ -44,7 +44,19 @@ public class Animal {
 		this.species = species;
 		this.animal_type = animal_type;
 	}
-
+	public Animal(int animal_id, int category_id, int age, String location, int matched, String image, String gender,
+			String weight, String etc) {
+		super();
+		this.animal_id = animal_id;
+		this.category_id = category_id;
+		this.age = age;
+		this.location = location;
+		this.matched = matched;
+		this.image = image;
+		this.gender = gender;
+		this.weight = weight;
+		this.etc = etc;
+	}
 	public Animal(int animal_id, int category_id, int age, String location, int matched, String image) {
 		super();
 		this.animal_id = animal_id;

@@ -21,7 +21,7 @@ import model.Adopter;
 import model.Animal;
 
 public class AdoptApplyDAO {
-	private static final Logger log = LoggerFactory.getLogger(CreateAdoptApplyController.class);
+	private static final Logger log = LoggerFactory.getLogger(AdoptApplyDAO.class);
 	
 	private JDBCUtil jdbcUtil = null;
 	AdoptApply adoptApply = new AdoptApply();

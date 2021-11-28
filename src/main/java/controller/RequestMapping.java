@@ -5,22 +5,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controller.animal.RegisterAnimalController;
-import controller.adopt.CreateAdoptApplyController;
-import controller.adopt.ListResultApplyController;
-import controller.adopt.ManagerAcceptController;
-import controller.adopt.ManagerDeclineController;
-import controller.adopt.ManagerResultController;
-import controller.adopt.ViewApplyController;
-import controller.adopt.ViewApprovalListController;
-import controller.animal.ListAnimalController;
-import controller.animal.ViewAnimalController;
-import controller.review.DeleteReviewController;
-import controller.review.ListReviewController;
-import controller.review.RegisterReviewController;
-import controller.review.UpdateReviewController;
-import controller.review.ViewReviewController;
+import controller.adopt.*;
+import controller.animal.*;
+import controller.review.*;
 import controller.user.*;
+import controller.qna.*;
+
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
     
@@ -36,15 +26,15 @@ public class RequestMapping {
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
         mappings.put("/user/mypage", new ViewUserController());
-
         mappings.put("/user/register", new RegisterUserController());
        
 //        mappings.put("/animal/search", new SearchAnimalController());
         mappings.put("/animal/view", new ViewAnimalController());
         mappings.put("/animal/list", new ListAnimalController());
         mappings.put("/animal/register", new RegisterAnimalController());
+        mappings.put("/animal/delete", new DeleteAnimalController());
+        mappings.put("/animal/update", new UpdateAnimalController());
         
-        // 엯 뼇 떊泥   룞臾쇱삁 빟
         mappings.put("/adopt/register", new CreateAdoptApplyController());
         mappings.put("/adopt/view", new ViewApplyController());
         mappings.put("/adopt/accept", new RegisterAnimalController());
@@ -61,7 +51,11 @@ public class RequestMapping {
         mappings.put("/review/update", new UpdateReviewController());
         mappings.put("/review/delete", new DeleteReviewController());
 
-        
+        mappings.put("/qna/create", new RegisterQnaController());
+        mappings.put("/qna/list", new ListQnaController());
+        mappings.put("/qna/view", new ViewQnaController());
+        mappings.put("/qna/update", new UpdateQnaController());
+        mappings.put("/qna/delete", new DeleteReviewController());
         
         logger.info("Initialized Request Mapping!");
     }

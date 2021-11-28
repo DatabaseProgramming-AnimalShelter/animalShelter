@@ -37,7 +37,6 @@ public class AnimalManager {
 	}
 
 	public int remove(int animal_id) throws SQLException, UserNotFoundException {
-
 		return animalDAO.remove(animal_id);
 	}
 
@@ -59,7 +58,7 @@ public class AnimalManager {
 
 	public Animal findAnimal(int animal_id) throws SQLException, AnimalNotFoundException {
 		// TODO Auto-generated method stub
-		Animal animal = animalDAO.findAnimal(animal_id);
+		Animal animal = AnimalDAO.findAnimal(animal_id);
 
 		if (animal == null) {
 			throw new AnimalNotFoundException(animal_id + "媛� 議댁옱�븯吏��븡�뒿�땲�떎.");

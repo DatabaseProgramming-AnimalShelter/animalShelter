@@ -98,6 +98,10 @@ admin {
                 <li class="nav-item"><a href="<c:url value="/animal/register"></c:url>" class="nav-link link-dark px-2">유기동물등록</a></li>
                 <li class="nav-item"><a href="<c:url value="/adopt/list" />" class="nav-link link-dark px-2">입양신청목록</a></li>
                 <li class="nav-item"><a href="<c:url value="/adopt/approved_list" />" class="nav-link link-dark px-2">입양결과</a></li>
+                <li class="nav-item"><a href="<c:url value="/qna/list" />" class="nav-link link-dark px-2">QNA게시판</a></li>
+            </c:when>
+            <c:when test="${user_id!='admin'}">
+                <li class="nav-item"><a href="<c:url value="/qna/create" />" class="nav-link link-dark px-2">관리자에게 문의</a></li>  
             </c:when>
           </c:choose> 
         </ul>
