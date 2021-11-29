@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Adopter;
+
 import model.Animal;
 import model.service.AnimalManager;
 
@@ -20,6 +21,7 @@ public class AnimalDAO {
 
    public int create(Animal animal) throws SQLException {
       String sql = "INSERT INTO Animal VALUES (animal_id_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?) " ;      
+
       Object[] param = new Object[] {
             
             animal.getCategory_id(),
@@ -128,11 +130,12 @@ public class AnimalDAO {
    }
 
    public List<Animal> findAnimalList() throws SQLException {
+	   
         String sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image ,a.gender "
                  + "FROM animal a JOIN Category c ON a.category_id = c.category_id " 
                  + "ORDER BY animal_id desc";        
                  
-      jdbcUtil.setSqlAndParameters(sql, null);      
+      jdbcUtil.setSqlAndParameters(sql,null);      
                
       try {
          ResultSet rs = jdbcUtil.executeQuery();         
@@ -156,7 +159,37 @@ public class AnimalDAO {
       }
       return null;
    }
-   
+   public List<Animal> findAnimalList_heart(String user_id) throws SQLException {
+       String sql = "SELECT a.animal_id, c.category_id,c.species, a.age, a.location, a.image ,a.gender,a_heart.a_heart_id  "
+                + "FROM animal a JOIN Category c ON a.category_id = c.category_id ,a_heart  " 
+    		    + "WHERE a_heart.animal_id = a.animal_id and a_heart.user_id='?' "
+                + "ORDER BY animal_id desc";       
+     System.out.println("############"+user_id+"#################");
+     jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});      
+              
+     try {
+        ResultSet rs = jdbcUtil.executeQuery();         
+        List<Animal> animalList = new ArrayList<Animal>();   
+        while (rs.next()) {
+           Animal animal = new Animal(
+                 rs.getInt("animal_id"), 
+                 rs.getInt("category_id"),
+                 rs.getInt("age"),
+                 rs.getString("location"),
+                 rs.getString("image"),
+                 rs.getString("gender"),
+                 rs.getString("a_heart_id"));
+           animalList.add(animal);            
+        }      
+        return animalList;               
+        
+     } catch (Exception ex) {
+        ex.printStackTrace();
+     } finally {
+        jdbcUtil.close();      
+     }
+     return null;
+  }
    public List<Animal> searchAnimalList(String animal_type,int category_id, int matched,String location) throws SQLException {
       String sql = null;
       Object[] param;

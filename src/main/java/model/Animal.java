@@ -7,26 +7,12 @@ public class Animal {
 	private String location;
 	private int matched;
 	private String image;
-	public String getSpecies() {
-		return species;
-	}
-
-	public void setSpecies(String species) {
-		this.species = species;
-	}
-
-	public String getAnimal_type() {
-		return animal_type;
-	}
-
-	public void setAnimal_type(String animal_type) {
-		this.animal_type = animal_type;
-	}
 	private String gender;
 	private String weight;
 	private String etc;
 	private String species;
 	private String animal_type;
+	
 
 	
 	public Animal(int animal_id, int category_id, int age, String location, int matched, String image, String gender,
@@ -98,6 +84,23 @@ public class Animal {
 		this.gender = gender;
 		this.etc = etc;
 	}
+	public String getSpecies() {
+		return species;
+	}
+
+	public void setSpecies(String species) {
+		this.species = species;
+	}
+
+	public String getAnimal_type() {
+		return animal_type;
+	}
+
+	public void setAnimal_type(String animal_type) {
+		this.animal_type = animal_type;
+	}
+
+
 	public int getAnimal_id() {
 		return animal_id;
 	}

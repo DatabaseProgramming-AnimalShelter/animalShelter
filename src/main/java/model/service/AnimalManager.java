@@ -52,10 +52,14 @@ public class AnimalManager {
 	public List<Animal> findAnimalList() throws SQLException {
 		return animalDAO.findAnimalList();
 	}
-
+	public List<Animal> findAnimalList_heart(String user_id) throws SQLException {
+		return animalDAO.findAnimalList_heart(user_id);
+	}
 	public List<Animal> searchAnimalList( String animal_type, int category_id, int matched,String location) throws SQLException {
 		return animalDAO.searchAnimalList(animal_type, category_id, matched,location);
 	}
+	
+	
 
 	public Animal findAnimal(int animal_id) throws SQLException, AnimalNotFoundException {
 		// TODO Auto-generated method stub

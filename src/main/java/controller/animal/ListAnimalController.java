@@ -15,6 +15,7 @@ public class ListAnimalController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		if (request.getMethod().equals("POST")) {
 
 			String type = request.getParameter("type");
@@ -30,9 +31,13 @@ public class ListAnimalController implements Controller {
 			System.out.println("category_id" + category_id);
 			matched = Integer.parseInt(request.getParameter("matched"));
 			System.out.println("matched" + matched);
+			
+			
 			AnimalManager manager = AnimalManager.getInstance();
 			List<Animal> animalList = manager.searchAnimalList(type,category_id, matched,location);
 			System.out.println("animalList");
+			
+			
 			request.setAttribute("animalList", animalList);					
 			request.setAttribute("type", type);		
 			request.setAttribute("category_id", category_id);
@@ -44,8 +49,11 @@ public class ListAnimalController implements Controller {
 		}
 		AnimalManager manager = AnimalManager.getInstance();
 		List<Animal> animalList = manager.findAnimalList();
-
-		request.setAttribute("animalList", animalList);
+		
+		
+		List<Animal> animalList_heart = manager.findAnimalList_heart(user_id);
+		//request.setAttribute("animalList", animalList);
+		request.setAttribute("animalList", animalList_heart);
 
 		return "/animal/list.jsp";
 	}
