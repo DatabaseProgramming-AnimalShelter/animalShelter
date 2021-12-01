@@ -51,7 +51,8 @@ function reviewCreate() {
 	<!-- registration form  -->
 	<form name="form" method="POST" action="<c:url value='/review/register'>
 	     		   								<c:param name='animal_id' value='${animal_id}'/>
-			  	  							</c:url>">
+			  	  							</c:url>" 
+			  	  							enctype="multipart/form-data" >
     	<div class="form-group row">   
 	        <label for="title" class="col-lg-2 col-form-label">동물번호</label>
 	        <div class="col-lg-10">	    
@@ -69,7 +70,13 @@ function reviewCreate() {
 	        <div class="col-lg-10">
         		<textarea id="body" name="content" rows=15" cols="50" placeholder="내용을 입력하시오." class="form-control"></textarea>
 	        </div>
-	    </div>       
+	    </div> 
+	    <div class="form-group row">   
+	        <label for="content" class="col-lg-2 col-form-label">사진</label>
+	        <div class="col-lg-10">
+        		<input type="file" name="image" size="11"/>
+	        </div>
+	    </div>         
 	    <br>
 	    <div class="form-group">        
 			<input type="button" class="btn btn-primary" value="확인" onClick="reviewCreate()"> 	     
