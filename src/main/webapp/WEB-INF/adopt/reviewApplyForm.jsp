@@ -15,9 +15,11 @@
 	height: 700px;
 	background-image: url("<c:url value='/images/yg1.png'/>");
 }
+
 form {
 	margin-top: 50px;
 }
+
 .item {
 	width: 80%;
 	height: 80%;
@@ -29,6 +31,7 @@ form {
 	border-radius: 1rem;
 	background-color: white;
 }
+
 .info {
 	padding-left: 30px;
 	padding-right: 10px;
@@ -37,6 +40,7 @@ form {
 	float: right;
 	margin: auto;
 }
+
 .btn {
 	margin: 0 auto;
 	padding: 10px;
@@ -47,15 +51,19 @@ form {
 	height: 40px;
 	text-align: center;
 }
+
 .apply {
 	background-color: #FEC8E3;
 }
+
 h1 {
 	text-align: center;
 }
+
 .type {
 	margin-left: 10%;
 }
+
 .btn {
 	margin-bottom: 30px;
 	background-color: #e0d8cb;
@@ -63,9 +71,10 @@ h1 {
 }
 </style>
 <div class="container">
-	<form method="POST" name="form" action="<c:url value='/adopt/result'>
-												<c:param name='apply_id' value='${apply.apply_id}'/>
-										</c:url>">
+	<form method="POST" name="form"
+		action="<c:url value='/adopt/result'>
+						<c:param name='apply_id' value='${apply.apply_id}'/>
+				</c:url>">
 		<h2 class="fw-bolder type">no.${apply.apply_id}</h2>
 		<div class="outer">
 			<div class="item">
@@ -93,7 +102,8 @@ h1 {
 						</tr>
 						<tr>
 							<th scope="row">동물아이디</th>
-							<td><a href="<c:url value='/animal/view'>
+							<td><a
+								href="<c:url value='/animal/view'>
 	                     <c:param name='animal_id' value='${apply.animal_id}'/>
 	                    </c:url>">${apply.animal_id}</a></td>
 						</tr>
@@ -121,30 +131,14 @@ h1 {
 							<th scope="row">입양완료 여부</th>
 							<td>${apply.apply_matched}</td>
 						</tr>
-						<%-- <tr>
-							<th><a class="btn btn-outline-danger" role="button"
-								href="<c:url value='/adopt/approval'><c:param name='apply_id' value='${apply.apply_id}'/>
-                    </c:url>">
-									수락</a></th>
-							<th><a class="btn btn-outline-secondary"
-								href="<c:url value='/adopt/decline'><c:param name='apply_id' value='${apply.apply_id}'/>
-                    </c:url>"
-								role="button">거부</a></th>
-						</tr> --%>
-						<tr>
-							<th><a class="btn btn-outline-danger" role="button"
-								href="<c:url value='/adopt/result'><c:param name='apply_id' value='${apply.apply_id}'/>
-                    </c:url>">
-									수락</a></th>
-							<%-- <th><a class="btn btn-outline-secondary"
-								href="<c:url value='/adopt/result'><c:param name='apply_id' value='${apply.apply_id}'/>
-											<c:param name='apply_result' value='0'/>
-                   				 	</c:url>"
-								role="button">거부</a></th> --%>
-							<th>
-								<input class="btn btn-outline-secondary" type="submit" value="거부"  >
-							</th>
-						</tr>
+						<c:if test="${user_id == 'admin'}">
+							<tr>
+								<th><input class="btn btn-outline-danger" type="submit" value="승인"></th>
+								<th><a class="btn btn-outline-secondary" role="button"
+									href="<c:url value='/adopt/result'><c:param name='apply_id' value='${apply.apply_id}'/>
+                   					 </c:url>">거부</a></th>
+							</tr>
+						</c:if>
 					</table>
 				</div>
 			</div>

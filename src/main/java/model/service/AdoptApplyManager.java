@@ -48,7 +48,7 @@ public class AdoptApplyManager {
 		return adoptApplyDAO.decline(adoptApply);
 	}
 	
-	// ìŠ¹ì¸ê³¼ ê±°ì ˆ í•©ì¹œ ë©”ì†Œë“œ
+	// ½ÂÀÎ°ú °ÅÀı ÇÕÄ£ ¸Ş¼Òµå
 	public int apply_result(AdoptApply adoptApply, int apply_result) throws SQLException {
 		return adoptApplyDAO.apply_result(adoptApply, apply_result);
 	}
@@ -58,16 +58,20 @@ public class AdoptApplyManager {
 		return adoptApply;
 	}
 
-	// ê°œì¸mypageì—ì„œ ë³´ì¼ result list
-	public List<AdoptApply> findAdoptApplyResult(String user_id) throws SQLException {
-		return adoptApplyDAO.findAdoptApplyResult(user_id);
+	// °³ÀÎ mypage¿¡¼­ º¸ÀÏ result list
+	public List<AdoptApply> findUserAdoptList(String user_id) throws SQLException {
+		return adoptApplyDAO.findUserAdoptList(user_id);
 	}
-
+	
+	public List<AdoptApply> findAnimalAdoptList(int animal_id) throws SQLException {
+		return adoptApplyDAO.findAnimalAdoptList(animal_id);
+	}
+	
 	public List<AdoptApply> findAdoptApplyList() throws SQLException {
 		return adoptApplyDAO.findAdoptApplyList();
 	}
 
-	// ê´€ë¦¬ìê°€ ìŠ¹ì¸ ê±°ì ˆí•œ ê²°ê³¼ë¥¼ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸
+	// °ü¸®ÀÚ°¡ ½ÂÀÎ °ÅÀıÇÑ °á°ú¸¦ º¸¿©ÁÖ´Â ¸®½ºÆ®
 	public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
 		return adoptApplyDAO.findAdoptApplyResultList();
 	}

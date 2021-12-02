@@ -12,7 +12,7 @@ public class ListResultApplyController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)   throws Exception {
       
-       AdoptApplyManager manager = AdoptApplyManager.getInstance();
+      AdoptApplyManager manager = AdoptApplyManager.getInstance();
       List<AdoptApply> adoptApplyList = manager.findAdoptApplyList();
 
       request.setAttribute("adoptApplyList", adoptApplyList);

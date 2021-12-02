@@ -175,13 +175,20 @@ border: 1px black solid}
 				</div>
 			</div>	
 
-			<c:if test="${animal.animal_matched == 0}">
+			<c:if test="${animal.animal_matched == 0 && applied == false}">
            		<a class="btn btn-primary"
 				href="<c:url value='/adopt/register'>
 	     		   <c:param name='animal_id' value='${animal.animal_id}'/>
 			  </c:url>">입양신청</a>
             </c:if>	
-		
+            
+			<c:if test="${apply.user_id == user_id}">
+           		<p>이미 입양 신청 한 동물입니다.</p>
+            </c:if>
+            
+            <c:if test="${apply.user_id != user_id && applied == true}">
+           		<p text-align="center">입양 승인을 기다리는 동물입니다.</p>
+            </c:if>
 		</div>
 	</form>
 </div>

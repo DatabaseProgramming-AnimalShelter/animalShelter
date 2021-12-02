@@ -30,14 +30,14 @@ public class ViewUserController implements Controller {
 		List<AdoptApply> list = null;
 		try {
 			user = manager.findUser(user_id);
-			list = apply_manager.findAdoptApplyResult(user_id);
+			//list = apply_manager.findAdoptApplyResult(user_id);
 		} catch (UserNotFoundException e) {
-			System.out.println("사용자를 찾을 수 없습니다.");
+			System.out.println("�궗�슜�옄瑜� 李얠쓣 �닔 �뾾�뒿�땲�떎.");
 			return "redirect:/";
 		}
 		request.setAttribute("user", user);
-		request.setAttribute("AdoptApplyList", list);
-		//입양신청 목록 - 승인결과
+		//request.setAttribute("AdoptApplyList", list);
+		//�엯�뼇�떊泥� 紐⑸줉 - �듅�씤寃곌낵
 		return "/user/mypage.jsp";
 	}
 

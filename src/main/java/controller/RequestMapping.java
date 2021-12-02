@@ -15,6 +15,7 @@ import controller.adopt.ViewApplyController;
 import controller.adopt.ViewApprovalListController;
 import controller.animal.ListAnimalController;
 import controller.animal.ViewAnimalController;
+import controller.adopt.UserAdoptListController;
 import controller.user.*;
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -30,16 +31,19 @@ public class RequestMapping {
         //mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
         mappings.put("/user/login", new LoginController());
         mappings.put("/user/logout", new LogoutController());
-        mappings.put("/user/mypage", new ViewUserController());
+        mappings.put("/user/mypage", new ViewUserController()); 
+        mappings.put("/user/update", new UpdateUserController());
+        mappings.put("/user/delete", new DeleteUserController()); 
+        mappings.put("/user/register", new RegisterUserController()); 
+        mappings.put("/adopt/userAdoptList", new UserAdoptListController()); 
 
-        mappings.put("/user/register", new RegisterUserController());
-       
+        
 //        mappings.put("/animal/search", new SearchAnimalController());
         mappings.put("/animal/view", new ViewAnimalController());
         mappings.put("/animal/list", new ListAnimalController());
         mappings.put("/animal/register", new RegisterAnimalController());
         
-        // 엯 뼇 떊泥   룞臾쇱삁 빟
+        // �뿯 堉� �뻿力�   猷욆눧�눘�굙 鍮�
         mappings.put("/adopt/register", new CreateAdoptApplyController());
         mappings.put("/adopt/view", new ViewApplyController());
         mappings.put("/adopt/accept", new RegisterAnimalController());
@@ -50,6 +54,7 @@ public class RequestMapping {
         mappings.put("/adopt/decline", new ManagerDeclineController()); 
         mappings.put("/adopt/result", new ManagerResultController());
 
+        mappings.put("/adopt/userAdoptList", new UserAdoptListController()); 
         
         
         logger.info("Initialized Request Mapping!");

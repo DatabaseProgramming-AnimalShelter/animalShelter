@@ -11,53 +11,46 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.service.AdopterManager;
-import model.Community;
 import model.Adopter;
 
 public class UpdateUserController implements Controller {
-    private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
+	private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
- 
-    	if (request.getMethod().equals("GET")) {	
-    		// GET request: 회원정보 수정 form 요청	
-    		// 원래는 UpdateUserFormController가 처리하던 작업을 여기서 수행
-    		String updateId = request.getParameter("userId");
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-    		log.debug("UpdateForm Request : {}", updateId);
-    		
-    		AdopterManager manager = AdopterManager.getInstance();
-    		Adopter user = manager.findUser(updateId);	// 수정하려는 사용자 정보 검색
-			request.setAttribute("user", user);			
+		String update_id = UserSessionUtils.getLoginUserId(request.getSession());		
+		log.debug("UpdateForm Request : {}", update_id);
+		//String update_id = request.getParameter("user_id");
+		Adopter user = new Adopter(
+				update_id, 
+				request.getParameter("password"), 
+				request.getParameter("user_name"),
+				request.getParameter("email"), 
+				request.getParameter("phone")
+				);
 
-			HttpSession session = request.getSession();
-			if (UserSessionUtils.isLoginUser(updateId, session) ||
-				UserSessionUtils.isLoginUser("admin", session)) {
-				// 현재 로그인한 사용자가 수정 대상 사용자이거나 관리자인 경우 -> 수정 가능
-	
-				return "/user/updateForm.jsp";   // 검색한 사용자 정보를 update form으로 전송     
-			}    
+		log.debug("UpdateForm Request : {}", update_id, request.getParameter("password"),
+				request.getParameter("user_name"), request.getParameter("email"), request.getParameter("phone"));
+
+		HttpSession session = request.getSession();
+		if (UserSessionUtils.isLoginUser(update_id, session) || UserSessionUtils.isLoginUser("admin", session)) {
+			// 현재 로그인한 사용자가 수정 대상 사용자이거나 관리자인 경우 -> 수정 가능
+			AdopterManager manager = AdopterManager.getInstance();
+			int result = manager.update(user);
 			
-			// else (수정 불가능한 경우) 사용자 보기 화면으로 오류 메세지를 전달
+			user = manager.findUser(update_id); // 수정 후 사용자 정보 검색
+			request.setAttribute("user", user);
+
+			if (result < 0) { // 업데이트 실패
+				request.setAttribute("updateFailed", true);
+			}
+		} else {
+			// (수정 불가능한 경우) 사용자 보기 화면으로 오류 메세지를 전달
 			request.setAttribute("updateFailed", true);
-			request.setAttribute("exception", 
-					new IllegalStateException("타인의 정보는 수정할 수 없습니다."));            
-			return "/user/view.jsp";	// 사용자 보기 화면으로 이동 (forwarding)
-	    }	
-    	
-    	// POST request (회원정보가 parameter로 전송됨)
-    	Adopter updateUser = new Adopter(
-    		request.getParameter("user_id"),
-    		request.getParameter("password"),
-    		request.getParameter("user_name"),
-    		request.getParameter("email"),
-    		request.getParameter("phone"));
+			request.setAttribute("exception", new IllegalStateException("타인의 정보는 수정할 수 없습니다."));
+		}
 
-    	log.debug("Update User : {}", updateUser);
-
-    	AdopterManager manager = AdopterManager.getInstance();
-		manager.update(updateUser);			
-        return "redirect:/user/list";			
-    }
+		return "/user/mypage.jsp";
+	}
 }
