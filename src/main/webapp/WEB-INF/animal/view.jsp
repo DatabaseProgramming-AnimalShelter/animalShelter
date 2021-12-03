@@ -72,6 +72,7 @@ h1 {
 }
 </style>
 <div class="container">
+
 	<form name="form" action="<c:url value='/adopt/register' />">
 		<div class="outer">
 			<h2 class="fw-bolder type">[${animal.animal_type}] >
@@ -91,12 +92,8 @@ h1 {
 					<br>
 
 				</div>
-
 				<div class="info">
-
 					<table class="table">
-
-
 						<tr>
 							<th scope="row">동물아이디</th>
 							<td>${animal.animal_id}</td>
@@ -180,8 +177,17 @@ h1 {
 						</tr>
 					</table>
 				</div>
-<<<<<<< HEAD
 			</div>
+			<c:if test="${user_id=='admin'}">
+				<a class="btn btn-primary"
+					href="<c:url value='/animal/update'>
+	     		   <c:param name='animal_id' value='${animal.animal_id}'/>
+			  </c:url>">동물수정</a>
+				<a class="btn btn-primary"
+					href="<c:url value='/animal/delete'>
+	     		   	<c:param name='animal_id' value='${animal.animal_id}'/>
+			  	  </c:url>">동물삭제</a>
+			</c:if>
 			<c:if test="${animal.animal_matched == 0 && applied == false}">
 				<%-- 아직 입양이 안됐고 다른 신청자가 없을 경우  --%>
 				<a class="btn btn-primary" href="<c:url value='/adopt/register'>
@@ -210,22 +216,6 @@ h1 {
 					</c:choose>
 				</c:otherwise>
 			</c:choose> --%>
-			</div>	
-
-			<c:if test="${animal.animal_matched == 0}">
-           		<a class="btn btn-primary"
-				href="<c:url value='/adopt/register'>
-	     		   <c:param name='animal_id' value='${animal.animal_id}'/>
-			  </c:url>">입양신청</a>
-            </c:if>	
-            
-           <%-- 	<a class="btn btn-primary" 
-           	href="<c:url value='/review/register'>
-	     		   	<c:param name='animal_id' value='${animal.animal_id}'/>
-			  	  </c:url>">
-			후기작성</a> --%>
-		
-
 		</div>
 	</form>
 </div>
