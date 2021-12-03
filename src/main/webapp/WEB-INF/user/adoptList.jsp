@@ -42,8 +42,7 @@
 						<c:if test="${adopt.apply_matched == 1}">
 							<c:if test="${adopt.animal_matched == 1}">
 								<a class="btn btn-outline-danger" role="button"
-									href="<c:url value='/adopt/result'><c:param name='animal_id' value='${adopt.animal_id}'/>
-                    			</c:url>">후기 작성</a>
+									href="<c:url value='/review/register'><c:param name='animal_id' value='${adopt.animal_id}'/></c:url>">후기 작성</a>
 							</c:if> 
                     		<c:if test="${adopt.animal_matched == 0}">
 								입양 신청이 반려 되었습니다.

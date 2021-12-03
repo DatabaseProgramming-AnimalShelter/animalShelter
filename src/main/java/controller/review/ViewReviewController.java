@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.service.ReviewManager;
 import model.service.ReviewNotFoundException;
 import controller.Controller;
-
+import controller.user.UserSessionUtils;
 import model.Review;
 
 public class ViewReviewController implements Controller{
@@ -15,7 +15,7 @@ public class ViewReviewController implements Controller{
 		// TODO Auto-generated method stub
 		Review review = null;
 		ReviewManager manager = ReviewManager.getInstance();
-		int post_id = (int) request.getAttribute("matched");
+		int post_id = Integer.parseInt(request.getParameter("post_id"));
 		
 //		try {
 //			review = manager.findReview(post_id);	// 후기 정보 검색  
@@ -25,8 +25,10 @@ public class ViewReviewController implements Controller{
 		
 		review = manager.findReview(post_id);  // 후기 정보 검색  
 		
-    	request.setAttribute("review", review);		// 후기 정보 저장				
-		return "/review/reviewDetail.jsp";				// 후기 상세보기 화면으로 이동*/
+		request.setAttribute("user_id", UserSessionUtils.getLoginUserId(request.getSession()));
+    	request.setAttribute("review", review);		// 후기 정보 저장		
+    	
+		return "/review/view.jsp";				// 후기 상세보기 화면으로 이동*/
 	}
 
 }

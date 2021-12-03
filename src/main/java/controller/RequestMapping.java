@@ -16,6 +16,12 @@ import controller.adopt.ViewApprovalListController;
 import controller.animal.ListAnimalController;
 import controller.animal.ViewAnimalController;
 import controller.adopt.UserAdoptListController;
+import controller.review.DeleteReviewController;
+import controller.review.ListReviewController;
+import controller.review.RegisterReviewController;
+import controller.review.UpdateReviewController;
+import controller.review.ViewReviewController;
+
 import controller.user.*;
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -37,13 +43,12 @@ public class RequestMapping {
         mappings.put("/user/register", new RegisterUserController()); 
         mappings.put("/adopt/userAdoptList", new UserAdoptListController()); 
 
-        
 //        mappings.put("/animal/search", new SearchAnimalController());
         mappings.put("/animal/view", new ViewAnimalController());
         mappings.put("/animal/list", new ListAnimalController());
         mappings.put("/animal/register", new RegisterAnimalController());
         
-        // �뿯 堉� �뻿力�   猷욆눧�눘�굙 鍮�
+        // 占쎈엷 �젆占� 占쎈뼁癲딉옙   �뙴�쉮�닱占쎈닔占쎄탽 �뜮占�
         mappings.put("/adopt/register", new CreateAdoptApplyController());
         mappings.put("/adopt/view", new ViewApplyController());
         mappings.put("/adopt/accept", new RegisterAnimalController());
@@ -53,10 +58,15 @@ public class RequestMapping {
         mappings.put("/adopt/approval", new ManagerAcceptController());
         mappings.put("/adopt/decline", new ManagerDeclineController()); 
         mappings.put("/adopt/result", new ManagerResultController());
-
         mappings.put("/adopt/userAdoptList", new UserAdoptListController()); 
-        
-        
+
+        mappings.put("/review/list", new ListReviewController());
+        mappings.put("/review/register", new RegisterReviewController());
+        mappings.put("/review/view", new ViewReviewController());
+        mappings.put("/review/update", new UpdateReviewController());
+        mappings.put("/review/delete", new DeleteReviewController());
+
+
         logger.info("Initialized Request Mapping!");
     }
 

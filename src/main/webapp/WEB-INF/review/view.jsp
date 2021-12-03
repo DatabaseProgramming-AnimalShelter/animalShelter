@@ -28,6 +28,10 @@ function communityRemove() {
 	<br>
 	<table class="table table-sm table-striped">
     	<tbody> 
+		  <tr>
+			<th>동물번호</th>
+			<td>${review.animal_id}</td>
+		  </tr>
 	  	  <tr>
 			<th>제목</th>
 			<td>${review.title}</td>
@@ -46,30 +50,39 @@ function communityRemove() {
 		  </tr>
 		  <tr>
 			<th>사진</th>
-			<td>${review.image}</td>
+			<td>
+				<c:choose>
+					<c:when test="${not empty review.image}">
+						<img
+							src="${pageContext.request.session.servletContext.contextPath}/upload/${review.image}"  class="" height="300px"/>
+					</c:when>
+					<c:otherwise>
+						<span>사진없음</span>
+					</c:otherwise>
+				</c:choose>
+			</td>
 		  </tr>
 		</tbody>
 	</table>
 	
 	<br> 		     
-	
-    <a class="btn btn-primary" 
+	<c:if test="${review.writer == user_id || user_id == 'admin'}">
+		<a class="btn btn-primary" 
     	href="<c:url value='/review/update'>
-	     		   <c:param name='commId' value='${review.post_id}'/>
+	     		   <c:param name='post_id' value='${review.post_id}'/>
 			  </c:url>">수정</a>
-			  
-    <a class="btn btn-warning" 
-   		href="<c:url value='/review/delete'>
-				   <c:param name='commId' value='${review.post_id}'/>
-			 </c:url>" onclick="return communityRemove();">삭제(미구현)</a>
-			 
-    <a class="btn btn-success" href="<c:url value='/review/list' />">후기 목록</a> 
-    <br>	   
-	    
-	<!-- 수정 또는 삭제가  실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
-	<c:if test="${updateFailed}">
-		<h6 class="text-danger"><c:out value="${exception.getMessage()}"/></h6>
-    </c:if>  
+	    <a class="btn btn-warning" 
+	   		href="<c:url value='/review/delete'>
+					   <c:param name='post_id' value='${review.post_id}'/>
+				 </c:url>" onclick="return reviewRemove();">삭제</a> 
+		<!-- 수정 또는 삭제가  실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
+		<c:if test="${updateFailed}">
+			<h6 class="text-danger"><c:out value="${exception.getMessage()}"/></h6>
+	    </c:if>  
+	</c:if>
+		<a class="btn btn-success" href="<c:url value='/review/list' />">후기 목록</a> 
+	    <br>	
+    
 </div>  
 </body>
 </html>

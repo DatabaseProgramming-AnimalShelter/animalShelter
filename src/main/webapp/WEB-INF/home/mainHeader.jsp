@@ -151,7 +151,7 @@ admin {
 									<li><hr class="dropdown-divider" /></li>
 									<li><a class="dropdown-item" href="#!">관심 동물</a></li>
 									<li><a class="dropdown-item" href="<c:url value='/adopt/userAdoptList'> <c:param name='user_id' value='${user.user_id}'/></c:url>">입양 신청 동물</a></li>
-									<li><a class="dropdown-item" href="#!">작성 후기</a></li>
+									<li><a class="dropdown-item" href="<c:url value='/review/list'><c:param name='user_id' value='${user.user_id}'/></c:url>">작성 후기</a></li>
 								</ul></li>
 						</c:when>
 					</c:choose>

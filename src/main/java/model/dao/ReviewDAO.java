@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Adopter;
 import model.Review;
 
 /**
@@ -19,19 +18,28 @@ public class ReviewDAO {
 		jdbcUtil = new JDBCUtil();	// JDBCUtil 객체 생성
 	}
 		
-	/**
-	 * 커뮤니티 테이블에 새로운 행 생성 (PK 값은 Sequence를 이용하여 자동 생성)
-	 */
+/**
+CREATE TABLE Review
+(
+   post_id              INTEGER NOT NULL ,
+   title                VARCHAR2(40) NOT NULL ,
+   content              VARCHAR2(40) NULL ,
+   creationDate         DATE NULL ,
+   image                VARCHAR2(40) NULL ,
+   writer               VARCHAR2(20) NOT NULL ,
+   animal_id            INTEGER NOT NULL 
+);
+
+	*/
 	public int create(Review review) throws SQLException {
-		String sql = "INSERT INTO Review VALUES (?, ?, ?, ?, ?, ?, ?)";		
+		String sql = "INSERT INTO Review "
+				+ "VALUES (post_id_seq.nextval, ?, ?, SYSDATE, ?, ?, ?)";		
 		Object[] param = new Object[] {
-				review.getPost_id(), 
-				review.getAnimal_id(),
-				review.getWriter(),
 				review.getTitle(),
 				review.getContent(),
-				review.getCreationDate(),
-				review.getImage()
+				review.getImage(),
+				review.getWriter(),
+				review.getAnimal_id()
 				};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 						
@@ -53,22 +61,19 @@ public class ReviewDAO {
 		}		
 		return 0;			
 	}
+	
 
 	/**
 	 * 기존의 동물 정보를 수정
 	 */
 	public int update(Review review) throws SQLException {
 		String sql = "UPDATE Review "
-					+ "SET post_id=?, animal_id=?, writer=?, title=?, content=?, creationDate=?, image=?  "
+					+ "SET  title=?, content=? "
 					+ "WHERE post_id=?";
 		Object[] param = new Object[] {
-				review.getPost_id(), 
-				review.getAnimal_id(),
-				review.getWriter(), 
 				review.getTitle(), 
 				review.getContent(),
-				review.getCreationDate(), 
-				review.getImage()
+				review.getPost_id()
 				};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
 			
@@ -120,12 +125,13 @@ public class ReviewDAO {
 			if (rs.next()) {						// 학생 정보 발견
 				Review review = new Review(		// User 객체를 생성하여 학생 정보를 저장
 					rs.getInt("post_id"),
-					rs.getString("animal_id"),
+					rs.getInt("animal_id"),
 					rs.getString("writer"),
 					rs.getString("title"),
 					rs.getString("content"),
 					rs.getDate("creationDate"),
-					rs.getString("image"));
+					rs.getString("image")
+					);
 				return review;
 			}
 		} catch (Exception ex) {
@@ -139,7 +145,7 @@ public class ReviewDAO {
 	
 	/**
 	 * 전체 커뮤니티 정보를 검색하여 List에 저장 및 반환
-	 */
+	 
 	public List<Review> findReviewList() throws SQLException {
         String sql = "SELECT post_id, animal_id, writer, title, content, creationDate, image "
         		   + "FROM Review " 
@@ -158,10 +164,73 @@ public class ReviewDAO {
 						rs.getString("title"),
 						rs.getString("content"),
 						rs.getDate("creationDate"),
-						rs.getString("image")
+						rs.getString("image"));
+					animalList.add(animal);				// List에 Community 객체 저장
+			}		
+			return animalList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
+	*/
+	
+	public List<Review> findReviewList() throws SQLException {
+        String sql = "SELECT post_id, animal_id, writer, title, content, creationDate "
+        		   + "FROM Review " 
+        		   + "ORDER BY post_id ";        
+        			
+		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			List<Review> animalList = new ArrayList<Review>();	// Community들의 리스트 생성
+			while (rs.next()) {
+				Review animal = new Review(
+						rs.getInt("post_id"), 
+						rs.getString("title"),
+						rs.getString("content"), 
+						rs.getDate("creationDate"),
+						rs.getString("writer"),
+						rs.getInt("animal_id")
 						);
-
-				animalList.add(animal);				// List에 Community 객체 저장
+					animalList.add(animal);				// List에 Community 객체 저장
+			}		
+			return animalList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
+	
+	public List<Review> findUserReviewList(String user_id) throws SQLException {
+        String sql = "SELECT post_id, animal_id, title, content, creationDate "
+        		   + "FROM Review "
+        		   + "WHERE writer=? "
+        		   + "ORDER BY post_id ";        
+        			
+        
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		// JDBCUtil에 query문 설정
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			List<Review> animalList = new ArrayList<Review>();	// Community들의 리스트 생성
+			while (rs.next()) {
+				Review animal = new Review(
+						rs.getInt("post_id"), 
+						rs.getString("title"),
+						rs.getString("content"), 
+						rs.getDate("creationDate"),
+						user_id,
+						rs.getInt("animal_id")
+						);
+					animalList.add(animal);				// List에 Community 객체 저장
 			}		
 			return animalList;					
 			

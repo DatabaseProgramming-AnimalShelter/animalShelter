@@ -93,7 +93,7 @@
 	</div>
 	<!-- registration form  -->
 	<form class="updateForm" name="form" method="POST" action="<c:url value='/user/update'/>">
-		<img class="signupLogo" src="<c:url value='/images/update.png'/>">
+		<img class="signupLogo" src="<c:url value='/images/UpdateUser.png'/>">
 		<div class="form-group row">
 			<label for="user_id" class="col-lg-3 col-form-label">사용자 ID</label>
 			<div class="col-lg-8">
@@ -140,76 +140,12 @@
 
 		<br>
 		<div class="form-group" text-align="center">
-			<th><input class="btn btn-outline-danger" type="button" value="수정" onClick="userUpdate()">
-			<%-- <a class="btn btn-outline-danger" role="button"
-				href="<c:url value='/user/update'><c:param name='user_id' value='${user.user_id}'/>
-                    </c:url>">회원
-					정보 수정</a> --%></th>
-			<th><input class="btn btn-outline-secondary" type="button" value="회원 탈퇴" onClick="userDelete('/user/delete')">
-			
-			<%-- <th><a class="btn btn-outline-secondary" role="button" onClick="alert('탈퇴 후에도 작성 된 글과 댓글은 남아있습니다.')"
-				href="<c:url value='/user/delete'><c:param name='user_id' value='${user.user_id}'/>
-                    </c:url>">회원 탈퇴</a> <!-- <input class="btn btn-outline-secondary" type="submit"
-								value="회원 탈퇴"> --></th> --%>
+			<th><input class="btn btn-outline-danger" type="button" value="수정" onClick="userUpdate()"></th>
+			<th><input class="btn btn-outline-secondary" type="button" value="회원 탈퇴" onClick="userDelete('<c:url value='/user/delete' />')">
 			<c:if test="${updateFailed || deleteFailed}">
 				<font color="red"><c:out value="${exception.getMessage()}" /></font>
 			</c:if>
 			</div>
 	</form>
-
-
-	
-
-		<%-- <table style="width: 100%">
-		<tr>
-			<td width="20"></td>
-			<td>
-				<table style="width: 100%">
-					<tr>
-						<td width="20"></td>
-						<td>
-							<table>
-								<tr>
-									<td class="title">&nbsp;&nbsp;<b>마이페이지임미다</b>&nbsp;&nbsp;
-									</td>
-								</tr>
-							</table> <br> <!-- 사용자 마이페이지 -->
-							<table class="">
-								<tr>
-									<td class="">사용자 ID</td>
-									<td class="">${curUserId}</td>
-								</tr>
-								<tr>
-									<td class="userHead">이름</td>
-									<td class="userCell">${user.user_name}</td>
-								</tr>
-
-								<tr>
-									<td class="userHead">이메일</td>
-									<td class="userCell">${user.email}</td>
-								</tr>
-								<tr>
-									<td class="userHead">전화번호</td>
-									<td class="userCell">${user.phone}</td>
-								</tr>
-
-							</table> <br> <a href="<c:url value='/user/update' ></c:url>">회원정보수정</a>
-							&nbsp; <a href="<c:url value='/user/delete'></c:url>"
-							onclick="return userRemove();">회원탈퇴</a> &nbsp; <br> <br>
-							<!-- 수정 또는 삭제가  실패한 경우 exception 객체에 저장된 오류 메시지를 출력 --> <c:if
-								test="${updateFailed || deleteFailed}">
-								<font color="red"><c:out
-										value="${exception.getMessage()}" /></font>
-							</c:if>
-						</td>
-					</tr>
-					<tr>
-
-					</tr>
-
-				</table>
-			</td>
-		</tr>
-	</table> --%>
 </div>
 <%@ include file="/WEB-INF/home/mainFooter.jsp"%>

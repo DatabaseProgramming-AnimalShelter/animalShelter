@@ -10,23 +10,28 @@ import controller.user.UserSessionUtils;
 import model.Review;
 import model.service.ReviewManager;
 
-public class ListReviewController implements Controller{
-	
-	
-	// ListReviewController가 필요한가?? 
+public class ListReviewController implements Controller {
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-    	
-    	// Controller와 Manager를 분리한 방법
+		/*
+		 * if (!UserSessionUtils.hasLogined(request.getSession())) { return
+		 * "redirect:/user/login/form"; // login form 요청으로 redirect }
+		 */
 		ReviewManager manager = ReviewManager.getInstance();
-		List<Review> reviewList = manager.findReviewList();
+		List<Review> reviewList = null;
+		
+		if(request.getParameter("user_id") != null) { // 마이페이지에서 사용자가 작성한 후기 리스트 볼 때	
+			reviewList = manager.findUserReviewList(UserSessionUtils.getLoginUserId(request.getSession()));
+		}
+		else { // 모든 사람이 작성한 후기 리스트 볼 때
+			reviewList = manager.findReviewList();
+		}
+		
+		request.setAttribute("reviewList", reviewList);
 
-		// animalList 객체를  request 객체에 저장하여 뷰에 전달
-		request.setAttribute("reviewList", reviewList);						
-
-		// 사용자 리스트 화면으로 이동(forwarding)
-		return "/review/list.jsp";        
+		return "/review/list.jsp";
 	}
 
 }
