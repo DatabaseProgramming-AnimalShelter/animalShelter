@@ -7,6 +7,7 @@ DROP SEQUENCE r_heart_id_seq;
 DROP SEQUENCE  a_heart_id_seq;
 DROP SEQUENCE qna_id_seq;
 DROP SEQUENCE qna_category_id_seq;
+DROP SEQUENCE comment_category_id_seq;
 
 DROP TABLE AdoptApply CASCADE CONSTRAINTS PURGE;
 
@@ -25,6 +26,8 @@ DROP TABLE Qna CASCADE CONSTRAINTS PURGE;
 DROP TABLE qna_category CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE Adopter CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Review_Comment CASCADE CONSTRAINTS PURGE;
 
 CREATE TABLE Adopter
 (
@@ -119,7 +122,7 @@ CREATE TABLE Review
 (
    post_id              INTEGER NOT NULL ,
    title                VARCHAR2(40) NOT NULL ,
-   content              VARCHAR2(40) NULL ,
+   content              VARCHAR2(4000) NULL ,
    creationDate         DATE NULL ,
    image                VARCHAR2(40) NULL ,
    writer               VARCHAR2(20) NOT NULL ,
@@ -136,6 +139,21 @@ CREATE TABLE R_heart
    count                INTEGER NULL ,
    user_id              VARCHAR2(20) NULL 
 );
+
+
+CREATE TABLE Review_Comment
+(
+	comment_id           INTEGER NOT NULL ,
+	post_id              INTEGER NOT NULL ,
+	user_id              VARCHAR2(20) NOT NULL ,
+	creationDate         DATE NULL ,
+	parent               INTEGER NULL ,
+	content              VARCHAR2(20) NULL ,
+ 	PRIMARY KEY (comment_id),
+	FOREIGN KEY (user_id) REFERENCES Adopter (user_id),
+	FOREIGN KEY (post_id) REFERENCES Review (post_id)
+);
+
 
 ALTER TABLE R_heart
    ADD CONSTRAINT  XPKR_heart PRIMARY KEY (r_heart_id);
@@ -200,6 +218,9 @@ INCREMENT BY 1;
 CREATE SEQUENCE qna_category_id_seq
 START WITH 1
 INCREMENT BY 1;
+CREATE SEQUENCE comment_id_seq
+START WITH 1
+INCREMENT BY 1;
 
 
 INSERT INTO Adopter VALUES ('admin', 'admin','admin', 'admin@dongduk.ac.kr', '02-940-9999');
@@ -232,3 +253,5 @@ INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '스핑크스', '고양이');
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'suggest');
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'inquiry');
 
+
+commit;

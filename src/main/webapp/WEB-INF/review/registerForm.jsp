@@ -42,12 +42,14 @@ function reviewCreate() {
 	<br>
 	<h4>후기 작성 화면</h4>
 	<br>
+	
 	<!-- 리뷰 등록 실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
 	<div class="row col-lg-12">
 		<c:if test="${creationFailed}">
 			<h6 class="text-danger"><c:out value="${exception.getMessage()}"/></h6>
 		</c:if>
 	</div>	  
+	
 	<!-- registration form  -->
 	<form name="form" method="POST" action="<c:url value='/review/register'>
 	     		   								<c:param name='animal_id' value='${animal_id}'/>
