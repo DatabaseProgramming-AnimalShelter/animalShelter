@@ -122,7 +122,7 @@ CREATE TABLE Review
 (
    post_id              INTEGER NOT NULL ,
    title                VARCHAR2(40) NOT NULL ,
-   content              VARCHAR2(40) NULL ,
+   content              VARCHAR2(4000) NULL ,
    creationDate         DATE NULL ,
    image                VARCHAR2(40) NULL ,
    writer               VARCHAR2(20) NOT NULL ,
@@ -253,3 +253,5 @@ INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '스핑크스', '고양이');
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'suggest');
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'inquiry');
 
+
+commit;
