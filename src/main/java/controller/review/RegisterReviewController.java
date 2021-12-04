@@ -63,7 +63,7 @@ public class RegisterReviewController implements Controller {
 			dir = new File(path);
 
 			// Tomcat 외부의 폴더에 저장하려면 아래와 같이 절대 경로로 폴더 이름을 지정함
-//			dir = new File("C:/Temp");
+			//dir = new File("C:/Temp");
 
 			if (!dir.exists())
 				dir.mkdir();
@@ -89,7 +89,6 @@ public class RegisterReviewController implements Controller {
 				// upload 객체에 전송되어 온 모든 데이터를 Collection 객체에 담는다.
 				for (int i = 0; i < items.size(); ++i) {
 					FileItem item = (FileItem) items.get(i);
-					System.out.println("@@@@@@@@@@@@@@@@item@@@@@" + item);
 					// commons-fileupload를 사용하여 전송받으면
 					// 모든 parameter는 FileItem 클래스에 하나씩 저장된다.
 
@@ -103,9 +102,6 @@ public class RegisterReviewController implements Controller {
 						// key 값이 content이면 content 변수에 값을 저장한다.
 					} else {// 파일이라면...
 						if (item.getFieldName().equals("image")) {
-							
-							System.out.println("!!!!!!!!!!!!!!!!!Cr@@@");
-
 							//key 값이 picture이면 파일 저장을 한다.
                 			filename = item.getName();//파일 이름 획득 (자동 한글 처리 됨)
                 			if(filename == null || filename.trim().length() == 0) continue;
@@ -115,31 +111,23 @@ public class RegisterReviewController implements Controller {
                 			//실제 C:\Web_Java\aaa.gif라고 하면 aaa.gif만 추출하기 위한 코드이다.
                 			File file = new File(dir, filename);
                 			item.write(file);
-
-                		      System.out.println("777777777777777777777");
                 			//파일을 upload 경로에 실제로 저장한다.
                 			//FileItem 객체를 통해 바로 출력 저장할 수 있다.
 						}
 					}
 				}
 			} catch (SizeLimitExceededException e) {
-			      System.out.println("3333333333333333333333");
 				// 업로드 되는 파일의 크기가 지정된 최대 크기를 초과할 때 발생하는 예외처리
 				e.printStackTrace();
 			} catch (FileUploadException e) {
-
-			      System.out.println("4444444444444444444444");
 				// 파일 업로드와 관련되어 발생할 수 있는 예외 처리
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
-        
 
-	System.out.println("@@@@@@@@@@@@Create Review :---------------------title:" + title + "  /content: " + content);
+	  System.out.println("@@@@@@@@@@@@Create Review :---------------------title:" + title + "  /content: " + content);
 
       Review review = new Review(
     	    	 animal.getAnimal_id(), 
@@ -148,10 +136,8 @@ public class RegisterReviewController implements Controller {
  		         content,
  		         filename
     	         );
-      System.out.println("111111111111111111111");
+      
       try {
-
-          System.out.println("222222222222222222222222222");
          ReviewManager manager = ReviewManager.getInstance();
          manager.create(review);
          
@@ -161,11 +147,9 @@ public class RegisterReviewController implements Controller {
 
          log.debug("Create Review : {}", review);
         
-         return "/review/view.jsp";
+         return "redirect:/review/list";
 
       } catch (ExistingUserException e) {   
-
-          System.out.println("22222222222오류222222222222");
          request.setAttribute("registerFailed", true);
          request.setAttribute("exception", e);
          request.setAttribute("review", review);
