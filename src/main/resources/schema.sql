@@ -7,6 +7,7 @@ DROP SEQUENCE r_heart_id_seq;
 DROP SEQUENCE  a_heart_id_seq;
 DROP SEQUENCE qna_id_seq;
 DROP SEQUENCE qna_category_id_seq;
+DROP SEQUENCE comment_category_id_seq;
 
 DROP TABLE AdoptApply CASCADE CONSTRAINTS PURGE;
 
@@ -25,6 +26,8 @@ DROP TABLE Qna CASCADE CONSTRAINTS PURGE;
 DROP TABLE qna_category CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE Adopter CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Review_Comment CASCADE CONSTRAINTS PURGE;
 
 CREATE TABLE Adopter
 (
@@ -137,6 +140,21 @@ CREATE TABLE R_heart
    user_id              VARCHAR2(20) NULL 
 );
 
+
+CREATE TABLE Review_Comment
+(
+	comment_id           INTEGER NOT NULL ,
+	post_id              INTEGER NOT NULL ,
+	user_id              VARCHAR2(20) NOT NULL ,
+	creationDate         DATE NULL ,
+	parent               INTEGER NULL ,
+	content              VARCHAR2(20) NULL ,
+ 	PRIMARY KEY (comment_id),
+	FOREIGN KEY (user_id) REFERENCES Adopter (user_id),
+	FOREIGN KEY (post_id) REFERENCES Review (post_id)
+);
+
+
 ALTER TABLE R_heart
    ADD CONSTRAINT  XPKR_heart PRIMARY KEY (r_heart_id);
 
@@ -198,6 +216,9 @@ CREATE SEQUENCE qna_id_seq
 START WITH 1
 INCREMENT BY 1;
 CREATE SEQUENCE qna_category_id_seq
+START WITH 1
+INCREMENT BY 1;
+CREATE SEQUENCE comment_id_seq
 START WITH 1
 INCREMENT BY 1;
 
