@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.Qna;
+import model.Review;
 import model.service.QnaManager;
+import model.service.ReviewManager;
 
 public class ListQnaController implements Controller {
 
@@ -20,7 +22,14 @@ public class ListQnaController implements Controller {
         }
 		
 		QnaManager manager = QnaManager.getInstance();
-		List<Qna> reviewList = manager.findQnaList();
+		List<Qna> reviewList = null;
+		
+		if(request.getParameter("user_id") != null) { // 마이페이지에서 사용자가 작성한 문의 리스트 볼 때	
+			reviewList = manager.findUserQnaList(UserSessionUtils.getLoginUserId(request.getSession()));
+		}
+		else { // 모든 사람이 작성한 문의 리스트 볼 때
+			reviewList = manager.findQnaList();
+		}		
 
 		request.setAttribute("reviewList", reviewList);
 

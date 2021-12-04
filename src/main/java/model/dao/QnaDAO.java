@@ -169,4 +169,38 @@ private JDBCUtil jdbcUtil = null;
 			}
 			return 0;
 		}
+	
+	public List<Qna> findUserQnaList(String user_id) throws SQLException {
+        String sql = "SELECT qna_id, qna_category_id, title, qna_type, content, password, user_name "
+        			+ "FROM Qna q, Adopter a " 
+        			+ "WHERE q.user_id = a.user_id and q.user_id=? "
+        			+ "ORDER BY qna_id ";        
+        			
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			
+			List<Qna> qnaList = new ArrayList<Qna>();	
+			while (rs.next()) {
+				Qna qna = new Qna(
+						rs.getInt("qna_id"),
+						rs.getInt("qna_category_id"),
+						rs.getString("title"),
+						user_id,
+						rs.getString("qna_type"),
+						rs.getString("content"),
+						rs.getString("password"),
+						rs.getString("user_name")
+						);
+				qnaList.add(qna);			
+			}		
+			return qnaList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();
+		}
+		return null;
+	}
 }

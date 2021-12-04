@@ -55,9 +55,12 @@ public class QnaManager {
 		return review;
 	}
 
-	public int findQnaCategoryId(String qna_type) {
+	public int findQnaCategoryId(String qna_type) { 
 		return qnaDAO.findQnaCategoryId(qna_type);
 	}
 	
-	
+	// 마이페이지 문의 리스트
+	public List<Qna> findUserQnaList(String user_id) throws SQLException {
+		return qnaDAO.findUserQnaList(user_id);
+	}
 }
