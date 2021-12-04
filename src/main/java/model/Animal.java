@@ -126,6 +126,13 @@ public class Animal {
 		this.image = image;
 		this.gender = gender;
 	}
+	//search
+	public Animal(String animal_type,int category_id, int matched,String location) {
+		this.animal_type = animal_type;
+		this.category_id = category_id;
+		this.matched=matched;
+		this.location = location;
+	}
 	public int getAnimal_id() {
 		return animal_id;
 	}

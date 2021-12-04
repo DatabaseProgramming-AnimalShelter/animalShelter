@@ -12,12 +12,13 @@ public interface AnimalMapper {
 	public int deleteAnimal(int animal_id);
 	
 	public List<Animal> findAnimalList();
-	/*public int updateAnimal(Animal animal);
 	
-	public int updateChair(Animal animal);
-
+	public List<Animal> searchAnimalList(Animal animal);
 	
-
+	public int updateAnimal(Animal animal);
+	
+	
+/*
 	
 	public Animal selectAnimalWithMembers(int commId);
 

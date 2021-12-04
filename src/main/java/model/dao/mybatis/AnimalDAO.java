@@ -33,7 +33,7 @@ public class AnimalDAO {
 	}
 	
 	/**
-	 * 커뮤니티 테이블에 새로운 행 생성 (PK 값은 Sequence를 이용하여 자동 생성)
+	 * animal 테이블에 새로운 행 생성 (PK 값은 Sequence를 이용하여 자동 생성)
 	 */
 	public Animal create(Animal animal) {
 		System.out.println("여긴왔누11");
@@ -51,9 +51,9 @@ public class AnimalDAO {
 	}
 
 	/**
-	 * 기존의 커뮤니티 정보를 수정
+	 * 기존의 animal 정보를 수정
 	 */
-	/*public int update(Animal comm) {
+	public int update(Animal comm) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			int result = sqlSession.getMapper(AnimalMapper.class).updateAnimal(comm);
@@ -69,7 +69,7 @@ public class AnimalDAO {
 
 
 	/**
-	 * 주어진 ID에 해당하는 커뮤니티 정보를 삭제.
+	 * 주어진 ID에 해당하는 animal객체를 삭제.
 	 */
 	public int remove(int commId) {		
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -85,7 +85,7 @@ public class AnimalDAO {
 	}
 
 	/**
-	 * 주어진  ID에 해당하는 커뮤니티 정보를 데이터베이스에서 찾아 Animal 도메인 클래스에 
+	 * 주어진  ID에 해당하는 동물 정보를 데이터베이스에서 찾아 Animal 도메인 클래스에 
 	 * 저장하여 반환.
 	 */
 	public Animal findAnimal(int animal_id) {
@@ -97,21 +97,9 @@ public class AnimalDAO {
 		}
 	}
 
-	/**
-	 * 주어진  ID에 해당하는 커뮤니티 정보를 데이터베이스에서 찾아 Animal 도메인 클래스에 
-	 * 저장하고, 동시에 그 커뮤니티에 속한 모든 회원들의 정보를 찾아 List<UserInfo> 에 저장하여 함께 반환함  
-	 */
-	/*public Animal findAnimalWithMembers(int commId) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			return sqlSession.getMapper(AnimalMapper.class).selectAnimalWithMembers(commId);			
-		} finally {
-			sqlSession.close();
-		}
-	}*/
 
 	/**
-	 * 전체 커뮤니티 정보를 검색하여 List에 저장 및 반환*/
+	 * 전체 동물 정보를 검색하여 List에 저장 및 반환*/
 		public List<Animal> findAnimalList() {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -120,6 +108,13 @@ public class AnimalDAO {
 			sqlSession.close();
 		}
 	} 
-
+		public List<Animal> searchAnimalList(Animal animal){
+			SqlSession sqlSession = sqlSessionFactory.openSession();
+			try {
+				return sqlSession.getMapper(AnimalMapper.class).searchAnimalList(animal);			
+			} finally {
+				sqlSession.close();
+			}
+		} 
 	
 }
