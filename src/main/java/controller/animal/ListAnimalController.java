@@ -15,7 +15,7 @@ public class ListAnimalController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		if (request.getMethod().equals("POST")) {
+		/*if (request.getMethod().equals("POST")) {
 
 			String type = request.getParameter("type");
 			System.out.println("type" + type);
@@ -41,7 +41,7 @@ public class ListAnimalController implements Controller {
 			request.setAttribute("ispost", 1);
 			System.out.println(animalList);
 			return "/animal/list.jsp";
-		}
+		}*/
 		AnimalManager manager = AnimalManager.getInstance();
 		List<Animal> animalList = manager.findAnimalList();
 

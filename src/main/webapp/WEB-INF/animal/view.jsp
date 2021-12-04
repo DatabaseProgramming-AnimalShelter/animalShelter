@@ -89,6 +89,7 @@ h1 {
 							<span>사진없음</span>
 						</c:otherwise>
 					</c:choose>
+					${pageContext.request.session.servletContext.contextPath}/upload/${animal.image}
 					<br>
 
 				</div>

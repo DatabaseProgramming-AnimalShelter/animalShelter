@@ -5,11 +5,10 @@
 <configuration>
 	<settings>
 		<setting name="logImpl" value="LOG4J" />
+		<setting name="cacheEnabled" value="false"/>
 	</settings>
 	<typeAliases>
 		<typeAlias type="model.Animal" alias="Animal" />
-		<typeAlias type="model.Qna" alias="Qna" />
-		<typeAlias type="model.Reply" alias="Reply" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -23,6 +22,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="repository/mybatis/mapper/CommentMapper.xml" />
+		<mapper resource="repository/mybatis/mapper/AnimalMapper.xml" />
 	</mappers>
 </configuration>

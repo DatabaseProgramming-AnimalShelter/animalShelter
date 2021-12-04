@@ -42,7 +42,7 @@ public class RegisterAnimalController implements Controller {
 		File dir = null;
 		if (request.getMethod().equals("GET")) {
 			// GET request: 회원정보 등록 form 요청
-			log.debug("ApplyForm Request");
+			log.debug("RegisterForm Request");
 			return "/animal/registerForm.jsp";
 		}
 
@@ -144,12 +144,12 @@ public class RegisterAnimalController implements Controller {
 		int animal_id = 0;
 		try {
 			AnimalManager manager = AnimalManager.getInstance();
-			animal_id = manager.create(animal);
+			animal_id = manager.create(animal).getAnimal_id();
 			animal = manager.findAnimal(animal_id);
 			request.setAttribute("animal", animal);
 			request.setAttribute("dir", dir);
 			request.setAttribute("filename", filename);
-			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + animal);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + animal_id);
 			return "/animal/view.jsp";
 
 		} catch (ExistingUserException e) {
