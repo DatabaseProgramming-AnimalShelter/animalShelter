@@ -121,6 +121,7 @@ public class AnimalDAO {
 			paramInt.put("category_id",animal.getCategory_id());
 			paramInt.put("matched",animal.getMatched());
 			 System.out.println("paramString"+paramString);
+			 System.out.println("paramInt"+paramInt);
 			System.out.println("animal_type"+animal.getAnimal_type());
 		      System.out.println("category_id"+String.valueOf(animal.getCategory_id()));
 		      System.out.println("matched"+String.valueOf(animal.getMatched()));

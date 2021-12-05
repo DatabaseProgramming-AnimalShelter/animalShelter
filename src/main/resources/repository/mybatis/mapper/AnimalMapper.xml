@@ -29,16 +29,22 @@
 	</delete>
 	
 	<select id="findAnimalList" resultType="Animal" >
-		SELECT a.animal_id, c.category_id, c.species, a.age, a.location, a.gender,a.image 
+		SELECT a.animal_id, c.category_id, c.species, a.age, a.location,a.image , a.gender
         FROM animal a JOIN Category c ON a.category_id = c.category_id  
         ORDER BY a.animal_id desc
     </select>
-
+  
  	<select id="searchAnimalList" resultType="Animal" >
-		SELECT a.animal_id, c.category_id, c.species, a.age, a.location, a.gender,a.image 
-        FROM animal a JOIN Category c ON a.category_id = c.category_id  
-        		 WHERE location = #{param1.location,javaType=string,jdbcType=VARCHAR}
-        
+		SELECT a.animal_id, c.category_id, c.species, a.age, a.location, a.gender,a.image , a.animal_matched
+        FROM animal a JOIN Category c ON a.category_id = c.category_id 
+     <where>
+        	<if test="param1.location != 'all'"> location = #{param1.location} </if>
+        	<if test="param2.matched != -1">   AND animal_matched = #{param2.matched} </if>
+        	<if test="param2.category_id == 100">  And a.category_id <![CDATA[>]]>100 AND a.category_id <![CDATA[<]]> 200</if>
+        	<if test="param2.category_id == 200">  And a.category_id <![CDATA[>]]>200 AND a.category_id <![CDATA[<]]> 300</if>
+        	<if test="param1.animal_type != 'none' and param2.category_id != 100 and param2.category_id != 200">  And a.category_id=#{param2.category_id}</if>
+        		
+       </where> 
         ORDER BY a.animal_id desc
     </select>
 </mapper>
