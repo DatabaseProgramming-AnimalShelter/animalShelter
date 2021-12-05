@@ -35,14 +35,10 @@
     </select>
 
  	<select id="searchAnimalList" resultType="Animal" >
-		SELECT a.animal_id, a.category_id, a.age, a.location, image, animal_type, species, a.animal_matched  ,a.gender,a.etc 
+		SELECT a.animal_id, c.category_id, c.species, a.age, a.location, a.gender,a.image 
         FROM animal a JOIN Category c ON a.category_id = c.category_id  
-      <!--   <where>
-        	<choose>
-        		<when test="animal.location != 'all'"> WHERE location =#{location}</when>
-        	</choose>
-        </where>
-        -->
+        		 WHERE location = #{param1.location,javaType=string,jdbcType=VARCHAR}
+        
         ORDER BY a.animal_id desc
     </select>
 </mapper>

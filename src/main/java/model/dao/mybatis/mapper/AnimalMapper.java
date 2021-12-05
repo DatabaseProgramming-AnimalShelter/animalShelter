@@ -1,5 +1,6 @@
 package model.dao.mybatis.mapper;
 
+import java.util.Map;
 import java.util.List;
 import model.Animal;
 
@@ -13,7 +14,7 @@ public interface AnimalMapper {
 	
 	public List<Animal> findAnimalList();
 	
-	public List<Animal> searchAnimalList(Animal animal);
+	public List<Animal> searchAnimalList(Map<String, String> paramString,Map<String, Integer> paramInt);
 	
 	public int updateAnimal(Animal animal);
 	

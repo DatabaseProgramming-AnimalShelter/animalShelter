@@ -2,7 +2,9 @@ package model.dao.mybatis;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -108,10 +110,25 @@ public class AnimalDAO {
 			sqlSession.close();
 		}
 	} 
+
+		/**
+		 * 동물 정보를 검색하여 List에 저장 및 반환*/
 		public List<Animal> searchAnimalList(Animal animal){
+			Map<String,String> paramString=new HashMap<String,String>(2);
+			paramString.put("animal_type",animal.getAnimal_type());
+			paramString.put("location",animal.getLocation());
+			Map<String,Integer> paramInt=new HashMap<String,Integer>(2);
+			paramInt.put("category_id",animal.getCategory_id());
+			paramInt.put("matched",animal.getMatched());
+			 System.out.println("paramString"+paramString);
+			System.out.println("animal_type"+animal.getAnimal_type());
+		      System.out.println("category_id"+String.valueOf(animal.getCategory_id()));
+		      System.out.println("matched"+String.valueOf(animal.getMatched()));
+		      System.out.println("location"+animal.getLocation());
+		     
 			SqlSession sqlSession = sqlSessionFactory.openSession();
 			try {
-				return sqlSession.getMapper(AnimalMapper.class).searchAnimalList(animal);			
+				return sqlSession.getMapper(AnimalMapper.class).searchAnimalList(paramString,paramInt);			
 			} finally {
 				sqlSession.close();
 			}
