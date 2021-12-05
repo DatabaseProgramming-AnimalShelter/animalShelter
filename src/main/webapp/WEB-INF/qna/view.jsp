@@ -33,11 +33,15 @@
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td>${qna.title}</td>
+					<td>${qna.qna_title}</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${qna.user_name}</td>
+					<td>${qna.qna_writer}</td>
+				</tr>
+				<tr>
+					<th>날짜</th>
+					<td>${qna.qna_date}</td>
 				</tr>
 				<tr>
 					<th>질문종류</th>
@@ -45,14 +49,12 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>${qna.content}</td>
+					<td>${qna.qna_content}</td>
 				</tr>
 			</tbody>
 		</table>
 
 		<br>
-		<!-- 자신이 쓴글이면 삭제, 수정 가능하게 -->
-		<c:if test="${user_id=='qna.user_id'}">
 			<a class="btn btn-primary"
 				href="<c:url value='/qna/update'>
 	     		   <c:param name='qna_id' value='${qna.qna_id}'/>
@@ -61,18 +63,6 @@
 				href="<c:url value='/qna/delete'>
 	     		   	<c:param name='qna_id' value='${qna.qna_id}'/>
 			  	  </c:url>">삭제</a>
-		</c:if>
-
-		<c:if test="${user_id=='admin'}">
-			<a class="btn btn-primary"
-				href="<c:url value='/qna/update'>
-	     		   <c:param name='qna_id' value='${qna.qna_id}'/>
-			  </c:url>">수정</a>
-			<a class="btn btn-primary"
-				href="<c:url value='/qna/delete'>
-	     		   	<c:param name='qna_id' value='${qna.qna_id}'/>
-			  	  </c:url>">삭제</a>
-		</c:if>
 
 		<!-- 수정 또는 삭제가  실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
 		<c:if test="${updateFailed}">

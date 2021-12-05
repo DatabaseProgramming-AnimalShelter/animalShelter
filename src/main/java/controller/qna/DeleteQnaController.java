@@ -17,14 +17,14 @@ public class DeleteQnaController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
-    	String user_id = UserSessionUtils.getLoginUserId(request.getSession());
+
 		int qna_id = Integer.parseInt(request.getParameter("qna_id"));
 
 		QnaManager manager = QnaManager.getInstance();
 	
 		manager.remove(qna_id);
 		
-		return "redirect:/review/list";	
+		return "redirect:/qna/list";	
 		
 	}
 }

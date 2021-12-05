@@ -12,7 +12,6 @@ import controller.qna.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
-    
    
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
@@ -57,7 +56,7 @@ public class RequestMapping {
         mappings.put("/qna/list", new ListQnaController());
         mappings.put("/qna/view", new ViewQnaController());
         mappings.put("/qna/update", new UpdateQnaController());
-        mappings.put("/qna/delete", new DeleteReviewController());
+        mappings.put("/qna/delete", new DeleteQnaController());
         
         logger.info("Initialized Request Mapping!");
     }

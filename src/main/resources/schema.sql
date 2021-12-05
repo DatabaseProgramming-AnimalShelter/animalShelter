@@ -139,11 +139,11 @@ CREATE TABLE Review_Comment
 CREATE TABLE Qna
 (
 	qna_id               INTEGER NOT NULL ,
-	title                VARCHAR2(40) NULL ,
-	content              VARCHAR2(500) NULL ,
-	password             VARCHAR2(40) NULL ,
+	qna_title            VARCHAR2(100) NULL ,
+	qna_content          VARCHAR2(1000) NULL ,
+	qna_password         VARCHAR2(100) NULL ,
 	qna_category_id      INTEGER NULL ,
-	user_id              VARCHAR2(20) NULL ,
+	qna_writer           VARCHAR2(100) NULL ,
 	qna_date             DATE NULL
 );
 
@@ -165,7 +165,7 @@ CREATE TABLE Qna_Comment
 	comment_content      VARCHAR2(500) NULL ,
 	reg_date             DATE NULL ,
 	qna_id               INTEGER NOT NULL ,
-	comment_writer       VARCHAR2(20) NULL 
+	comment_writer       VARCHAR2(100) NULL
 );
 
 ALTER TABLE Qna_Comment
@@ -175,9 +175,9 @@ CREATE TABLE Qna_Reply
 (
 	reply_id             INTEGER NOT NULL ,
 	comment_no           INTEGER NOT NULL ,
-	reply_writer         VARCHAR2(20) NULL ,
+	reply_writer         VARCHAR2(100) NULL ,
 	reply_content        VARCHAR2(500) NULL ,
-	reg_date             DATE NULL 
+	reg_date             DATE NULL
 );
 
 ALTER TABLE Qna_Reply
