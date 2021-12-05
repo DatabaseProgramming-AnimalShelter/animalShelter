@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import controller.adopt.*;
 import controller.animal.*;
 import controller.review.*;
+import controller.review_comment.CreateReviewCommentController;
+import controller.review_comment.DeleteReviewCommentController;
 import controller.user.*;
 import controller.qna.*;
 
@@ -51,6 +53,8 @@ public class RequestMapping {
         mappings.put("/review/view", new ViewReviewController());
         mappings.put("/review/update", new UpdateReviewController());
         mappings.put("/review/delete", new DeleteReviewController());
+        mappings.put("/review/comment", new CreateReviewCommentController());
+        mappings.put("/review_comment/delete", new DeleteReviewCommentController());
 
         mappings.put("/qna/create", new RegisterQnaController());
         mappings.put("/qna/list", new ListQnaController());

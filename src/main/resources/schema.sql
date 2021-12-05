@@ -129,7 +129,7 @@ CREATE TABLE Review_Comment
 	user_id              VARCHAR2(20) NOT NULL ,
 	creationDate         DATE NULL ,
 	parent               INTEGER NULL ,
-	content              VARCHAR2(20) NULL ,
+	content              VARCHAR2(4000) NULL ,
  	PRIMARY KEY (comment_id),
 	FOREIGN KEY (user_id) REFERENCES Adopter (user_id),
 	FOREIGN KEY (post_id) REFERENCES Review (post_id)

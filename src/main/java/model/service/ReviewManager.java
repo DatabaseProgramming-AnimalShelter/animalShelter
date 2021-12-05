@@ -42,20 +42,9 @@ public class ReviewManager {
 		return reviewDAO.update(review);
 	}	
 
-	public int remove(int post_id) throws SQLException, UserNotFoundException {
-
-		return reviewDAO.remove(post_id);
+	public int remove(int comment_id) throws SQLException, UserNotFoundException {
+		return reviewDAO.remove(comment_id);
 	}
-
-	/*public Adopter findUser(String user_id)
-		throws SQLException, UserNotFoundException {
-		Adopter user = adopterDAO.findUser(user_id);
-		
-		if (user == null) {
-			throw new UserNotFoundException(user_id + "는 존재하지 않는 아이디입니다.");
-		}		
-		return user;
-	}*/
 
 	public List<Review> findReviewList() throws SQLException {
 			return reviewDAO.findReviewList();
