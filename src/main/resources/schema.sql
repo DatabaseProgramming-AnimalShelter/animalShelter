@@ -5,9 +5,11 @@ DROP SEQUENCE post_id_seq;
 DROP SEQUENCE animal_id_seq;
 DROP SEQUENCE r_heart_id_seq;
 DROP SEQUENCE  a_heart_id_seq;
-DROP SEQUENCE qna_id_seq;
 DROP SEQUENCE qna_category_id_seq;
-DROP SEQUENCE comment_category_id_seq;
+DROP SEQUENCE qna_id_seq;
+DROP SEQUENCE comment_no_seq;
+DROP SEQUENCE reply_id_seq;
+DROP SEQUENCE comment_id_seq;
 
 DROP TABLE AdoptApply CASCADE CONSTRAINTS PURGE;
 
@@ -21,11 +23,15 @@ DROP TABLE Animal CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE category CASCADE CONSTRAINTS PURGE;
 
+DROP TABLE Adopter CASCADE CONSTRAINTS PURGE;
+
 DROP TABLE Qna CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE qna_category CASCADE CONSTRAINTS PURGE;
 
-DROP TABLE Adopter CASCADE CONSTRAINTS PURGE;
+DROP TABLE Qna_Reply CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Qna_Comment CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE Review_Comment CASCADE CONSTRAINTS PURGE;
 
@@ -94,30 +100,6 @@ CREATE TABLE category
 ALTER TABLE category
    ADD CONSTRAINT  XPKcategory PRIMARY KEY (category_id);
 
-CREATE TABLE qna_category
-(
-   qna_category_id      INTEGER NOT NULL ,
-   qna_type             VARCHAR2(40) NULL 
-);
-
-
-ALTER TABLE qna_category
-   ADD CONSTRAINT  XPKqna_category PRIMARY KEY (qna_category_id);
-
-CREATE TABLE Qna
-(
-   qna_id               INTEGER NOT NULL ,
-   title                VARCHAR2(40) NULL ,
-   content              VARCHAR2(40) NULL ,
-   password             VARCHAR2(40) NULL ,
-   user_id              VARCHAR2(20) NULL ,
-   qna_category_id      INTEGER NULL 
-);
-
-
-ALTER TABLE Qna
-   ADD CONSTRAINT  XPKQna PRIMARY KEY (qna_id);
-
 CREATE TABLE Review
 (
    post_id              INTEGER NOT NULL ,
@@ -140,7 +122,6 @@ CREATE TABLE R_heart
    user_id              VARCHAR2(20) NULL 
 );
 
-
 CREATE TABLE Review_Comment
 (
 	comment_id           INTEGER NOT NULL ,
@@ -154,6 +135,53 @@ CREATE TABLE Review_Comment
 	FOREIGN KEY (post_id) REFERENCES Review (post_id)
 );
 
+
+CREATE TABLE Qna
+(
+	qna_id               INTEGER NOT NULL ,
+	title                VARCHAR2(40) NULL ,
+	content              VARCHAR2(500) NULL ,
+	password             VARCHAR2(40) NULL ,
+	qna_category_id      INTEGER NULL ,
+	user_id              VARCHAR2(20) NULL ,
+	qna_date             DATE NULL
+);
+
+ALTER TABLE Qna
+	ADD CONSTRAINT  XPKQna PRIMARY KEY (qna_id);
+
+CREATE TABLE qna_category
+(
+	qna_category_id      INTEGER NOT NULL ,
+	qna_type             VARCHAR2(40) NULL 
+);
+
+ALTER TABLE qna_category
+	ADD CONSTRAINT  XPKqna_category PRIMARY KEY (qna_category_id);
+
+CREATE TABLE Qna_Comment
+(
+	comment_no           INTEGER NOT NULL ,
+	comment_content      VARCHAR2(500) NULL ,
+	reg_date             DATE NULL ,
+	qna_id               INTEGER NOT NULL ,
+	comment_writer       VARCHAR2(20) NULL 
+);
+
+ALTER TABLE Qna_Comment
+	ADD CONSTRAINT  XPKComment PRIMARY KEY (comment_no);
+
+CREATE TABLE Qna_Reply
+(
+	reply_id             INTEGER NOT NULL ,
+	comment_no           INTEGER NOT NULL ,
+	reply_writer         VARCHAR2(20) NULL ,
+	reply_content        VARCHAR2(500) NULL ,
+	reg_date             DATE NULL 
+);
+
+ALTER TABLE Qna_Reply
+	ADD CONSTRAINT  XPKReply PRIMARY KEY (reply_id);
 
 ALTER TABLE R_heart
    ADD CONSTRAINT  XPKR_heart PRIMARY KEY (r_heart_id);
@@ -173,12 +201,6 @@ ALTER TABLE A_heart
 ALTER TABLE A_heart
    ADD (CONSTRAINT R_29 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
-ALTER TABLE Qna
-   ADD (CONSTRAINT R_32 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
-
-ALTER TABLE Qna
-   ADD (CONSTRAINT R_33 FOREIGN KEY (qna_category_id) REFERENCES qna_category (qna_category_id) ON DELETE CASCADE);
-
 ALTER TABLE Review
    ADD (CONSTRAINT 후기작성 FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
@@ -191,6 +213,15 @@ ALTER TABLE R_heart
 ALTER TABLE R_heart
    ADD (CONSTRAINT R_34 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
+ALTER TABLE Qna
+	ADD (CONSTRAINT R_33 FOREIGN KEY (qna_category_id) REFERENCES qna_category (qna_category_id) ON DELETE SET NULL);
+
+ALTER TABLE Qna_Comment
+	ADD (CONSTRAINT R_36 FOREIGN KEY (qna_id) REFERENCES Qna (qna_id));
+
+ALTER TABLE Qna_Reply
+	ADD (CONSTRAINT R_37 FOREIGN KEY (comment_no) REFERENCES Qna_Comment (comment_no));   
+   
 CREATE SEQUENCE dog_id_seq
 START WITH 100
 INCREMENT BY 1;
@@ -212,16 +243,21 @@ INCREMENT BY 1;
 CREATE SEQUENCE a_heart_id_seq
 START WITH 1
 INCREMENT BY 1;
-CREATE SEQUENCE qna_id_seq
-START WITH 1
-INCREMENT BY 1;
 CREATE SEQUENCE qna_category_id_seq
 START WITH 1
 INCREMENT BY 1;
 CREATE SEQUENCE comment_id_seq
 START WITH 1
 INCREMENT BY 1;
-
+CREATE SEQUENCE qna_id_seq
+START WITH 1
+INCREMENT BY 1;
+CREATE SEQUENCE comment_no_seq
+START WITH 1
+INCREMENT BY 1;
+CREATE SEQUENCE reply_id_seq
+START WITH 1
+INCREMENT BY 1;
 
 INSERT INTO Adopter VALUES ('admin', 'admin','admin', 'admin@dongduk.ac.kr', '02-940-9999');
 INSERT INTO Adopter VALUES ( 'hyunsoo', '1234', 'song', 'hyunsu@gmail.com', '010-1234-5678');
