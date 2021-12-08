@@ -1,66 +1,78 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import model.Adopter;
 import model.Qna;
-import model.dao.QnaDAO;
-
+import model.dao.mybatis.QnaDAO;
 
 public class QnaManager {
-	private static QnaManager reviewMan = new QnaManager();
+	private static QnaManager qnaMan = new QnaManager();
 	private QnaDAO qnaDAO;
 
-	public QnaDAO getReviewDAO() {
-		return this.qnaDAO;
-	}
-	
 	private QnaManager() {
 		try {
 			qnaDAO = new QnaDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}			
+		}
 	}
-	
+
 	public static QnaManager getInstance() {
-		return reviewMan;
+		return qnaMan;
 	}
-	
+
 	public int create(Qna qna) throws SQLException, ExistingUserException {
+		System.out.println("Managercreateï¿½ë–†ï¿½ì˜‰");
 		return qnaDAO.create(qna);
 	}
 
 	public int update(Qna qna) throws SQLException, UserNotFoundException {
 		return qnaDAO.update(qna);
-	}	
-
-	public int remove(int qna_id) throws SQLException, UserNotFoundException {
-
-		return qnaDAO.remove(qna_id);
 	}
 
-	public List<Qna> findQnaList() throws SQLException {
-			return qnaDAO.findQnaList();
+	public int remove(int qnaId) throws SQLException, UserNotFoundException {
+
+		return qnaDAO.remove(qnaId);
+	}
+//
+//	public boolean login(String password) throws SQLException, UserNotFoundException, PasswordMismatchException {
+//		Adopter user = findUser(user_id);
+//
+//		if (!user.matchPassword(password)) {
+//			throw new PasswordMismatchException("PasswordMismatchException");
+//		}
+//		return true;
+//	}
+
+	public List<Qna> selectAllQnaList() throws SQLException {
+		return qnaDAO.selectAllQnaList();
 	}
 
-	public Qna findQna(int qna_id) throws SQLException, AnimalNotFoundException {
+	public Qna findQnaByPrimaryKey(int qnaId) throws SQLException, AnimalNotFoundException {
 		// TODO Auto-generated method stub
-		Qna review = qnaDAO.findQna(qna_id);
-		
-		if(review == null) {
-			throw new AnimalNotFoundException(qna_id + "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½Ä±ï¿½ï¿½Ô´Ï´ï¿½.");
+		Qna review = qnaDAO.findQnaByPrimaryKey(qnaId);
+
+		if (review == null) {
+			throw new AnimalNotFoundException(qnaId + "åª›ï¿½ ï¿½ë¾¾ï¿½ë’¿ï¿½ë•²ï¿½ë–.");
 		}
-		
 		return review;
 	}
 
 	public int findQnaCategoryId(String qna_type) { 
 		return qnaDAO.findQnaCategoryId(qna_type);
 	}
-	
-	// ¸¶ÀÌÆäÀÌÁö ¹®ÀÇ ¸®½ºÆ®
+
+	public List<Qna> findQnaCategoryByQnaType(String qnaType) {
+		return qnaDAO.findQnaCategoryByQnaType(qnaType);
+	}
+
+	// ë§ˆì´í˜ì´ì§€ ë¬¸ì˜ ë¦¬ìŠ¤íŠ¸
 	public List<Qna> findUserQnaList(String user_id) throws SQLException {
 		return qnaDAO.findUserQnaList(user_id);
 	}
+
 }

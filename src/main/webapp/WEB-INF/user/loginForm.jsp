@@ -62,10 +62,10 @@
 	    <div class="form-floating">  
 	        <input type="password" name="password" class="form-control" id="password" placeholder="비밀번호"> 
 	         <label for="password">비밀번호</label>
-	    </div> 
+	    </div><br>
 		<div class="form-group">        
 			<input type="button" class="w-100 btn btn-lg" value="로그인" onClick="login()" style=background-color:brown> 
-			<a  class="w-100 btn btn-lg" href="<c:url value='/user/register' />"><button style=background-color:olive>회원 가입  </button> </a>  		     
+<%-- 			<a  class="w-100 btn btn-lg" href="<c:url value='/user/register' />"><button style=background-color:olive>회원 가입  </button> </a>  --%>		
 		</div>   	
 	</form> 
 	

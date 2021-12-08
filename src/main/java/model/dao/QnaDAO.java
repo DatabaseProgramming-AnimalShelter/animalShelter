@@ -19,10 +19,10 @@ private JDBCUtil jdbcUtil = null;
 		String sql = "INSERT INTO Qna "
 				+ "VALUES (qna_id_seq.nextval, ?, ?, ?, ?, ?)";		
 		Object[] param = new Object[] {
-				qna.getTitle(),
-				qna.getContent(),
-				qna.getUser_id(),
-				qna.getCategory_id()
+				qna.getQna_title(),
+				qna.getQna_content(),
+				qna.getQna_writer(),
+				qna.getQna_category_id()
 			};				
 		jdbcUtil.setSqlAndParameters(sql, param);
 						
@@ -50,9 +50,9 @@ private JDBCUtil jdbcUtil = null;
 					+ "SET  title=?, content=?, qna_category_id=? "
 					+ "WHERE qna_id=?";
 		Object[] param = new Object[] {
-				qna.getTitle(), 
-				qna.getContent(),
-				qna.getCategory_id(),
+				qna.getQna_title(), 
+				qna.getQna_content(),
+				qna.getQna_category_id(),
 				qna.getQna_id()
 				};				
 		jdbcUtil.setSqlAndParameters(sql, param);
@@ -90,23 +90,28 @@ private JDBCUtil jdbcUtil = null;
 	}
 	
 	public Qna findQna(int qna_id) throws SQLException {
-        String sql = "SELECT qna_id, qna_category_id, title, user_id, qna_type, content, password, user_name "
+        String sql = "SELECT qna_id, qna_category_id, qna_title, qna_writer, qna_type, qna_content, qna_password, qna_date "
      		   + "FROM Qna q, Adopter a " 
      		  + "WHERE q.user_id = a.user_id and q.qna_id=? ";  
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {qna_id});	
 
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		
-			if (rs.next()) {						
+			List<Qna> qnaList = new ArrayList<Qna>();	
+			if (rs.next()) {	
+				String qna_writer = rs.getString("writer");
+		        if(qna_writer == null) { 
+		        	qna_writer = "(알 수 없음)";
+		        }
 				Qna qna = new Qna(		
-					rs.getInt("qna_id"),
+					qna_id,
+					qna_writer,
+					rs.getString("qna_title"),
+					rs.getString("qna_content"),
+					rs.getString("qna_password"),
+					rs.getDate("qna_date"),
 					rs.getInt("qna_category_id"),
-					rs.getString("title"),
-					rs.getString("user_id"),
-					rs.getString("qna_type"),
-					rs.getString("content"),
-					rs.getString("password"),
-					rs.getString("user_name")
+					rs.getString("qna_type")
 					);
 				return qna;
 			}
@@ -117,6 +122,7 @@ private JDBCUtil jdbcUtil = null;
 		}
 		return null;
 	}
+	
 	public List<Qna> findQnaList() throws SQLException {
         String sql = "SELECT qna_id, qna_category_id, title, user_id, qna_type, content, password, user_name "
       		   + "FROM Qna q, Adopter a " 
@@ -129,15 +135,19 @@ private JDBCUtil jdbcUtil = null;
 			ResultSet rs = jdbcUtil.executeQuery();			
 			List<Qna> qnaList = new ArrayList<Qna>();	
 			while (rs.next()) {
+				String qna_writer = rs.getString("writer");
+		        if(qna_writer == null) { 
+		        	qna_writer = "(알 수 없음)";
+		        }
 				Qna animal = new Qna(
 						rs.getInt("qna_id"),
+						qna_writer,
+						rs.getString("qna_title"),
+						rs.getString("qna_content"),
+						rs.getString("qna_password"),
+						rs.getDate("qna_date"),
 						rs.getInt("qna_category_id"),
-						rs.getString("title"),
-						rs.getString("user_id"),
-						rs.getString("qna_type"),
-						rs.getString("content"),
-						rs.getString("password"),
-						rs.getString("user_name")
+						rs.getString("qna_type")
 						);
 				qnaList.add(animal);			
 			}		
@@ -168,7 +178,7 @@ private JDBCUtil jdbcUtil = null;
 				jdbcUtil.close();		
 			}
 			return 0;
-		}
+	}
 	
 	public List<Qna> findUserQnaList(String user_id) throws SQLException {
         String sql = "SELECT qna_id, qna_category_id, title, qna_type, content, password, user_name "
@@ -184,13 +194,13 @@ private JDBCUtil jdbcUtil = null;
 			while (rs.next()) {
 				Qna qna = new Qna(
 						rs.getInt("qna_id"),
-						rs.getInt("qna_category_id"),
-						rs.getString("title"),
 						user_id,
-						rs.getString("qna_type"),
-						rs.getString("content"),
-						rs.getString("password"),
-						rs.getString("user_name")
+						rs.getString("qna_title"),
+						rs.getString("qna_content"),
+						rs.getString("qna_password"),
+						rs.getDate("qna_date"),
+						rs.getInt("qna_category_id"),
+						rs.getString("qna_type")
 						);
 				qnaList.add(qna);			
 			}		

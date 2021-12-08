@@ -17,23 +17,27 @@ public class ListQnaController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		if (!UserSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/user/login/form";		// login form 占쏙옙청占쏙옙占쏙옙 redirect
-        }
 		
 		QnaManager manager = QnaManager.getInstance();
-		List<Qna> reviewList = null;
+
+		List<Qna> QnaList = null;
 		
 		if(request.getParameter("user_id") != null) { // 마이페이지에서 사용자가 작성한 문의 리스트 볼 때	
-			reviewList = manager.findUserQnaList(UserSessionUtils.getLoginUserId(request.getSession()));
+			QnaList = manager.findUserQnaList(UserSessionUtils.getLoginUserId(request.getSession()));
 		}
 		else { // 모든 사람이 작성한 문의 리스트 볼 때
-			reviewList = manager.findQnaList();
+			QnaList = manager.selectAllQnaList();
 		}		
 
-		request.setAttribute("reviewList", reviewList);
+	//	List<Qna> QnaList = manager.selectAllQnaList();
 
-		return "/review/list.jsp";
+
+		for(int i = 0; i < QnaList.size(); i++) {
+//			System.out.println("Title : " + QnaList.get(i).getContent());
+		}
+		
+		request.setAttribute("QnaList", QnaList);
+		return "/qna/list.jsp";
 	}
 
 }

@@ -10,19 +10,19 @@
 
 <div class="container">
 	<br>
-	<h4>후기 목록</h4>
+	<h4>내가 쓴 댓글 목록</h4>
 	<br>
 	<table class="table table-bordered">
       <thead class="thead-inverse">
 		<tr>
 		  <td>Post id</td>
 		  <td>제목</td>
-		  <td>작성자</td>
-		  <td>날짜</td>
+		  <td>글 작성자</td>
+		  <td>댓글 작성 날짜</td>
 		</tr>
       </thead>
       <tbody>  	 
-		<c:forEach var="review" items="${reviewList}">
+		<c:forEach var="review" items="${reviewCommnetList}">
 			<tr>
 			  <td>${review.post_id}</td>
 			  <td><a href="<c:url value='/review/view'>
@@ -31,7 +31,7 @@
 				  ${review.title}</a>
 			  </td>
 			  <td>${review.writer}</td>
-			  <td>${review.creationDate}</td>
+			  <td>${review.comment_creationDate}</td>
 			</tr>
 		</c:forEach>
 	  </tbody>

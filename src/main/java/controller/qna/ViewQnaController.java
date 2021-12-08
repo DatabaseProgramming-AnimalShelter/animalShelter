@@ -16,7 +16,7 @@ public class ViewQnaController implements Controller{
 		
 		QnaManager manager = QnaManager.getInstance();
 		int qna_id = Integer.parseInt(request.getParameter("qna_id"));
-		Qna qna = manager.findQna(qna_id); 
+		Qna qna = manager.findQnaByPrimaryKey(qna_id); 
 		
     	request.setAttribute("qna", qna);			
     	

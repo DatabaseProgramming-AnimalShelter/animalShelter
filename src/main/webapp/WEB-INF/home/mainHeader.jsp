@@ -88,8 +88,7 @@ admin {
     </form>-->
 		<a class="navbar-brand " href="<c:url value='/index.jsp' />"><img
 			class="logo" src="<c:url value='/images/mainLogo.png'/>"
-			height="140px"></a> <br>
-		<br>
+			height="140px"></a> <br> <br>
 		<nav class="py-2 bg-light border-bottom">
 			<div class=" d-flex flex-wrap">
 				<ul class="nav me-auto">
@@ -115,6 +114,8 @@ admin {
 						<c:when test="${user_id!='admin'}">
 							<li class="nav-item"><a href="<c:url value="/qna/create" />"
 								class="nav-link link-dark px-2">관리자에게 문의</a></li>
+							<li class="nav-item"><a href="<c:url value="/qna/list" />"
+								class="nav-link link-dark px-2">QNA게시판</a></li>
 						</c:when>
 					</c:choose>
 				</ul>
@@ -122,7 +123,9 @@ admin {
 					<c:choose>
 						<c:when test="${user_id=='admin'}">
 							<li class="nav-item"><admin>관리자계정 로그인<admin>
-							<li class="nav-item"><a href="<c:url value="/user/logout"></c:url>" class="nav-link link-dark px-2">Logout</a></li>
+								<li class="nav-item"><a
+									href="<c:url value="/user/logout"></c:url>"
+									class="nav-link link-dark px-2">Logout</a></li>
 						</c:when>
 						<c:when test="${user_id==NULL}">
 							<li class="nav-item"><a
@@ -148,10 +151,12 @@ admin {
 										href="<c:url value='/user/mypage'> <c:param name='user_id' value='${user.user_id}'/></c:url>">
 											내 정보</a></li>
 									<li><hr class="dropdown-divider" /></li>
-									<li><a class="dropdown-item" href="<c:url value='/adopt/userAdoptList'> <c:param name='user_id' value='${user.user_id}'/></c:url>">입양 신청 동물</a></li>
+									<li><a class="dropdown-item" href="<c:url value='/adopt/userAdoptList' />">입양 신청 동물</a></li>
 									<li><a class="dropdown-item" href="<c:url value='/review/list'><c:param name='user_id' value='${user.user_id}'/></c:url>">작성 후기</a></li>
+									<li><a class="dropdown-item" href="<c:url value='/review/commentList' />">작성 댓글</a></li>
 									<li><a class="dropdown-item" href="<c:url value='/qna/list'> <c:param name='user_id' value='${user.user_id}'/></c:url>">문의 내역</a></li>
-								</ul></li>
+								</ul>
+							</li>
 						</c:when>
 					</c:choose>
 				</ul>

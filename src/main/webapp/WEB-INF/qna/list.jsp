@@ -3,7 +3,7 @@
 	pageEncoding="utf-8"%>
 <%@ include file="/WEB-INF/home/mainHeader.jsp"%>
 
-<title>커뮤니티 관리 - 목록</title>
+<title>QNA 관리 - 목록</title>
 <!-- Bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -19,22 +19,24 @@
 	<table class="table table-bordered">
 		<thead class="thead-inverse">
 			<tr>
-				<td>번호</td>
+				<th>id</th>
 				<td>제목</td>
 				<td>작성자</td>
 				<td>질문종류</td>
+				<td>date</td>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="qna" items="${qnaList}">
+			<c:forEach var="list" items="${QnaList}">
 				<tr
 					onclick='location.href="<c:url value='/qna/view'>
-						      <c:param name='qna_id' value='${qna.qna_id}'/>
+						      <c:param name='qna_id' value='${list.qna_id}'/>
 						   </c:url>"'>
-					<th scope="row">${qna.qna_id}</th>
-					<td>${qna.title}</td>
-					<td>${qna.user_name}</td>
-					<td>${qna.qna_type}</td>
+					<th scope="row">${list.qna_id}</th>
+					<td>${list.qna_title}</td>
+					<td>${list.qna_writer}</td>
+					<td>${list.qna_type}</td>
+					<td>${list.qna_date}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
