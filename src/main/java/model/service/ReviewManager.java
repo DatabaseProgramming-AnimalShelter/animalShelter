@@ -53,6 +53,10 @@ public class ReviewManager {
 		return review;
 	}
 	
+	public Review findUserReview(String user_id, int animal_id)throws SQLException {
+		return reviewDAO.findUserReview(user_id, animal_id);
+	}
+	
 	public List<Review> findUserReviewList(String user_id) throws SQLException {
 		return reviewDAO.findUserReviewList(user_id);
 	}
