@@ -161,11 +161,13 @@ ALTER TABLE qna_category
 
 CREATE TABLE Qna_Comment
 (
-	comment_no           INTEGER NOT NULL ,
-	comment_content      VARCHAR2(500) NULL ,
-	reg_date             DATE NULL ,
 	qna_id               INTEGER NOT NULL ,
-	comment_writer       VARCHAR2(100) NULL
+	qna_title            VARCHAR2(100) NULL ,
+	qna_content          VARCHAR2(1000) NULL ,
+	qna_password         VARCHAR2(100) NULL ,
+	qna_category_id      INTEGER NULL ,
+	qna_writer           VARCHAR2(100) NULL ,
+	qna_date             DATE NUL
 );
 
 ALTER TABLE Qna_Comment

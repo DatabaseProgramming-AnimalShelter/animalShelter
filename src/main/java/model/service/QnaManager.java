@@ -1,17 +1,22 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.Adopter;
 import model.Qna;
+import model.Qna_Comment;
+import model.Qna_Reply;
+import model.dao.mybatis.CommentDAO;
 import model.dao.mybatis.QnaDAO;
 
 public class QnaManager {
 	private static QnaManager qnaMan = new QnaManager();
 	private QnaDAO qnaDAO;
+	private CommentDAO commentDAO;
 
 	private QnaManager() {
 		try {
@@ -34,35 +39,26 @@ public class QnaManager {
 		return qnaDAO.update(qna);
 	}
 
-	public int remove(int qnaId) throws SQLException, UserNotFoundException {
+	public int remove(int qna_id) throws SQLException, UserNotFoundException {
 
-		return qnaDAO.remove(qnaId);
+		return qnaDAO.remove(qna_id);
 	}
-//
-//	public boolean login(String password) throws SQLException, UserNotFoundException, PasswordMismatchException {
-//		Adopter user = findUser(user_id);
-//
-//		if (!user.matchPassword(password)) {
-//			throw new PasswordMismatchException("PasswordMismatchException");
-//		}
-//		return true;
-//	}
 
-	public int findQnaCategoryId(String qnaType) {
-		System.out.println("qnaTYPE임~" + qnaType);
-		return qnaDAO.findQnaCategoryId(qnaType);
+	public int findQnaCategoryId(String qna_type) {
+		System.out.println("qnaTYPE임~" + qna_type);
+		return qnaDAO.findQnaCategoryId(qna_type);
 	}
 
 	public List<Qna> selectAllQnaList() throws SQLException {
 		return qnaDAO.selectAllQnaList();
 	}
 
-	public Qna findQnaByPrimaryKey(int qnaId) throws SQLException, AnimalNotFoundException {
+	public Qna findQnaByPrimaryKey(int qna_id) throws SQLException, AnimalNotFoundException {
 		// TODO Auto-generated method stub
-		Qna review = qnaDAO.findQnaByPrimaryKey(qnaId);
+		Qna review = qnaDAO.findQnaByPrimaryKey(qna_id);
 
 		if (review == null) {
-			throw new AnimalNotFoundException(qnaId + "가 없습니다.");
+			throw new AnimalNotFoundException(qna_id + "가 없습니다.");
 		}
 		return review;
 	}
@@ -70,4 +66,37 @@ public class QnaManager {
 	public List<Qna> findQnaCategoryByQnaType(String qnaType) {
 		return qnaDAO.findQnaCategoryByQnaType(qnaType);
 	}
+	//댓글 입력
+	public int insertComment(Qna_Comment comment) {
+			return commentDAO.insertComment(comment);
+	}
+	//댓글 삭제
+	public int deleteAllComments() {		
+		return commentDAO.deleteAllComments();
+	}	
+	//대댓글입력
+	public int insertReply(Qna_Reply reply) {
+		//int reply_id, int comment_no, String reply_content, Date reg_Date
+		return commentDAO.insertReply(reply);
+	}
+	//대댓글 전체 삭제
+	public int deleteAllReplies() {
+		return commentDAO.deleteAllReplies();
+	}
+	//comment번호로 선택
+	public Qna_Comment selectCommentByPrimaryKey(int comment_no) {		
+		return commentDAO.selectCommentByPrimaryKey(comment_no);		
+	}
+	//comment, qna, reply모두 선택
+	public Qna_Comment selectCommentByPrimaryKeyCollection(int comment_no) {
+		return commentDAO.selectCommentByPrimaryKeyCollection(comment_no);	
+	}
+	//qna_id로 comment선택하기
+	public List<Qna_Comment> selectCommentByCondition(int qna_id) {
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition.put("qna_id", qna_id);
+		return commentDAO.selectCommentByCondition(condition);
+	}
+
 }
+

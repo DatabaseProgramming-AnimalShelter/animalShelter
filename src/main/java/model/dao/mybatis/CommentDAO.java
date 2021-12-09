@@ -10,12 +10,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import model.Comment;
+import model.Qna_Comment;
+import model.Qna_Reply;
 import model.dao.mybatis.mapper.*;
 
 public class CommentDAO {
+
 	private SqlSessionFactory sqlSessionFactory;
-	
+
 	public CommentDAO() {
 		String resource = "mybatis-config.xml";
 		InputStream inputStream;
@@ -26,29 +28,29 @@ public class CommentDAO {
 		}
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 	}
-	
-	public Comment selectCommentByPrimaryKey(long commentNo) {
+
+	public Qna_Comment selectCommentByPrimaryKey(int comment_no) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			return sqlSession.getMapper(CommentMapper.class).selectCommentByPrimaryKey(commentNo);			
+			return sqlSession.getMapper(Qna_CommentMapper.class).selectCommentByPrimaryKey(comment_no);			
 		} finally {
 			sqlSession.close();
 		}
 	}
 
-	public List<Comment> selectCommentByCondition(Map<String, Object> condition) {
+	public List<Qna_Comment> selectCommentByCondition(Map<String, Object> condition) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			return sqlSession.getMapper(CommentMapper.class).selectCommentByCondition(condition);			
+			return sqlSession.getMapper(Qna_CommentMapper.class).selectCommentByCondition(condition);			
 		} finally {
 			sqlSession.close();
 		}
 	}
 	
-	public int insertComment(Comment comment) {
+	public int insertComment(Qna_Comment comment) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			int result = sqlSession.getMapper(CommentMapper.class).insertComment(comment);
+			int result = sqlSession.getMapper(Qna_CommentMapper.class).insertComment(comment);
 			if (result > 0) {
 				sqlSession.commit();
 			} 
@@ -58,10 +60,10 @@ public class CommentDAO {
 		}
 	}
 
-	public int updateComment(Comment comment) {
+	public int updateComment(Qna_Comment comment) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			int result = sqlSession.getMapper(CommentMapper.class).updateComment(comment);
+			int result = sqlSession.getMapper(Qna_CommentMapper.class).updateComment(comment);
 			if (result > 0) {
 				sqlSession.commit();
 			} 
@@ -71,10 +73,10 @@ public class CommentDAO {
 		}
 	}
 
-	public int deleteComment(long commentNo) {
+	public int deleteComment(int comment_no) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			int result = sqlSession.getMapper(CommentMapper.class).deleteComment(commentNo);
+			int result = sqlSession.getMapper(Qna_CommentMapper.class).deleteComment(comment_no);
 			if (result > 0) {
 				sqlSession.commit();
 			} 
@@ -87,7 +89,42 @@ public class CommentDAO {
 	public int deleteAllComments() {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			int result = sqlSession.getMapper(CommentMapper.class).deleteAllComments();
+			int result = sqlSession.getMapper(Qna_CommentMapper.class).deleteAllComments();
+			if (result > 0) {
+				sqlSession.commit();
+			} 
+			return result;		
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public Qna_Comment selectCommentByPrimaryKeyCollection(int comment_no) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			return sqlSession.getMapper(Qna_CommentMapper.class).selectCommentByPrimaryKeyCollection(comment_no);			
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public int insertReply(Qna_Reply reply) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			int result = sqlSession.getMapper(Qna_CommentMapper.class).insertReply(reply);
+			if (result > 0) {
+				sqlSession.commit();
+			} 
+			return result;
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public int deleteAllReplies() {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			int result = sqlSession.getMapper(Qna_CommentMapper.class).deleteAllReplies();
 			if (result > 0) {
 				sqlSession.commit();
 			} 
