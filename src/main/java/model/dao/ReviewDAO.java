@@ -8,14 +8,14 @@ import java.util.List;
 import model.Review;
 
 /**
- * »ç¿ëÀÚ °ü¸®¸¦ À§ÇØ µ¥ÀÌÅÍº£ÀÌ½º ÀÛ¾÷À» Àü´ãÇÏ´Â DAO Å¬·¡½º
- * Review Å×ÀÌºí¿¡¼­ Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ Ãß°¡, ¼öÁ¤, »èÁ¦, °Ë»ö ¼öÇà 
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ DAO Å¬ï¿½ï¿½ï¿½ï¿½
+ * Review ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½ 
  */
 public class ReviewDAO {
 	private JDBCUtil jdbcUtil = null;
 	
 	public ReviewDAO() {			
-		jdbcUtil = new JDBCUtil();	// JDBCUtil °´Ã¼ »ý¼º
+		jdbcUtil = new JDBCUtil();	// JDBCUtil ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 	}
 		
 /**
@@ -41,15 +41,15 @@ CREATE TABLE Review
 				review.getWriter(),
 				review.getAnimal_id()
 				};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ¿¡ insert¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ï¿½ï¿½ insertï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 						
-		String key[] = {"post_id"};	// PK ÄÃ·³ÀÇ ÀÌ¸§     
+		String key[] = {"post_id"};	// PK ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½     
 		try {    
-			int result = jdbcUtil.executeUpdate(key);  // insert ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate(key);  // insert ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		   	ResultSet rs = jdbcUtil.getGeneratedKeys();
 		   	if(rs.next()) {
-		   		int generatedKey = rs.getInt(1);   // »ý¼ºµÈ PK °ª
-		   		review.setPost_id(generatedKey); 	// idÇÊµå¿¡ ÀúÀå  
+		   		int generatedKey = rs.getInt(1);   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PK ï¿½ï¿½
+		   		review.setPost_id(generatedKey); 	// idï¿½Êµå¿¡ ï¿½ï¿½ï¿½ï¿½  
 		   	}
 		   	return result;
 		} catch (Exception ex) {
@@ -57,14 +57,14 @@ CREATE TABLE Review
 			ex.printStackTrace();
 		} finally {		
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹ÝÈ¯
+			jdbcUtil.close();	// resource ï¿½ï¿½È¯
 		}		
 		return 0;			
 	}
 	
 
 	/**
-	 * ±âÁ¸ÀÇ µ¿¹° Á¤º¸¸¦ ¼öÁ¤
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 */
 	public int update(Review review) throws SQLException {
 		String sql = "UPDATE Review "
@@ -75,10 +75,10 @@ CREATE TABLE Review
 				review.getContent(),
 				review.getPost_id()
 				};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil¿¡ update¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtilï¿½ï¿½ updateï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
 		try {				
-			int result = jdbcUtil.executeUpdate();	// update ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate();	// update ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -86,21 +86,21 @@ CREATE TABLE Review
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹ÝÈ¯
+			jdbcUtil.close();	// resource ï¿½ï¿½È¯
 		}		
 		return 0;
 	}
 
 	
 	/**
-	 * ÁÖ¾îÁø ID¿¡ ÇØ´çÇÏ´Â Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ »èÁ¦.
+	 * ï¿½Ö¾ï¿½ï¿½ï¿½ IDï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	 */
 	public int remove(int post_id) throws SQLException {
 		String sql = "DELETE FROM Review WHERE post_id=?";		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {post_id});	// JDBCUtil¿¡ delete¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {post_id});	// JDBCUtilï¿½ï¿½ deleteï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 		try {				
-			int result = jdbcUtil.executeUpdate();	// delete ¹® ½ÇÇà
+			int result = jdbcUtil.executeUpdate();	// delete ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -108,7 +108,7 @@ CREATE TABLE Review
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ¹ÝÈ¯
+			jdbcUtil.close();	// resource ï¿½ï¿½È¯
 		}		
 		return 0;
 	}
@@ -118,12 +118,12 @@ CREATE TABLE Review
         String sql = "SELECT post_id, animal_id, writer, title, content, creationDate, image "
      		   + "FROM Review " 
      		  + "WHERE post_id=?";  
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {post_id});	// JDBCUtil¿¡ query¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {post_id});	// JDBCUtilï¿½ï¿½ queryï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query ½ÇÇà
-			if (rs.next()) {						// ÇÐ»ý Á¤º¸ ¹ß°ß
-				Review review = new Review(		// User °´Ã¼¸¦ »ý¼ºÇÏ¿© ÇÐ»ý Á¤º¸¸¦ ÀúÀå
+			ResultSet rs = jdbcUtil.executeQuery();		// query ï¿½ï¿½ï¿½ï¿½
+			if (rs.next()) {						// ï¿½Ð»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
+				Review review = new Review(		// User ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Ð»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					rs.getInt("post_id"),
 					rs.getInt("animal_id"),
 					rs.getString("writer"),
@@ -137,25 +137,25 @@ CREATE TABLE Review
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹ÝÈ¯
+			jdbcUtil.close();		// resource ï¿½ï¿½È¯
 		}
 		return null;
 	}
 	
 	
 	/**
-	 * ÀüÃ¼ Ä¿¹Â´ÏÆ¼ Á¤º¸¸¦ °Ë»öÇÏ¿© List¿¡ ÀúÀå ¹× ¹ÝÈ¯
+	 * ï¿½ï¿½Ã¼ Ä¿ï¿½Â´ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï¿ï¿½ Listï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯
 	 
 	public List<Review> findReviewList() throws SQLException {
         String sql = "SELECT post_id, animal_id, writer, title, content, creationDate, image "
         		   + "FROM Review " 
         		   + "ORDER BY post_id ";        
         			
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil¿¡ query¹® ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtilï¿½ï¿½ queryï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
-			List<Review> animalList = new ArrayList<Review>();	// CommunityµéÀÇ ¸®½ºÆ® »ý¼º
+			ResultSet rs = jdbcUtil.executeQuery();			// query ï¿½ï¿½ï¿½ï¿½			
+			List<Review> animalList = new ArrayList<Review>();	// Communityï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 			while (rs.next()) {
 				Review animal = new Review(
 						rs.getInt("post_id"), 
@@ -165,14 +165,14 @@ CREATE TABLE Review
 						rs.getString("content"),
 						rs.getDate("creationDate"),
 						rs.getString("image"));
-					animalList.add(animal);				// List¿¡ Community °´Ã¼ ÀúÀå
+					animalList.add(animal);				// Listï¿½ï¿½ Community ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹ÝÈ¯
+			jdbcUtil.close();		// resource ï¿½ï¿½È¯
 		}
 		return null;
 	}
@@ -183,11 +183,11 @@ CREATE TABLE Review
         		   + "FROM Review " 
         		   + "ORDER BY post_id ";        
         			
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil¿¡ query¹® ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtilï¿½ï¿½ queryï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
-			List<Review> animalList = new ArrayList<Review>();	// CommunityµéÀÇ ¸®½ºÆ® »ý¼º
+			ResultSet rs = jdbcUtil.executeQuery();			// query ï¿½ï¿½ï¿½ï¿½			
+			List<Review> animalList = new ArrayList<Review>();	// Communityï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 			while (rs.next()) {
 				Review animal = new Review(
 						rs.getInt("post_id"), 
@@ -197,14 +197,14 @@ CREATE TABLE Review
 						rs.getString("writer"),
 						rs.getInt("animal_id")
 						);
-					animalList.add(animal);				// List¿¡ Community °´Ã¼ ÀúÀå
+					animalList.add(animal);				// Listï¿½ï¿½ Community ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹ÝÈ¯
+			jdbcUtil.close();		// resource ï¿½ï¿½È¯
 		}
 		return null;
 	}
@@ -216,11 +216,11 @@ CREATE TABLE Review
         		   + "ORDER BY post_id ";        
         			
         
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		// JDBCUtil¿¡ query¹® ¼³Á¤
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		// JDBCUtilï¿½ï¿½ queryï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
-			List<Review> animalList = new ArrayList<Review>();	// CommunityµéÀÇ ¸®½ºÆ® »ý¼º
+			ResultSet rs = jdbcUtil.executeQuery();			// query ï¿½ï¿½ï¿½ï¿½			
+			List<Review> animalList = new ArrayList<Review>();	// Communityï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 			while (rs.next()) {
 				Review animal = new Review(
 						rs.getInt("post_id"), 
@@ -230,14 +230,14 @@ CREATE TABLE Review
 						user_id,
 						rs.getInt("animal_id")
 						);
-					animalList.add(animal);				// List¿¡ Community °´Ã¼ ÀúÀå
+					animalList.add(animal);				// Listï¿½ï¿½ Community ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ¹ÝÈ¯
+			jdbcUtil.close();		// resource ï¿½ï¿½È¯
 		}
 		return null;
 	}
@@ -245,17 +245,17 @@ CREATE TABLE Review
 //	
 //	public List<Review> searchReviewList(int post_id) throws SQLException {
 //		String sql = null;
-//		// list.jsp¿¡¼­ species°¡ 0ÀÌ¸é  typeÀ» ÀüÃ¼·Î ¼±ÅÃÇÑ°ÍÀÌ´Ï category_id=?¸¦ ÁÖ¸é ¾ÈµÊ
+//		// list.jspï¿½ï¿½ï¿½ï¿½ speciesï¿½ï¿½ 0ï¿½Ì¸ï¿½  typeï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½Ì´ï¿½ category_id=?ï¿½ï¿½ ï¿½Ö¸ï¿½ ï¿½Èµï¿½
 //		String sql = "SELECT post_id, animal_id, writer, title, content, creationDate, image "
 //     		   + "FROM Review " 
 //     		   + "ORDER BY post_id ";   
 //		
-//        Object[] param = new Object[] { category_id, animal_type, matched};	// JDBCUtil¿¡ update¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
-//        jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ¿¡ insert¹®°ú ¸Å°³ º¯¼ö ¼³Á¤
+//        Object[] param = new Object[] { category_id, animal_type, matched};	// JDBCUtilï¿½ï¿½ updateï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//        jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil ï¿½ï¿½ insertï¿½ï¿½ï¿½ï¿½ ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //        
 //		try {
-//			ResultSet rs = jdbcUtil.executeQuery();			// query ½ÇÇà			
-//			List<Animal> animalList = new ArrayList<Animal>();	// CommunityµéÀÇ ¸®½ºÆ® »ý¼º
+//			ResultSet rs = jdbcUtil.executeQuery();			// query ï¿½ï¿½ï¿½ï¿½			
+//			List<Animal> animalList = new ArrayList<Animal>();	// Communityï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 //			while (rs.next()) {
 //				Animal animal = new Animal(
 //						rs.getInt("animal_id"), 
@@ -267,14 +267,14 @@ CREATE TABLE Review
 //						rs.getString("species"),
 //						rs.getString("animal_type"));
 //
-//				animalList.add(animal);				// List¿¡ Community °´Ã¼ ÀúÀå
+//				animalList.add(animal);				// Listï¿½ï¿½ Community ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 //			}		
 //			return animalList;					
 //			
 //		} catch (Exception ex) {
 //			ex.printStackTrace();
 //		} finally {
-//			jdbcUtil.close();		// resource ¹ÝÈ¯
+//			jdbcUtil.close();		// resource ï¿½ï¿½È¯
 //		}
 //		return null;
 //	}

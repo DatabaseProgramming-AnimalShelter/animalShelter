@@ -18,17 +18,17 @@ public class ViewReviewController implements Controller{
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
 		
 //		try {
-//			review = manager.findReview(post_id);	// ÈÄ±â Á¤º¸ °Ë»ö  
+//			review = manager.findReview(post_id);	// ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½  
 //		} catch (ReviewNotFoundException e) {				
 //	        return "redirect:/review/list";
 //		}	
 		
-		review = manager.findReview(post_id);  // ÈÄ±â Á¤º¸ °Ë»ö  
+		review = manager.findReview(post_id);  // ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½  
 		
 		request.setAttribute("user_id", UserSessionUtils.getLoginUserId(request.getSession()));
-    	request.setAttribute("review", review);		// ÈÄ±â Á¤º¸ ÀúÀå		
+    	request.setAttribute("review", review);		// ï¿½Ä±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½		
     	
-		return "/review/view.jsp";				// ÈÄ±â »ó¼¼º¸±â È­¸éÀ¸·Î ÀÌµ¿*/
+		return "/review/view.jsp";				// ï¿½Ä±ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½*/
 	}
 
 }

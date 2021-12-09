@@ -84,7 +84,8 @@ CREATE TABLE A_heart
 (
    a_heart_id           INTEGER NOT NULL ,
    animal_id            INTEGER NULL ,
-   user_id              VARCHAR2(20) NULL 
+   user_id              VARCHAR2(20) NULL,
+   FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL
 );
 
 ALTER TABLE A_heart
@@ -107,8 +108,9 @@ CREATE TABLE Review
    content              VARCHAR2(4000) NULL ,
    creationDate         DATE NULL ,
    image                VARCHAR2(40) NULL ,
-   writer               VARCHAR2(20) NOT NULL ,
-   animal_id            INTEGER NOT NULL 
+   writer               VARCHAR2(20) NULL ,
+   animal_id            INTEGER NOT NULL,
+   FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE SET NULL
 );
 
 ALTER TABLE Review
@@ -126,12 +128,12 @@ CREATE TABLE Review_Comment
 (
 	comment_id           INTEGER NOT NULL ,
 	post_id              INTEGER NOT NULL ,
-	user_id              VARCHAR2(20) NOT NULL ,
+	user_id              VARCHAR2(20) NULL ,
 	creationDate         DATE NULL ,
 	parent               INTEGER NULL ,
-	content              VARCHAR2(20) NULL ,
+	content              VARCHAR2(4000) NULL ,
  	PRIMARY KEY (comment_id),
-	FOREIGN KEY (user_id) REFERENCES Adopter (user_id),
+	FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL,
 	FOREIGN KEY (post_id) REFERENCES Review (post_id)
 );
 
@@ -204,7 +206,7 @@ ALTER TABLE A_heart
    ADD (CONSTRAINT R_29 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Review
-   ADD (CONSTRAINT 후기작성 FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
+   ADD (CONSTRAINT �썑湲곗옉�꽦 FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Review
    ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
@@ -290,6 +292,5 @@ INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '스핑크스', '고양이');
 
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'suggest');
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'inquiry');
-
 
 commit;

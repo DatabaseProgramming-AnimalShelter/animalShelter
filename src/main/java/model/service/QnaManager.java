@@ -31,7 +31,7 @@ public class QnaManager {
 	}
 
 	public int create(Qna qna) throws SQLException, ExistingUserException {
-		System.out.println("Managercreate시작");
+		System.out.println("Managercreate�떆�옉");
 		return qnaDAO.create(qna);
 	}
 
@@ -44,9 +44,9 @@ public class QnaManager {
 		return qnaDAO.remove(qna_id);
 	}
 
-	public int findQnaCategoryId(String qna_type) {
-		System.out.println("qnaTYPE임~" + qna_type);
-		return qnaDAO.findQnaCategoryId(qna_type);
+	public int findQnaCategoryId(String qna_id) {
+		System.out.println("qnaTYPE임~" + qna_id);
+		return qnaDAO.findQnaCategoryId(qna_id);
 	}
 
 	public List<Qna> selectAllQnaList() throws SQLException {
@@ -62,6 +62,10 @@ public class QnaManager {
 		}
 		return review;
 	}
+//
+//	public int findQnaCategoryId(String qna_type) { 
+//		return qnaDAO.findQnaCategoryId(qna_type);
+//	}
 
 	public List<Qna> findQnaCategoryByQnaType(String qnaType) {
 		return qnaDAO.findQnaCategoryByQnaType(qnaType);

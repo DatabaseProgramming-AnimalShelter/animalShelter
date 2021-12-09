@@ -57,14 +57,14 @@ public class AdoptApplyDAO {
 		return 0;
 	}
 
-	// ½ÂÀÎ -> AdoptApplyÀÇ apply_matched : 1, approval_date : SYSDATE & AnimalÀÇ animal_matched : 1
-	// °ÅÀý -> AdoptApplyÀÇ apply_matched : 1, approval_date : SYSDATE
+	// ï¿½ï¿½ï¿½ï¿½ -> AdoptApplyï¿½ï¿½ apply_matched : 1, approval_date : SYSDATE & Animalï¿½ï¿½ animal_matched : 1
+	// ï¿½ï¿½ï¿½ï¿½ -> AdoptApplyï¿½ï¿½ apply_matched : 1, approval_date : SYSDATE
 	
-	// ½ÂÀÎ°ú °ÅÀý ÇÕÄ£ ¸Þ¼Òµå
+	// ï¿½ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä£ ï¿½Þ¼Òµï¿½
 	public int apply_result(AdoptApply adoptApply, int apply_result) throws SQLException {
 		int result = 0;
 		
-		// ½ÂÀÎ, °ÅÀý ¸ðµÎ ÇØ´ç
+		// ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½
 		try {
 			String sql = "UPDATE AdoptApply " + "SET apply_matched=? , approval_date=SYSDATE " + "WHERE apply_id=? ";
 			Object[] param = new Object[] { 1, adoptApply.getApply_id() };
@@ -78,7 +78,7 @@ public class AdoptApplyDAO {
 			jdbcUtil.close();
 		}
 
-		// ½ÂÀÎ µÆÀ» °æ¿ì
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if (apply_result == 1) {
 			
 			try {
@@ -88,7 +88,7 @@ public class AdoptApplyDAO {
 				result += jdbcUtil.executeUpdate();
 				
 				/*
-				 * // ÇÑ µ¿¹°¿¡ ´ëÇØ ´Ù¸¥ ÀÔ¾ç ½ÅÃ»ÀÌ Á¸Àç ÇÒ °æ¿ì ´Ù¸¥ ½ÅÃ»µé ¸ðµÎ °ÅÀý Ã³¸® String sql3 = "UPDATE Animal "
+				 * // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½Ô¾ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ String sql3 = "UPDATE Animal "
 				 * + "SET  animal_matched=? " + "WHERE animal_id=? ";
 				 * 
 				 * Iterator<AdoptApply> iter = adoptApplyList.iterator(); while(iter.hasNext())
@@ -109,7 +109,7 @@ public class AdoptApplyDAO {
 		return result;
 	}
 
-	// adoptapplyÀÇ matched °ª: 1 + animalÀÇ matched: 1
+	// adoptapplyï¿½ï¿½ matched ï¿½ï¿½: 1 + animalï¿½ï¿½ matched: 1
 	public int approval(AdoptApply adoptApply) throws SQLException {
 
 		String sql = "UPDATE AdoptApply " + "SET apply_matched=? , approval_date=SYSDATE " + "WHERE apply_id=? ";
@@ -134,12 +134,12 @@ public class AdoptApplyDAO {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource è«›ì„‘ †š
+			jdbcUtil.close(); // resource è«›ì„‘ ï¿½ï¿½
 		}
 		return 0;
 	}
 
-	// adoptapplyÀÇ matched °ª¸¸ 1
+	// adoptapplyï¿½ï¿½ matched ï¿½ï¿½ï¿½ï¿½ 1
 	public int decline(AdoptApply adoptApply) throws SQLException {
 
 		String sql = "UPDATE AdoptApply " + "SET  apply_matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
@@ -189,7 +189,7 @@ public class AdoptApplyDAO {
 		return null;
 	}
 
-	// °ü¸®ÀÚ ÀÔÀå¿¡¼­ ÀÔ¾ç½ÅÃ»ÀÇ ¸®½ºÆ®¸¦ º¸¿©ÁÖ´Â ÆäÀÌÁö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ ï¿½Ô¾ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public List<AdoptApply> findAdoptApplyList() throws SQLException {
 		String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
 				+ "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " + "WHERE adp.apply_matched=0 "
@@ -214,12 +214,12 @@ public class AdoptApplyDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource è«›ì„‘ †š
+			jdbcUtil.close(); // resource è«›ì„‘ ï¿½ï¿½
 		}
 		return null;
 	}
 
-	// ÀÔ¾ç°á°ú¸¦ ´Ù º¸¿©ÁÖ´Â ÆäÀÌÁö ( °ü¸®ÀÚ°¡ ½ÂÀÎ °ÅºÎ ÀÌÈÄ)
+	// ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ( ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Åºï¿½ ï¿½ï¿½ï¿½ï¿½)
 	public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
 		String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date, adp.approval_date ,an.animal_matched "
 				+ "FROM AdoptApply adp, Adopter a ,Animal an "
@@ -248,12 +248,12 @@ public class AdoptApplyDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource è«›ì„‘ †š
+			jdbcUtil.close(); // resource è«›ì„‘ ï¿½ï¿½
 		}
 		return null;
 	}
 	
-	// ¸¶ÀÌÆäÀÌÁö¿¡¼­ º¸¿©Áú ÀÔ¾ç ¸®½ºÆ®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¾ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public List<AdoptApply> findAdoptApplyResult(String user_id) throws SQLException {
 		String sql = "SELECT adp.apply_id, adp.animal_id, adp.apply_matched, adp.apply_date, adp.approval_date, a.animal_matched,  "
 				+ "FROM AdoptApply adp JOIN Animal a ON adp.animal_id = a.animal_id "
@@ -286,7 +286,7 @@ public class AdoptApplyDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource è«›ì„‘ †š
+			jdbcUtil.close(); // resource è«›ì„‘ ï¿½ï¿½
 		}
 		return null;
 	}
