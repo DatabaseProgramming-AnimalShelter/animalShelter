@@ -1,4 +1,4 @@
-<!-- 후기 글  - detail 화면  - 조회 -->
+<!-- 문의 글  - detail 화면  - 조회 -->
 
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>후기 글 - 조회</title>
+<title>문의 글 - 조회</title>
 <!-- Bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">

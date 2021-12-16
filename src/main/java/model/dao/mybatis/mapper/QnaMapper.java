@@ -20,4 +20,8 @@ public interface QnaMapper {
 	public List<Qna> selectAllQnaList();
 	
 	public List<Qna> findQnaCategoryByQnaType(String qnaType);
+	
+	public List<Qna> selectMyQnaList(String user_id);
+	
+	public String checkQnaPwd(int qna_id);
 }

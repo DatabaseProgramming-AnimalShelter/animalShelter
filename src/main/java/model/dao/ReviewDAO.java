@@ -58,10 +58,6 @@ CREATE TABLE Review
 		return 0;			
 	}
 	
-
-	/**
-	 * ������ ���� ������ ����
-	 */
 	public int update(Review review) throws SQLException {
 		String sql = "UPDATE Review "
 					+ "SET  title=?, content=? "
@@ -87,10 +83,6 @@ CREATE TABLE Review
 		return 0;
 	}
 
-	
-	/**
-	 * �־��� ID�� �ش��ϴ� Ŀ�´�Ƽ ������ ����.
-	 */
 	public int remove(int post_id) throws SQLException {
 		String sql = "DELETE FROM Review WHERE post_id=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {post_id});	// JDBCUtil�� delete���� �Ű� ���� ����
@@ -217,12 +209,12 @@ CREATE TABLE Review
         String sql = "SELECT post_id, title, content, creationDate, image "
       		   + "FROM Review " 
       		  + "WHERE writer=? and animal_id=? ";  
- 		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id, animal_id});	// JDBCUtil�� query���� �Ű� ���� ����
+ 		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id, animal_id});	
 
  		try {
- 			ResultSet rs = jdbcUtil.executeQuery();		// query ����
- 			if (rs.next()) {						// �л� ���� �߰�
- 				Review review = new Review(		// User ��ü�� �����Ͽ� �л� ������ ����
+ 			ResultSet rs = jdbcUtil.executeQuery();		
+ 			if (rs.next()) {						
+ 				Review review = new Review(		
  					rs.getInt("post_id"),
  					animal_id,
  					user_id,

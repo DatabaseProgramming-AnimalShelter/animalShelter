@@ -22,10 +22,10 @@ public class ListQnaController implements Controller {
 
 		List<Qna> QnaList = null;
 		
-		if(request.getParameter("user_id") != null) { // 마이페이지에서 사용자가 작성한 문의 리스트 볼 때	
-			QnaList = manager.findUserQnaList(UserSessionUtils.getLoginUserId(request.getSession()));
+		if(request.getParameter("user_id") != null) { 
+			QnaList = manager.selectMyQnaList(UserSessionUtils.getLoginUserId(request.getSession()));
 		}
-		else { // 모든 사람이 작성한 문의 리스트 볼 때
+		else { 
 			QnaList = manager.selectAllQnaList();
 		}		
 

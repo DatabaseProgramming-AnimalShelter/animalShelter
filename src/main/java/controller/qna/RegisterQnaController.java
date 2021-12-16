@@ -34,8 +34,8 @@ public class RegisterQnaController implements Controller {
 		System.out.println("qna_category_id " + qna_category_id);
 		System.out.println("qna_password " + request.getParameter("qna_password"));
 		Qna qna = new Qna(
-				request.getParameter("qna_title"),
 				request.getParameter("qna_writer"),
+				request.getParameter("qna_title"),
 				request.getParameter("qna_content"),
 				request.getParameter("qna_password"),
 				qna_category_id

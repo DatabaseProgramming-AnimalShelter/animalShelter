@@ -71,8 +71,13 @@ public class QnaManager {
 	}
 
 	// 마이페이지 문의 리스트
-	public List<Qna> findUserQnaList(String user_id) throws SQLException {
-		return qnaDAO.findUserQnaList(user_id);
+	public List<Qna> selectMyQnaList(String user_id) throws SQLException {
+		return qnaDAO.selectMyQnaList(user_id);
+	}
+	
+	// 비밀번호 체크
+	public String checkQnaPwd(int qna_id) throws SQLException {
+		return qnaDAO.checkQnaPwd(qna_id);
 	}
 
 }

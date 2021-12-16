@@ -104,4 +104,22 @@ public class QnaDAO {
 			sqlSession.close();
 		}
 	}
+	
+	public List<Qna> selectMyQnaList(String user_id){
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			return sqlSession.getMapper(QnaMapper.class).selectMyQnaList(user_id);
+		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	public String checkQnaPwd(int qna_id){
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			return sqlSession.getMapper(QnaMapper.class).checkQnaPwd(qna_id);
+		}finally {
+			sqlSession.close();
+		}
+	}
 }

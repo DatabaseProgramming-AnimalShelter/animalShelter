@@ -28,8 +28,7 @@
 		</thead>
 		<tbody>
 			<c:forEach var="list" items="${QnaList}">
-				<tr
-					onclick='location.href="<c:url value='/qna/view'>
+				<tr onclick='location.href="<c:url value='/qna/view'>
 						      <c:param name='qna_id' value='${list.qna_id}'/>
 						   </c:url>"'>
 					<th scope="row">${list.qna_id}</th>

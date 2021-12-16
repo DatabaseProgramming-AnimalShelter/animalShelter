@@ -67,4 +67,14 @@
 		<include refid="BaseColumns" />
 		ORDER BY q.qna_id
 	</select>
+	<select id="selectMyQnaList" parameterType="String" resultType="Qna">
+		<include refid="BaseColumns"></include>
+		WHERE qna_writer = #{user_id}
+		ORDER BY qna_id
+	</select>
+	<select id="checkQnaPwd" parameterType="int" resultType="String">
+		SELECT qna_password
+		FROM QNA
+		WHERE qna_id = #{qna_id}
+	</select>
 </mapper>
