@@ -10,6 +10,7 @@ import model.service.QnaManager;
 import model.service.ReviewNotFoundException;
 import controller.Controller;
 import controller.adopt.CreateAdoptApplyController;
+import controller.user.UserSessionUtils;
 import model.Qna;
 
 public class ViewQnaController implements Controller{
@@ -21,7 +22,9 @@ public class ViewQnaController implements Controller{
 		
 		QnaManager manager = QnaManager.getInstance();
 		int qna_id = Integer.parseInt(request.getParameter("qna_id"));
-		Qna qna = manager.findQnaByPrimaryKey(qna_id); 
+		Qna qna = manager.findQnaByPrimaryKey(qna_id);
+		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
+		int flg = 0;
 		
 		request.setAttribute("qna", qna);		
 		
@@ -30,10 +33,16 @@ public class ViewQnaController implements Controller{
 			String input_pwd = request.getParameter("check_qna_password");
 			
 			if(pwd.equals(input_pwd)) { // 비밀번호 맞으면
-				return "/qna/view.jsp";
+				flg = 1;
 			}
 		}
+		if(user_id != null && user_id.equals("admin")) {
+			flg = 1;
+		}
 		
+		if(flg == 1) {
+			return "/qna/view.jsp";
+		}
 		return "/qna/checkPwd.jsp";
 	}
 
