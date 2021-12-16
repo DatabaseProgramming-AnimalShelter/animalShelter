@@ -1,4 +1,4 @@
-<!-- 후기 글  - detail 화면  - 조회 -->
+<!-- 문의 글  - detail 화면  - 조회 -->
 
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>후기 글 - 조회</title>
+<title>문의 글 - 조회</title>
 <!-- Bootstrap -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -33,11 +33,15 @@
 			<tbody>
 				<tr>
 					<th>제목</th>
-					<td>${qna.title}</td>
+					<td>${qna.qna_title}</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${qna.user_name}</td>
+					<td>${qna.qna_writer}</td>
+				</tr>
+				<tr>
+					<th>날짜</th>
+					<td>${qna.qna_date}</td>
 				</tr>
 				<tr>
 					<th>질문종류</th>
@@ -45,14 +49,12 @@
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td>${qna.content}</td>
+					<td>${qna.qna_content}</td>
 				</tr>
 			</tbody>
 		</table>
 
 		<br>
-		<!-- 자신이 쓴글이면 삭제, 수정 가능하게 -->
-		<c:if test="${user_id=='qna.user_id'}">
 			<a class="btn btn-primary"
 				href="<c:url value='/qna/update'>
 	     		   <c:param name='qna_id' value='${qna.qna_id}'/>
@@ -61,18 +63,6 @@
 				href="<c:url value='/qna/delete'>
 	     		   	<c:param name='qna_id' value='${qna.qna_id}'/>
 			  	  </c:url>">삭제</a>
-		</c:if>
-
-		<c:if test="${user_id=='admin'}">
-			<a class="btn btn-primary"
-				href="<c:url value='/qna/update'>
-	     		   <c:param name='qna_id' value='${qna.qna_id}'/>
-			  </c:url>">수정</a>
-			<a class="btn btn-primary"
-				href="<c:url value='/qna/delete'>
-	     		   	<c:param name='qna_id' value='${qna.qna_id}'/>
-			  	  </c:url>">삭제</a>
-		</c:if>
 
 		<!-- 수정 또는 삭제가  실패한 경우 exception 객체에 저장된 오류 메시지를 출력 -->
 		<c:if test="${updateFailed}">

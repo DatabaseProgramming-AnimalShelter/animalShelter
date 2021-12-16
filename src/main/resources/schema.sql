@@ -84,7 +84,8 @@ CREATE TABLE A_heart
 (
    a_heart_id           INTEGER NOT NULL ,
    animal_id            INTEGER NULL ,
-   user_id              VARCHAR2(20) NULL 
+   user_id              VARCHAR2(20) NULL,
+   FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL
 );
 
 ALTER TABLE A_heart
@@ -107,8 +108,9 @@ CREATE TABLE Review
    content              VARCHAR2(4000) NULL ,
    creationDate         DATE NULL ,
    image                VARCHAR2(40) NULL ,
-   writer               VARCHAR2(20) NOT NULL ,
-   animal_id            INTEGER NOT NULL 
+   writer               VARCHAR2(20) NULL ,
+   animal_id            INTEGER NOT NULL,
+   FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE SET NULL
 );
 
 ALTER TABLE Review
@@ -126,12 +128,12 @@ CREATE TABLE Review_Comment
 (
    comment_id           INTEGER NOT NULL ,
    post_id              INTEGER NOT NULL ,
-   user_id              VARCHAR2(20) NOT NULL ,
+   user_id              VARCHAR2(20) NULL ,
    creationDate         DATE NULL ,
    parent               INTEGER NULL ,
-   content              VARCHAR2(20) NULL ,
+   content              VARCHAR2(4000) NULL ,
     PRIMARY KEY (comment_id),
-   FOREIGN KEY (user_id) REFERENCES Adopter (user_id),
+   FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL,
    FOREIGN KEY (post_id) REFERENCES Review (post_id)
 );
 
@@ -139,11 +141,11 @@ CREATE TABLE Review_Comment
 CREATE TABLE Qna
 (
    qna_id               INTEGER NOT NULL ,
-   title                VARCHAR2(40) NULL ,
-   content              VARCHAR2(500) NULL ,
-   password             VARCHAR2(40) NULL ,
+   qna_title            VARCHAR2(100) NULL ,
+   qna_content          VARCHAR2(1000) NULL ,
+   qna_password         VARCHAR2(100) NULL ,
    qna_category_id      INTEGER NULL ,
-   user_id              VARCHAR2(20) NULL ,
+   qna_writer           VARCHAR2(100) NULL ,
    qna_date             DATE NULL
 );
 
@@ -161,11 +163,13 @@ ALTER TABLE qna_category
 
 CREATE TABLE Qna_Comment
 (
-   comment_no           INTEGER NOT NULL ,
-   comment_content      VARCHAR2(500) NULL ,
-   reg_date             DATE NULL ,
    qna_id               INTEGER NOT NULL ,
-   comment_writer       VARCHAR2(20) NULL 
+   qna_title            VARCHAR2(100) NULL ,
+   qna_content          VARCHAR2(1000) NULL ,
+   qna_password         VARCHAR2(100) NULL ,
+   qna_category_id      INTEGER NULL ,
+   qna_writer           VARCHAR2(100) NULL ,
+   qna_date             DATE NUL
 );
 
 ALTER TABLE Qna_Comment
@@ -175,9 +179,9 @@ CREATE TABLE Qna_Reply
 (
    reply_id             INTEGER NOT NULL ,
    comment_no           INTEGER NOT NULL ,
-   reply_writer         VARCHAR2(20) NULL ,
+   reply_writer         VARCHAR2(100) NULL ,
    reply_content        VARCHAR2(500) NULL ,
-   reg_date             DATE NULL 
+   reg_date             DATE NULL
 );
 
 ALTER TABLE Qna_Reply
@@ -202,7 +206,7 @@ ALTER TABLE A_heart
    ADD (CONSTRAINT R_29 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Review
-   ADD (CONSTRAINT ÌõÑÍ∏∞ÏûëÏÑ± FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
+   ADD (CONSTRAINT  õÑÍ∏∞Ïûë Ñ± FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Review
    ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
@@ -263,31 +267,30 @@ INSERT INTO Adopter VALUES ('admin', 'admin','admin', 'admin@dongduk.ac.kr', '02
 INSERT INTO Adopter VALUES ( 'hyunsoo', '1234', 'song', 'hyunsu@gmail.com', '010-1234-5678');
 INSERT INTO Adopter VALUES ( 'yujin', '1234', 'han', 'yujin@naver.com', '010-5323-7788');
 
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Í∞ïÏïÑÏßÄÏ†ÑÏ≤¥', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÎØπÏä§Í≤¨', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Í∏∞ÌÉÄ', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÏßÑÎèóÍ∞ú', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÌíçÏÇ∞Í∞ú', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÏπòÏôÄÏôÄ', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÏöîÌÅ¨ÏÖîÌÖåÎ¶¨Ïñ¥', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÎπÑÏàë', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Ìë∏Îì§', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÎßêÌã∞Ï¶à', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Í≥®Îì†Î¶¨Ìä∏Î¶¨Î≤Ñ', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Ìè¨Î©îÎùºÎãàÏïà', 'Í∞ú');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Ïõ∞ÏãúÏΩîÍ∏∞', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∞≠æ∆¡ˆ¿¸√º', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'πÕΩ∫∞ﬂ', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '±‚≈∏', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '¡¯µæ∞≥', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '«≥ªÍ∞≥', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ƒ°øÕøÕ', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ø‰≈©º≈≈◊∏ÆæÓ', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∫Òºı', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '«™µÈ', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∏ª∆º¡Ó', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∞ÒµÁ∏Æ∆Æ∏Æπˆ', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∆˜∏ﬁ∂Û¥œæ»', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '¿£Ω√ƒ⁄±‚', '∞≥');
 
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Í≥†ÏñëÏù¥Ï†ÑÏ≤¥', 'Í≥†ÏñëÏù¥');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ÎØπÏä§', 'Í≥†ÏñëÏù¥');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Í∏∞ÌÉÄ', 'Í≥†ÏñëÏù¥');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ÏΩîÎ¶¨ÏïàÏàèÌó§Ïñ¥' ,'Í≥†ÏñëÏù¥');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ÏÉ¥', 'Í≥†ÏñëÏù¥');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Î±ÖÍ∞à', 'Í≥†ÏñëÏù¥');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Î®ºÏπòÌÇ®', 'Í≥†ÏñëÏù¥');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Ïä§ÌïëÌÅ¨Ïä§', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '∞ÌæÁ¿Ã¿¸√º', '∞ÌæÁ¿Ã');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'πÕΩ∫', '∞ÌæÁ¿Ã');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '±‚≈∏', '∞ÌæÁ¿Ã');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ƒ⁄∏Ææ»ºÙ«ÏæÓ' ,'∞ÌæÁ¿Ã');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'º§', '∞ÌæÁ¿Ã');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'π∞•', '∞ÌæÁ¿Ã');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '∏’ƒ°≈≤', '∞ÌæÁ¿Ã');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Ω∫«Œ≈©Ω∫', '∞ÌæÁ¿Ã');
 
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'suggest');
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'inquiry');
-
 
 commit;

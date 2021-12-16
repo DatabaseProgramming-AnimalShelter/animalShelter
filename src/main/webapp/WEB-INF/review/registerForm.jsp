@@ -64,19 +64,40 @@ function reviewCreate() {
     	<div class="form-group row">   
 	        <label for="title" class="col-lg-2 col-form-label">제목</label>
 	        <div class="col-lg-10">
-	            <input type="text" name="title" class="form-control" placeholder="제목">	            	
+	        	<c:choose>
+	        		<c:when test="${review.title != null}">
+	        			<input type="text" name="title" class="form-control" value="${review.title}">
+	        		</c:when>
+	        		<c:otherwise>
+	        			<input type="text" name="title" class="form-control" placeholder="제목">
+	        		</c:otherwise>
+	        	</c:choose>           	
 	        </div>
 	    </div>       
 	    <div class="form-group row">   
 	        <label for="content" class="col-lg-2 col-form-label">내용</label>
 	        <div class="col-lg-10">
-        		<textarea id="body" name="content" rows=15" cols="50" placeholder="내용을 입력하시오." class="form-control"></textarea>
+	        	<c:choose>
+	        		<c:when test="${review.content != null}">
+        				<textarea id="body" name="content" rows="15" cols="50" class="form-control">${review.content}</textarea>
+	        		</c:when>
+	        		<c:otherwise>
+        				<textarea id="body" name="content" rows="15" cols="50" placeholder="내용을 입력하시오." class="form-control"></textarea>
+	        		</c:otherwise>
+	        	</c:choose>
 	        </div>
 	    </div> 
 	    <div class="form-group row">   
 	        <label for="content" class="col-lg-2 col-form-label">사진</label>
 	        <div class="col-lg-10">
-        		<input type="file" name="image" size="11"/>
+	     	   <c:choose>
+	        		<c:when test="${review.image != null}">
+	        			<input type="file" name="image" size="11"/>
+	        		</c:when>
+	        		<c:otherwise>
+						<input type="file" name="image" size="11"/>	        		
+					</c:otherwise>
+	        	</c:choose> 
 	        </div>
 	    </div>         
 	    <br>

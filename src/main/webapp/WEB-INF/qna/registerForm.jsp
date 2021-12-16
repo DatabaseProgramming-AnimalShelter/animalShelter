@@ -45,15 +45,25 @@
 		action="<c:url value='/qna/create'></c:url>">
 
 		<div class="form-group row">
-			<label for="title" class="col-lg-2 col-form-label">제목</label>
+			<label for="qna_title" class="col-lg-2 col-form-label">제목</label>
 			<div class="col-lg-10">
-				<input type="text" name="title" class="form-control"
+				<input type="text" name="qna_title" class="form-control"
 					placeholder="제목">
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="title" class="col-lg-2 col-form-label">글쓴이</label>
-			<div class="col-lg-10">${user_name}</div>
+			<label for="qna_writer" class="col-lg-2 col-form-label">글쓴이</label>
+			<div class="col-lg-10">
+				<input type="text" name="qna_writer" class="form-control"
+					placeholder="글쓴이">
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="qna_password" class="col-lg-2 col-form-label">비밀번호</label>
+			<div class="col-lg-10">
+				<input type="password"  name="qna_password" class="form-control"
+					placeholder="비밀번호를 입력하세요">
+			</div>
 		</div>
 		<div class="form-group row">
 			<label for="qna_type" class="col-lg-3 col-form-label">질문종류</label>
@@ -65,22 +75,12 @@
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="content" class="col-lg-2 col-form-label">내용</label>
+			<label for="qna_content" class="col-lg-2 col-form-label">내용</label>
 			<div class="col-lg-10">
-				<textarea id="body" name="content" rows="15" cols="50"
+				<textarea id="content" name="qna_content" rows="15" cols="50"
 					placeholder="내용을 입력하시오." class="form-control"></textarea>
 			</div>
 		</div>
-		<!-- password?? 
-		<div class="form-group row">
-			<label for="password" class="col-lg-2 col-form-label">비밀번호</label>
-			<div class="col-lg-10">
-				<input type="text" name="password" class="form-control"
-					placeholder="비밀번호를 입력하세요">
-			</div>
-		</div>
-		-->
-		
 		<br>
 		<div class="form-group">
 			<input type="button" class="btn btn-primary" value="질문 보내기"

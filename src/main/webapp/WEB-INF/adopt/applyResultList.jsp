@@ -19,7 +19,7 @@
 			<tbody>
 				<c:forEach var="adopt" items="${AdoptApplyList}">
 					<tr><td><a
-						href="<c:url value='/adopt/viewApply'>
+						href="<c:url value='/adopt/view'>
 					   <c:param name='apply_id' value='${adopt.apply_id}'/>
 			 		 </c:url>">
 							${adopt.apply_id}</a></td>

@@ -16,23 +16,25 @@ public class UpdateQnaController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
 
-    	String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		int qna_id = Integer.parseInt(request.getParameter("qna_id"));
 		QnaManager manager = QnaManager.getInstance();
 		
 		if (request.getMethod().equals("GET")) {	
 
 			System.out.println("qna_id" + qna_id );
-			Qna qna = manager.findQna(qna_id);
+			Qna qna = manager.findQnaByPrimaryKey(qna_id);
 			request.setAttribute("qna", qna);			
 				
 			return "/qna/updateForm.jsp";    
 	    }	
 		int qna_category_id = manager.findQnaCategoryId(request.getParameter("qna_type"));
 		Qna qna = new Qna(
-				request.getParameter("title"), 
-				user_id, qna_category_id, 
-				request.getParameter("content")
+				Integer.parseInt(request.getParameter("qna_id")),
+				request.getParameter("qna_writer"),
+				request.getParameter("qna_title"),
+				request.getParameter("qna_content"),
+				request.getParameter("qna_password"),
+				qna_category_id
 			);
 		
     	log.debug("Update qna : {}", qna);

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.QnaMapper">
+	<cache />
+	<sql id="BaseColumns">
+		SELECT q.qna_id,
+		q.qna_writer,
+		q.qna_title,
+		q.qna_content,
+		q.qna_password,
+		q.qna_date,
+		c.qna_category_id,
+		c.qna_type
+		FROM QNA q JOIN QNA_CATEGORY c ON
+		q.qna_category_id =
+		c.qna_category_id
+	</sql>
+	<insert id="create" parameterType="Qna">
+		<selectKey keyProperty="qna_id" resultType="int"
+			order="BEFORE">
+			SELECT
+			qna_id_seq.nextval AS qna_id FROM DUAL
+		</selectKey>
+
+		INSERT INTO QNA ( qna_id, qna_writer, qna_title, qna_content,
+		qna_password, qna_date,
+		qna_category_id)
+		VALUES ( #{qna_id},
+		#{qna_writer},
+		#{qna_title},#{qna_content},#{qna_password}, SYSDATE,
+		#{qna_category_id})
+	</insert>
+	<update id="update" parameterType="Qna">
+		UPDATE QNA
+		SET qna_writer =
+		#{qna_writer}, qna_title = #{qna_title}, qna_content = #{qna_content},
+		qna_password =
+		#{qna_password}, qna_date = SYSDATE,  qna_category_id = #{qna_category_id}
+		WHERE qna_id = #{qna_id}
+	</update>
+
+	<delete id="remove" parameterType="int">
+		DELETE FROM QNA
+		WHERE qna_id =
+		#{qna_id}
+	</delete>
+
+	<select id="findQnaByPrimaryKey" parameterType="int"
+		resultType="Qna">
+		<include refid="BaseColumns" />
+		WHERE qna_id = #{qna_id}
+	</select>
+	<select id="findQnaCategoryId" parameterType="String"
+		resultType="int">
+		SELECT qna_category_id AS qna_category_id
+		FROM QNA_CATEGORY
+		WHERE qna_type = #{qna_type}
+	</select>
+	<select id="findQnaCategoryByQnaType" parameterType="String"
+		resultType="Qna">
+		<include refid="BaseColumns" />
+		WHERE c.qna_type = #{qna_type}
+		ORDER BY qna_id
+	</select>
+	<select id="selectAllQnaList" resultType="Qna">
+		<include refid="BaseColumns" />
+		ORDER BY q.qna_id
+	</select>
+	<select id="selectMyQnaList" parameterType="String" resultType="Qna">
+		<include refid="BaseColumns"></include>
+		WHERE qna_writer = #{user_id}
+		ORDER BY qna_id
+	</select>
+	<select id="checkQnaPwd" parameterType="int" resultType="String">
+		SELECT qna_password
+		FROM QNA
+		WHERE qna_id = #{qna_id}
+	</select>
+</mapper>

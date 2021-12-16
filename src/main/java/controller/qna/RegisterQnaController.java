@@ -10,10 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import controller.user.UserSessionUtils;
-import model.Adopter;
+
 import model.Qna;
-import model.service.AdopterManager;
 import model.service.ExistingUserException;
 import model.service.QnaManager;
 
@@ -23,27 +21,27 @@ public class RegisterQnaController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		String user_id = UserSessionUtils.getLoginUserId(request.getSession());
 		QnaManager manager = QnaManager.getInstance();
 
 		if (request.getMethod().equals("GET")) {
 			// GET request: 리뷰 등록 form 요청
 			log.debug("CreateForm Request");
 
-			request.setAttribute("user_id", user_id);
-
 			return "/qna/registerForm.jsp";
 		}
-
+		System.out.println("USERID넘어와짐"+request.getParameter("qna_writer"));
 		int qna_category_id = manager.findQnaCategoryId(request.getParameter("qna_type"));
+		System.out.println("qna_category_id " + qna_category_id);
+		System.out.println("qna_password " + request.getParameter("qna_password"));
 		Qna qna = new Qna(
-				request.getParameter("title"), 
-				user_id, qna_category_id, 
-				request.getParameter("content")
-			);
-
+				request.getParameter("qna_writer"),
+				request.getParameter("qna_title"),
+				request.getParameter("qna_content"),
+				request.getParameter("qna_password"),
+				qna_category_id
+				);
 		try {
-
+			System.out.println(qna.toString());
 			manager.create(qna);
 
 			log.debug("Create Review : {}", qna);
@@ -53,7 +51,7 @@ public class RegisterQnaController implements Controller {
 			request.setAttribute("registerFailed", true);
 			request.setAttribute("exception", e);
 			request.setAttribute("qna", qna);
-			return "/review/registerForm.jsp";
+			return "/qna/registerForm.jsp";
 		}
 	}
 }
