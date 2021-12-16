@@ -29,7 +29,7 @@
 	</delete>
 	
 	<select id="findAnimalList" resultType="Animal" >
-		SELECT a.animal_id, c.category_id, c.species, a.age, a.location,a.image , a.gender
+		SELECT a.animal_id, c.category_id, c.species , a.age, a.location,a.image, a.gender
         FROM animal a JOIN Category c ON a.category_id = c.category_id  
         ORDER BY a.animal_id desc
     </select>

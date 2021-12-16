@@ -15,8 +15,8 @@ import model.Animal;
 import model.dao.mybatis.mapper.AnimalMapper;
 
 /**
- * 사용자 관리를 위해 데이터베이스 작업을 전담하는 DAO 클래스
- * Animal 테이블에서 커뮤니티 정보를 추가, 수정, 삭제, 검색 수행 
+ * �궗�슜�옄 愿�由щ�� �쐞�빐 �뜲�씠�꽣踰좎씠�뒪 �옉�뾽�쓣 �쟾�떞�븯�뒗 DAO �겢�옒�뒪
+ * Animal �뀒�씠釉붿뿉�꽌 而ㅻ�ㅻ땲�떚 �젙蹂대�� 異붽�, �닔�젙, �궘�젣, 寃��깋 �닔�뻾 
  */
 public class AnimalDAO {
 	private SqlSessionFactory sqlSessionFactory;
@@ -31,16 +31,16 @@ public class AnimalDAO {
 			throw new IllegalArgumentException(e);
 		}System.out.println("dlrjsehlsk,,,,,,,,");
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		System.out.println("myba@tis,,,,,,,,생성,,,,,,ehoTwl,,,");
+		System.out.println("myba@tis,,,,,,,,�깮�꽦,,,,,,ehoTwl,,,");
 	}
 	
 	/**
-	 * animal 테이블에 새로운 행 생성 (PK 값은 Sequence를 이용하여 자동 생성)
+	 * animal �뀒�씠釉붿뿉 �깉濡쒖슫 �뻾 �깮�꽦 (PK 媛믪� Sequence瑜� �씠�슜�븯�뿬 �옄�룞 �깮�꽦)
 	 */
 	public Animal create(Animal animal) {
-		System.out.println("여긴왔누11");
+		System.out.println("�뿬湲댁솕�늻11");
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		System.out.println("여긴왔누");
+		System.out.println("�뿬湲댁솕�늻");
 		try {
 			int result = sqlSession.getMapper(AnimalMapper.class).insertAnimal(animal);
 			if (result > 0) {
@@ -53,7 +53,7 @@ public class AnimalDAO {
 	}
 
 	/**
-	 * 기존의 animal 정보를 수정
+	 * 湲곗〈�쓽 animal �젙蹂대�� �닔�젙
 	 */
 	public int update(Animal comm) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -71,7 +71,7 @@ public class AnimalDAO {
 
 
 	/**
-	 * 주어진 ID에 해당하는 animal객체를 삭제.
+	 * 二쇱뼱吏� ID�뿉 �빐�떦�븯�뒗 animal媛앹껜瑜� �궘�젣.
 	 */
 	public int remove(int commId) {		
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -87,8 +87,8 @@ public class AnimalDAO {
 	}
 
 	/**
-	 * 주어진  ID에 해당하는 동물 정보를 데이터베이스에서 찾아 Animal 도메인 클래스에 
-	 * 저장하여 반환.
+	 * 二쇱뼱吏�  ID�뿉 �빐�떦�븯�뒗 �룞臾� �젙蹂대�� �뜲�씠�꽣踰좎씠�뒪�뿉�꽌 李얠븘 Animal �룄硫붿씤 �겢�옒�뒪�뿉 
+	 * ���옣�븯�뿬 諛섑솚.
 	 */
 	public Animal findAnimal(int animal_id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -101,7 +101,7 @@ public class AnimalDAO {
 
 
 	/**
-	 * 전체 동물 정보를 검색하여 List에 저장 및 반환*/
+	 * �쟾泥� �룞臾� �젙蹂대�� 寃��깋�븯�뿬 List�뿉 ���옣 諛� 諛섑솚*/
 		public List<Animal> findAnimalList() {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
@@ -112,7 +112,7 @@ public class AnimalDAO {
 	} 
 
 		/**
-		 * 동물 정보를 검색하여 List에 저장 및 반환*/
+		 * �룞臾� �젙蹂대�� 寃��깋�븯�뿬 List�뿉 ���옣 諛� 諛섑솚*/
 		public List<Animal> searchAnimalList(Animal animal){
 			Map<String,String> paramString=new HashMap<String,String>(2);
 			paramString.put("animal_type",animal.getAnimal_type());
@@ -120,13 +120,7 @@ public class AnimalDAO {
 			Map<String,Integer> paramInt=new HashMap<String,Integer>(2);
 			paramInt.put("category_id",animal.getCategory_id());
 			paramInt.put("matched",animal.getMatched());
-			 System.out.println("paramString"+paramString);
-			 System.out.println("paramInt"+paramInt);
-			System.out.println("animal_type"+animal.getAnimal_type());
-		      System.out.println("category_id"+String.valueOf(animal.getCategory_id()));
-		      System.out.println("matched"+String.valueOf(animal.getMatched()));
-		      System.out.println("location"+animal.getLocation());
-		     
+			
 			SqlSession sqlSession = sqlSessionFactory.openSession();
 			try {
 				return sqlSession.getMapper(AnimalMapper.class).searchAnimalList(paramString,paramInt);			

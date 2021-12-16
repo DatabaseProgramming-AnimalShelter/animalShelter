@@ -45,7 +45,7 @@ public class ListAnimalController implements Controller {
 		}
 		AnimalManager manager = AnimalManager.getInstance();
 		List<Animal> animalList = manager.findAnimalList();
-
+		System.out.println(animalList);
 		request.setAttribute("animalList", animalList);
 
 		return "/animal/list.jsp";
