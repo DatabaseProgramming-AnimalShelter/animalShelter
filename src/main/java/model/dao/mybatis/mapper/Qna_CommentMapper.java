@@ -7,6 +7,7 @@ import model.Qna_Comment;
 import model.Qna_Reply;
 
 public interface Qna_CommentMapper {
+	
 	Qna_Comment selectCommentByPrimaryKey(int comment_no);
 	
 	List<Qna_Comment> selectCommentByCondition(Map<String, Object> condition);

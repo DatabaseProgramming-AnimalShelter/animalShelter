@@ -48,7 +48,6 @@ public class AdoptApplyManager {
 		return adoptApplyDAO.decline(adoptApply);
 	}
 	
-	// 승인과 거절 합친 메소드
 	public int apply_result(AdoptApply adoptApply, int apply_result) throws SQLException {
 		return adoptApplyDAO.apply_result(adoptApply, apply_result);
 	}
@@ -58,7 +57,6 @@ public class AdoptApplyManager {
 		return adoptApply;
 	}
 
-	// 개인 mypage에서 보일 result list
 	public List<AdoptApply> findUserAdoptList(String user_id) throws SQLException {
 		return adoptApplyDAO.findUserAdoptList(user_id);
 	}
@@ -71,7 +69,6 @@ public class AdoptApplyManager {
 		return adoptApplyDAO.findAdoptApplyList();
 	}
 
-	// 관리자가 승인 거절한 결과를 보여주는 리스트
 	public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
 		return adoptApplyDAO.findAdoptApplyResultList();
 	}

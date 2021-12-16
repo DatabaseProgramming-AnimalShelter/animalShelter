@@ -55,10 +55,7 @@ $(function(){
 			</tr>
 		</thead>
 		<tbody>
-			<!--  <tr
-					onclick='location.href="<c:url value='/qna/view'>
-						      <c:param name='qna_id' value='${list.qna_id}'/>
-						   </c:url>"'>-->
+
 			<c:forEach var="list" items="${QnaList}">
 				<tr data-toggle="modal" data-id="${list.qna_id}" data-target="#orderModal">
 					<th scope="row">${list.qna_id}</th>

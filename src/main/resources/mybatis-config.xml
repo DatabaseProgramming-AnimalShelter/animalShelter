@@ -11,8 +11,8 @@
 	<typeAliases>
 		<typeAlias type="model.Animal" alias="Animal" />
 		<typeAlias type="model.Qna" alias="Qna" />
-		<typeAlias type="model.Reply" alias="Reply" />
-		<typeAlias type="model.Comment" alias="Comment" />
+		<typeAlias type="model.Qna_Reply" alias="Qna_Reply" />
+		<typeAlias type="model.Qna_Comment" alias="Qna_Comment" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">

@@ -35,16 +35,24 @@
 	</select>
 
 	<insert id="insertComment" parameterType="Qna_Comment">
+		<selectKey keyProperty="comment_no" resultType="int"
+			order="BEFORE">
+			SELECT
+			comment_no_seq.nextval AS comment_no FROM DUAL
+		</selectKey>
 		INSERT INTO Qna_Comment
-		(comment_no, qna_id, comment_writer, comment_content, reg_date)
+		(comment_no, qna_id, comment_writer,
+		comment_content, reg_date)
 		VALUES
-		(#{comment_no}, #{qna_id}, #{comment_writer}, #{commentContent},
+		(#{comment_no}, #{qna_id},
+		#{comment_writer}, #{commentContent},
 		#{regDate})
 	</insert>
 
 	<update id="updateComment" parameterType="Qna_Comment">
 		UPDATE Qna_Comment
-		SET comment_content = #{comment_content}
+		SET
+		comment_content = #{comment_content}
 		WHERE comment_no = #{comment_no}
 	</update>
 
@@ -64,14 +72,11 @@
 			property="comment_content" />
 		<result column="reg_date" jdbcType="TIMESTAMP"
 			property="reg_date" />
-		<association property="qna" column="qna_id"
-			javaType="Qna">
+		<association property="qna" column="qna_id" javaType="Qna">
 			<id property="qna_id" column="qna_id" />
-			<!-- qna의 필드가 더 필요하면 꺼내옴
-			<result property="userName" column="user_name" />
-			<result property="phone" column="phone" />
-			<result property="address" column="address" />			
-			 -->
+			<!-- qna의 필드가 더 필요하면 꺼내옴 <result property="userName" column="user_name" 
+				/> <result property="phone" column="phone" /> <result property="address" 
+				column="address" /> -->
 		</association>
 		<collection property="replies" ofType="Qna_Reply">
 			<id property="reply_id" column="reply_id" />
@@ -83,19 +88,32 @@
 
 	<select id="selectCommentByPrimaryKeyCollection"
 		parameterType="Qna_Comment" resultMap="collectionResultMap">
-		SELECT c.comment_no, c.comment_writer, c.comment_content, c.reg_date, 
-		q.qna_id, 
-		r.reply_id, r.reply_writer, r.reply_content, r.reg_date 
-		FROM QNA_COMMENT c, QNA q, QNA_REPLY r
-		WHERE q.qna_id = c.qna_id AND c.comment_no = r.comment_no
-		AND c.comment_no = #{comment_no} AND q.qna_id = {qna_id}
+		SELECT c.comment_no,
+		c.comment_writer, c.comment_content, c.reg_date,
+		q.qna_id,
+		r.reply_id,
+		r.reply_writer, r.reply_content, r.reg_date
+		FROM QNA_COMMENT c, QNA q,
+		QNA_REPLY r
+		WHERE q.qna_id = c.qna_id AND
+		c.comment_no = r.comment_no
+		AND c.comment_no = #{comment_no} AND
+		q.qna_id = {qna_id}
 	</select>
 
 	<insert id="insertReply" parameterType="Qna_Reply">
+		<selectKey keyProperty="reply_id" resultType="int"
+			order="BEFORE">
+			SELECT
+			reply_id_seq.nextval AS reply_id FROM DUAL
+		</selectKey>
 		INSERT INTO QNA_REPLY
-		(reply_id, comment_no, reply_writer, reply_content, reg_date)
+		(reply_id, comment_no, reply_writer,
+		reply_content, reg_date)
 		VALUES
-		(#{reply_id}, #{comment_no}, #{reply_writer}, #{reply_content}, #{reg_date})
+		(#{reply_id}, #{comment_no},
+		#{reply_writer}, #{reply_content},
+		#{reg_date})
 	</insert>
 
 	<delete id="deleteAllReplies">

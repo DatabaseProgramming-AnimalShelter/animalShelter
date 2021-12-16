@@ -14,6 +14,23 @@ public class Qna_Comment implements Serializable {
 	private Qna qna;
 	private List<Qna_Reply> replies;	// Reply 객체들의 list 참조
 	
+	
+	
+	public Qna_Comment(String qna_id, String comment_content, String comment_writer) {
+		super();
+		this.qna_id = qna_id;
+		this.comment_content = comment_content;
+		this.comment_writer = comment_writer;
+	}
+
+	public Qna_Comment(String qna_id, Date reg_date, String comment_writer,String comment_content ) {
+		super();
+		this.qna_id = qna_id;
+		this.reg_date = reg_date;
+		this.comment_writer = comment_writer;
+		this.comment_content = comment_content;
+	}
+
 	public int getComment_no() {
 		return comment_no;
 	}
