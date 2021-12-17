@@ -7,8 +7,11 @@ import org.slf4j.LoggerFactory;
 import controller.adopt.*;
 import controller.animal.*;
 import controller.review.*;
+import controller.review_comment.CreateReviewCommentController;
+import controller.review_comment.DeleteReviewCommentController;
 import controller.user.*;
 import controller.qna.*;
+import controller.qna_comment.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -51,12 +54,16 @@ public class RequestMapping {
         mappings.put("/review/view", new ViewReviewController());
         mappings.put("/review/update", new UpdateReviewController());
         mappings.put("/review/delete", new DeleteReviewController());
+        mappings.put("/review/comment", new CreateReviewCommentController());
+        mappings.put("/review_comment/delete", new DeleteReviewCommentController());
 
         mappings.put("/qna/create", new RegisterQnaController());
         mappings.put("/qna/list", new ListQnaController());
         mappings.put("/qna/view", new ViewQnaController());
         mappings.put("/qna/update", new UpdateQnaController());
         mappings.put("/qna/delete", new DeleteQnaController());
+        mappings.put("/qna/create_comment", new CreateQnaCommentController());
+        mappings.put("/qna/delete_comment", new DeleteQnaCommentController());
         
         logger.info("Initialized Request Mapping!");
     }

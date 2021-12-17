@@ -11,6 +11,9 @@ public class Review {
 	private String content;
 	private String image;
 	
+	// Review_Commnet
+	private Date comment_creationDate;
+	
 	public Review(int post_id, int animal_id, String writer, String title, 
 			String content, Date creationDate, String image) {
 		super();
@@ -82,8 +85,14 @@ public class Review {
 		this.content = content;
 	}
 	
-	
-	
+	// findReviewCommentList에서 쓰임
+	public Review(int post_id, String writer, String title, Date comment_creationDate) {
+		super();
+		this.post_id = post_id;
+		this.writer = writer;
+		this.title = title;
+		this.comment_creationDate = comment_creationDate;
+	}	
 
 	public Review(Object parseInt) {
 		// TODO Auto-generated constructor stub
@@ -143,6 +152,14 @@ public class Review {
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Date getComment_creationDate() {
+		return comment_creationDate;
+	}
+
+	public void setComment_creationDate(Date comment_creationDate) {
+		this.comment_creationDate = comment_creationDate;
 	}
 	
 

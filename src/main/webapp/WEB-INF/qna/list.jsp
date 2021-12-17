@@ -4,46 +4,18 @@
 <%@ include file="/WEB-INF/home/mainHeader.jsp"%>
 
 <title>QNA 관리 - 목록</title>
-
-<style>
-$(function(){
-    $('#orderModal').modal({
-        keyboard: true,
-        backdrop: "static",
-        show:false,
-        
-    }).on('show', function(){
-          var getIdFromRow = $(this).data('orderid');
-        //make your ajax call populate items or what even you need
-        $(this).find('#orderDetails').html($('<b> Order Id selected: ' + getIdFromRow  + '</b>'))
-    });
-    
-    $(".table-striped").find('tr[data-target]').on('click', function(){
-        //or do your operations here instead of on show of modal to populate values to modal.
-         $('#orderModal').data('orderid',$(this).data('id'));
-    });
-    
-});
-</style>
 <!-- Bootstrap -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
-	function clickDel(formName) {
-		formName.action = "/board/contentDelAsk";
-		formName.method = "post";
-		formName.submit();
-	}
-</script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <div class="container">
 	<br>
 	<h4>QNA 목록</h4>
 	<br>
-
 	<table class="table table-bordered">
 		<thead class="thead-inverse">
 			<tr>
@@ -55,9 +27,10 @@ $(function(){
 			</tr>
 		</thead>
 		<tbody>
-
 			<c:forEach var="list" items="${QnaList}">
-				<tr data-toggle="modal" data-id="${list.qna_id}" data-target="#orderModal">
+				<tr onclick='location.href="<c:url value='/qna/view'>
+						      <c:param name='qna_id' value='${list.qna_id}'/>
+						   </c:url>"'>
 					<th scope="row">${list.qna_id}</th>
 					<td>${list.qna_title}</td>
 					<td>${list.qna_writer}</td>

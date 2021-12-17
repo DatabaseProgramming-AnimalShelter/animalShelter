@@ -10,17 +10,18 @@ import java.util.Map;
 import model.Qna;
 import model.Qna_Comment;
 import model.Qna_Reply;
-import model.dao.mybatis.CommentDAO;
 import model.dao.mybatis.QnaDAO;
+import model.dao.mybatis.Qna_CommentDAO;
 
 public class QnaManager {
 	private static QnaManager qnaMan = new QnaManager();
 	private QnaDAO qnaDAO;
-	private CommentDAO commentDAO;
+	private Qna_CommentDAO commentDAO;
 
 	private QnaManager() {
 		try {
 			qnaDAO = new QnaDAO();
+			commentDAO = new Qna_CommentDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,54 +63,37 @@ public class QnaManager {
 		}
 		return review;
 	}
-//
-//	public int findQnaCategoryId(String qna_type) { 
-//		return qnaDAO.findQnaCategoryId(qna_type);
-//	}
 
 	public List<Qna> findQnaCategoryByQnaType(String qnaType) {
 		return qnaDAO.findQnaCategoryByQnaType(qnaType);
 	}
-	//댓글 입력
+
+	// 댓글 입력
 	public int insertComment(Qna_Comment comment) {
-			return commentDAO.insertComment(comment);
+		return commentDAO.insertComment(comment);
 	}
-	//댓글 삭제
-	public int deleteAllComments() {		
-		return commentDAO.deleteAllComments();
-	}	
-	//대댓글입력
-	public int insertReply(Qna_Reply reply) {
-		//int reply_id, int comment_no, String reply_content, Date reg_Date
-		return commentDAO.insertReply(reply);
+
+	// 댓글 수정
+	public int updateComment(Qna_Comment comment) {
+		return commentDAO.updateComment(comment);
 	}
-	//대댓글 전체 삭제
-	public int deleteAllReplies() {
-		return commentDAO.deleteAllReplies();
+
+	// 댓글 삭제
+	public int deleteComment(int comment_no) {
+		return commentDAO.deleteComment(comment_no);
 	}
-	//comment번호로 선택
-	public Qna_Comment selectCommentByPrimaryKey(int comment_no) {		
-		return commentDAO.selectCommentByPrimaryKey(comment_no);		
-	}
-	//comment, qna, reply모두 선택
-	public Qna_Comment selectCommentByPrimaryKeyCollection(int comment_no) {
-		return commentDAO.selectCommentByPrimaryKeyCollection(comment_no);	
-	}
-	//qna_id로 comment선택하기
-	public List<Qna_Comment> selectCommentByCondition(int qna_id) {
-		Map<String, Object> condition = new HashMap<String, Object>();
-		condition.put("qna_id", qna_id);
-		return commentDAO.selectCommentByCondition(condition);
+	//댓글선택
+	public Qna_Comment selectComment(int qna_id) {
+		return commentDAO.selectComment(qna_id);
 	}
 	// 마이페이지 문의 리스트
 	public List<Qna> selectMyQnaList(String user_id) throws SQLException {
 		return qnaDAO.selectMyQnaList(user_id);
 	}
-	
+
 	// 비밀번호 체크
 	public String checkQnaPwd(int qna_id) throws SQLException {
 		return qnaDAO.checkQnaPwd(qna_id);
 	}
 
 }
-

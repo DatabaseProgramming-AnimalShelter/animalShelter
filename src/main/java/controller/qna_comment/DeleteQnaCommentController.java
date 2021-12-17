@@ -1,4 +1,4 @@
-package controller.qna;
+package controller.qna_comment;
 
 import java.util.Date;
 import java.util.List;
@@ -15,8 +15,8 @@ import model.Qna;
 import model.service.ExistingUserException;
 import model.service.QnaManager;
 
-public class DeleteCommentController implements Controller {
-	private static final Logger log = LoggerFactory.getLogger(DeleteCommentController.class);
+public class DeleteQnaCommentController implements Controller {
+	private static final Logger log = LoggerFactory.getLogger(DeleteQnaCommentController.class);
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -120,4 +120,5 @@ public class QnaDAO {
 			sqlSession.close();
 		}
 	}
+	
 }

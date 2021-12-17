@@ -22,14 +22,14 @@ public class UpdateReviewController implements Controller {
 		int post_id = Integer.parseInt(request.getParameter("post_id"));
 		
 		if (request.getMethod().equals("GET")) {	
-    		// GET request: Ä¿¹Â´ÏÆ¼ ¼öÁ¤ form ¿äÃ»	
+    		// GET request: ì»¤ë®¤ë‹ˆí‹° ìˆ˜ì • form ìš”ì²­	
 			System.out.println("@@@@@@@@@@review post_id: ----------" + post_id );
 
     		ReviewManager manager = ReviewManager.getInstance();
-			Review review = manager.findReview(post_id);	// ¼öÁ¤ÇÏ·Á´Â Ä¿¹Â´ÏÆ¼ Á¤º¸ °Ë»ö
+			Review review = manager.findReview(post_id);	// ìˆ˜ì •í•˜ë ¤ëŠ” ì»¤ë®¤ë‹ˆí‹° ì •ë³´ ê²€ìƒ‰
 			request.setAttribute("review", review);			
 				
-			return "/review/updateForm.jsp";   // °Ë»öÇÑ Á¤º¸¸¦ update formÀ¸·Î Àü¼Û     
+			return "/review/updateForm.jsp";   // ê²€ìƒ‰í•œ ì •ë³´ë¥¼ update formìœ¼ë¡œ ì „ì†¡     
 	    }	
     	
 		Review review = new Review(

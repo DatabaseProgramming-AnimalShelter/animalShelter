@@ -7,10 +7,6 @@ import java.util.List;
 
 import model.Review;
 
-/**
- * ����� ������ ���� �����ͺ��̽� �۾��� �����ϴ� DAO Ŭ����
- * Review ���̺��� Ŀ�´�Ƽ ������ �߰�, ����, ����, �˻� ���� 
- */
 public class ReviewDAO {
 	private JDBCUtil jdbcUtil = null;
 	
@@ -29,7 +25,6 @@ CREATE TABLE Review
    writer               VARCHAR2(20) NOT NULL ,
    animal_id            INTEGER NOT NULL 
 );
-
 	*/
 	public int create(Review review) throws SQLException {
 		String sql = "INSERT INTO Review "
@@ -115,10 +110,14 @@ CREATE TABLE Review
 		try {
 			ResultSet rs = jdbcUtil.executeQuery();		// query ����
 			if (rs.next()) {						// �л� ���� �߰�
+				String writer = rs.getString("writer");
+		        if(writer == null) { 
+		        	writer = "(알 수 없음)";
+		        }
 				Review review = new Review(		// User ��ü�� �����Ͽ� �л� ������ ����
 					rs.getInt("post_id"),
 					rs.getInt("animal_id"),
-					rs.getString("writer"),
+					writer,
 					rs.getString("title"),
 					rs.getString("content"),
 					rs.getDate("creationDate"),
@@ -173,30 +172,34 @@ CREATE TABLE Review
 	public List<Review> findReviewList() throws SQLException {
         String sql = "SELECT post_id, animal_id, writer, title, content, creationDate "
         		   + "FROM Review " 
-        		   + "ORDER BY post_id ";        
+        		   + "ORDER BY post_id ";  
         			
-		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil�� query�� ����
+		jdbcUtil.setSqlAndParameters(sql, null);		
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ����			
-			List<Review> animalList = new ArrayList<Review>();	// Community���� ����Ʈ ����
+			ResultSet rs = jdbcUtil.executeQuery();						
+			List<Review> animalList = new ArrayList<Review>();	
 			while (rs.next()) {
+				String writer = rs.getString("writer");
+		        if(writer == null) { 
+		        	writer = "(알 수 없음)";
+		        }
 				Review animal = new Review(
 						rs.getInt("post_id"), 
 						rs.getString("title"),
 						rs.getString("content"), 
 						rs.getDate("creationDate"),
-						rs.getString("writer"),
+						writer,
 						rs.getInt("animal_id")
 						);
-					animalList.add(animal);				// List�� Community ��ü ����
+					animalList.add(animal);				
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ��ȯ
+			jdbcUtil.close();		
 		}
 		return null;
 	}
@@ -234,13 +237,12 @@ CREATE TABLE Review
         		   + "FROM Review "
         		   + "WHERE writer=? "
         		   + "ORDER BY post_id ";        
-        			
         
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		// JDBCUtil�� query�� ����
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		
 					
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query ����			
-			List<Review> animalList = new ArrayList<Review>();	// Community���� ����Ʈ ����
+			ResultSet rs = jdbcUtil.executeQuery();						
+			List<Review> animalList = new ArrayList<Review>();	
 			while (rs.next()) {
 				Review animal = new Review(
 						rs.getInt("post_id"), 
@@ -249,15 +251,49 @@ CREATE TABLE Review
 						rs.getDate("creationDate"),
 						user_id,
 						rs.getInt("animal_id")
-						);
-					animalList.add(animal);				// List�� Community ��ü ����
+				);
+					animalList.add(animal);				
 			}		
 			return animalList;					
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ��ȯ
+			jdbcUtil.close();		
+		}
+		return null;
+	}
+	
+	public List<Review> findReviewCommnetList(String user_id) throws SQLException {
+        String sql = "SELECT r.post_id, r.title, r.writer, rc.creationDate "
+        		   + "FROM Review r JOIN Review_Comment rc ON r.post_id = rc.post_id "
+        		   + "WHERE rc.user_id=? "
+        		   + "ORDER BY rc.creationDate DESC ";        
+      
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});		
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();						
+			List<Review> commentList = new ArrayList<Review>();	
+			while (rs.next()) {
+				String writer = rs.getString("writer");
+		        if(writer == null) { 
+		        	writer = "(알 수 없음)";
+		        }
+				Review animal = new Review(
+						rs.getInt("post_id"), 
+						writer,
+						rs.getString("title"),
+						rs.getDate("creationDate")
+				);
+				commentList.add(animal);				
+			}		
+			return commentList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		
 		}
 		return null;
 	}

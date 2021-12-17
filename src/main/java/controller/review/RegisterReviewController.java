@@ -45,16 +45,8 @@ public class RegisterReviewController implements Controller {
         if (request.getMethod().equals("GET")) {
    		  // GET request: 리뷰 등록 form 요청	
           log.debug("ApplyForm Request");
-          ReviewManager reviewManager = ReviewManager.getInstance();
-          Review review = reviewManager.findUserReview(user_id, animal_id);
-          
-          if(review != null) {
-        	  request.setAttribute("review", review);
-        	  return "/review/updateForm.jsp";
-          }
-          
-    	  request.setAttribute("animal_id", animal_id);
-    	  return "/review/registerForm.jsp";
+		  request.setAttribute("animal_id", animal_id);
+          return "/review/registerForm.jsp";   
         }  
 
 		boolean check = ServletFileUpload.isMultipartContent(request);

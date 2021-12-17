@@ -25,7 +25,7 @@ public class DeleteReviewController implements Controller {
 	
 		manager.remove(post_id);
 		
-		return "redirect:/review/list";	// »ç¿ëÀÚ º¸±â È­¸éÀ¸·Î ÀÌµ¿ (forwarding)	
+		return "redirect:/review/list";	// ì‚¬ìš©ì ë³´ê¸° í™”ë©´ìœ¼ë¡œ ì´ë™ (forwarding)	
 		
 	}
 }

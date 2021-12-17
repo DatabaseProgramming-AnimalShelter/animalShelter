@@ -8,7 +8,6 @@ DROP SEQUENCE  a_heart_id_seq;
 DROP SEQUENCE qna_category_id_seq;
 DROP SEQUENCE qna_id_seq;
 DROP SEQUENCE comment_no_seq;
-DROP SEQUENCE reply_id_seq;
 DROP SEQUENCE comment_id_seq;
 
 DROP TABLE AdoptApply CASCADE CONSTRAINTS PURGE;
@@ -163,29 +162,14 @@ ALTER TABLE qna_category
 
 CREATE TABLE Qna_Comment
 (
-	qna_id               INTEGER NOT NULL ,
-	qna_title            VARCHAR2(100) NULL ,
-	qna_content          VARCHAR2(1000) NULL ,
-	qna_password         VARCHAR2(100) NULL ,
-	qna_category_id      INTEGER NULL ,
-	qna_writer           VARCHAR2(100) NULL ,
-	qna_date             DATE NUL
+	comment_no           INTEGER NOT NULL ,
+	comment_content      VARCHAR2(500) NULL ,
+	reg_date             DATE NULL ,
+	qna_id               INTEGER NOT NULL
 );
 
 ALTER TABLE Qna_Comment
 	ADD CONSTRAINT  XPKComment PRIMARY KEY (comment_no);
-
-CREATE TABLE Qna_Reply
-(
-	reply_id             INTEGER NOT NULL ,
-	comment_no           INTEGER NOT NULL ,
-	reply_writer         VARCHAR2(100) NULL ,
-	reply_content        VARCHAR2(500) NULL ,
-	reg_date             DATE NULL
-);
-
-ALTER TABLE Qna_Reply
-	ADD CONSTRAINT  XPKReply PRIMARY KEY (reply_id);
 
 ALTER TABLE R_heart
    ADD CONSTRAINT  XPKR_heart PRIMARY KEY (r_heart_id);
@@ -259,9 +243,7 @@ INCREMENT BY 1;
 CREATE SEQUENCE comment_no_seq
 START WITH 1
 INCREMENT BY 1;
-CREATE SEQUENCE reply_id_seq
-START WITH 1
-INCREMENT BY 1;
+
 
 INSERT INTO Adopter VALUES ('admin', 'admin','admin', 'admin@dongduk.ac.kr', '02-940-9999');
 INSERT INTO Adopter VALUES ( 'hyunsoo', '1234', 'song', 'hyunsu@gmail.com', '010-1234-5678');

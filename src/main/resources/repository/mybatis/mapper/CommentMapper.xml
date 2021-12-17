@@ -1,37 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="repository.mybatis.mapper.CommentMapper">
+<mapper namespace="model.dao.mybatis.mapper.Qna_CommentMapper">
 	<cache />
 
 	<sql id="BaseColumns">
 		comment_no AS comment_no,
-		comment_writer AS comment_writer,
-		comment_content AS comment_content,
-		reg_date AS reg_date
+		comment_content AS comment_content
 	</sql>
 
-	<select id="selectCommentByPrimaryKey" parameterType="int"
+	<!-- view 페이지에서 qna_id에 해당하는 댓글 가져오기 -->
+	<select id="selectComment" parameterType="int"
 		resultType="Qna_Comment">
 		SELECT
 		<include refid="BaseColumns" />
 		FROM Qna_Comment
-		WHERE comment_no = #{comment_no}
-	</select>
-
-	<select id="selectCommentByCondition" parameterType="hashmap"
-		resultType="Qna_Comment">
-		SELECT
-		<include refid="BaseColumns" />
-		FROM Qna_Comment
-		<where>
-			<if test="comment_no != null">
-				comment_no = #{comment_no}
-			</if>
-			<if test="qna_id != null">
-				AND qna_id = #{qna_id}
-			</if>
-		</where>
+		WHERE qna_id = #{qna_id}
 	</select>
 
 	<insert id="insertComment" parameterType="Qna_Comment">
@@ -41,83 +25,24 @@
 			comment_no_seq.nextval AS comment_no FROM DUAL
 		</selectKey>
 		INSERT INTO Qna_Comment
-		(comment_no, qna_id, comment_writer,
-		comment_content, reg_date)
+		(comment_no,
+		comment_content, reg_date, qna_id)
 		VALUES
-		(#{comment_no}, #{qna_id},
-		#{comment_writer}, #{commentContent},
-		#{regDate})
+		(#{comment_no},
+		#{comment_content}, SYSDATE, #{qna_id})
 	</insert>
 
 	<update id="updateComment" parameterType="Qna_Comment">
 		UPDATE Qna_Comment
 		SET
 		comment_content = #{comment_content}
+		AND reg_date = SYSDATE
 		WHERE comment_no = #{comment_no}
 	</update>
 
 	<delete id="deleteComment" parameterType="int">
 		DELETE FROM Qna_Comment
 		WHERE comment_no = #{comment_no}
-	</delete>
-
-	<delete id="deleteAllComments">
-		DELETE FROM Qna_Comment
-	</delete>
-
-	<resultMap id="collectionResultMap" type="Qna_Comment">
-		<id column="comment_no" jdbcType="BIGINT" property="comment_no" />
-		<result column="qna_id" jdbcType="VARCHAR" property="qna_id" />
-		<result column="comment_content" jdbcType="VARCHAR"
-			property="comment_content" />
-		<result column="reg_date" jdbcType="TIMESTAMP"
-			property="reg_date" />
-		<association property="qna" column="qna_id" javaType="Qna">
-			<id property="qna_id" column="qna_id" />
-			<!-- qna의 필드가 더 필요하면 꺼내옴 <result property="userName" column="user_name" 
-				/> <result property="phone" column="phone" /> <result property="address" 
-				column="address" /> -->
-		</association>
-		<collection property="replies" ofType="Qna_Reply">
-			<id property="reply_id" column="reply_id" />
-			<result property="reply_writer" column="reply_writer" />
-			<result property="reply_content" column="reply_content" />
-			<result property="reg_date" column="reg_date" />
-		</collection>
-	</resultMap>
-
-	<select id="selectCommentByPrimaryKeyCollection"
-		parameterType="Qna_Comment" resultMap="collectionResultMap">
-		SELECT c.comment_no,
-		c.comment_writer, c.comment_content, c.reg_date,
-		q.qna_id,
-		r.reply_id,
-		r.reply_writer, r.reply_content, r.reg_date
-		FROM QNA_COMMENT c, QNA q,
-		QNA_REPLY r
-		WHERE q.qna_id = c.qna_id AND
-		c.comment_no = r.comment_no
-		AND c.comment_no = #{comment_no} AND
-		q.qna_id = {qna_id}
-	</select>
-
-	<insert id="insertReply" parameterType="Qna_Reply">
-		<selectKey keyProperty="reply_id" resultType="int"
-			order="BEFORE">
-			SELECT
-			reply_id_seq.nextval AS reply_id FROM DUAL
-		</selectKey>
-		INSERT INTO QNA_REPLY
-		(reply_id, comment_no, reply_writer,
-		reply_content, reg_date)
-		VALUES
-		(#{reply_id}, #{comment_no},
-		#{reply_writer}, #{reply_content},
-		#{reg_date})
-	</insert>
-
-	<delete id="deleteAllReplies">
-		DELETE FROM QNA_REPLY
 	</delete>
 
 </mapper>

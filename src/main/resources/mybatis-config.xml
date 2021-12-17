@@ -29,5 +29,6 @@
 	</environments>
 	<mappers>
 		<mapper resource="repository/mybatis/mapper/QnaMapper.xml" />
+		<mapper resource="repository/mybatis/mapper/CommentMapper.xml" />
 	</mappers>
 </configuration>
