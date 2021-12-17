@@ -1,7 +1,5 @@
 package controller.user;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,53 +9,43 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.service.AdopterManager;
-import model.Community;
 import model.Adopter;
 
 public class UpdateUserController implements Controller {
-    private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
+	private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
 
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
- 
-    	if (request.getMethod().equals("GET")) {	
-    		// GET request: È¸¿øÁ¤º¸ ¼öÁ¤ form ¿äÃ»	
-    		// ¿ø·¡´Â UpdateUserFormController°¡ Ã³¸®ÇÏ´ø ÀÛ¾÷À» ¿©±â¼­ ¼öÇà
-    		String updateId = request.getParameter("userId");
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-    		log.debug("UpdateForm Request : {}", updateId);
-    		
-    		AdopterManager manager = AdopterManager.getInstance();
-    		Adopter user = manager.findUser(updateId);	// ¼öÁ¤ÇÏ·Á´Â »ç¿ëÀÚ Á¤º¸ °Ë»ö
-			request.setAttribute("user", user);			
+		String update_id = UserSessionUtils.getLoginUserId(request.getSession());		
+		log.debug("UpdateForm Request : {}", update_id);
+		Adopter user = new Adopter(
+				update_id, 
+				request.getParameter("password"), 
+				request.getParameter("user_name"),
+				request.getParameter("email"), 
+				request.getParameter("phone")
+				);
 
-			HttpSession session = request.getSession();
-			if (UserSessionUtils.isLoginUser(updateId, session) ||
-				UserSessionUtils.isLoginUser("admin", session)) {
-				// ÇöÀç ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ ¼öÁ¤ ´ë»ó »ç¿ëÀÚÀÌ°Å³ª °ü¸®ÀÚÀÎ °æ¿ì -> ¼öÁ¤ °¡´É
-	
-				return "/user/updateForm.jsp";   // °Ë»öÇÑ »ç¿ëÀÚ Á¤º¸¸¦ update formÀ¸·Î Àü¼Û     
-			}    
+		log.debug("UpdateForm Request : {}", update_id, request.getParameter("password"),
+				request.getParameter("user_name"), request.getParameter("email"), request.getParameter("phone"));
+
+		HttpSession session = request.getSession();
+		if (UserSessionUtils.isLoginUser(update_id, session) || UserSessionUtils.isLoginUser("admin", session)) {
+			AdopterManager manager = AdopterManager.getInstance();
+			int result = manager.update(user);
 			
-			// else (¼öÁ¤ ºÒ°¡´ÉÇÑ °æ¿ì) »ç¿ëÀÚ º¸±â È­¸éÀ¸·Î ¿À·ù ¸Ş¼¼Áö¸¦ Àü´Ş
+			user = manager.findUser(update_id); 
+			request.setAttribute("user", user);
+
+			if (result < 0) { 
+				request.setAttribute("updateFailed", true);
+			}
+		} else {
 			request.setAttribute("updateFailed", true);
-			request.setAttribute("exception", 
-					new IllegalStateException("Å¸ÀÎÀÇ Á¤º¸´Â ¼öÁ¤ÇÒ ¼ö ¾ø½À´Ï´Ù."));            
-			return "/user/view.jsp";	// »ç¿ëÀÚ º¸±â È­¸éÀ¸·Î ÀÌµ¿ (forwarding)
-	    }	
-    	
-    	// POST request (È¸¿øÁ¤º¸°¡ parameter·Î Àü¼ÛµÊ)
-    	Adopter updateUser = new Adopter(
-    		request.getParameter("user_id"),
-    		request.getParameter("password"),
-    		request.getParameter("user_name"),
-    		request.getParameter("email"),
-    		request.getParameter("phone"));
+			request.setAttribute("exception", new IllegalStateException("ìˆ˜ì •ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
+		}
 
-    	log.debug("Update User : {}", updateUser);
-
-    	AdopterManager manager = AdopterManager.getInstance();
-		manager.update(updateUser);			
-        return "redirect:/user/list";			
-    }
+		return "/user/mypage.jsp";
+	}
 }

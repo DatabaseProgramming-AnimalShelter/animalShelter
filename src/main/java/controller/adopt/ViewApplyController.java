@@ -1,18 +1,14 @@
 package controller.adopt;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import model.service.AdoptApplyManager;
-import model.service.AnimalManager;
 import model.AdoptApply;
-import model.Animal;
 
 
 // 신청한 항목 다 보이게

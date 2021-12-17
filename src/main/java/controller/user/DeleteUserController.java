@@ -8,41 +8,41 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.User;
-import model.service.UserManager;
+import model.Adopter;
+import model.service.AdopterManager;
+
 
 public class DeleteUserController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(DeleteUserController.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
-		String deleteId = request.getParameter("userId");
-    	log.debug("Delete User : {}", deleteId);
+    	String user_id = UserSessionUtils.getLoginUserId(request.getSession());		
+    	log.debug("Delete User : {}", user_id);
 
-    	UserManager manager = UserManager.getInstance();		
+		AdopterManager manager = AdopterManager.getInstance();
 		HttpSession session = request.getSession();	
 	
-		if ((UserSessionUtils.isLoginUser("admin", session) && 	// ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ °ü¸®ÀÚÀÌ°í 	
-			 !deleteId.equals("admin"))							// »èÁ¦ ´ë»óÀÌ ÀÏ¹İ »ç¿ëÀÚÀÎ °æ¿ì, 
-			   || 												// ¶Ç´Â 
-			(!UserSessionUtils.isLoginUser("admin", session) &&  // ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ °ü¸®ÀÚ°¡ ¾Æ´Ï°í 
-			  UserSessionUtils.isLoginUser(deleteId, session))) { // ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ »èÁ¦ ´ë»óÀÎ °æ¿ì (ÀÚ±â ÀÚ½ÅÀ» »èÁ¦)
+		if ((UserSessionUtils.isLoginUser("admin", session) && 	
+			 !user_id.equals("admin"))							
+			   || 												
+			(!UserSessionUtils.isLoginUser("admin", session) &&  
+			  UserSessionUtils.isLoginUser(user_id, session))) { 
 				
-			manager.remove(deleteId);				// »ç¿ëÀÚ Á¤º¸ »èÁ¦
-			if (UserSessionUtils.isLoginUser("admin", session))	// ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ °ü¸®ÀÚ 	
-				return "redirect:/user/list";		// »ç¿ëÀÚ ¸®½ºÆ®·Î ÀÌµ¿
-			else 									// ·Î±×ÀÎÇÑ »ç¿ëÀÚ´Â ÀÌ¹Ì »èÁ¦µÊ
-				return "redirect:/user/logout";		// logout Ã³¸®
+			manager.remove(user_id);				
+			if (UserSessionUtils.isLoginUser("admin", session))		
+				return "redirect:/main.jsp";
+			else 									
+				return "redirect:/user/logout";		
 		}
 		
-		/* »èÁ¦°¡ ºÒ°¡´ÉÇÑ °æ¿ì */
-		User user = manager.findUser(deleteId);	// »ç¿ëÀÚ Á¤º¸ °Ë»ö
+		Adopter user = manager.findUser(user_id);	
 		request.setAttribute("user", user);						
 		request.setAttribute("deleteFailed", true);
 		String msg = (UserSessionUtils.isLoginUser("admin", session)) 
-				   ? "½Ã½ºÅÛ °ü¸®ÀÚ Á¤º¸´Â »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù."		
-				   : "Å¸ÀÎÀÇ Á¤º¸´Â »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù.";													
+				   ? "íšŒì› ì‚­ì œì— ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤."		
+				   : "íƒˆí‡´ì— ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤.";													
 		request.setAttribute("exception", new IllegalStateException(msg));            
-		return "/user/view.jsp";		// »ç¿ëÀÚ º¸±â È­¸éÀ¸·Î ÀÌµ¿ (forwarding)	
+		return "/user/mypage.jsp";
 	}
 }

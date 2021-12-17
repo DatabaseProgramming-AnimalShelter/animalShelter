@@ -31,7 +31,7 @@ public class AdopterManager {
 	
 	public int create(Adopter user) throws SQLException, ExistingUserException {
 		if (adopterDAO.existingUser(user.getUser_id()) == true) {
-			throw new ExistingUserException(user.getUser_id() + "占쏙옙 占쏙옙占쏙옙占싹댐옙 占쏙옙占싱듸옙占쌉니댐옙.");
+			throw new ExistingUserException(user.getUser_id() + "이미 존재하는 아이디 입니다.");
 		}
 		return adopterDAO.create(user);
 	}
@@ -51,7 +51,7 @@ public class AdopterManager {
 		Adopter user = adopterDAO.findUser(user_id);
 		System.out.println(user);
 		if (user == null) {
-			throw new UserNotFoundException(user_id + "없는 회원입니다");
+			throw new UserNotFoundException(user_id + "는 존재하지 않습니다.");
 		}		
 		return user;
 	}

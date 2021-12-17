@@ -45,7 +45,7 @@ function userModify() {
 </script>
 </head>
 <body>
-<%@include file="/WEB-INF/navbar.jsp" %>
+
 
 <div class="container">  
 	<br>

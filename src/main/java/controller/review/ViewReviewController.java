@@ -1,32 +1,51 @@
 package controller.review;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.service.ReviewCommentManager;
 import model.service.ReviewManager;
 import model.service.ReviewNotFoundException;
 import controller.Controller;
-
+import controller.user.UserSessionUtils;
 import model.Review;
+import model.Review_Comment;
 
 public class ViewReviewController implements Controller{
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
+
+		int post_id = Integer.parseInt(request.getParameter("post_id"));
+
+		//í›„ê¸°ê¸€
 		Review review = null;
 		ReviewManager manager = ReviewManager.getInstance();
-		int post_id = (int) request.getAttribute("matched");
+		//ëŒ“ê¸€
+		ReviewCommentManager comment_manager = ReviewCommentManager.getInstance();
+		List<Review_Comment> reviewCommentList = null;
+
 		
 //		try {
-//			review = manager.findReview(post_id);	// ÈÄ±â Á¤º¸ °Ë»ö  
+//			review = manager.findReview(post_id);	// í›„ê¸° ì •ë³´ ê²€ìƒ‰  
 //		} catch (ReviewNotFoundException e) {				
 //	        return "redirect:/review/list";
 //		}	
 		
-		review = manager.findReview(post_id);  // ÈÄ±â Á¤º¸ °Ë»ö  
+		review = manager.findReview(post_id);  // í›„ê¸° ì •ë³´ ê²€ìƒ‰  
+		//ëŒ“ê¸€
+		reviewCommentList = comment_manager.findReviewCommentList(post_id);
 		
-    	request.setAttribute("review", review);		// ÈÄ±â Á¤º¸ ÀúÀå				
-		return "/review/reviewDetail.jsp";				// ÈÄ±â »ó¼¼º¸±â È­¸éÀ¸·Î ÀÌµ¿*/
+		request.setAttribute("user_id", UserSessionUtils.getLoginUserId(request.getSession()));
+    	request.setAttribute("review", review);		// í›„ê¸° ì •ë³´ ì €ì¥		
+    	//ëŒ“ê¸€
+		request.setAttribute("reviewCommentList", reviewCommentList);
+
+    	
+		return "/review/view.jsp";				// í›„ê¸° ìƒì„¸ë³´ê¸° í™”ë©´ìœ¼ë¡œ ì´ë™
 	}
 
 }

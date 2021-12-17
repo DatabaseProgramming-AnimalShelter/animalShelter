@@ -10,23 +10,28 @@ import controller.user.UserSessionUtils;
 import model.Review;
 import model.service.ReviewManager;
 
-public class ListReviewController implements Controller{
-	
-	
-	// ListReviewController°¡ ÇÊ¿äÇÑ°¡?? 
+public class ListReviewController implements Controller {
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-    	
-    	// Controller¿Í Manager¸¦ ºĞ¸®ÇÑ ¹æ¹ı
+		/*
+		 * if (!UserSessionUtils.hasLogined(request.getSession())) { return
+		 * "redirect:/user/login/form"; // login form ìš”ì²­ìœ¼ë¡œ redirect }
+		 */
 		ReviewManager manager = ReviewManager.getInstance();
-		List<Review> reviewList = manager.findReviewList();
+		List<Review> reviewList = null;
+		
+		if(request.getParameter("user_id") != null) { // ë§ˆì´í˜ì´ì§€ì—ì„œ ì‚¬ìš©ìê°€ ì‘ì„±í•œ í›„ê¸° ë¦¬ìŠ¤íŠ¸ ë³¼ ë•Œ	
+			reviewList = manager.findUserReviewList(UserSessionUtils.getLoginUserId(request.getSession()));
+		}
+		else { // ëª¨ë“  ì‚¬ëŒì´ ì‘ì„±í•œ í›„ê¸° ë¦¬ìŠ¤íŠ¸ ë³¼ ë•Œ
+			reviewList = manager.findReviewList();
+		}
+		
+		request.setAttribute("reviewList", reviewList);
 
-		// animalList °´Ã¼¸¦  request °´Ã¼¿¡ ÀúÀåÇÏ¿© ºä¿¡ Àü´Ş
-		request.setAttribute("reviewList", reviewList);						
-
-		// »ç¿ëÀÚ ¸®½ºÆ® È­¸éÀ¸·Î ÀÌµ¿(forwarding)
-		return "/review/list.jsp";        
+		return "/review/list.jsp";
 	}
 
 }

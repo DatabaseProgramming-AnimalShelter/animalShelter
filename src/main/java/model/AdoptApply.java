@@ -1,8 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 public class AdoptApply {
 
    private int apply_id;
@@ -108,7 +105,36 @@ public class AdoptApply {
       this.animal_type = animal_type;
       this.species = species;
    }
-
+   
+   public AdoptApply(int apply_id, int animal_id, int animal_matched, int apply_matched, String apply_date,
+		String approval_date) {
+		super();
+		this.apply_id = apply_id;
+		this.animal_id = animal_id;
+		this.animal_matched = animal_matched;
+		this.apply_matched = apply_matched;
+		this.apply_date = apply_date;
+		this.approval_date = approval_date;
+   }
+   
+   public AdoptApply(int apply_id, int animal_id, int apply_matched, int animal_matched, String approval_date,
+			String animal_type, String species) {
+		super();
+		this.apply_id = apply_id;
+		this.animal_id = animal_id;
+		this.apply_matched = apply_matched;
+		this.animal_matched = animal_matched;
+		this.approval_date = approval_date;
+		this.animal_type = animal_type;
+		this.species = species;
+	}
+   
+   public AdoptApply(int apply_id, String user_id) {
+	   super();
+	   this.apply_id = apply_id;
+	   this.user_id = user_id;
+   }
+   
    public int getApply_id() {
       return apply_id;
    }

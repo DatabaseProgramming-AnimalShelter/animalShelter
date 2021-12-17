@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <groupId>dbp03.team-streetfighters18</groupId>
-  <artifactId>project-animalShelters</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
+	<groupId>dbp03.team-streetfighters18</groupId>
+	<artifactId>project-animalShelters</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
-  <name>project-animalShelters Maven Webapp</name>
+	<name>project-animalShelters Maven Webapp</name>
 	<description>project for abandoned animals</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -72,10 +73,10 @@
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
-			<version>21.3.0.0</version>			
+			<version>21.3.0.0</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<!-- for unit test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -83,20 +84,32 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- for mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.7</version>
+		</dependency>
+		<!-- log4j -->
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
+		</dependency>	
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-compiler-plugin</artifactId>
-			    <version>2.5.1</version>
-			    <configuration>
-			        <source>${java.version}</source>
-			        <target>${java.version}</target>
-			        <compilerArgument>-Xlint:all</compilerArgument>
-			        <showWarnings>true</showWarnings>
-			        <showDeprecation>true</showDeprecation>
-			    </configuration>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
