@@ -1,15 +1,11 @@
 package model.service;
 
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import model.Qna;
 import model.Qna_Comment;
-import model.Qna_Reply;
 import model.dao.mybatis.QnaDAO;
 import model.dao.mybatis.Qna_CommentDAO;
 
@@ -26,13 +22,11 @@ public class QnaManager {
 			e.printStackTrace();
 		}
 	}
-
 	public static QnaManager getInstance() {
 		return qnaMan;
 	}
 
 	public int create(Qna qna) throws SQLException, ExistingUserException {
-		System.out.println("Managercreate�떆�옉");
 		return qnaDAO.create(qna);
 	}
 
@@ -46,7 +40,6 @@ public class QnaManager {
 	}
 
 	public int findQnaCategoryId(String qna_id) {
-		System.out.println("qnaTYPE임~" + qna_id);
 		return qnaDAO.findQnaCategoryId(qna_id);
 	}
 
@@ -55,7 +48,6 @@ public class QnaManager {
 	}
 
 	public Qna findQnaByPrimaryKey(int qna_id) throws SQLException, AnimalNotFoundException {
-		// TODO Auto-generated method stub
 		Qna review = qnaDAO.findQnaByPrimaryKey(qna_id);
 
 		if (review == null) {

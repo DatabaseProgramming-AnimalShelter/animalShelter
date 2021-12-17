@@ -1,8 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 public class AdoptApply {
 
    private int apply_id;
@@ -109,7 +106,7 @@ public class AdoptApply {
       this.species = species;
    }
    
-   // findAdoptApplyResult¿¡¼­ »ç¿ë
+   // findAdoptApplyResultï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
    public AdoptApply(int apply_id, int animal_id, int animal_matched, int apply_matched, String apply_date,
 		String approval_date) {
 		super();
@@ -121,7 +118,7 @@ public class AdoptApply {
 		this.approval_date = approval_date;
    }
    
-   // findUserAdoptList¿¡¼­ »ç¿ë
+   // findUserAdoptListï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
    public AdoptApply(int apply_id, int animal_id, int apply_matched, int animal_matched, String approval_date,
 			String animal_type, String species) {
 		super();
@@ -134,7 +131,7 @@ public class AdoptApply {
 		this.species = species;
 	}
    
-   // findAnimalAdptList¿¡¼­ »ç¿ë
+   // findAnimalAdptListï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
    public AdoptApply(int apply_id, String user_id) {
 	   super();
 	   this.apply_id = apply_id;

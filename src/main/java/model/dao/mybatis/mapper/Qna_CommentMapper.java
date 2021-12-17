@@ -10,5 +10,4 @@ public interface Qna_CommentMapper {
 	int updateComment(Qna_Comment comment);
 	
 	int deleteComment(int comment_no);
-
 }
