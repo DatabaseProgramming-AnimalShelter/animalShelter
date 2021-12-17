@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.mybatis.mapper.Qna_CommentMapper">
+	<cache />
+
+	<sql id="BaseColumns">
+		comment_no AS comment_no,
+		comment_content AS comment_content,
+		reg_date AS reg_date
+	</sql>
+
+	<!-- view 페이지에서 qna_id에 해당하는 댓글 가져오기 -->
+	<select id="selectComment" parameterType="int"
+		resultType="Qna_Comment">
+		SELECT
+		<include refid="BaseColumns" />
+		FROM Qna_Comment
+		WHERE qna_id = #{qna_id}
+	</select>
+
+	<insert id="insertComment" parameterType="Qna_Comment">
+		<selectKey keyProperty="comment_no" resultType="int"
+			order="BEFORE">
+			SELECT
+			comment_no_seq.nextval AS comment_no FROM DUAL
+		</selectKey>
+		INSERT INTO Qna_Comment
+		(comment_no,
+		comment_content, reg_date, qna_id)
+		VALUES
+		(#{comment_no},
+		#{comment_content}, SYSDATE, #{qna_id})
+	</insert>
+
+	<update id="updateComment" parameterType="Qna_Comment">
+		UPDATE Qna_Comment
+		SET
+		comment_content = #{comment_content}
+		AND reg_date = SYSDATE
+		WHERE comment_no = #{comment_no}
+	</update>
+
+	<delete id="deleteComment" parameterType="int">
+		DELETE FROM Qna_Comment
+		WHERE comment_no = #{comment_no}
+	</delete>
+
+</mapper>

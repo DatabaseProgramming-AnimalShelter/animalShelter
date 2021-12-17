@@ -77,6 +77,9 @@ function reviewCreate() {
 	    <div class="form-group row">   
 	        <label for="content" class="col-lg-2 col-form-label">내용</label>
 	        <div class="col-lg-10">
+
+        		<textarea id="body" name="content" rows=15" cols="50" placeholder="내용을 입력하시오." class="form-control"></textarea>
+
 	        	<c:choose>
 	        		<c:when test="${review.content != null}">
         				<textarea id="body" name="content" rows="15" cols="50" class="form-control">${review.content}</textarea>

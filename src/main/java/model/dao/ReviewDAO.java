@@ -25,7 +25,6 @@ CREATE TABLE Review
    writer               VARCHAR2(20) NOT NULL ,
    animal_id            INTEGER NOT NULL 
 );
-
 	*/
 	public int create(Review review) throws SQLException {
 		String sql = "INSERT INTO Review "

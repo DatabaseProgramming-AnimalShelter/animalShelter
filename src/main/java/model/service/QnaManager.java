@@ -1,32 +1,32 @@
 package model.service;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import model.Adopter;
+
 import model.Qna;
+import model.Qna_Comment;
 import model.dao.mybatis.QnaDAO;
+import model.dao.mybatis.Qna_CommentDAO;
 
 public class QnaManager {
 	private static QnaManager qnaMan = new QnaManager();
 	private QnaDAO qnaDAO;
+	private Qna_CommentDAO commentDAO;
 
 	private QnaManager() {
 		try {
 			qnaDAO = new QnaDAO();
+			commentDAO = new Qna_CommentDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 	public static QnaManager getInstance() {
 		return qnaMan;
 	}
 
 	public int create(Qna qna) throws SQLException, ExistingUserException {
-		System.out.println("Managercreate�떆�옉");
 		return qnaDAO.create(qna);
 	}
 
@@ -34,47 +34,42 @@ public class QnaManager {
 		return qnaDAO.update(qna);
 	}
 
-	public int remove(int qnaId) throws SQLException, UserNotFoundException {
+	public int remove(int qna_id) throws SQLException, UserNotFoundException {
 
-		return qnaDAO.remove(qnaId);
+		return qnaDAO.remove(qna_id);
 	}
-//
-//	public boolean login(String password) throws SQLException, UserNotFoundException, PasswordMismatchException {
-//		Adopter user = findUser(user_id);
-//
-//		if (!user.matchPassword(password)) {
-//			throw new PasswordMismatchException("PasswordMismatchException");
-//		}
-//		return true;
-//	}
-
+	public int findQnaCategoryId(String qna_id) {
+		return qnaDAO.findQnaCategoryId(qna_id);
+	}
+	//리스트 가져오기
 	public List<Qna> selectAllQnaList() throws SQLException {
 		return qnaDAO.selectAllQnaList();
 	}
-
-	public Qna findQnaByPrimaryKey(int qnaId) throws SQLException, AnimalNotFoundException {
-		// TODO Auto-generated method stub
-		Qna review = qnaDAO.findQnaByPrimaryKey(qnaId);
+	//qna_id로 qna객체 찾기
+	public Qna findQnaByPrimaryKey(int qna_id) throws SQLException, AnimalNotFoundException {
+		Qna review = qnaDAO.findQnaByPrimaryKey(qna_id);
 
 		if (review == null) {
-			throw new AnimalNotFoundException(qnaId + "媛� �뾾�뒿�땲�떎.");
+			throw new AnimalNotFoundException(qna_id + "가 없습니다.");
 		}
 		return review;
 	}
-
-	public int findQnaCategoryId(String qna_type) { 
-		return qnaDAO.findQnaCategoryId(qna_type);
+	// 댓글 입력
+	public int insertComment(Qna_Comment comment) {
+		return commentDAO.insertComment(comment);
 	}
-
-	public List<Qna> findQnaCategoryByQnaType(String qnaType) {
-		return qnaDAO.findQnaCategoryByQnaType(qnaType);
+	// 댓글 삭제
+	public int deleteComment(int comment_no) {
+		return commentDAO.deleteComment(comment_no);
 	}
-
+	//댓글 선택
+	public Qna_Comment selectComment(int qna_id) {
+		return commentDAO.selectComment(qna_id);
+	}
 	// 마이페이지 문의 리스트
 	public List<Qna> selectMyQnaList(String user_id) throws SQLException {
 		return qnaDAO.selectMyQnaList(user_id);
 	}
-	
 	// 비밀번호 체크
 	public String checkQnaPwd(int qna_id) throws SQLException {
 		return qnaDAO.checkQnaPwd(qna_id);

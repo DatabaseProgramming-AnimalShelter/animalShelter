@@ -128,7 +128,7 @@ public class AdoptApply {
 		this.animal_type = animal_type;
 		this.species = species;
 	}
-
+   
    public AdoptApply(int apply_id, String user_id) {
 	   super();
 	   this.apply_id = apply_id;

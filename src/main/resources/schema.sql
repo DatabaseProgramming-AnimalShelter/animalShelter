@@ -8,7 +8,6 @@ DROP SEQUENCE  a_heart_id_seq;
 DROP SEQUENCE qna_category_id_seq;
 DROP SEQUENCE qna_id_seq;
 DROP SEQUENCE comment_no_seq;
-DROP SEQUENCE reply_id_seq;
 DROP SEQUENCE comment_id_seq;
 
 DROP TABLE AdoptApply CASCADE CONSTRAINTS PURGE;
@@ -28,8 +27,6 @@ DROP TABLE Adopter CASCADE CONSTRAINTS PURGE;
 DROP TABLE Qna CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE qna_category CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE Qna_Reply CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE Qna_Comment CASCADE CONSTRAINTS PURGE;
 
@@ -163,29 +160,14 @@ ALTER TABLE qna_category
 
 CREATE TABLE Qna_Comment
 (
-   qna_id               INTEGER NOT NULL ,
-   qna_title            VARCHAR2(100) NULL ,
-   qna_content          VARCHAR2(1000) NULL ,
-   qna_password         VARCHAR2(100) NULL ,
-   qna_category_id      INTEGER NULL ,
-   qna_writer           VARCHAR2(100) NULL ,
-   qna_date             DATE NUL
+   comment_no           INTEGER NOT NULL ,
+   comment_content      VARCHAR2(500) NULL ,
+   reg_date             DATE NULL ,
+   qna_id               INTEGER NOT NULL
 );
 
 ALTER TABLE Qna_Comment
    ADD CONSTRAINT  XPKComment PRIMARY KEY (comment_no);
-
-CREATE TABLE Qna_Reply
-(
-   reply_id             INTEGER NOT NULL ,
-   comment_no           INTEGER NOT NULL ,
-   reply_writer         VARCHAR2(100) NULL ,
-   reply_content        VARCHAR2(500) NULL ,
-   reg_date             DATE NULL
-);
-
-ALTER TABLE Qna_Reply
-   ADD CONSTRAINT  XPKReply PRIMARY KEY (reply_id);
 
 ALTER TABLE R_heart
    ADD CONSTRAINT  XPKR_heart PRIMARY KEY (r_heart_id);
@@ -206,7 +188,7 @@ ALTER TABLE A_heart
    ADD (CONSTRAINT R_29 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Review
-   ADD (CONSTRAINT  õÑÍ∏∞Ïûë Ñ± FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
+   ADD (CONSTRAINT  ÏçëÊπ≤Í≥óÏòâ ÍΩ¶ FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Review
    ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
@@ -259,36 +241,34 @@ INCREMENT BY 1;
 CREATE SEQUENCE comment_no_seq
 START WITH 1
 INCREMENT BY 1;
-CREATE SEQUENCE reply_id_seq
-START WITH 1
-INCREMENT BY 1;
+
 
 INSERT INTO Adopter VALUES ('admin', 'admin','admin', 'admin@dongduk.ac.kr', '02-940-9999');
 INSERT INTO Adopter VALUES ( 'hyunsoo', '1234', 'song', 'hyunsu@gmail.com', '010-1234-5678');
 INSERT INTO Adopter VALUES ( 'yujin', '1234', 'han', 'yujin@naver.com', '010-5323-7788');
 
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∞≠æ∆¡ˆ¿¸√º', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'πÕΩ∫∞ﬂ', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '±‚≈∏', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '¡¯µæ∞≥', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '«≥ªÍ∞≥', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ƒ°øÕøÕ', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ø‰≈©º≈≈◊∏ÆæÓ', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∫Òºı', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '«™µÈ', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∏ª∆º¡Ó', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∞ÒµÁ∏Æ∆Æ∏Æπˆ', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '∆˜∏ﬁ∂Û¥œæ»', '∞≥');
-INSERT INTO category VALUES (dog_id_seq.NEXTVAL, '¿£Ω√ƒ⁄±‚', '∞≥');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Í∞ïÏïÑÏßÄÏ†ÑÏ≤¥', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÎØπÏä§Í≤¨', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Í∏∞ÌÉÄ', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÏßÑÎèóÍ∞ú', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÌíçÏÇ∞Í∞ú', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÏπòÏôÄÏôÄ', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÏöîÌÅ¨ÏÖîÌÖåÎ¶¨Ïñ¥', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÎπÑÏàë', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Ìë∏Îì§', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'ÎßêÌã∞Ï¶à', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Í≥®Îì†Î¶¨Ìä∏Î¶¨Î≤Ñ', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Ìè¨Î©îÎùºÎãàÏïà', 'Í∞ú');
+INSERT INTO category VALUES (dog_id_seq.NEXTVAL, 'Ïõ∞ÏãúÏΩîÍ∏∞', 'Í∞ú');
 
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '∞ÌæÁ¿Ã¿¸√º', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'πÕΩ∫', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '±‚≈∏', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ƒ⁄∏Ææ»ºÙ«ÏæÓ' ,'∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'º§', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'π∞•', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, '∏’ƒ°≈≤', '∞ÌæÁ¿Ã');
-INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Ω∫«Œ≈©Ω∫', '∞ÌæÁ¿Ã');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Í≥†ÏñëÏù¥Ï†ÑÏ≤¥', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ÎØπÏä§', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Í∏∞ÌÉÄ', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ÏΩîÎ¶¨ÏïàÏàèÌó§Ïñ¥' ,'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'ÏÉ¥', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Î±ÖÍ∞à', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Î®ºÏπòÌÇ®', 'Í≥†ÏñëÏù¥');
+INSERT INTO category VALUES (cat_id_seq.NEXTVAL, 'Ïä§ÌïëÌÅ¨Ïä§', 'Í≥†ÏñëÏù¥');
 
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'suggest');
 INSERT INTO qna_category VALUES (qna_category_id_seq.NEXTVAL, 'inquiry');

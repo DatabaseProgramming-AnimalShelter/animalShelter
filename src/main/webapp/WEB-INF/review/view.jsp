@@ -12,7 +12,6 @@
 function reviewRemove() {
 	return confirm("후기를 정말 삭제하시겠습니까?");		
 }
-
 function commentCreate() {
 	var userId = '${user_id}';
 	
@@ -27,11 +26,9 @@ function commentCreate() {
 	} 
 	form.submit();
 }
-
 function commentRemove() {
 	return confirm("댓글을 정말 삭제하시겠습니까?");		
 }
-
 function commentReply() {
 	var userId = '${user_id}';
 	

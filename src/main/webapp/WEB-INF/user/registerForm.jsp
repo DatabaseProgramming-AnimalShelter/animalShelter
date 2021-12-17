@@ -38,7 +38,7 @@
 			form.name.focus();
 			return false;
 		}
-		if (form.user_name.value == "") {
+		if (form.name.value == "") {
 			alert("이름을 입력하십시오.");
 			form.name.focus();
 			return false;

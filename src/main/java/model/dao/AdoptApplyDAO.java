@@ -68,6 +68,7 @@ public class AdoptApplyDAO {
 		}
 
 		if (apply_result == 1) {
+			
 			try {
 				String sql2 = "UPDATE Animal " + "SET  animal_matched=? " + "WHERE animal_id=? ";
 				Object[] param2 = new Object[] { 1, adoptApply.getAnimal_id() };

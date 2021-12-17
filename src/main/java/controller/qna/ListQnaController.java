@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.Qna;
-import model.Review;
 import model.service.QnaManager;
-import model.service.ReviewManager;
 
 public class ListQnaController implements Controller {
 
@@ -20,7 +18,7 @@ public class ListQnaController implements Controller {
 		
 		QnaManager manager = QnaManager.getInstance();
 
-		List<Qna> QnaList = null;
+		List<Qna> QnaList = manager.selectAllQnaList();
 		
 		if(request.getParameter("user_id") != null) { 
 			QnaList = manager.selectMyQnaList(UserSessionUtils.getLoginUserId(request.getSession()));
@@ -28,8 +26,6 @@ public class ListQnaController implements Controller {
 		else { 
 			QnaList = manager.selectAllQnaList();
 		}		
-
-	//	List<Qna> QnaList = manager.selectAllQnaList();
 
 
 		for(int i = 0; i < QnaList.size(); i++) {

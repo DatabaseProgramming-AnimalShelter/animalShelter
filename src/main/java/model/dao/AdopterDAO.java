@@ -58,10 +58,10 @@ public class AdopterDAO {
 
 	public int remove(String user_id) throws SQLException {
 		String sql = "DELETE FROM adopter WHERE user_id=?";		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});	
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});	// JDBCUtil�� delete���� �Ű� ���� ����
 
 		try {				
-			int result = jdbcUtil.executeUpdate();	
+			int result = jdbcUtil.executeUpdate();	// delete �� ����
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -69,7 +69,7 @@ public class AdopterDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	
+			jdbcUtil.close();	// resource ��ȯ
 		}		
 		return 0;
 	}

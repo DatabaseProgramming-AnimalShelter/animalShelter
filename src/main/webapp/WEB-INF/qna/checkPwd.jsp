@@ -26,7 +26,7 @@
 		form.submit();
 	}
 </script>
-
+</head>
 <div class="container">
 	<br>
 	<h4>비밀번호 확인</h4>

@@ -11,6 +11,7 @@ import controller.review_comment.CreateReviewCommentController;
 import controller.review_comment.DeleteReviewCommentController;
 import controller.user.*;
 import controller.qna.*;
+import controller.qna_comment.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -52,8 +53,6 @@ public class RequestMapping {
         mappings.put("/review/update", new UpdateReviewController());
         mappings.put("/review/delete", new DeleteReviewController());
         mappings.put("/review/comment", new CreateReviewCommentController());
-        mappings.put("/review/commentList", new ReviewCommentListController());
-        
         mappings.put("/review_comment/delete", new DeleteReviewCommentController());
 
         mappings.put("/qna/create", new RegisterQnaController());
@@ -61,6 +60,8 @@ public class RequestMapping {
         mappings.put("/qna/view", new ViewQnaController());
         mappings.put("/qna/update", new UpdateQnaController());
         mappings.put("/qna/delete", new DeleteQnaController());
+        mappings.put("/qna/create_comment", new CreateQnaCommentController());
+        mappings.put("/qna/delete_comment", new DeleteQnaCommentController());
         
         logger.info("Initialized Request Mapping!");
     }

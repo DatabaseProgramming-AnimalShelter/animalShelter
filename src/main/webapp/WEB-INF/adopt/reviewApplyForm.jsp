@@ -131,7 +131,7 @@ h1 {
 							<th scope="row">입양완료 여부</th>
 							<td>${apply.apply_matched}</td>
 						</tr>
-						<c:if test="${user_id == 'admin' && apply.apply_matched == 0}">
+						<c:if test="${user_id == 'admin'}">
 							<tr>
 								<th><input class="btn btn-outline-danger" type="submit" value="승인"></th>
 								<th><a class="btn btn-outline-secondary" role="button"
