@@ -23,29 +23,26 @@ public class DeleteUserController implements Controller {
 		AdopterManager manager = AdopterManager.getInstance();
 		HttpSession session = request.getSession();	
 	
-		if ((UserSessionUtils.isLoginUser("admin", session) && 	// ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ °ü¸®ÀÚÀÌ°í 	
-			 !user_id.equals("admin"))							// »èÁ¦ ´ë»óÀÌ ÀÏ¹İ »ç¿ëÀÚÀÎ °æ¿ì, 
-			   || 												// ¶Ç´Â 
-			(!UserSessionUtils.isLoginUser("admin", session) &&  // ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ °ü¸®ÀÚ°¡ ¾Æ´Ï°í 
-			  UserSessionUtils.isLoginUser(user_id, session))) { // ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ »èÁ¦ ´ë»óÀÎ °æ¿ì (ÀÚ±â ÀÚ½ÅÀ» »èÁ¦)
+		if ((UserSessionUtils.isLoginUser("admin", session) && 	
+			 !user_id.equals("admin"))							
+			   || 												
+			(!UserSessionUtils.isLoginUser("admin", session) &&  
+			  UserSessionUtils.isLoginUser(user_id, session))) { 
 				
-			manager.remove(user_id);				// »ç¿ëÀÚ Á¤º¸ »èÁ¦
-			if (UserSessionUtils.isLoginUser("admin", session))	// ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ °ü¸®ÀÚ 	
-				//return "redirect:/user/list";		// »ç¿ëÀÚ ¸®½ºÆ®·Î ÀÌµ¿
+			manager.remove(user_id);				
+			if (UserSessionUtils.isLoginUser("admin", session))		
 				return "redirect:/main.jsp";
-			else 									// ·Î±×ÀÎÇÑ »ç¿ëÀÚ´Â ÀÌ¹Ì »èÁ¦µÊ
-				return "redirect:/user/logout";		// logout Ã³¸®
+			else 									
+				return "redirect:/user/logout";		
 		}
 		
-		/* »èÁ¦°¡ ºÒ°¡´ÉÇÑ °æ¿ì */
-		Adopter user = manager.findUser(user_id);	// »ç¿ëÀÚ Á¤º¸ °Ë»ö
+		Adopter user = manager.findUser(user_id);	
 		request.setAttribute("user", user);						
 		request.setAttribute("deleteFailed", true);
 		String msg = (UserSessionUtils.isLoginUser("admin", session)) 
-				   ? "½Ã½ºÅÛ °ü¸®ÀÚ Á¤º¸´Â »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù."		
-				   : "Å¸ÀÎÀÇ Á¤º¸´Â »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù.";													
+				   ? "íšŒì› ì‚­ì œì— ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤."		
+				   : "íƒˆí‡´ì— ì‹¤íŒ¨ í•˜ì˜€ìŠµë‹ˆë‹¤.";													
 		request.setAttribute("exception", new IllegalStateException(msg));            
 		return "/user/mypage.jsp";
-		//return "/user/view.jsp";		// »ç¿ëÀÚ º¸±â È­¸éÀ¸·Î ÀÌµ¿ (forwarding)	
 	}
 }

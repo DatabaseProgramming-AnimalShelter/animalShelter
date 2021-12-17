@@ -1,7 +1,5 @@
 package controller.user;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,7 +19,6 @@ public class UpdateUserController implements Controller {
 
 		String update_id = UserSessionUtils.getLoginUserId(request.getSession());		
 		log.debug("UpdateForm Request : {}", update_id);
-		//String update_id = request.getParameter("user_id");
 		Adopter user = new Adopter(
 				update_id, 
 				request.getParameter("password"), 
@@ -35,20 +32,18 @@ public class UpdateUserController implements Controller {
 
 		HttpSession session = request.getSession();
 		if (UserSessionUtils.isLoginUser(update_id, session) || UserSessionUtils.isLoginUser("admin", session)) {
-			// ÇöÀç ·Î±×ÀÎÇÑ »ç¿ëÀÚ°¡ ¼öÁ¤ ´ë»ó »ç¿ëÀÚÀÌ°Å³ª °ü¸®ÀÚÀÎ °æ¿ì -> ¼öÁ¤ °¡´É
 			AdopterManager manager = AdopterManager.getInstance();
 			int result = manager.update(user);
 			
-			user = manager.findUser(update_id); // ¼öÁ¤ ÈÄ »ç¿ëÀÚ Á¤º¸ °Ë»ö
+			user = manager.findUser(update_id); 
 			request.setAttribute("user", user);
 
-			if (result < 0) { // ¾÷µ¥ÀÌÆ® ½ÇÆĞ
+			if (result < 0) { 
 				request.setAttribute("updateFailed", true);
 			}
 		} else {
-			// (¼öÁ¤ ºÒ°¡´ÉÇÑ °æ¿ì) »ç¿ëÀÚ º¸±â È­¸éÀ¸·Î ¿À·ù ¸Ş¼¼Áö¸¦ Àü´Ş
 			request.setAttribute("updateFailed", true);
-			request.setAttribute("exception", new IllegalStateException("Å¸ÀÎÀÇ Á¤º¸´Â ¼öÁ¤ÇÒ ¼ö ¾ø½À´Ï´Ù."));
+			request.setAttribute("exception", new IllegalStateException("ìˆ˜ì •ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤."));
 		}
 
 		return "/user/mypage.jsp";

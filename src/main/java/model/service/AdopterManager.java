@@ -31,7 +31,7 @@ public class AdopterManager {
 	
 	public int create(Adopter user) throws SQLException, ExistingUserException {
 		if (adopterDAO.existingUser(user.getUser_id()) == true) {
-			throw new ExistingUserException(user.getUser_id() + "�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떦�뙋�삕 �뜝�룞�삕�뜝�떛�벝�삕�뜝�뙃�땲�뙋�삕.");
+			throw new ExistingUserException(user.getUser_id() + "이미 존재하는 아이디 입니다.");
 		}
 		return adopterDAO.create(user);
 	}

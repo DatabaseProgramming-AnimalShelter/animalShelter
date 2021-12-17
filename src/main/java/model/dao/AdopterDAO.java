@@ -40,10 +40,10 @@ public class AdopterDAO {
 		Object[] param = new Object[] {
 				user.getPassword(), user.getUser_name(), 
 					user.getEmail(), user.getPhone(),user.getUser_id()};				
-		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil�� update���� �Ű� ���� ����
+		jdbcUtil.setSqlAndParameters(sql, param);	
 			
 		try {				
-			int result = jdbcUtil.executeUpdate();	// update �� ����
+			int result = jdbcUtil.executeUpdate();	
 			return result;
 		} catch (Exception ex) {
 			jdbcUtil.rollback();
@@ -51,7 +51,7 @@ public class AdopterDAO {
 		}
 		finally {
 			jdbcUtil.commit();
-			jdbcUtil.close();	// resource ��ȯ
+			jdbcUtil.close();	
 		}		
 		return 0;
 	}
@@ -78,12 +78,12 @@ public class AdopterDAO {
         String sql = "SELECT password, user_name, email, phone "
         			+ "FROM adopter "
         			+ "WHERE user_id=? ";              
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});	// JDBCUtil�� query���� �Ű� ���� ����
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {user_id});	
 
 		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query ����
-			if (rs.next()) {						// �л� ���� �߰�
-				Adopter user = new Adopter(		// User ��ü�� �����Ͽ� �л� ������ ����
+			ResultSet rs = jdbcUtil.executeQuery();		
+			if (rs.next()) {						
+				Adopter user = new Adopter(		
 					user_id,
 					rs.getString("password"),
 					rs.getString("user_name"),
@@ -94,7 +94,7 @@ public class AdopterDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close();		// resource ��ȯ
+			jdbcUtil.close();		
 		}
 		return null;
 	}

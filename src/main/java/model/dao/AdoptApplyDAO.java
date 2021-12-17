@@ -119,10 +119,9 @@ public class AdoptApplyDAO {
 				+ "ORDER BY apply_id ";
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		jdbcUtil.setSqlAndParameters(sql, null);
-		System.out.println("1ddddddd");
 		try {
-			System.out.println("2ddddddd");
-			ResultSet rs = jdbcUtil.executeQuery(); // query �떎�뻾
+
+			ResultSet rs = jdbcUtil.executeQuery(); 
 			List<AdoptApply> adoptApplyList = new ArrayList<AdoptApply>();
 			while (rs.next()) {
 				Date apply_date = new Date(rs.getDate("apply_date").getTime());
