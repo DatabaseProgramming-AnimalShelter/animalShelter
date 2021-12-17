@@ -1,8 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 public class AdoptApply {
 
    private int apply_id;
@@ -109,7 +106,6 @@ public class AdoptApply {
       this.species = species;
    }
    
-   // findAdoptApplyResult에서 사용
    public AdoptApply(int apply_id, int animal_id, int animal_matched, int apply_matched, String apply_date,
 		String approval_date) {
 		super();
@@ -121,7 +117,6 @@ public class AdoptApply {
 		this.approval_date = approval_date;
    }
    
-   // findUserAdoptList에서 사용
    public AdoptApply(int apply_id, int animal_id, int apply_matched, int animal_matched, String approval_date,
 			String animal_type, String species) {
 		super();
@@ -133,8 +128,7 @@ public class AdoptApply {
 		this.animal_type = animal_type;
 		this.species = species;
 	}
-   
-   // findAnimalAdptList에서 사용
+
    public AdoptApply(int apply_id, String user_id) {
 	   super();
 	   this.apply_id = apply_id;

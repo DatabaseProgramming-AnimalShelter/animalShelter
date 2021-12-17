@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import controller.user.UserSessionUtils;
 import model.AdoptApply;
-import model.Review;
 import model.service.AdoptApplyManager;
-import model.service.ReviewManager;
 
 public class UserAdoptListController implements Controller {
 

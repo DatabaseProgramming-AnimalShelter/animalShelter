@@ -43,8 +43,6 @@ public class RequestMapping {
         mappings.put("/adopt/accept", new RegisterAnimalController());
         mappings.put("/adopt/list", new ListResultApplyController());
         mappings.put("/adopt/approved_list", new ViewApprovalListController());
-        mappings.put("/adopt/approval", new ManagerAcceptController());
-        mappings.put("/adopt/decline", new ManagerDeclineController()); 
         mappings.put("/adopt/result", new ManagerResultController());
         mappings.put("/adopt/userAdoptList", new UserAdoptListController()); 
 

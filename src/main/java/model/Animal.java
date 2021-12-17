@@ -120,7 +120,7 @@ public class Animal {
 		super();
 		this.animal_id = animal_id;
 		this.category_id = category_id;
-		this.species=species;
+		this.species = species;
 		this.age = age;
 		this.location = location;
 		this.image = image;

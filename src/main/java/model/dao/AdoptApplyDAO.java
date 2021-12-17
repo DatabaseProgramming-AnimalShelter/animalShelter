@@ -8,17 +8,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controller.adopt.CreateAdoptApplyController;
-
 import java.util.Date;
-import java.util.Iterator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 import model.AdoptApply;
-import model.Adopter;
-import model.Animal;
 
 public class AdoptApplyDAO {
 	private static final Logger log = LoggerFactory.getLogger(AdoptApplyDAO.class);
@@ -90,56 +84,6 @@ public class AdoptApplyDAO {
 
 		return result;
 	}
-	
-	public int approval(AdoptApply adoptApply) throws SQLException {
-
-		String sql = "UPDATE AdoptApply " + "SET apply_matched=? , approval_date=SYSDATE " + "WHERE apply_id=? ";
-		Object[] param = new Object[] { 1, adoptApply.getApply_id() };
-
-		String sql2 = "UPDATE Animal " + "SET  animal_matched=? " + "WHERE animal_id=? ";
-		Object[] param2 = new Object[] { 1, adoptApply.getAnimal_id() };
-		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
-		try {
-			// Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
-			jdbcUtil.setSqlAndParameters(sql, param);
-
-			jdbcUtil.executeUpdate();
-			jdbcUtil.commit();
-			jdbcUtil.close();
-			jdbcUtil.setSqlAndParameters(sql2, param2);
-			int result = jdbcUtil.executeUpdate();
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.commit();
-			jdbcUtil.close(); // resource 諛섑 ��
-		}
-		return 0;
-	}
-
-	public int decline(AdoptApply adoptApply) throws SQLException {
-
-		String sql = "UPDATE AdoptApply " + "SET  apply_matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
-		Object[] param = new Object[] { 1, adoptApply.getApply_id() };
-
-		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		try {
-			// Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
-			jdbcUtil.setSqlAndParameters(sql, param);
-			int result = jdbcUtil.executeUpdate();
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.commit();
-			jdbcUtil.close();
-		}
-		return 0;
-	}
 
 	// view
 	public AdoptApply findAdoptApply(int apply_id) throws SQLException {
@@ -193,7 +137,7 @@ public class AdoptApplyDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource 諛섑 ��
+			jdbcUtil.close(); 
 		}
 		return null;
 	}
@@ -226,7 +170,7 @@ public class AdoptApplyDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource 諛섑 ��
+			jdbcUtil.close(); 
 		}
 		return null;
 	}
@@ -263,7 +207,7 @@ public class AdoptApplyDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource 諛섑 ��
+			jdbcUtil.close(); 
 		}
 		return null;
 	}

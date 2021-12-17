@@ -4,16 +4,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.AdoptApply;
-import model.Adopter;
-import model.Animal;
 import model.dao.AdoptApplyDAO;
-import model.dao.AdopterDAO;
 
 public class AdoptApplyManager {
 
 	private static AdoptApplyManager applyMan = new AdoptApplyManager();
 	private AdoptApplyDAO adoptApplyDAO;
-	// private AnimalDAO commDAO;
 
 	public AdoptApplyDAO getAdopterDAO() {
 		return this.adoptApplyDAO;
@@ -22,7 +18,6 @@ public class AdoptApplyManager {
 	private AdoptApplyManager() {
 		try {
 			adoptApplyDAO = new AdoptApplyDAO();
-			// commDAO = new AnimalDAO();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -37,15 +32,6 @@ public class AdoptApplyManager {
 		System.out.println("----------------------applyManCreate:--------------------" + applyMan);
 
 		return adoptApplyDAO.create(adoptApply);
-	}
-
-	public int approval(AdoptApply adoptApply) throws SQLException {
-
-		return adoptApplyDAO.approval(adoptApply);
-	}
-
-	public int decline(AdoptApply adoptApply) throws SQLException {
-		return adoptApplyDAO.decline(adoptApply);
 	}
 	
 	public int apply_result(AdoptApply adoptApply, int apply_result) throws SQLException {
