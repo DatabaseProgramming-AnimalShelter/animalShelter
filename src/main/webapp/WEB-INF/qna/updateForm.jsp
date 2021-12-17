@@ -49,16 +49,16 @@
 					value="${qna.qna_writer}">
 			</div>
 		</div>
-		<!--
+		
 		
 		<div class="form-group row">
 			<label for="name" class="col-lg-2 col-form-label">비밀번호</label>
 			<div class="col-lg-10">
-				<input type="text" name="qna_password" class="form-control"
+				<input type="password" name="qna_password" class="form-control"
 					value="${qna.qna_password}">
 			</div>
 		</div>
-		-->
+		
 		<div class="form-group row">
 			<label for="content" class="col-lg-2 col-form-label">질문종류</label>
 			<div class="col-lg-8">
