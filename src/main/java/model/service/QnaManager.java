@@ -38,15 +38,14 @@ public class QnaManager {
 
 		return qnaDAO.remove(qna_id);
 	}
-
 	public int findQnaCategoryId(String qna_id) {
 		return qnaDAO.findQnaCategoryId(qna_id);
 	}
-
+	//리스트 가져오기
 	public List<Qna> selectAllQnaList() throws SQLException {
 		return qnaDAO.selectAllQnaList();
 	}
-
+	//qna_id로 qna객체 찾기
 	public Qna findQnaByPrimaryKey(int qna_id) throws SQLException, AnimalNotFoundException {
 		Qna review = qnaDAO.findQnaByPrimaryKey(qna_id);
 
@@ -55,26 +54,15 @@ public class QnaManager {
 		}
 		return review;
 	}
-
-	public List<Qna> findQnaCategoryByQnaType(String qnaType) {
-		return qnaDAO.findQnaCategoryByQnaType(qnaType);
-	}
-
 	// 댓글 입력
 	public int insertComment(Qna_Comment comment) {
 		return commentDAO.insertComment(comment);
 	}
-
-	// 댓글 수정
-	public int updateComment(Qna_Comment comment) {
-		return commentDAO.updateComment(comment);
-	}
-
 	// 댓글 삭제
 	public int deleteComment(int comment_no) {
 		return commentDAO.deleteComment(comment_no);
 	}
-	//댓글선택
+	//댓글 선택
 	public Qna_Comment selectComment(int qna_id) {
 		return commentDAO.selectComment(qna_id);
 	}
@@ -82,7 +70,6 @@ public class QnaManager {
 	public List<Qna> selectMyQnaList(String user_id) throws SQLException {
 		return qnaDAO.selectMyQnaList(user_id);
 	}
-
 	// 비밀번호 체크
 	public String checkQnaPwd(int qna_id) throws SQLException {
 		return qnaDAO.checkQnaPwd(qna_id);

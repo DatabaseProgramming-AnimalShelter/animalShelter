@@ -27,7 +27,6 @@ public class QnaDAO {
 	}
 	
 	public int create(Qna qna) {
-		System.out.println("Daocreate시작");
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			int result = sqlSession.getMapper(QnaMapper.class).create(qna);
@@ -67,7 +66,6 @@ public class QnaDAO {
 	}
 	
 	public int findQnaCategoryId(String qnaType) {
-		System.out.println("DaoFind시작");
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			return sqlSession.getMapper(QnaMapper.class).findQnaCategoryId(qnaType);			
@@ -89,15 +87,6 @@ public class QnaDAO {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			return sqlSession.getMapper(QnaMapper.class).selectAllQnaList();			
-		} finally {
-			sqlSession.close();
-		}
-	}
-	
-	public List<Qna> findQnaCategoryByQnaType(String qnaType) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			return sqlSession.getMapper(QnaMapper.class).findQnaCategoryByQnaType(qnaType);			
 		} finally {
 			sqlSession.close();
 		}

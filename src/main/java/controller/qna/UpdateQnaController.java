@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.Controller;
-import controller.user.UserSessionUtils;
 import model.service.QnaManager;
 import model.Qna;
 
@@ -21,7 +20,6 @@ public class UpdateQnaController implements Controller {
 		
 		if (request.getMethod().equals("GET")) {	
 
-			System.out.println("qna_id" + qna_id );
 			Qna qna = manager.findQnaByPrimaryKey(qna_id);
 			request.setAttribute("qna", qna);			
 				

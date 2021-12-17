@@ -1,8 +1,4 @@
 package controller.qna;
-
-import java.util.Date;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,10 +25,7 @@ public class RegisterQnaController implements Controller {
 
 			return "/qna/registerForm.jsp";
 		}
-		System.out.println("USERID넘어와짐"+request.getParameter("qna_writer"));
 		int qna_category_id = manager.findQnaCategoryId(request.getParameter("qna_type"));
-		System.out.println("qna_category_id " + qna_category_id);
-		System.out.println("qna_password " + request.getParameter("qna_password"));
 		Qna qna = new Qna(
 				request.getParameter("qna_writer"),
 				request.getParameter("qna_title"),
@@ -44,7 +37,7 @@ public class RegisterQnaController implements Controller {
 			System.out.println(qna.toString());
 			manager.create(qna);
 
-			log.debug("Create Review : {}", qna);
+			log.debug("Create Qna : {}", qna);
 			return "redirect:/qna/list";
 
 		} catch (ExistingUserException e) {

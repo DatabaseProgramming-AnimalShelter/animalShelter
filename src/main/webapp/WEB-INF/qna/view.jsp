@@ -141,7 +141,7 @@
 				</div>
 			</section>
 		</c:if>
-		<!-- 댓글 작성 부분 -->
+		<!-- 댓글 작성 : 관리자만 가능 -->
 		<br> <br>
 		<c:if test="${comment == null && user_id == 'admin' }">
 			<form name="form" method="POST"

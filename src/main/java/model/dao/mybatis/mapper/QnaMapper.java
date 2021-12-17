@@ -11,13 +11,11 @@ public interface QnaMapper {
 	
 	public int remove(int qnaId);
 	
-	public int findQnaCategoryId(String qnaType); //create할때
+	public int findQnaCategoryId(String qnaType);
 	
 	public Qna findQnaByPrimaryKey(int qnaId);
 	
 	public List<Qna> selectAllQnaList();
-	
-	public List<Qna> findQnaCategoryByQnaType(String qnaType);
 	
 	public List<Qna> selectMyQnaList(String user_id);
 	

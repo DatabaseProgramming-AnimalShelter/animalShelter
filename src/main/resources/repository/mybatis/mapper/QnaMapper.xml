@@ -22,7 +22,6 @@
 			SELECT
 			qna_id_seq.nextval AS qna_id FROM DUAL
 		</selectKey>
-
 		INSERT INTO QNA ( qna_id, qna_writer, qna_title, qna_content,
 		qna_password, qna_date,
 		qna_category_id)
@@ -39,13 +38,11 @@
 		#{qna_password}, qna_date = SYSDATE,  qna_category_id = #{qna_category_id}
 		WHERE qna_id = #{qna_id}
 	</update>
-
 	<delete id="remove" parameterType="int">
 		DELETE FROM QNA
 		WHERE qna_id =
 		#{qna_id}
 	</delete>
-
 	<select id="findQnaByPrimaryKey" parameterType="int"
 		resultType="Qna">
 		<include refid="BaseColumns" />
@@ -56,12 +53,6 @@
 		SELECT qna_category_id AS qna_category_id
 		FROM QNA_CATEGORY
 		WHERE qna_type = #{qna_type}
-	</select>
-	<select id="findQnaCategoryByQnaType" parameterType="String"
-		resultType="Qna">
-		<include refid="BaseColumns" />
-		WHERE c.qna_type = #{qna_type}
-		ORDER BY qna_id
 	</select>
 	<select id="selectAllQnaList" resultType="Qna">
 		<include refid="BaseColumns" />
