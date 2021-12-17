@@ -28,8 +28,6 @@ DROP TABLE Qna CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE qna_category CASCADE CONSTRAINTS PURGE;
 
-DROP TABLE Qna_Reply CASCADE CONSTRAINTS PURGE;
-
 DROP TABLE Qna_Comment CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE Review_Comment CASCADE CONSTRAINTS PURGE;
@@ -125,51 +123,51 @@ CREATE TABLE R_heart
 
 CREATE TABLE Review_Comment
 (
-	comment_id           INTEGER NOT NULL ,
-	post_id              INTEGER NOT NULL ,
-	user_id              VARCHAR2(20) NULL ,
-	creationDate         DATE NULL ,
-	parent               INTEGER NULL ,
-	content              VARCHAR2(4000) NULL ,
- 	PRIMARY KEY (comment_id),
-	FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL,
-	FOREIGN KEY (post_id) REFERENCES Review (post_id)
+   comment_id           INTEGER NOT NULL ,
+   post_id              INTEGER NOT NULL ,
+   user_id              VARCHAR2(20) NULL ,
+   creationDate         DATE NULL ,
+   parent               INTEGER NULL ,
+   content              VARCHAR2(4000) NULL ,
+    PRIMARY KEY (comment_id),
+   FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL,
+   FOREIGN KEY (post_id) REFERENCES Review (post_id)
 );
 
 
 CREATE TABLE Qna
 (
-	qna_id               INTEGER NOT NULL ,
-	qna_title            VARCHAR2(100) NULL ,
-	qna_content          VARCHAR2(1000) NULL ,
-	qna_password         VARCHAR2(100) NULL ,
-	qna_category_id      INTEGER NULL ,
-	qna_writer           VARCHAR2(100) NULL ,
-	qna_date             DATE NULL
+   qna_id               INTEGER NOT NULL ,
+   qna_title            VARCHAR2(100) NULL ,
+   qna_content          VARCHAR2(1000) NULL ,
+   qna_password         VARCHAR2(100) NULL ,
+   qna_category_id      INTEGER NULL ,
+   qna_writer           VARCHAR2(100) NULL ,
+   qna_date             DATE NULL
 );
 
 ALTER TABLE Qna
-	ADD CONSTRAINT  XPKQna PRIMARY KEY (qna_id);
+   ADD CONSTRAINT  XPKQna PRIMARY KEY (qna_id);
 
 CREATE TABLE qna_category
 (
-	qna_category_id      INTEGER NOT NULL ,
-	qna_type             VARCHAR2(40) NULL 
+   qna_category_id      INTEGER NOT NULL ,
+   qna_type             VARCHAR2(40) NULL 
 );
 
 ALTER TABLE qna_category
-	ADD CONSTRAINT  XPKqna_category PRIMARY KEY (qna_category_id);
+   ADD CONSTRAINT  XPKqna_category PRIMARY KEY (qna_category_id);
 
 CREATE TABLE Qna_Comment
 (
-	comment_no           INTEGER NOT NULL ,
-	comment_content      VARCHAR2(500) NULL ,
-	reg_date             DATE NULL ,
-	qna_id               INTEGER NOT NULL
+   comment_no           INTEGER NOT NULL ,
+   comment_content      VARCHAR2(500) NULL ,
+   reg_date             DATE NULL ,
+   qna_id               INTEGER NOT NULL
 );
 
 ALTER TABLE Qna_Comment
-	ADD CONSTRAINT  XPKComment PRIMARY KEY (comment_no);
+   ADD CONSTRAINT  XPKComment PRIMARY KEY (comment_no);
 
 ALTER TABLE R_heart
    ADD CONSTRAINT  XPKR_heart PRIMARY KEY (r_heart_id);
@@ -190,7 +188,7 @@ ALTER TABLE A_heart
    ADD (CONSTRAINT R_29 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Review
-   ADD (CONSTRAINT �썑湲곗옉�꽦 FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
+   ADD (CONSTRAINT  썑湲곗옉 꽦 FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Review
    ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
@@ -202,13 +200,13 @@ ALTER TABLE R_heart
    ADD (CONSTRAINT R_34 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Qna
-	ADD (CONSTRAINT R_33 FOREIGN KEY (qna_category_id) REFERENCES qna_category (qna_category_id) ON DELETE SET NULL);
+   ADD (CONSTRAINT R_33 FOREIGN KEY (qna_category_id) REFERENCES qna_category (qna_category_id) ON DELETE SET NULL);
 
 ALTER TABLE Qna_Comment
-	ADD (CONSTRAINT R_36 FOREIGN KEY (qna_id) REFERENCES Qna (qna_id));
+   ADD (CONSTRAINT R_36 FOREIGN KEY (qna_id) REFERENCES Qna (qna_id));
 
 ALTER TABLE Qna_Reply
-	ADD (CONSTRAINT R_37 FOREIGN KEY (comment_no) REFERENCES Qna_Comment (comment_no));   
+   ADD (CONSTRAINT R_37 FOREIGN KEY (comment_no) REFERENCES Qna_Comment (comment_no));   
    
 CREATE SEQUENCE dog_id_seq
 START WITH 100

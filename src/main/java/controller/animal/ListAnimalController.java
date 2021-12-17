@@ -31,7 +31,8 @@ public class ListAnimalController implements Controller {
 			matched = Integer.parseInt(request.getParameter("matched"));
 			System.out.println("matched" + matched);
 			AnimalManager manager = AnimalManager.getInstance();
-			List<Animal> animalList = manager.searchAnimalList(type,category_id, matched,location);
+			Animal animal = new Animal(type,category_id, matched,location);
+			List<Animal> animalList = manager.searchAnimalList(animal);
 			System.out.println("animalList");
 			request.setAttribute("animalList", animalList);					
 			request.setAttribute("type", type);		
@@ -44,7 +45,7 @@ public class ListAnimalController implements Controller {
 		}
 		AnimalManager manager = AnimalManager.getInstance();
 		List<Animal> animalList = manager.findAnimalList();
-
+		System.out.println(animalList);
 		request.setAttribute("animalList", animalList);
 
 		return "/animal/list.jsp";

@@ -27,6 +27,7 @@
 		</environment>
 	</environments>
 	<mappers>
+		<mapper resource="repository/mybatis/mapper/AnimalMapper.xml" />
 		<mapper resource="repository/mybatis/mapper/QnaMapper.xml" />
 		<mapper resource="repository/mybatis/mapper/CommentMapper.xml" />
 	</mappers>

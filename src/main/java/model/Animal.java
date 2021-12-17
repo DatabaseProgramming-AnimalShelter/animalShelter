@@ -7,6 +7,13 @@ public class Animal {
 	private String location;
 	private int matched;
 	private String image;
+	private String gender;
+	private String weight;
+	private String etc;
+	private String species;
+	private String animal_type;
+
+	
 	public String getSpecies() {
 		return species;
 	}
@@ -22,11 +29,6 @@ public class Animal {
 	public void setAnimal_type(String animal_type) {
 		this.animal_type = animal_type;
 	}
-	private String gender;
-	private String weight;
-	private String etc;
-	private String species;
-	private String animal_type;
 
 	
 	public Animal(int animal_id, int category_id, int age, String location, int matched, String image, String gender,
@@ -56,6 +58,10 @@ public class Animal {
 		this.gender = gender;
 		this.weight = weight;
 		this.etc = etc;
+	}
+	public Animal(int animal_id) {
+		super();
+		this.animal_id = animal_id;
 	}
 	public Animal(int animal_id, int category_id, int age, String location, int matched, String image) {
 		super();
@@ -109,6 +115,23 @@ public class Animal {
 		this.image = image;
 		this.gender = gender;
 		this.etc = etc;
+	}
+	public Animal(int animal_id, int category_id, String species, int age, String location, String image, String gender) {
+		super();
+		this.animal_id = animal_id;
+		this.category_id = category_id;
+		this.species=species;
+		this.age = age;
+		this.location = location;
+		this.image = image;
+		this.gender = gender;
+	}
+	//search
+	public Animal(String animal_type,int category_id, int matched,String location) {
+		this.animal_type = animal_type;
+		this.category_id = category_id;
+		this.matched=matched;
+		this.location = location;
 	}
 	public int getAnimal_id() {
 		return animal_id;
