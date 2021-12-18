@@ -4,25 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import controller.adopt.CreateAdoptApplyController;
-
 import java.util.Date;
-import java.util.Iterator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-
 import model.AdoptApply;
-import model.Adopter;
-import model.Animal;
 
 public class AdoptApplyDAO {
-	private static final Logger log = LoggerFactory.getLogger(AdoptApplyDAO.class);
-	
 	private JDBCUtil jdbcUtil = null;
 	AdoptApply adoptApply = new AdoptApply();
 
@@ -57,14 +44,8 @@ public class AdoptApplyDAO {
 		return 0;
 	}
 
-	// ���� -> AdoptApply�� apply_matched : 1, approval_date : SYSDATE & Animal�� animal_matched : 1
-	// ���� -> AdoptApply�� apply_matched : 1, approval_date : SYSDATE
-	
-	// ���ΰ� ���� ��ģ �޼ҵ�
 	public int apply_result(AdoptApply adoptApply, int apply_result) throws SQLException {
 		int result = 0;
-		
-		// ����, ���� ��� �ش�
 		try {
 			String sql = "UPDATE AdoptApply " + "SET apply_matched=? , approval_date=SYSDATE " + "WHERE apply_id=? ";
 			Object[] param = new Object[] { 1, adoptApply.getApply_id() };
@@ -77,8 +58,6 @@ public class AdoptApplyDAO {
 			jdbcUtil.commit();
 			jdbcUtil.close();
 		}
-
-		// ���� ���� ���
 		if (apply_result == 1) {
 			
 			try {
@@ -86,16 +65,6 @@ public class AdoptApplyDAO {
 				Object[] param2 = new Object[] { 1, adoptApply.getAnimal_id() };
 				jdbcUtil.setSqlAndParameters(sql2, param2);
 				result += jdbcUtil.executeUpdate();
-				
-				/*
-				 * // �� ������ ���� �ٸ� �Ծ� ��û�� ���� �� ��� �ٸ� ��û�� ��� ���� ó�� String sql3 = "UPDATE Animal "
-				 * + "SET  animal_matched=? " + "WHERE animal_id=? ";
-				 * 
-				 * Iterator<AdoptApply> iter = adoptApplyList.iterator(); while(iter.hasNext())
-				 * { check = true; AdoptApply apply = iter.next(); Object[] param3 = new
-				 * Object[] { 0, apply.getAnimal_id() }; jdbcUtil.setSqlAndParameters(sql2,
-				 * param2); jdbcUtil.executeUpdate(); jdbcUtil.commit(); jdbcUtil.close(); }
-				 */
 				
 			} catch (Exception ex) {
 				jdbcUtil.rollback();
@@ -109,7 +78,6 @@ public class AdoptApplyDAO {
 		return result;
 	}
 
-	// adoptapply�� matched ��: 1 + animal�� matched: 1
 	public int approval(AdoptApply adoptApply) throws SQLException {
 
 		String sql = "UPDATE AdoptApply " + "SET apply_matched=? , approval_date=SYSDATE " + "WHERE apply_id=? ";
@@ -117,10 +85,8 @@ public class AdoptApplyDAO {
 
 		String sql2 = "UPDATE Animal " + "SET  animal_matched=? " + "WHERE animal_id=? ";
 		Object[] param2 = new Object[] { 1, adoptApply.getAnimal_id() };
-		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 
 		try {
-			// Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
 			jdbcUtil.setSqlAndParameters(sql, param);
 
 			jdbcUtil.executeUpdate();
@@ -134,20 +100,17 @@ public class AdoptApplyDAO {
 			ex.printStackTrace();
 		} finally {
 			jdbcUtil.commit();
-			jdbcUtil.close(); // resource 諛섑 ��
+			jdbcUtil.close(); 
 		}
 		return 0;
 	}
 
-	// adoptapply�� matched ���� 1
 	public int decline(AdoptApply adoptApply) throws SQLException {
 
 		String sql = "UPDATE AdoptApply " + "SET  apply_matched=?, approval_date=SYSDATE " + "WHERE apply_id=?";
 		Object[] param = new Object[] { 1, adoptApply.getApply_id() };
 
-		// DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		try {
-			// Date date = new Date(df.parse(adoptApply.getApproval_date()).getTime());
 			jdbcUtil.setSqlAndParameters(sql, param);
 			int result = jdbcUtil.executeUpdate();
 			return result;
@@ -161,7 +124,6 @@ public class AdoptApplyDAO {
 		return 0;
 	}
 
-	// view
 	public AdoptApply findAdoptApply(int apply_id) throws SQLException {
 		String sql = "SELECT adp.apply_id, adp.user_id, adp.animal_id, adp.content, adp.living_environment, adp.have_pets, adp.apply_matched, adp.apply_date, a.image, u.user_name, c.animal_type, c.species  "
 				+ "FROM AdoptApply adp , Adopter u , Animal a ,Category c "
@@ -189,7 +151,6 @@ public class AdoptApplyDAO {
 		return null;
 	}
 
-	// ������ ���忡�� �Ծ��û�� ����Ʈ�� �����ִ� ������
 	public List<AdoptApply> findAdoptApplyList() throws SQLException {
 		String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date "
 				+ "FROM AdoptApply adp JOIN Adopter a ON adp.user_id = a.user_id " + "WHERE adp.apply_matched=0 "
@@ -219,7 +180,6 @@ public class AdoptApplyDAO {
 		return null;
 	}
 
-	// �Ծ����� �� �����ִ� ������ ( �����ڰ� ���� �ź� ����)
 	public List<AdoptApply> findAdoptApplyResultList() throws SQLException {
 		String sql = "SELECT adp.apply_id, adp.user_id,  a.user_name, adp.animal_id,adp.apply_matched, adp.apply_date, adp.approval_date ,an.animal_matched "
 				+ "FROM AdoptApply adp, Adopter a ,Animal an "
@@ -248,12 +208,11 @@ public class AdoptApplyDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource 諛섑 ��
+			jdbcUtil.close(); 
 		}
 		return null;
 	}
 	
-	// �������������� ������ �Ծ� ����Ʈ
 	public List<AdoptApply> findAdoptApplyResult(String user_id) throws SQLException {
 		String sql = "SELECT adp.apply_id, adp.animal_id, adp.apply_matched, adp.apply_date, adp.approval_date, a.animal_matched,  "
 				+ "FROM AdoptApply adp JOIN Animal a ON adp.animal_id = a.animal_id "
@@ -286,7 +245,7 @@ public class AdoptApplyDAO {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
-			jdbcUtil.close(); // resource 諛섑 ��
+			jdbcUtil.close(); 
 		}
 		return null;
 	}

@@ -7,10 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import model.service.AdoptApplyManager;
-import model.service.AnimalManager;
 import model.AdoptApply;
-import model.Animal;
-
 public class ManagerAcceptController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

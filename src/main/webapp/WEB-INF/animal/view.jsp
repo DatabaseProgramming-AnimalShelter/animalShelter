@@ -86,7 +86,7 @@ h1 {
 								height="400px" width="400px" />
 						</c:when>
 						<c:otherwise>
-							<span>사진없음</span>
+							<span>사진없음 </span>
 						</c:otherwise>
 					</c:choose>
 					<br>
@@ -181,41 +181,21 @@ h1 {
 			<c:if test="${user_id=='admin'}">
 				<a class="btn btn-primary"
 					href="<c:url value='/animal/update'>
-	     		   <c:param name='animal_id' value='${animal.animal_id}'/>
-			  </c:url>">동물수정</a>
+                 <c:param name='animal_id' value='${animal.animal_id}'/>
+           </c:url>">동물수정</a>
 				<a class="btn btn-primary"
 					href="<c:url value='/animal/delete'>
-	     		   	<c:param name='animal_id' value='${animal.animal_id}'/>
-			  	  </c:url>">동물삭제</a>
+                    <c:param name='animal_id' value='${animal.animal_id}'/>
+                </c:url>">동물삭제</a>
 			</c:if>
-			<c:if test="${animal.animal_matched == 0 && applied == false}">
+			<c:if
+				test="${animal.animal_matched == 0 && applied == false &&user_id!=NULL}">
 				<%-- 아직 입양이 안됐고 다른 신청자가 없을 경우  --%>
-				<a class="btn btn-primary" href="<c:url value='/adopt/register'>
-	     		  	<c:param name='animal_id' value='${animal.animal_id}'/>
-			  	</c:url>">입양신청</a>
+				<a class="btn btn-primary"
+					href="<c:url value='/adopt/register'>
+                   <c:param name='animal_id' value='${animal.animal_id}'/>
+              </c:url>">입양신청</a>
 			</c:if>
-			<%-- <c:choose>
-				<c:when test="${applied == false}">
-					<c:if test="${animal.animal_matched == 0}">
-						아직 입양이 안됐고 다른 신청자가 없을 경우 
-						<a class="btn btn-primary" href="<c:url value='/adopt/register'>
-	     		  		 	<c:param name='animal_id' value='${animal.animal_id}'/>
-			  			</c:url>">입양신청</a>
-					</c:if>
-				</c:when>
-				<c:otherwise>
-					<c:choose>
-						<c:when test="${apply.user_id == user_id}">
-							사용자가 이미 입양 신청한 동물일 경우
-							<p class="fw-bolder type">입양 신청이 완료되었습니다.</p>
-						</c:when>
-						<c:otherwise>
-							다른 사용자가 이미 입양 신청한 동물일 경우		
-							<p class="fw-bolder type">입양 승인을 기다리는 동물입니다.</p>
-						</c:otherwise>
-					</c:choose>
-				</c:otherwise>
-			</c:choose> --%>
 		</div>
 	</form>
 </div>

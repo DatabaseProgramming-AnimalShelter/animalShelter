@@ -1,9 +1,4 @@
 package controller.adopt;
-
-import java.io.File;
-import java.time.LocalDate;
-
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -18,7 +13,6 @@ import model.Animal;
 import model.service.AdoptApplyManager;
 import model.service.AdopterManager;
 import model.service.AnimalManager;
-import model.service.ExistingUserException;
 
 public class CreateAdoptApplyController implements Controller {
 	private static final Logger log = LoggerFactory.getLogger(CreateAdoptApplyController.class);

@@ -4,10 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.AdoptApply;
-import model.Adopter;
-import model.Animal;
 import model.dao.AdoptApplyDAO;
-import model.dao.AdopterDAO;
+
 
 public class AdoptApplyManager {
 

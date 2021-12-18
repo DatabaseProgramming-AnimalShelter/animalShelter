@@ -55,8 +55,10 @@ public class RequestMapping {
         mappings.put("/review/update", new UpdateReviewController());
         mappings.put("/review/delete", new DeleteReviewController());
         mappings.put("/review/comment", new CreateReviewCommentController());
+        mappings.put("/review/comment", new CreateReviewCommentController());
+        mappings.put("/review/commentList", new ReviewCommentListController());
         mappings.put("/review_comment/delete", new DeleteReviewCommentController());
-
+        
         mappings.put("/qna/create", new RegisterQnaController());
         mappings.put("/qna/list", new ListQnaController());
         mappings.put("/qna/view", new ViewQnaController());

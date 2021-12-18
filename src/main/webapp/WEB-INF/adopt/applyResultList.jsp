@@ -12,7 +12,6 @@
 					<th scope="col">신청자 이름</th>
 					<th scope="col">동물 번호</th>
 					<th scope="col">승인 날짜</th>
-					<!-- 신청날짜를 보여주는 이유는 : 선착순의 느낌도 주기 위해서 -->
 					<th scope="col">입양 승인 거부 여부</th>
 				</tr>
 			</thead>

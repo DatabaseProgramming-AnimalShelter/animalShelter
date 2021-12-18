@@ -47,7 +47,7 @@ CREATE TABLE Animal
    image                VARCHAR2(40) NULL ,
    gender               VARCHAR2(40) NULL ,
    weight               VARCHAR2(40) NULL ,
-   etc                  VARCHAR2(40) NULL ,
+   etc                  VARCHAR2(1000) NULL ,
    animal_matched       INT NULL 
    
 );
@@ -61,7 +61,7 @@ CREATE TABLE AdoptApply
    user_id              VARCHAR2(20) NULL ,
    animal_id            INTEGER NULL ,
    content              VARCHAR2(1000) NULL ,
-   living_environment   VARCHAR2(40) NULL ,
+   living_environment   VARCHAR2(1000) NULL ,
    apply_matched        INT NULL ,
    have_pets            VARCHAR2(40) NULL ,
    apply_date           DATE NULL ,
@@ -88,7 +88,7 @@ CREATE TABLE Review
    title                VARCHAR2(40) NOT NULL ,
    content              VARCHAR2(4000) NULL ,
    creationDate         DATE NULL ,
-   image                VARCHAR2(40) NULL ,
+   image                VARCHAR2(1000) NULL ,
    writer               VARCHAR2(20) NULL ,
    animal_id            INTEGER NOT NULL,
    FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE SET NULL
@@ -153,13 +153,8 @@ ALTER TABLE AdoptApply
 ALTER TABLE AdoptApply
    ADD (CONSTRAINT R_22 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
 
-
-ALTER TABLE Review
-   ADD (CONSTRAINT  썑湲곗옉 꽦 FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
-
 ALTER TABLE Review
    ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
-
 
 ALTER TABLE Qna
    ADD (CONSTRAINT R_33 FOREIGN KEY (qna_category_id) REFERENCES qna_category (qna_category_id) ON DELETE SET NULL);

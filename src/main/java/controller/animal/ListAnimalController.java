@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
-import controller.user.UserSessionUtils;
 import model.Animal;
 import model.service.AnimalManager;
 
