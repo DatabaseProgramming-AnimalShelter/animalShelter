@@ -25,12 +25,7 @@ public class ListQnaController implements Controller {
 		}
 		else { 
 			QnaList = manager.selectAllQnaList();
-		}		
-
-
-		for(int i = 0; i < QnaList.size(); i++) {
-//			System.out.println("Title : " + QnaList.get(i).getContent());
-		}
+		}	
 		
 		request.setAttribute("QnaList", QnaList);
 		return "/qna/list.jsp";

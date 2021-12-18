@@ -3,18 +3,12 @@ DROP SEQUENCE cat_id_seq;
 DROP SEQUENCE dog_id_seq;
 DROP SEQUENCE post_id_seq;
 DROP SEQUENCE animal_id_seq;
-DROP SEQUENCE r_heart_id_seq;
-DROP SEQUENCE  a_heart_id_seq;
 DROP SEQUENCE qna_category_id_seq;
 DROP SEQUENCE qna_id_seq;
 DROP SEQUENCE comment_no_seq;
 DROP SEQUENCE comment_id_seq;
 
 DROP TABLE AdoptApply CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE A_heart CASCADE CONSTRAINTS PURGE;
-
-DROP TABLE R_heart CASCADE CONSTRAINTS PURGE;
 
 DROP TABLE Review CASCADE CONSTRAINTS PURGE;
 
@@ -66,7 +60,7 @@ CREATE TABLE AdoptApply
    apply_id             INTEGER NOT NULL ,
    user_id              VARCHAR2(20) NULL ,
    animal_id            INTEGER NULL ,
-   content              VARCHAR2(40) NULL ,
+   content              VARCHAR2(1000) NULL ,
    living_environment   VARCHAR2(40) NULL ,
    apply_matched        INT NULL ,
    have_pets            VARCHAR2(40) NULL ,
@@ -77,16 +71,6 @@ CREATE TABLE AdoptApply
 ALTER TABLE AdoptApply
    ADD CONSTRAINT  XPKAdoptApply PRIMARY KEY (apply_id);
 
-CREATE TABLE A_heart
-(
-   a_heart_id           INTEGER NOT NULL ,
-   animal_id            INTEGER NULL ,
-   user_id              VARCHAR2(20) NULL,
-   FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL
-);
-
-ALTER TABLE A_heart
-   ADD CONSTRAINT  XPKE_heart PRIMARY KEY (a_heart_id);
 
 CREATE TABLE category
 (
@@ -113,14 +97,6 @@ CREATE TABLE Review
 ALTER TABLE Review
    ADD CONSTRAINT  XPKReview PRIMARY KEY (post_id);
 
-CREATE TABLE R_heart
-(
-   r_heart_id           INTEGER NOT NULL ,
-   post_id              INTEGER NULL ,
-   count                INTEGER NULL ,
-   user_id              VARCHAR2(20) NULL 
-);
-
 CREATE TABLE Review_Comment
 (
    comment_id           INTEGER NOT NULL ,
@@ -131,7 +107,7 @@ CREATE TABLE Review_Comment
    content              VARCHAR2(4000) NULL ,
     PRIMARY KEY (comment_id),
    FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE SET NULL,
-   FOREIGN KEY (post_id) REFERENCES Review (post_id)
+   FOREIGN KEY (post_id) REFERENCES Review (post_id) ON DELETE CASCADE
 );
 
 
@@ -168,10 +144,6 @@ CREATE TABLE Qna_Comment
 
 ALTER TABLE Qna_Comment
    ADD CONSTRAINT  XPKComment PRIMARY KEY (comment_no);
-
-ALTER TABLE R_heart
-   ADD CONSTRAINT  XPKR_heart PRIMARY KEY (r_heart_id);
-
 ALTER TABLE Animal
    ADD (CONSTRAINT R_27 FOREIGN KEY (category_id) REFERENCES category (category_id));
 
@@ -181,11 +153,6 @@ ALTER TABLE AdoptApply
 ALTER TABLE AdoptApply
    ADD (CONSTRAINT R_22 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
 
-ALTER TABLE A_heart
-   ADD (CONSTRAINT R_28 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
-
-ALTER TABLE A_heart
-   ADD (CONSTRAINT R_29 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Review
    ADD (CONSTRAINT  썑湲곗옉 꽦 FOREIGN KEY (writer) REFERENCES Adopter (user_id) ON DELETE CASCADE);
@@ -193,20 +160,12 @@ ALTER TABLE Review
 ALTER TABLE Review
    ADD (CONSTRAINT R_17 FOREIGN KEY (animal_id) REFERENCES Animal (animal_id) ON DELETE CASCADE);
 
-ALTER TABLE R_heart
-   ADD (CONSTRAINT R_30 FOREIGN KEY (post_id) REFERENCES Review (post_id) ON DELETE CASCADE);
-
-ALTER TABLE R_heart
-   ADD (CONSTRAINT R_34 FOREIGN KEY (user_id) REFERENCES Adopter (user_id) ON DELETE CASCADE);
 
 ALTER TABLE Qna
    ADD (CONSTRAINT R_33 FOREIGN KEY (qna_category_id) REFERENCES qna_category (qna_category_id) ON DELETE SET NULL);
 
 ALTER TABLE Qna_Comment
-   ADD (CONSTRAINT R_36 FOREIGN KEY (qna_id) REFERENCES Qna (qna_id));
-
-ALTER TABLE Qna_Reply
-   ADD (CONSTRAINT R_37 FOREIGN KEY (comment_no) REFERENCES Qna_Comment (comment_no));   
+   ADD (CONSTRAINT R_36 FOREIGN KEY (qna_id) REFERENCES Qna (qna_id) ON DELETE CASCADE); 
    
 CREATE SEQUENCE dog_id_seq
 START WITH 100
@@ -221,12 +180,6 @@ CREATE SEQUENCE post_id_seq
 START WITH 1
 INCREMENT BY 1;
 CREATE SEQUENCE animal_id_seq
-START WITH 1
-INCREMENT BY 1;
-CREATE SEQUENCE r_heart_id_seq
-START WITH 1
-INCREMENT BY 1;
-CREATE SEQUENCE a_heart_id_seq
 START WITH 1
 INCREMENT BY 1;
 CREATE SEQUENCE qna_category_id_seq
