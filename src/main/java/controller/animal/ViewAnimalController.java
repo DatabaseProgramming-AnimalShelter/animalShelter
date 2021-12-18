@@ -32,7 +32,7 @@ public class ViewAnimalController implements Controller {
 		System.out.println("#########################" + animal_id);
 
 		try {
-			animal = manager.findAnimal(animal_id); // �쑀湲곕룞臾� �젙蹂� 寃��깋
+			animal = manager.findAnimal(animal_id); 
 			AdoptApply apply = new AdoptApply();
 			apply = null;
 			//animalList = applyManager.findUserAdoptList(user_id); 
@@ -57,9 +57,10 @@ public class ViewAnimalController implements Controller {
 		String path = context.getRealPath("/upload");
 		File dir = new File(path);
 		request.setAttribute("dir", dir);
-		request.setAttribute("animal", animal); // �쑀湲곕룞臾� �젙蹂� ���옣
+		request.setAttribute("animal", animal); 
+		request.setAttribute("user_id", user_id);
 		System.out.println("#########################" + animal.getImage());
-		return "/animal/view.jsp"; // �쑀湲곕룞臾� �긽�꽭蹂닿린 �솕硫댁쑝濡� �씠�룞*/
+		return "/animal/view.jsp"; 
 	}
 
 }

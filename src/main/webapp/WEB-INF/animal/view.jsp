@@ -188,7 +188,7 @@ h1 {
 	     		   	<c:param name='animal_id' value='${animal.animal_id}'/>
 			  	  </c:url>">동물삭제</a>
 			</c:if>
-			<c:if test="${animal.animal_matched == 0 && applied == false}">
+			<c:if test="${animal.animal_matched == 0 && applied == false && user_id != null}">
 				<%-- 아직 입양이 안됐고 다른 신청자가 없을 경우  --%>
 				<a class="btn btn-primary" href="<c:url value='/adopt/register'>
 	     		  	<c:param name='animal_id' value='${animal.animal_id}'/>
