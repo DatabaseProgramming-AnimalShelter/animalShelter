@@ -9,10 +9,13 @@
 ## 업무 분담
 ![image](https://user-images.githubusercontent.com/78431728/157072229-20a11474-6302-48f2-89fa-901ebfdfef1d.png)
 
-## 주요 기능
+## 시스템 설계 , DB 설계 과정
 ![image](https://user-images.githubusercontent.com/78431728/157071217-37c2be7d-ede9-4236-a153-b8d7116dc181.png)
 ![image](https://user-images.githubusercontent.com/78431728/157071313-77ce0f6f-9266-4acc-bb5e-4769cf7a4fef.png)
 ![image](https://user-images.githubusercontent.com/78431728/157071389-e207d76b-f149-46e6-9ebf-5d87afbb1da5.png)
+![image](https://user-images.githubusercontent.com/78431728/157072532-2ed71d2f-1517-4dba-a1ae-dbbde228bcef.png)
+
+## 주요 기능
 ![image](https://user-images.githubusercontent.com/78431728/157071475-5ee03f7d-7b36-4b40-8b9b-5645852ca83e.png)
 ![image](https://user-images.githubusercontent.com/78431728/157071528-51ac5056-b548-47cb-8768-c13ca35e14c1.png)
 ![image](https://user-images.githubusercontent.com/78431728/157071574-310c1cf6-d886-45af-a056-c5b8aaf1fe0a.png)
